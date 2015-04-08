@@ -1,3 +1,5 @@
-Debug
+**/bin/**
+**/obj/**
 /*.suo
-NUnit.2.6.4
+/packages/NUnit.2.6.4
+/packages/System.Windows.Interactivity.WPF.2.0.20525

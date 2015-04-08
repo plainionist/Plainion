@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Core.Tests", "src\Plainion.Core.Tests\Plainion.Core.Tests.csproj", "{58BB77AF-6384-4E77-8DE1-0915C3D4B03E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Windows", "src\Plainion.Windows\Plainion.Windows.csproj", "{B76263B3-B4C6-4111-865D-1CE6B578D34A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{58BB77AF-6384-4E77-8DE1-0915C3D4B03E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58BB77AF-6384-4E77-8DE1-0915C3D4B03E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58BB77AF-6384-4E77-8DE1-0915C3D4B03E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B76263B3-B4C6-4111-865D-1CE6B578D34A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B76263B3-B4C6-4111-865D-1CE6B578D34A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B76263B3-B4C6-4111-865D-1CE6B578D34A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B76263B3-B4C6-4111-865D-1CE6B578D34A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
