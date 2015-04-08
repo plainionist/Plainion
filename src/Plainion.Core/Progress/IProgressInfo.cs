@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Plainion
+namespace Plainion.Progress
 {
     /// <summary>
     /// Provides simple progress description to be used with System.IProgress

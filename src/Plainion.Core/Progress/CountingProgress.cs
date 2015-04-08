@@ -1,5 +1,5 @@
 ﻿
-namespace Plainion
+namespace Plainion.Progress
 {
     /// <summary>
     /// Defines a progress which starts at 1 and just increases without defined maximum.

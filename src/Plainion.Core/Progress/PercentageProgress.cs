@@ -1,5 +1,5 @@
 ﻿
-namespace Plainion
+namespace Plainion.Progress
 {
     /// <summary>
     /// Defines a progress which gives percentage updates.
