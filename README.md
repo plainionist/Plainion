@@ -1,2 +1,2 @@
 # Plainion
-Provides software development tools and .Net libraries for efficient tools development
+Provides .Net libraries to simplify development of software engineering tools 
