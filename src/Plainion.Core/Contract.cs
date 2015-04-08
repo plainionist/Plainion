@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Blade
+namespace Plainion
 {
     /// <summary>
-    /// Provides simple Design-By-Contract convenience APIs.
+    /// Provides simple but expressive Design-By-Contract convenience APIs.
     /// </summary>
     public static class Contract
     {

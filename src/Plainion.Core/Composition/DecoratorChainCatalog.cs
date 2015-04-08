@@ -1,16 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Primitives;
 using System.ComponentModel.Composition.ReflectionModel;
-using System.ComponentModel.Composition;
+using System.Linq;
 using System.Security;
-using System.Diagnostics;
-using System.Reflection;
 
-namespace Blade.Composition
+namespace Plainion.Composition
 {
+    /// <summary>
+    /// Provides MEF support for the decorator pattern. 
+    /// This catalog builds a chain of decorators for the contract specified at the constructor and from the types added 
+    /// using Add(). Each decorator type has to import and export the "contract to decorate". The last addd type will be 
+    /// the most outer decorator which will then satisfy imports requiring the "contract to decorate".
+    /// </summary>
+    /// <remarks>
+    /// Internally this catalog rewrites the contracts of the parts in the chain to avoid conflicts.
+    /// Recomposition is currently not supported.
+    /// </remarks>
     public class DecoratorChainCatalog : ComposablePartCatalog
     {
         private List<Type> myDecoratorChain;
@@ -18,11 +25,17 @@ namespace Blade.Composition
 
         private string myContractName;
 
+        /// <summary>
+        /// Creates a catalog for the contract specified by the given type.
+        /// </summary>
         public DecoratorChainCatalog( Type contract )
             : this( AttributedModelServices.GetContractName( contract ) )
         {
         }
 
+        /// <summary>
+        /// Creates a catalog for the contract specified by the given contract name.
+        /// </summary>
         public DecoratorChainCatalog( string contract )
         {
             Contract.RequiresNotNullNotEmpty( contract, "contract" );

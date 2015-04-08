@@ -22,7 +22,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Composition\Composer.cs" />
     <Compile Include="Composition\DecoratorChainCatalog.cs" />
+    <Compile Include="Composition\IComposer.cs" />
     <Compile Include="Contract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringExtensions.cs" />

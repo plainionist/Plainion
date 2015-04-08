@@ -1,8 +1,6 @@
 using System;
-using System.Linq;
-using System.Text;
 
-namespace Blade
+namespace Plainion
 {
     public static class StringExtensions
     {
@@ -22,7 +20,6 @@ namespace Blade
                 value.Equals( "yes", StringComparison.OrdinalIgnoreCase ) ||
                 value.Equals( "on", StringComparison.OrdinalIgnoreCase ) );
         }
-
 
         public static bool Contains( this string source, string value, StringComparison comparison )
         {
