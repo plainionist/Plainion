@@ -83,9 +83,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Warning.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Plainion.Core\Plainion.Core.csproj">
       <Project>{3cbd40b6-84fc-4898-8c64-cd602da8ef79}</Project>
       <Name>Plainion.Core</Name>

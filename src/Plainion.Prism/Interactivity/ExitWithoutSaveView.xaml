@@ -11,7 +11,7 @@
             <Button Content="Yes" Margin="3,3,3,3" MinWidth="75" Command="{Binding YesCommand}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <Image Source="pack://application:,,,/Plainion.Windows;component/Images/Warning.png" Width="38" Height="38" Margin="10,0,0,0"/>
+            <Image Source="pack://application:,,,/Plainion.Prism;component/Images/Warning.png" Width="38" Height="38" Margin="10,0,0,0"/>
             <TextBlock DockPanel.Dock="Top" Text="Save changes?" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25,0,0,0"/>
         </StackPanel>
     </DockPanel>
