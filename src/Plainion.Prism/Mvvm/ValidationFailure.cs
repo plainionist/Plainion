@@ -1,5 +1,5 @@
 ﻿
-namespace Plainion.Controls.Mvvm
+namespace Plainion.Prism.Mvvm
 {
     public class ValidationFailure
     {

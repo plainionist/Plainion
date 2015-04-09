@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Plainion.Controls.Interactivity
+namespace Plainion.Prism.Interactivity
 {
     public partial class ExitWithoutSaveView : UserControl
     {

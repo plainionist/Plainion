@@ -1,5 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:c="clr-namespace:Plainion.Controls.Mvvm"
+                    xmlns:c="clr-namespace:Plainion.Prism.Mvvm"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <ControlTemplate x:Key="HighlightErrorsWithBorder">

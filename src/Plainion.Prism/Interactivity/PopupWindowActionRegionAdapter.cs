@@ -4,7 +4,7 @@ using System.Windows;
 using Microsoft.Practices.Prism.Interactivity;
 using Microsoft.Practices.Prism.Regions;
 
-namespace Plainion.Controls.Interactivity
+namespace Plainion.Prism.Interactivity
 {
     [Export( typeof( PopupWindowActionRegionAdapter ) )]
     public class PopupWindowActionRegionAdapter : RegionAdapterBase<PopupWindowAction>

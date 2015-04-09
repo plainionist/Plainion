@@ -2,10 +2,10 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interactivity;
-using Plainion.Controls.Interactivity.InteractionRequest;
+using Plainion.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
-namespace Plainion.Controls.Interactivity
+namespace Plainion.Prism.Interactivity
 {
     public class PopupPrintDialogAction : TriggerAction<FrameworkElement>
     {

@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Threading;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
-namespace Plainion.Controls.Interactivity.InteractionRequest
+namespace Plainion.Prism.Interactivity.InteractionRequest
 {
     public class AsyncWindowRequest : IAsyncWindowRequest
     {

@@ -4,7 +4,7 @@ using System.Windows.Markup;
 using Microsoft.Practices.Prism.Interactivity;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
-namespace Plainion.Controls.Interactivity
+namespace Plainion.Prism.Interactivity
 {
     [DefaultProperty( "WindowContent" ), ContentProperty( "WindowContent" )]
     public class PopupViewAction : PopupWindowAction

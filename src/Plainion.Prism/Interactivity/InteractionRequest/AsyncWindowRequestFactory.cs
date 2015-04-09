@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 
-namespace Plainion.Controls.Interactivity.InteractionRequest
+namespace Plainion.Prism.Interactivity.InteractionRequest
 {
     [Export( typeof( IAsyncWindowRequestFactory ) )]
     public class AsyncWindowRequestFactory : IAsyncWindowRequestFactory

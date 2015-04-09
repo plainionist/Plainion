@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.ViewModel;
 
-namespace Plainion.Controls.Mvvm
+namespace Plainion.Prism.Mvvm
 {
     // more advanced: http://blog.pluralsight.com/async-validation-wpf-prism
     public class ValidatableBindableBase : BindableBase, INotifyDataErrorInfo

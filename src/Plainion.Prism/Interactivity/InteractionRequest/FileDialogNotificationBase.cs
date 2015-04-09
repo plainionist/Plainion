@@ -2,7 +2,7 @@
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Win32;
 
-namespace Plainion.Controls.Interactivity.InteractionRequest
+namespace Plainion.Prism.Interactivity.InteractionRequest
 {
     /// <summary>
     /// Notification base class for Microsoft.Win32.FileDialog.

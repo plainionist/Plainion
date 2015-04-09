@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Documents;
 
-namespace Plainion.Controls.Interactivity.InteractionRequest
+namespace Plainion.Prism.Interactivity.InteractionRequest
 {
     public interface IPrintRequestAware
     {

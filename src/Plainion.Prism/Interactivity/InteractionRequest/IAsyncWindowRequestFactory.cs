@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Plainion.Controls.Interactivity.InteractionRequest
+namespace Plainion.Prism.Interactivity.InteractionRequest
 {
     public interface IAsyncWindowRequestFactory
     {

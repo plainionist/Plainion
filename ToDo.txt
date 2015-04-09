@@ -1,6 +1,0 @@
-- windows
-  - api doc
-  - check with blade regarding usage doc and whether we want to keep it
-  - wiki doc
-- prism
-  - add

@@ -5,7 +5,7 @@ using System.Windows.Interactivity;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Win32;
 
-namespace Plainion.Controls.Interactivity
+namespace Plainion.Prism.Interactivity
 {
     public class PopupFileDialogAction : TriggerAction<FrameworkElement>
     {

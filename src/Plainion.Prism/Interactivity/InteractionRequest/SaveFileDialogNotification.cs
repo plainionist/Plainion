@@ -1,5 +1,5 @@
 ﻿
-namespace Plainion.Controls.Interactivity.InteractionRequest
+namespace Plainion.Prism.Interactivity.InteractionRequest
 {
     public class SaveFileDialogNotification : FileDialogNotificationBase
     {

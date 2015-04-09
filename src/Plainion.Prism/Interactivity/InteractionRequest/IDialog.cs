@@ -1,6 +1,6 @@
 ﻿using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
-namespace Plainion.Controls.Interactivity.InteractionRequest
+namespace Plainion.Prism.Interactivity.InteractionRequest
 {
     interface IDialog : IConfirmation
     {

@@ -84,7 +84,7 @@
                        Height="15" 
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
-                       Source="pack://application:,,,/Plainion.Controls;component/Images/search.png" />
+                       Source="pack://application:,,,/Plainion.Windows;component/Images/search.png" />
                             </Border>
                         </Grid>
                     </Border>
@@ -105,7 +105,7 @@
                             </MultiTrigger.Conditions>
                             <Setter Property="Source"
                       TargetName="SearchIcon"
-                      Value="pack://application:,,,/Plainion.Controls;component/Images/clear.png" />
+                      Value="pack://application:,,,/Plainion.Windows;component/Images/clear.png" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
