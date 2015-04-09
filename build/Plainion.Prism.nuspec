@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Plainion.Prism</id>
+    <title>Plainion.Prism</title>
+    <version>1.0.0.0</version>
+    <authors>ronin4net</authors>
+    <owners>ronin4net</owners>
+    <licenseUrl>http://opensource.org/licenses/BSD-3-Clause</licenseUrl>
+    <projectUrl>https://github.com/ronin4net/Plainion/wiki/Plainion.Prism</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Provides extensions to Prism to simplify development of software engineering tools</description>
+    <releaseNotes>Initial release containing:
+- ValidatableBindableBase
+- InteractionRequest extensions
+    - ExitWithoutSaveNotification
+    - PopupViewAction
+    - PopupFileDialogAction
+    - PopupPrintDialogAction
+- PopupWindowActionRegionAdapter
+    </releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <dependencies>
+      <dependency id="Plainion.Core" version="1.0.0" />
+      <dependency id="CommonServiceLocator" version="1.2"/>
+      <dependency id="Expression.Blend.Sdk" version="1.0.2"/>
+      <dependency id="Prism" version="5.0.0"/>
+      <dependency id="Prism.Composition" version="5.0.0"/>
+      <dependency id="Prism.Interactivity" version="5.0.0"/>
+      <dependency id="Prism.Mvvm" version="1.0.0"/>
+      <dependency id="Prism.PubSubEvents" version="1.0.0"/>
+    </dependencies>
+  </metadata>
+</package>

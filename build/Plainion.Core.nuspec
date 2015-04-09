@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Plainion.Core.dll</id>
+    <id>Plainion.Core</id>
     <title>Plainion.Core</title>
     <version>1.0.0.0</version>
     <authors>ronin4net</authors>
@@ -9,10 +9,11 @@
     <licenseUrl>http://opensource.org/licenses/BSD-3-Clause</licenseUrl>
     <projectUrl>https://github.com/ronin4net/Plainion/wiki/Plainion.Core</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Provides .Net libraries to simplify development of software engineering tools </description>
+    <description>Provides .Net libraries to simplify development of software engineering tools</description>
     <releaseNotes>
-    - Composer (MEF wraper) added
-    - System.IProgress extensions added
+- MEF extensions: Composer, DecoratorChainCatalog
+- TPL extensions: StartSTATask
+- System.IProgress extensions added
     </releaseNotes>
     <copyright>Copyright 2015</copyright>
   </metadata>
