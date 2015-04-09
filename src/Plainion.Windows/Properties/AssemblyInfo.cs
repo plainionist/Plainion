@@ -6,11 +6,11 @@ using System.Windows.Markup;
 [assembly: AssemblyTitle( "Plainion.Windows" )]
 [assembly: ComVisible( false )]
 
-[assembly: XmlnsPrefix( "http://github.com/ronin4net/plainion/windows", "pn" )]
-[assembly: XmlnsDefinition( "http://github.com/ronin4net/plainion/windows", "Plainion.Windows" )]
-[assembly: XmlnsDefinition( "http://github.com/ronin4net/plainion/windows", "Plainion.Windows.Controls" )]
-[assembly: XmlnsDefinition( "http://github.com/ronin4net/plainion/windows", "Plainion.Windows.Interactivity" )]
-[assembly: XmlnsDefinition( "http://github.com/ronin4net/plainion/windows", "Plainion.Windows.Interactivity.DragDrop" )]
+[assembly: XmlnsPrefix( "http://github.com/ronin4net/plainion", "pn" )]
+[assembly: XmlnsDefinition( "http://github.com/ronin4net/plainion", "Plainion.Windows" )]
+[assembly: XmlnsDefinition( "http://github.com/ronin4net/plainion", "Plainion.Windows.Controls" )]
+[assembly: XmlnsDefinition( "http://github.com/ronin4net/plainion", "Plainion.Windows.Interactivity" )]
+[assembly: XmlnsDefinition( "http://github.com/ronin4net/plainion", "Plainion.Windows.Interactivity.DragDrop" )]
 
 
 // Specifies the location in which theme dictionaries are stored for types in an assembly.

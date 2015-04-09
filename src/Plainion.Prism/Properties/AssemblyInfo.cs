@@ -6,10 +6,10 @@ using System.Windows.Markup;
 [assembly: AssemblyTitle( "Plainion.Prism" )]
 [assembly: ComVisible( false )]
 
-[assembly: XmlnsPrefix( "http://github.com/ronin4net/plainion/windows", "pn" )]
-[assembly: XmlnsDefinition( "http://github.com/ronin4net/plainion/windows", "Plainion.Prism" )]
-[assembly: XmlnsDefinition( "http://github.com/ronin4net/plainion/windows", "Plainion.Prism.Interactivity" )]
-[assembly: XmlnsDefinition( "http://github.com/ronin4net/plainion/windows", "Plainion.Prism.Mvvm" )]
+[assembly: XmlnsPrefix( "http://github.com/ronin4net/plainion", "pn" )]
+[assembly: XmlnsDefinition( "http://github.com/ronin4net/plainion", "Plainion.Prism" )]
+[assembly: XmlnsDefinition( "http://github.com/ronin4net/plainion", "Plainion.Prism.Interactivity" )]
+[assembly: XmlnsDefinition( "http://github.com/ronin4net/plainion", "Plainion.Prism.Mvvm" )]
 
 
 // Specifies the location in which theme dictionaries are stored for types in an assembly.
