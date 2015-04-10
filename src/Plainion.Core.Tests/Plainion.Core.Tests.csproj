@@ -30,7 +30,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Composition\DecoratorChainCatalogTests.cs" />
+    <Compile Include="IO\MemoryFS\DirectoryImplTest.cs" />
+    <Compile Include="IO\MemoryFS\FileImplTest.cs" />
+    <Compile Include="IO\MemoryFS\FileSystemImplTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validation\Model.cs" />
+    <Compile Include="Validation\ValidateObjectAttributeTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Plainion.Core\Plainion.Core.csproj">
