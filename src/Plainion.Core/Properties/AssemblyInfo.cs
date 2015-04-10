@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 
 [assembly: AssemblyTitle( "Plainion.Core" )]
 [assembly: CLSCompliant( true )]
+[assembly: AssemblyVersion( "2.0.0.0" )]
 
 // required since .NET 4.0 to allow calls to other assemblies
 [assembly: AllowPartiallyTrustedCallersAttribute()]

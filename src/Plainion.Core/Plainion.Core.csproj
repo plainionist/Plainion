@@ -80,6 +80,7 @@
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Tasks\Tasks.cs" />
     <Compile Include="Text\Wildcard.cs" />
+    <Compile Include="TypeConverter.cs" />
     <Compile Include="Validation\CompositeValidationResult.cs" />
     <Compile Include="Validation\RecursiveValidator.cs" />
     <Compile Include="Validation\ValidateObjectAttribute.cs" />
