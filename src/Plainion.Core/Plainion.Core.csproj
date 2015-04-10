@@ -31,11 +31,16 @@
     <Compile Include="Binding\IncludeExtension.cs" />
     <Compile Include="Binding\ValidatingXamlReader.cs" />
     <Compile Include="Collections\CollectionReadonlyCollectionAdapter.cs" />
+    <Compile Include="Collections\Enumerable.cs" />
+    <Compile Include="Collections\ListExtensions.cs" />
     <Compile Include="Collections\Index.cs" />
+    <Compile Include="Collections\IObservableEnumerable.cs" />
+    <Compile Include="Collections\IObservableReadonlyCollection.cs" />
     <Compile Include="Composition\Composer.cs" />
     <Compile Include="Composition\DecoratorChainCatalog.cs" />
     <Compile Include="Composition\IComposer.cs" />
     <Compile Include="Contract.cs" />
+    <Compile Include="Diagnostics\Enumerable.cs" />
     <Compile Include="Diagnostics\ProcessThreadIndex.cs" />
     <Compile Include="Diagnostics\ProcessThreadSet.cs" />
     <Compile Include="ExceptionExtensions.cs" />
@@ -65,6 +70,7 @@
     <Compile Include="Logging\LoggingSinkLogger.cs" />
     <Compile Include="Logging\LoggingSinkLoggerFactory.cs" />
     <Compile Include="Logging\LogLevel.cs" />
+    <Compile Include="NumberExtensions.cs" />
     <Compile Include="Progress\CountingProgress.cs" />
     <Compile Include="Progress\IProgressInfo.cs" />
     <Compile Include="Progress\PercentageProgress.cs" />
