@@ -22,10 +22,14 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\CollectionReadonlyCollectionAdapter.cs" />
+    <Compile Include="Collections\Index.cs" />
     <Compile Include="Composition\Composer.cs" />
     <Compile Include="Composition\DecoratorChainCatalog.cs" />
     <Compile Include="Composition\IComposer.cs" />
     <Compile Include="Contract.cs" />
+    <Compile Include="Diagnostics\ProcessThreadIndex.cs" />
+    <Compile Include="Diagnostics\ProcessThreadSet.cs" />
     <Compile Include="Progress\CountingProgress.cs" />
     <Compile Include="Progress\IProgressInfo.cs" />
     <Compile Include="Progress\PercentageProgress.cs" />

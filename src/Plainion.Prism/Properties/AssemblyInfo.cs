@@ -29,4 +29,3 @@ using System.Windows.Markup;
     //     Themes\generic.xaml
     ResourceDictionaryLocation.SourceAssembly )]
 
-
