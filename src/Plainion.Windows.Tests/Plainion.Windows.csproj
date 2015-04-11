@@ -74,7 +74,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interactivity\TextBoxUpdateModelOnEnterBehavior.cs" />
     <Compile Include="PropertyBinding.cs" />
-    <Compile Include="ProperyAccessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\CircularProgressIndicator.xaml">
