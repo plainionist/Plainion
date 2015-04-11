@@ -27,14 +27,14 @@ namespace Plainion.Windows
         /// </summary>
         public static void Bind<T>( Expression<Func<T>> source, Expression<Func<T>> target, BindingMode mode )
         {
-            Bind( PropertyAccessor.Create( source ), PropertyAccessor.Create( target ), mode );
+            Bind( BindableProperty.Create( source ), BindableProperty.Create( target ), mode );
         }
 
         /// <summary>
         /// Binds two properties where both declaring types implement INotifyPropertyChanged.
         /// Supported BindingModes: OneWay, OneWayToSource, TwoWay
         /// </summary>
-        public static void Bind( PropertyAccessor source, PropertyAccessor target, BindingMode mode )
+        public static void Bind( BindableProperty source, BindableProperty target, BindingMode mode )
         {
             Contract.Requires( mode == BindingMode.OneWay || mode == BindingMode.OneWayToSource || mode == BindingMode.TwoWay,
                 "BindingMode not supported: " + mode );
@@ -50,7 +50,7 @@ namespace Plainion.Windows
             }
         }
 
-        private static void BindHandler( PropertyAccessor source, EventHandler<PropertyChangedEventArgs> handler )
+        private static void BindHandler( BindableProperty source, EventHandler<PropertyChangedEventArgs> handler )
         {
             foreach( var binding in myBindings.ToArray() )
             {

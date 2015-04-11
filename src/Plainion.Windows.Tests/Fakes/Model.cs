@@ -1,18 +1,11 @@
 ﻿
 namespace Plainion.Windows.Tests.Fakes
 {
-    class ViewModel1 : ViewModelBase
+    class Model : ViewModelBase
     {
         private int myValue;
 
-        public ViewModel1()
-        {
-            Model = new Model();
-        }
-
-        public Model Model { get; private set; }
-
-        public int PrimaryValue
+        public int ModelValue
         {
             get { return myValue; }
             set { SetProperty( ref myValue, value ); }

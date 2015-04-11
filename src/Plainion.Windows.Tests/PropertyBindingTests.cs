@@ -79,9 +79,11 @@ namespace Plainion.Windows.Tests
                 var vm1 = new ViewModel1();
                 var vm2 = new ViewModel2();
 
+                var beforeRegisteredBindingsCount = PropertyBinding.RegisteredBindingsCount;
+                
                 PropertyBinding.Bind( () => vm1.PrimaryValue, () => vm2.SecondaryValue, BindingMode.TwoWay );
 
-                Assert.That( PropertyBinding.RegisteredBindingsCount, Is.EqualTo( 2 ) );
+                Assert.That( PropertyBinding.RegisteredBindingsCount, Is.EqualTo( beforeRegisteredBindingsCount + 2 ) );
             }
 
             // allocate some memory and for GC and see whether bindings are removed from internal registration.
