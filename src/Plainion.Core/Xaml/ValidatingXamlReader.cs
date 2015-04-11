@@ -3,7 +3,7 @@ using System.Windows.Markup;
 using System.Xml.Linq;
 using Plainion.Validation;
 
-namespace Plainion.Binding
+namespace Plainion.Xaml
 {
     /// <summary>
     /// Reads given Xaml input and validates it using DataAnnotations and <see cref="RecursiveValidator"/>

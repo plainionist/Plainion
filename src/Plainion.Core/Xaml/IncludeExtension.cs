@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Markup;
 
-namespace Plainion.Binding
+namespace Plainion.Xaml
 {
     /// <summary>
     /// Xaml markup comparable to XInclude. Allows simple include of Xaml files into other Xaml files.
