@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\..\build\Plainion.Globals.msbuild" />
-  <Import Project="..\..\build\Plainion.Globals.msbuild" />
   <PropertyGroup>
     <ProjectGuid>{57156D7A-BD77-45E3-82F6-01FA4A07E200}</ProjectGuid>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

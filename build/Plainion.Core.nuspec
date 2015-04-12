@@ -3,7 +3,7 @@
   <metadata>
     <id>Plainion.Core</id>
     <title>Plainion.Core</title>
-    <version>2.0.0.0</version>
+    <version>2.1.0.0</version>
     <authors>ronin4net</authors>
     <owners>ronin4net</owners>
     <licenseUrl>http://opensource.org/licenses/BSD-3-Clause</licenseUrl>
@@ -11,17 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Provides .Net libraries to simplify development of software engineering tools</description>
     <releaseNotes>
-- RecursiveValidator (DataAnnotations)
-- Wildcard
-- simple Logging framework
-- FileSystem access with interfaces and InMemory realization
-- ValidatingXamlReader
-- Enumerable and List extensions
-- Collection interfaces
-- Number extensions
-- Objects.Clone
-- StringExtensions
-- TypeConverter 
+- ValidatingXamlReader moved from Binding namespace to Xaml namespace
     </releaseNotes>
     <copyright>Copyright 2015</copyright>
   </metadata>

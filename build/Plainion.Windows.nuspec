@@ -3,14 +3,17 @@
   <metadata>
     <id>Plainion.Windows</id>
     <title>Plainion.Windows</title>
-    <version>1.2.0.0</version>
+    <version>1.3.0.0</version>
     <authors>ronin4net</authors>
     <owners>ronin4net</owners>
     <licenseUrl>http://opensource.org/licenses/BSD-3-Clause</licenseUrl>
     <projectUrl>https://github.com/ronin4net/Plainion/wiki/Plainion.Windows</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Provides extensions to WPF to simplify development of software engineering tools</description>
-    <releaseNotes>Upgraded to Plainion.Core 2.0.0.0</releaseNotes>
+    <releaseNotes>
+- Upgraded to Plainion.Core 2.1.0.0
+- BindableProperty and PropertyBinding added
+    </releaseNotes>
     <copyright>Copyright 2015</copyright>
     <dependencies>
       <dependency id="Plainion.Core" version="2.0.0.0" />

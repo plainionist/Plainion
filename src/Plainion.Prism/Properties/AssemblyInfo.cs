@@ -5,7 +5,7 @@ using System.Windows.Markup;
 
 [assembly: AssemblyTitle( "Plainion.Prism" )]
 [assembly: ComVisible( false )]
-[assembly: AssemblyVersion( "1.2.0.0" )]
+[assembly: AssemblyVersion( "1.3.0.0" )]
 
 [assembly: XmlnsPrefix( "http://github.com/ronin4net/plainion", "pn" )]
 [assembly: XmlnsDefinition( "http://github.com/ronin4net/plainion", "Plainion.Prism" )]
