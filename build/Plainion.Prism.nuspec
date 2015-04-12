@@ -13,7 +13,7 @@
     <releaseNotes>Upgraded to Plainion.Core 2.1.0.0</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <dependencies>
-      <dependency id="Plainion.Core" version="2.1 .0.0" />
+      <dependency id="Plainion.Core" version="2.1.0.0" />
       <dependency id="CommonServiceLocator" version="1.2"/>
       <dependency id="Expression.Blend.Sdk" version="1.0.2"/>
       <dependency id="Prism" version="5.0.0"/>
