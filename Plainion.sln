@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E942AA64-1A87-4E87-AD6B-0C1778D0ED82}"
 	ProjectSection(SolutionItems) = preProject
 		build\GlobalAssemblyInfo.cs = build\GlobalAssemblyInfo.cs
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Core.Tests", "src\Plainion.Core.Tests\Plainion.Core.Tests.csproj", "{58BB77AF-6384-4E77-8DE1-0915C3D4B03E}"
