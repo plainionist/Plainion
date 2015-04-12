@@ -1,5 +1,5 @@
 ﻿using System;
-using System.ComponentModel;
+using System.Collections.Generic;
 using System.Windows.Data;
 using NUnit.Framework;
 using Plainion.Windows.Tests.Fakes;
@@ -73,39 +73,63 @@ namespace Plainion.Windows.Tests
         }
 
         [TestCase]
-        public void TwoWayBinding_SourceAndTargetMarkedForGC_BindingReleased()
+        public void PropertyOwnersStillAlive_BindingsSurvivesGC()
         {
+            var vm1 = new ViewModel1();
+            var vm2 = new ViewModel2();
+
+            PropertyBinding.Bind( () => vm1.PrimaryValue, () => vm2.SecondaryValue, BindingMode.TwoWay );
+
+            EnforceGC();
+
+            {
+                // lets see whether binding still works
+                vm1.PrimaryValue = 42;
+                Assert.That( vm2.SecondaryValue, Is.EqualTo( 42 ) );
+            }
+        }
+
+        [TestCase]
+        public void PropertyOwnersMarkedForGC_BindingReleased()
+        {
+            WeakReference<ViewModel1> wr1 = null;
+            WeakReference<ViewModel2> wr2 = null;
+
+            new Action( () =>
             {
                 var vm1 = new ViewModel1();
                 var vm2 = new ViewModel2();
 
-                var beforeRegisteredBindingsCount = PropertyBinding.RegisteredBindingsCount;
-                
+                wr1 = new WeakReference<ViewModel1>( vm1 );
+                wr2 = new WeakReference<ViewModel2>( vm2 );
+
                 PropertyBinding.Bind( () => vm1.PrimaryValue, () => vm2.SecondaryValue, BindingMode.TwoWay );
+            } )();
 
-                Assert.That( PropertyBinding.RegisteredBindingsCount, Is.EqualTo( beforeRegisteredBindingsCount + 2 ) );
-            }
-
-            // allocate some memory and for GC and see whether bindings are removed from internal registration.
-            {
-                var a1 = new string[ 1000 * 1000 ];
-                var a2 = new string[ 1000 * 1000 ];
-                var a3 = new string[ 1000 * 1000 ];
-                var a4 = new string[ 1000 * 1000 ];
-
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-            }
+            EnforceGC();
 
             {
-                var vm1 = new ViewModel1();
-                var vm2 = new ViewModel2();
+                ViewModel1 vm1;
+                Assert.That( wr1.TryGetTarget( out vm1 ), Is.False );
 
-                // this registration should now clean up the static references two the handlers
-                PropertyBinding.Bind( () => vm1.PrimaryValue, () => vm2.SecondaryValue, BindingMode.TwoWay );
-
-                Assert.That( PropertyBinding.RegisteredBindingsCount, Is.EqualTo( 2 ) );
+                ViewModel2 vm2;
+                Assert.That( wr2.TryGetTarget( out vm2 ), Is.False );
             }
+        }
+
+        private static volatile List<byte[]> x = new List<byte[]>();
+
+        // allocate some memory and trigger GC 
+        private static void EnforceGC()
+        {
+            for( int i = 0; i < 10000; ++i )
+            {
+                // do not go on LOH
+                x.Add( new byte[ 10 * 1024 ] );
+            }
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
     }
 }

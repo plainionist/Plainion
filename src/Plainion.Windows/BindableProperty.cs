@@ -65,35 +65,26 @@ namespace Plainion.Windows
             var constantExpr = memberExpr.Expression as ConstantExpression;
             if( constantExpr != null )
             {
-                // 
                 return constantExpr.Value;
             }
 
             var nestedMemberExpr = memberExpr.Expression as MemberExpression;
             Contract.Invariant( nestedMemberExpr != null, "Failed to handle nested expression type: " + memberExpr.Expression.GetType().ToString() );
 
-            object instance = null;
+            var ownerOfOwner = GetOwner( nestedMemberExpr );
+            var memberOfOwner = nestedMemberExpr.Member.Name;
+            var supportedBindings = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
 
-            constantExpr = nestedMemberExpr.Expression as ConstantExpression;
-            if( constantExpr != null )
-            {
-                instance = constantExpr.Value;
-            }
-            else
-            {
-                instance = GetOwner( nestedMemberExpr );
-            }
-
-            var fieldInfo = instance.GetType().GetField( nestedMemberExpr.Member.Name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic );
+            var fieldInfo = ownerOfOwner.GetType().GetField( memberOfOwner, supportedBindings );
             if( fieldInfo != null )
             {
-                return fieldInfo.GetValue( instance );
+                return fieldInfo.GetValue( ownerOfOwner );
             }
 
-            var propertyInfo = instance.GetType().GetProperty( nestedMemberExpr.Member.Name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic );
+            var propertyInfo = ownerOfOwner.GetType().GetProperty( memberOfOwner, supportedBindings );
             if( propertyInfo != null )
             {
-                return propertyInfo.GetValue( instance );
+                return propertyInfo.GetValue( ownerOfOwner );
             }
 
             throw new NotSupportedException( "Failed to get owner" );

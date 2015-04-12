@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Windows.Data;
 
 namespace Plainion.Windows
 {
     public static class PropertyBinding
     {
-        private static List<WeakReference<EventHandler<PropertyChangedEventArgs>>> myBindings =
-            new List<WeakReference<EventHandler<PropertyChangedEventArgs>>>();
-
-        internal static int RegisteredBindingsCount { get { return myBindings.Count; } }
+        // weakly tracks all the anonymous event handlers
+        // see: http://stackoverflow.com/questions/15225547/weakeventmanager-holds-reference-to-subscriber
+        private static ConditionalWeakTable<INotifyPropertyChanged,List<EventHandler<PropertyChangedEventArgs>>> myBindings =
+            new ConditionalWeakTable<INotifyPropertyChanged, List<EventHandler<PropertyChangedEventArgs>>>();
 
         /// <summary>
         /// Binds two properties where both declaring types implement INotifyPropertyChanged with BindingMode.TwoWay.
@@ -52,16 +53,14 @@ namespace Plainion.Windows
 
         private static void BindHandler( BindableProperty source, EventHandler<PropertyChangedEventArgs> handler )
         {
-            foreach( var binding in myBindings.ToArray() )
+            List<EventHandler<PropertyChangedEventArgs>> handlers;
+            if( !myBindings.TryGetValue( source.Owner, out handlers ) )
             {
-                EventHandler<PropertyChangedEventArgs> deadHandler;
-                if( !binding.TryGetTarget( out deadHandler ) )
-                {
-                    myBindings.Remove( binding );
-                }
+                handlers = new List<EventHandler<PropertyChangedEventArgs>>();
+                myBindings.Add( source.Owner, handlers );
             }
 
-            myBindings.Add( new WeakReference<EventHandler<PropertyChangedEventArgs>>( handler ) );
+            handlers.Add( handler );
 
             PropertyChangedEventManager.AddHandler( source.Owner, handler, source.PropertyName );
         }
