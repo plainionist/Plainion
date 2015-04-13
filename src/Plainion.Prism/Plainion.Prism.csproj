@@ -86,6 +86,8 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Events\ApplicationReadyEvent.cs" />
+    <Compile Include="Events\ApplicationShutdownEvent.cs" />
     <None Include="packages.config" />
     <AppDesigner Include="Properties\" />
   </ItemGroup>
