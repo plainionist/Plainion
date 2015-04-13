@@ -75,6 +75,7 @@
     <Compile Include="Interactivity\TextBoxUpdateModelOnEnterBehavior.cs" />
     <Compile Include="PropertyBinding.cs" />
     <Compile Include="BindableProperty.cs" />
+    <Compile Include="UnhandledExceptionHook.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\CircularProgressIndicator.xaml">
