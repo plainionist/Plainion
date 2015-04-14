@@ -53,6 +53,7 @@
     <Compile Include="Controls\CircularProgressIndicator.xaml.cs">
       <DependentUpon>CircularProgressIndicator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MultiStyleExtension.cs" />
     <Compile Include="NotConverter.cs" />
     <Compile Include="OrConverter.cs" />
     <Compile Include="Interactivity\MultiSelectBehavior.cs" />
