@@ -81,6 +81,8 @@
     <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="Package=Prism" Targets="_CreatePackage" />
     <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="Package=AppFw.Wpf" Targets="_CreatePackage" />
     <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="Package=AppFw.Shell" Targets="_CreatePackage" />
+
+    <CallTarget Targets="CreateStarterRelease"/>
   </Target>
 
   <Target Name="_CreatePackage">
@@ -91,5 +93,29 @@
     <Copy SourceFiles="@(File)" DestinationFolder="$(PackageRoot)\$(Package)\lib\NET45"/>
 
     <Exec Command="$(NuGet) pack $(PackageRoot)\$(Package)\Plainion.$(Package).nuspec -OutputDirectory $(PackageRoot)\$(Package)"/>
+  </Target>
+
+  <Target Name="CreateStarterRelease">
+    <MakeDir Directories="$(PackageRoot)\Plainion.Starter"/>
+
+    <ItemGroup>
+      <Content Include="$(BuildOutputPath)\Plainion.Core.dll"/>
+      <Content Include="$(BuildOutputPath)\Plainion.Core.pdb"/>
+      <Content Include="$(BuildOutputPath)\Plainion.Core.xml"/>
+      
+      <Content Include="$(BuildOutputPath)\Plainion.AppFw.Shell.dll"/>
+      <Content Include="$(BuildOutputPath)\Plainion.AppFw.Shell.pdb"/>
+      <Content Include="$(BuildOutputPath)\Plainion.AppFw.Shell.xml"/>
+
+      <Content Include="$(BuildOutputPath)\Plainion.AppFw.Shell.Hosting.dll"/>
+      <Content Include="$(BuildOutputPath)\Plainion.AppFw.Shell.Hosting.pdb"/>
+      <Content Include="$(BuildOutputPath)\Plainion.AppFw.Shell.Hosting.xml"/>
+
+      <Content Include="$(BuildOutputPath)\Plainion.Starter.exe"/>
+      <Content Include="$(BuildOutputPath)\Plainion.Starter.exe.config"/>
+    </ItemGroup>
+
+    <Copy SourceFiles="@(Content)" DestinationFolder="$(PackageRoot)\Plainion.Starter"/>
+
   </Target>
 </Project>
