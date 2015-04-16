@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.AppFw.Shell.Tests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainions.AppFw.Wpf", "src\AppFw\Plainion.AppFw.Wpf\Plainions.AppFw.Wpf.csproj", "{423A405F-8AB1-4910-BB0F-4AB88DC84ED5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Starter", "src\AppFw\Plainion.Starter\Plainion.Starter.csproj", "{EBDD30F9-D9B6-4784-BDB7-7669EBC00F60}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{423A405F-8AB1-4910-BB0F-4AB88DC84ED5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{423A405F-8AB1-4910-BB0F-4AB88DC84ED5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{423A405F-8AB1-4910-BB0F-4AB88DC84ED5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBDD30F9-D9B6-4784-BDB7-7669EBC00F60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBDD30F9-D9B6-4784-BDB7-7669EBC00F60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBDD30F9-D9B6-4784-BDB7-7669EBC00F60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBDD30F9-D9B6-4784-BDB7-7669EBC00F60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,5 +99,6 @@ Global
 		{304C2937-728D-4F37-BF56-830D0A9D6334} = {BCAB08B5-5E40-437B-BE7F-10FCEC2518E0}
 		{39C023D6-3C8F-4D49-99D8-FB7F741E5843} = {BCAB08B5-5E40-437B-BE7F-10FCEC2518E0}
 		{423A405F-8AB1-4910-BB0F-4AB88DC84ED5} = {BCAB08B5-5E40-437B-BE7F-10FCEC2518E0}
+		{EBDD30F9-D9B6-4784-BDB7-7669EBC00F60} = {BCAB08B5-5E40-437B-BE7F-10FCEC2518E0}
 	EndGlobalSection
 EndGlobal

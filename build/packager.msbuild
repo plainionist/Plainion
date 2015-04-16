@@ -35,7 +35,7 @@
       <TestAssemblyPattern>*Tests.dll</TestAssemblyPattern>
     </PropertyGroup>
     
-    <Exec Command="$(BuildOutputPath)\Blade.Starter.exe -TestIt -a $(TestAssemblyPattern)"
+    <Exec Command="$(BuildOutputPath)\Plainion.Starter.exe -TestIt -a $(TestAssemblyPattern)"
           WorkingDirectory="$(BuildOutputPath)"
           CustomErrorRegularExpression="^\s*\d+\) Test Failure : .*$"/>
   </Target>

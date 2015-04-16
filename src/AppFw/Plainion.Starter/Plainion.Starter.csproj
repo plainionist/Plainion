@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\..\build\Plainion.Globals.msbuild" />
+  <PropertyGroup>
+    <ProjectGuid>{EBDD30F9-D9B6-4784-BDB7-7669EBC00F60}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Plainion.Starter</RootNamespace>
+    <AssemblyName>Plainion.Starter</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Foundation\Plainion.Core\Plainion.Core.csproj">
+      <Project>{3cbd40b6-84fc-4898-8c64-cd602da8ef79}</Project>
+      <Name>Plainion.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plainion.AppFw.Shell.Hosting\Plainion.AppFw.Shell.Hosting.csproj">
+      <Project>{304c2937-728d-4f37-bf56-830d0a9d6334}</Project>
+      <Name>Plainion.AppFw.Shell.Hosting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plainion.AppFw.Shell\Plainion.AppFw.Shell.csproj">
+      <Project>{A59089BB-AEA6-4110-ADD1-8ACF862D3F5C}</Project>
+      <Name>Plainion.AppFw.Shell</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
