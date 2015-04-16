@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "@Solution Items", "@Solution Items", "{E942AA64-1A87-4E87-AD6B-0C1778D0ED82}"
 	ProjectSection(SolutionItems) = preProject
@@ -35,7 +35,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.AppFw.Shell.Hostin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.AppFw.Shell.Tests", "src\AppFw\Plainion.AppFw.Shell.Tests\Plainion.AppFw.Shell.Tests.csproj", "{39C023D6-3C8F-4D49-99D8-FB7F741E5843}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainions.AppFw.Wpf", "src\AppFw\Plainion.AppFw.Wpf\Plainions.AppFw.Wpf.csproj", "{423A405F-8AB1-4910-BB0F-4AB88DC84ED5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.AppFw.Wpf", "src\AppFw\Plainion.AppFw.Wpf\Plainion.AppFw.Wpf.csproj", "{423A405F-8AB1-4910-BB0F-4AB88DC84ED5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Starter", "src\AppFw\Plainion.Starter\Plainion.Starter.csproj", "{EBDD30F9-D9B6-4784-BDB7-7669EBC00F60}"
 EndProject

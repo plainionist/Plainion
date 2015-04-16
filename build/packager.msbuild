@@ -12,6 +12,39 @@
     <NuGet>$(BuildRoot)/nuget.exe</NuGet>
   </PropertyGroup>
 
+  <ItemGroup  Condition=" '$(Package)' == 'Core' ">
+    <File Include="$(BuildOutputPath)\Plainion.Core.dll"/>
+    <File Include="$(BuildOutputPath)\Plainion.Core.pdb"/>
+    <File Include="$(BuildOutputPath)\Plainion.Core.xml"/>
+  </ItemGroup>
+
+  <ItemGroup  Condition=" '$(Package)' == 'Windows' ">
+    <File Include="$(BuildOutputPath)\Plainion.Windows.dll"/>
+    <File Include="$(BuildOutputPath)\Plainion.Windows.pdb"/>
+    <File Include="$(BuildOutputPath)\Plainion.Windows.xml"/>
+  </ItemGroup>
+
+  <ItemGroup  Condition=" '$(Package)' == 'Prism' ">
+    <File Include="$(BuildOutputPath)\Plainion.Prism.dll"/>
+    <File Include="$(BuildOutputPath)\Plainion.Prism.pdb"/>
+    <File Include="$(BuildOutputPath)\Plainion.Prism.xml"/>
+  </ItemGroup>
+
+  <ItemGroup  Condition=" '$(Package)' == 'AppFw.Wpf' ">
+    <File Include="$(BuildOutputPath)\Plainion.AppFw.Wpf.dll"/>
+    <File Include="$(BuildOutputPath)\Plainion.AppFw.Wpf.pdb"/>
+    <File Include="$(BuildOutputPath)\Plainion.AppFw.Wpf.xml"/>
+  </ItemGroup>
+
+  <ItemGroup  Condition=" '$(Package)' == 'AppFw.Shell' ">
+    <File Include="$(BuildOutputPath)\Plainion.AppFw.Shell.dll"/>
+    <File Include="$(BuildOutputPath)\Plainion.AppFw.Shell.pdb"/>
+    <File Include="$(BuildOutputPath)\Plainion.AppFw.Shell.xml"/>
+    <File Include="$(BuildOutputPath)\Plainion.AppFw.Shell.Hosting.dll"/>
+    <File Include="$(BuildOutputPath)\Plainion.AppFw.Shell.Hosting.pdb"/>
+    <File Include="$(BuildOutputPath)\Plainion.AppFw.Shell.Hosting.xml"/>
+  </ItemGroup>
+
   <Target Name="UpdatePackages">
     <Exec Command="$(NuGet) restore $(Solution)" WorkingDirectory="$(PackageRoot)"/>
   </Target>
@@ -21,7 +54,7 @@
       <BuildMode>Release</BuildMode>
       <BuildPlatform>Any CPU</BuildPlatform>
     </PropertyGroup>
-    
+
     <RemoveDir Directories="$(BuildOutputPath)"/>
 
     <MSBuild Projects="$(Solution)"
@@ -34,7 +67,7 @@
     <PropertyGroup>
       <TestAssemblyPattern>*Tests.dll</TestAssemblyPattern>
     </PropertyGroup>
-    
+
     <Exec Command="$(BuildOutputPath)\Plainion.Starter.exe -TestIt -a $(TestAssemblyPattern)"
           WorkingDirectory="$(BuildOutputPath)"
           CustomErrorRegularExpression="^\s*\d+\) Test Failure : .*$"/>
@@ -43,23 +76,20 @@
   <Target Name="All" DependsOnTargets="Build">
     <RemoveDir Directories="$(PackageRoot)"/>
 
-    <CallTarget Targets="_CreatePackage"/>
+    <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="Package=Core" Targets="_CreatePackage" />
+    <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="Package=Windows" Targets="_CreatePackage" />
+    <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="Package=Prism" Targets="_CreatePackage" />
+    <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="Package=AppFw.Wpf" Targets="_CreatePackage" />
+    <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="Package=AppFw.Shell" Targets="_CreatePackage" />
   </Target>
 
   <Target Name="_CreatePackage">
-    <MakeDir Directories="$(PackageRoot)\Core\lib\NET45"/>
+    <MakeDir Directories="$(PackageRoot)\$(Package)\lib\NET45"/>
 
-    <Copy SourceFiles="$(BuildRoot)\Plainion.Core.nuspec" DestinationFolder="$(PackageRoot)\Core"/>
+    <Copy SourceFiles="$(BuildRoot)\Plainion.$(Package).nuspec" DestinationFolder="$(PackageRoot)\$(Package)"/>
 
-    <ItemGroup>
-      <File Include="$(BuildOutputPath)\Plainion.Core.dll"/>
-      <File Include="$(BuildOutputPath)\Plainion.Core.pdb"/>
-      <File Include="$(BuildOutputPath)\Plainion.Core.xml"/>
-    </ItemGroup>
+    <Copy SourceFiles="@(File)" DestinationFolder="$(PackageRoot)\$(Package)\lib\NET45"/>
 
-    <Copy SourceFiles="@(File)" DestinationFolder="$(PackageRoot)\Core\lib\NET45"/>
-
-    <Exec Command="$(NuGet) pack $(PackageRoot)\Core\Plainion.Core.nuspec -OutputDirectory $(PackageRoot)\Core"/>
-
+    <Exec Command="$(NuGet) pack $(PackageRoot)\$(Package)\Plainion.$(Package).nuspec -OutputDirectory $(PackageRoot)\$(Package)"/>
   </Target>
 </Project>

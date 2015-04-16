@@ -12,10 +12,12 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <DocumentationFile>$(OutputPath)\Plainion.AppFw.Wpf.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>$(OutputPath)\Plainion.AppFw.Wpf.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Practices.Prism.Composition">

@@ -7,10 +7,10 @@
     <authors>ronin4net</authors>
     <owners>ronin4net</owners>
     <licenseUrl>http://opensource.org/licenses/BSD-3-Clause</licenseUrl>
-    <projectUrl>https://github.com/ronin4net/Plainion/wiki/Plainion.Windows</projectUrl>
+    <projectUrl>https://github.com/ronin4net/Plainion/wiki/Plainion.AppFw.Wpf</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Provides extensions to WPF to simplify development of software engineering tools</description>
-    <releaseNotes>UnhandledExceptionHook and MultiStyleExtension added</releaseNotes>
+    <description>Provides a simple application framework for writing WPF/Prism based software engineering tools</description>
+    <releaseNotes>initial release</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <dependencies>
       <dependency id="Plainion.Core" version="2.1.0.0" />
@@ -18,7 +18,6 @@
       <dependency id="Plainion.Prism" version="1.4.0.0" />
       <dependency id="Expression.Blend.Sdk" version="1.0.2" />
       <dependency id="CommonServiceLocator" version="1.2" />
-      <dependency id="Expression.Blend.Sdk" version="1.0.2" />
       <dependency id="Prism" version="5.0.0" />
       <dependency id="Prism.Composition" version="5.0.0" />
       <dependency id="Prism.Interactivity" version="5.0.0" />

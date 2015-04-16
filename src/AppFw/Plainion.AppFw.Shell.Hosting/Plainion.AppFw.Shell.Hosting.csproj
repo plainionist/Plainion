@@ -6,8 +6,8 @@
     <ProjectGuid>{304C2937-728D-4F37-BF56-830D0A9D6334}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Plainion.AppFw.AppFw.Shell.Hosting</RootNamespace>
-    <AssemblyName>Plainion.AppFw.AppFw.Shell.Hosting</AssemblyName>
+    <RootNamespace>Plainion.AppFw.Shell.Hosting</RootNamespace>
+    <AssemblyName>Plainion.AppFw.Shell.Hosting</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DocumentationFile>$(OutputPath)\Plainion.AppFw.Shell.Hosting.xml</DocumentationFile>

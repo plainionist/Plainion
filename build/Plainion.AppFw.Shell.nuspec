@@ -7,14 +7,13 @@
     <authors>ronin4net</authors>
     <owners>ronin4net</owners>
     <licenseUrl>http://opensource.org/licenses/BSD-3-Clause</licenseUrl>
-    <projectUrl>https://github.com/ronin4net/Plainion/wiki/Plainion.Windows</projectUrl>
+    <projectUrl>https://github.com/ronin4net/Plainion/wiki/Plainion.AppFw.Shell</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Provides a simple application framework for writing Xaml/C# shell scripts</description>
     <releaseNotes>initial release</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <dependencies>
       <dependency id="Plainion.Core" version="2.1.0.0" />
-      <dependency id="Expression.Blend.Sdk" version="1.0.2" />
     </dependencies>
   </metadata>
 </package>
