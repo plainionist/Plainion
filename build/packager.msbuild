@@ -1,0 +1,65 @@
+<Project DefaultTargets="All" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+
+  <PropertyGroup>
+    <ProjectRoot>$([System.IO.Path]::GetFullPath('..'))</ProjectRoot>
+    <BuildRoot>$(ProjectRoot)\build</BuildRoot>
+    <PackageRoot>$(ProjectRoot)\pkg</PackageRoot>
+
+    <Solution>$(ProjectRoot)/Plainion.sln</Solution>
+
+    <BuildOutputPath>$(ProjectRoot)\bin\pkg.in</BuildOutputPath>
+
+    <NuGet>$(BuildRoot)/nuget.exe</NuGet>
+  </PropertyGroup>
+
+  <Target Name="UpdatePackages">
+    <Exec Command="$(NuGet) restore $(Solution)" WorkingDirectory="$(PackageRoot)"/>
+  </Target>
+
+  <Target Name="Build" DependsOnTargets="UpdatePackages">
+    <PropertyGroup>
+      <BuildMode>Release</BuildMode>
+      <BuildPlatform>Any CPU</BuildPlatform>
+    </PropertyGroup>
+    
+    <RemoveDir Directories="$(BuildOutputPath)"/>
+
+    <MSBuild Projects="$(Solution)"
+             Properties="Configuration=$(BuildMode);Platform=$(BuildPlatform);OutputPath=$(BuildOutputPath)"
+             Targets="Rebuild"
+             BuildInParallel="true"/>
+  </Target>
+
+  <Target Name="Tests">
+    <PropertyGroup>
+      <TestAssemblyPattern>*Tests.dll</TestAssemblyPattern>
+    </PropertyGroup>
+    
+    <Exec Command="$(BuildOutputPath)\Blade.Starter.exe -TestIt -a $(TestAssemblyPattern)"
+          WorkingDirectory="$(BuildOutputPath)"
+          CustomErrorRegularExpression="^\s*\d+\) Test Failure : .*$"/>
+  </Target>
+
+  <Target Name="All" DependsOnTargets="Build">
+    <RemoveDir Directories="$(PackageRoot)"/>
+
+    <CallTarget Targets="_CreatePackage"/>
+  </Target>
+
+  <Target Name="_CreatePackage">
+    <MakeDir Directories="$(PackageRoot)\Core\lib\NET45"/>
+
+    <Copy SourceFiles="$(BuildRoot)\Plainion.Core.nuspec" DestinationFolder="$(PackageRoot)\Core"/>
+
+    <ItemGroup>
+      <File Include="$(BuildOutputPath)\Plainion.Core.dll"/>
+      <File Include="$(BuildOutputPath)\Plainion.Core.pdb"/>
+      <File Include="$(BuildOutputPath)\Plainion.Core.xml"/>
+    </ItemGroup>
+
+    <Copy SourceFiles="@(File)" DestinationFolder="$(PackageRoot)\Core\lib\NET45"/>
+
+    <Exec Command="$(NuGet) pack $(PackageRoot)\Core\Plainion.Core.nuspec -OutputDirectory $(PackageRoot)\Core"/>
+
+  </Target>
+</Project>

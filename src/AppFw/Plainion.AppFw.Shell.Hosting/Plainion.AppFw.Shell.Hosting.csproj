@@ -36,7 +36,7 @@
       <Project>{3cbd40b6-84fc-4898-8c64-cd602da8ef79}</Project>
       <Name>Plainion.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Plainions.AppFw.Shell\Plainion.AppFw.Shell.csproj">
+    <ProjectReference Include="..\Plainion.AppFw.Shell\Plainion.AppFw.Shell.csproj">
       <Project>{a59089bb-aea6-4110-add1-8acf862d3f5c}</Project>
       <Name>Plainion.AppFw.Shell</Name>
     </ProjectReference>

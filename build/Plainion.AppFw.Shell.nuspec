@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Plainion.Windows</id>
-    <title>Plainion.Windows</title>
-    <version>1.4.0.0</version>
+    <id>Plainion.AppFw.Shell</id>
+    <title>Plainion.AppFw.Shell</title>
+    <version>1.0.0.0</version>
     <authors>ronin4net</authors>
     <owners>ronin4net</owners>
     <licenseUrl>http://opensource.org/licenses/BSD-3-Clause</licenseUrl>
     <projectUrl>https://github.com/ronin4net/Plainion/wiki/Plainion.Windows</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Provides extensions to WPF to simplify development of software engineering tools</description>
-    <releaseNotes>UnhandledExceptionHook and MultiStyleExtension added</releaseNotes>
+    <description>Provides a simple application framework for writing Xaml/C# shell scripts</description>
+    <releaseNotes>initial release</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <dependencies>
       <dependency id="Plainion.Core" version="2.1.0.0" />

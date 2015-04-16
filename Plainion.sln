@@ -5,7 +5,13 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "@Solution Items", "@Solution Items", "{E942AA64-1A87-4E87-AD6B-0C1778D0ED82}"
 	ProjectSection(SolutionItems) = preProject
-		build\GlobalAssemblyInfo.cs = build\GlobalAssemblyInfo.cs
+		build\create-packages.cmd = build\create-packages.cmd
+		build\packager.msbuild = build\packager.msbuild
+		build\Plainion.AppFw.Shell.nuspec = build\Plainion.AppFw.Shell.nuspec
+		build\Plainion.AppFw.Wpf.nuspec = build\Plainion.AppFw.Wpf.nuspec
+		build\Plainion.Core.nuspec = build\Plainion.Core.nuspec
+		build\Plainion.Prism.nuspec = build\Plainion.Prism.nuspec
+		build\Plainion.Windows.nuspec = build\Plainion.Windows.nuspec
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -23,13 +29,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Windows", "src\Fou
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Windows.Tests", "src\Foundation\Plainion.Windows.Tests\Plainion.Windows.Tests.csproj", "{57156D7A-BD77-45E3-82F6-01FA4A07E200}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.AppFw.Shell", "src\AppFw\Plainions.AppFw.Shell\Plainion.AppFw.Shell.csproj", "{A59089BB-AEA6-4110-ADD1-8ACF862D3F5C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.AppFw.Shell", "src\AppFw\Plainion.AppFw.Shell\Plainion.AppFw.Shell.csproj", "{A59089BB-AEA6-4110-ADD1-8ACF862D3F5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.AppFw.Shell.Hosting", "src\AppFw\Plainions.AppFw.Shell.Hosting\Plainion.AppFw.Shell.Hosting.csproj", "{304C2937-728D-4F37-BF56-830D0A9D6334}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.AppFw.Shell.Hosting", "src\AppFw\Plainion.AppFw.Shell.Hosting\Plainion.AppFw.Shell.Hosting.csproj", "{304C2937-728D-4F37-BF56-830D0A9D6334}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.AppFw.Shell.Tests", "src\AppFw\Plainions.AppFw.Shell.Tests\Plainion.AppFw.Shell.Tests.csproj", "{39C023D6-3C8F-4D49-99D8-FB7F741E5843}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.AppFw.Shell.Tests", "src\AppFw\Plainion.AppFw.Shell.Tests\Plainion.AppFw.Shell.Tests.csproj", "{39C023D6-3C8F-4D49-99D8-FB7F741E5843}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainions.AppFw.Wpf", "src\AppFw\Plainions.AppFw.Wpf\Plainions.AppFw.Wpf.csproj", "{423A405F-8AB1-4910-BB0F-4AB88DC84ED5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainions.AppFw.Wpf", "src\AppFw\Plainion.AppFw.Wpf\Plainions.AppFw.Wpf.csproj", "{423A405F-8AB1-4910-BB0F-4AB88DC84ED5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
