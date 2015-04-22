@@ -74,7 +74,7 @@ namespace Plainion.Windows.Interactivity
 
             if( e.ChangedButton == MouseButton && e.ClickCount == ClickCount && Keyboard.Modifiers == Modifiers )
             {
-                Command.Execute( CommandParameterProperty );
+                Command.Execute( CommandParameter );
                 e.Handled = true;
             }
         }
