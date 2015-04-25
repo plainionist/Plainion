@@ -73,7 +73,7 @@
           CustomErrorRegularExpression="^\s*\d+\) Test Failure : .*$"/>
   </Target>
 
-  <Target Name="All" DependsOnTargets="Build">
+  <Target Name="All" DependsOnTargets="Build,Tests">
     <RemoveDir Directories="$(PackageRoot)"/>
 
     <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="Package=Core" Targets="_CreatePackage" />
