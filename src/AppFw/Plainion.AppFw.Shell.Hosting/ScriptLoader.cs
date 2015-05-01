@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Xml.Linq;
 using Plainion.Logging;
 using Plainion.Xaml;
 
@@ -12,10 +13,15 @@ namespace Plainion.AppFw.Shell.Hosting
     {
         private static readonly ILogger myLogger = LoggerFactory.GetLogger( typeof( ScriptLoader ) );
 
+        private string myRootDirectory;
         private List<Script> myScripts;
 
-        public ScriptLoader()
+        public ScriptLoader( string rootDirectory )
         {
+            Contract.RequiresNotNull( rootDirectory, "rootDirectory" );
+
+            myRootDirectory = rootDirectory;
+
             myScripts = new List<Script>();
         }
 
@@ -24,22 +30,9 @@ namespace Plainion.AppFw.Shell.Hosting
             get { return myScripts; }
         }
 
-        public void Load( string rootDirectory )
+        public void Load()
         {
-            var assemblies = Directory.GetFiles( rootDirectory, "*.dll", SearchOption.AllDirectories );
-            var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies()
-                .Select( asm => Path.GetFileName( asm.Location ) )
-                .ToList();
-            foreach( var assembly in assemblies )
-            {
-                // avoid loading assemblies the executing assembly is compiled to
-                if( !loadedAssemblies.Any( asm => Path.GetFileName( assembly ) == asm ) )
-                {
-                    Assembly.LoadFrom( assembly );
-                }
-            }
-
-            var scriptFiles = Directory.GetFiles( rootDirectory, "*.xaml", SearchOption.AllDirectories );
+            var scriptFiles = Directory.GetFiles( myRootDirectory, "*.xaml", SearchOption.AllDirectories );
 
             var scripts = scriptFiles
                 .Select( f => LoadScriptSafe( f ) )
@@ -67,6 +60,8 @@ namespace Plainion.AppFw.Shell.Hosting
         {
             myLogger.Debug( "Processing starter script: {0}", file );
 
+            LoadDependentAssemblies( file );
+
             var reader = new ValidatingXamlReader();
             var obj = reader.Read<object>( file );
 
@@ -83,6 +78,39 @@ namespace Plainion.AppFw.Shell.Hosting
             else
             {
                 throw new NotSupportedException( "Unknown root element: " + obj.GetType() );
+            }
+        }
+
+        //         xmlns:s="clr-namespace:Plainion.Scripts.TestRunner;assembly=Plainion.Scripts" 
+        private void LoadDependentAssemblies( string scriptFile )
+        {
+            var doc = XElement.Load( scriptFile );
+
+            var assembliesToLoad = doc.Attributes()
+                .Where( attr => attr.IsNamespaceDeclaration )
+                .Select( attr => attr.Value )
+                .Where( ns => ns.StartsWith( "clr-namespace:", StringComparison.OrdinalIgnoreCase ) )
+                .Where( ns => ns.Contains( "assembly=", StringComparison.OrdinalIgnoreCase ) )
+                .Select( ns => ns.Split( new[] { "assembly=" }, StringSplitOptions.RemoveEmptyEntries ).Last() )
+                .ToList();
+
+            foreach( var dep in assembliesToLoad )
+            {
+                var isAlreadyLoaded = AppDomain.CurrentDomain.GetAssemblies()
+                    .Any( asm => Path.GetFileNameWithoutExtension( asm.Location ).Equals( dep, StringComparison.OrdinalIgnoreCase ) );
+
+                if( isAlreadyLoaded )
+                {
+                    myLogger.Info( "Assembly already loaded: {0}", dep );
+                    continue;
+                }
+
+                var assembly = Directory.EnumerateFiles( myRootDirectory, "*.dll", SearchOption.AllDirectories )
+                    .FirstOrDefault( dll => Path.GetFileNameWithoutExtension( dll ).Equals( dep, StringComparison.OrdinalIgnoreCase ) );
+
+                Contract.Invariant( assembly != null, "Assembly not found: {0}", dep );
+
+                Assembly.LoadFrom( assembly );
             }
         }
     }

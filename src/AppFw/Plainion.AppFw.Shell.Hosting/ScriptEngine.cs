@@ -11,7 +11,7 @@ namespace Plainion.AppFw.Shell.Hosting
         private static readonly ILogger myLogger = LoggerFactory.GetLogger( typeof( ScriptEngine ) );
 
         private bool myShowHelp = false;
-        private ScriptLoader myScriptLoader;
+        private List<Script> myScripts;
         private List<string> myScriptArgs;
         private List<string> myScriptsToExecute;
         private List<string> myScriptDirectories;
@@ -27,7 +27,7 @@ namespace Plainion.AppFw.Shell.Hosting
 
             myScriptDirectories = scriptDirectories.ToList();
 
-            myScriptLoader = new ScriptLoader();
+            myScripts = new List<Script>();
             myScriptArgs = new List<string>();
             myScriptsToExecute = new List<string>();
         }
@@ -36,7 +36,7 @@ namespace Plainion.AppFw.Shell.Hosting
         {
             ParseCmdArgs( args );
 
-            LoadStarterScripts();
+            LoadScripts();
 
             if( myShowHelp || !myScriptsToExecute.Any() )
             {
@@ -48,14 +48,17 @@ namespace Plainion.AppFw.Shell.Hosting
             return true;
         }
 
-        private void LoadStarterScripts()
+        private void LoadScripts()
         {
             var validDirs = myScriptDirectories
                 .Where( dir => Directory.Exists( dir ) );
 
             foreach( var dir in validDirs )
             {
-                myScriptLoader.Load( dir );
+                var loader = new ScriptLoader( dir );
+                loader.Load();
+
+                myScripts.AddRange( loader.Scripts );
             }
         }
 
@@ -76,7 +79,7 @@ namespace Plainion.AppFw.Shell.Hosting
 
         private Script GetScriptByOption( string option )
         {
-            var scripts = myScriptLoader.Scripts
+            var scripts = myScripts
                 .Where( s => s.Option.Equals( option, StringComparison.OrdinalIgnoreCase ) )
                 .ToList();
 
@@ -164,7 +167,7 @@ namespace Plainion.AppFw.Shell.Hosting
             writer.WriteLine( @"Scripts:" );
             writer.WriteLine();
 
-            foreach( var script in myScriptLoader.Scripts.OrderBy( h => h.Option ) )
+            foreach( var script in myScripts.OrderBy( h => h.Option ) )
             {
                 writer.WriteLine( "{0,-30} - {1}", script.Option, script.Description );
             }
