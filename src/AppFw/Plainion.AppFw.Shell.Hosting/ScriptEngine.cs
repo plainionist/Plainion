@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Plainion.Logging;
-using Plainion.AppFw.Shell;
-using Plainion;
 
 namespace Plainion.AppFw.Shell.Hosting
 {
@@ -16,13 +14,18 @@ namespace Plainion.AppFw.Shell.Hosting
         private ScriptLoader myScriptLoader;
         private List<string> myScriptArgs;
         private List<string> myScriptsToExecute;
-        private IReadOnlyCollection<string> myScriptDirectories;
+        private List<string> myScriptDirectories;
+
+        public ScriptEngine()
+            : this( new List<string>() )
+        {
+        }
 
         public ScriptEngine( IReadOnlyCollection<string> scriptDirectories )
         {
             Contract.RequiresNotNull( scriptDirectories, "scriptDirectories" );
 
-            myScriptDirectories = scriptDirectories;
+            myScriptDirectories = scriptDirectories.ToList();
 
             myScriptLoader = new ScriptLoader();
             myScriptArgs = new List<string>();
@@ -120,6 +123,14 @@ namespace Plainion.AppFw.Shell.Hosting
                     {
                         LoggerFactory.LogLevel = LogLevel.Debug;
                     }
+                    else if( arg == "-D" || arg == "--Dir" )
+                    {
+                        Contract.Requires( i + 1 < args.Length, "--Dir requires an argument" );
+
+                        i++;
+
+                        myScriptDirectories.Add( args[ i ] );
+                    }
                     else
                     {
                         // first non-global argument is treated as script
@@ -136,12 +147,13 @@ namespace Plainion.AppFw.Shell.Hosting
 
         public void PrintUsage( TextWriter writer )
         {
-            writer.WriteLine( @"Plainion.Tools.Starter.exe [options] <script> <script args>" );
+            writer.WriteLine( "{0} [options] <script> <script args>", Path.GetFileName( GetType().Assembly.Location ) );
             writer.WriteLine();
-            writer.WriteLine( @"Global options:" );
-            writer.WriteLine( @"  -h/--help              print usage" );
-            writer.WriteLine( @"  -v/--verbose           run in verbose mode" );
-            writer.WriteLine( @"  -d/--debug             run in debug mode" );
+            writer.WriteLine( "Global options:" );
+            writer.WriteLine( "  -h/--help              print usage" );
+            writer.WriteLine( "  -v/--verbose           run in verbose mode" );
+            writer.WriteLine( "  -d/--debug             run in debug mode" );
+            writer.WriteLine( "  -D/--Dir               script directory. Multiple allowed" );
             writer.WriteLine();
 
             PrintScripts( writer );

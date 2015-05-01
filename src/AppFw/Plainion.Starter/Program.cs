@@ -1,9 +1,7 @@
 using System;
 using System.Diagnostics;
-using System.IO;
 using Plainion.AppFw.Shell.Hosting;
 using Plainion.Logging;
-using Plainion.Xaml;
 
 namespace Plainion.Starter
 {
@@ -21,9 +19,7 @@ namespace Plainion.Starter
 
             try
             {
-                var settings = GetSettings();
-
-                var engine = new ScriptEngine( settings.ScriptDirectories );
+                var engine = new ScriptEngine();
                 if( !engine.Run( args ) )
                 {
                     engine.PrintUsage( Console.Out );
@@ -38,19 +34,6 @@ namespace Plainion.Starter
             }
 
             return 0;
-        }
-
-        private static Settings GetSettings()
-        {
-            var location = typeof( Program ).Assembly.Location;
-            var settingsFile = location + ".xaml";
-
-            if( File.Exists( settingsFile ) )
-            {
-                return new ValidatingXamlReader().Read<Settings>( settingsFile );
-            }
-
-            return new Settings();
         }
     }
 }

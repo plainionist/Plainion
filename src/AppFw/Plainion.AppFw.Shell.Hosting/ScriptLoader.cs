@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using Plainion.Logging;
 using Plainion.Xaml;
 
@@ -25,6 +26,19 @@ namespace Plainion.AppFw.Shell.Hosting
 
         public void Load( string rootDirectory )
         {
+            var assemblies = Directory.GetFiles( rootDirectory, "*.dll", SearchOption.AllDirectories );
+            var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies()
+                .Select( asm => Path.GetFileName( asm.Location ) )
+                .ToList();
+            foreach( var assembly in assemblies )
+            {
+                // avoid loading assemblies the executing assembly is compiled to
+                if( !loadedAssemblies.Any( asm => Path.GetFileName( assembly ) == asm ) )
+                {
+                    Assembly.LoadFrom( assembly );
+                }
+            }
+
             var scriptFiles = Directory.GetFiles( rootDirectory, "*.xaml", SearchOption.AllDirectories );
 
             var scripts = scriptFiles
