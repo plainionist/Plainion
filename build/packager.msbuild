@@ -9,7 +9,7 @@
 
     <BuildOutputPath>$(ProjectRoot)\bin\pkg.in</BuildOutputPath>
 
-    <NuGet>$(BuildRoot)/nuget.exe</NuGet>
+    <NuGet>/bin/nuget.exe</NuGet>
   </PropertyGroup>
 
   <ItemGroup  Condition=" '$(Package)' == 'Core' ">
