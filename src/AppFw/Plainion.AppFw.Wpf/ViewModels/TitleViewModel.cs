@@ -1,9 +1,8 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.Composition;
+using Microsoft.Practices.Prism.Mvvm;
 using Plainion.AppFw.Wpf.Model;
 using Plainion.AppFw.Wpf.Services;
-using Microsoft.Practices.Prism.Mvvm;
 
 namespace Plainion.AppFw.Wpf.ViewModels
 {
@@ -36,7 +35,7 @@ namespace Plainion.AppFw.Wpf.ViewModels
             }
         }
 
-        private void OnProjectChanging( object sender, EventArgs e )
+        private void OnProjectChanging( TProject oldProject )
         {
             if ( myProjectService.Project != null )
             {
@@ -44,7 +43,7 @@ namespace Plainion.AppFw.Wpf.ViewModels
             }
         }
 
-        private void OnProjectChanged( object sender, EventArgs e )
+        private void OnProjectChanged( TProject newProject )
         {
             if ( myProjectService.Project == null || string.IsNullOrEmpty( myProjectService.Project.Location ) )
             {

@@ -16,7 +16,7 @@ namespace Plainion.AppFw.Wpf.Model
         public string Location
         {
             get { return myLocation; }
-            set
+            internal set
             {
                 var location = value != null ? Path.GetFullPath( value ) : null;
 

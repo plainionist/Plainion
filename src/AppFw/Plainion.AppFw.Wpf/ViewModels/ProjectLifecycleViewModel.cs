@@ -16,13 +16,11 @@ namespace Plainion.AppFw.Wpf.ViewModels
     public class ProjectLifecycleViewModel<TProject> : BindableBase where TProject : ProjectBase
     {
         private IProjectService<TProject> myProjectService;
-        private IPersistenceService<TProject> myPersistenceService;
 
         [ImportingConstructor]
-        public ProjectLifecycleViewModel( IProjectService<TProject> projectService, IPersistenceService<TProject> persistenceService )
+        public ProjectLifecycleViewModel( IProjectService<TProject> projectService )
         {
             myProjectService = projectService;
-            myPersistenceService = persistenceService;
 
             myProjectService.ProjectChanged += OnProjectChanged;
 
@@ -37,7 +35,7 @@ namespace Plainion.AppFw.Wpf.ViewModels
             SaveFileRequest = new InteractionRequest<SaveFileDialogNotification>();
         }
 
-        private void OnProjectChanged( object sender, ProjectChangeEventArgs<TProject> e )
+        private void OnProjectChanged( TProject newProject )
         {
             SaveCommand.RaiseCanExecuteChanged();
         }
@@ -59,14 +57,14 @@ namespace Plainion.AppFw.Wpf.ViewModels
             var args = new CancelEventArgs( false );
             HandleUnsavedData( args );
 
-            if ( args.Cancel )
+            if( args.Cancel )
             {
                 return;
             }
 
-            if ( !AutoSaveNewProject )
+            if( !AutoSaveNewProject )
             {
-                myProjectService.Project = myProjectService.CreateEmptyProject( null );
+                myProjectService.CreateEmptyProject( null );
                 return;
             }
 
@@ -78,16 +76,14 @@ namespace Plainion.AppFw.Wpf.ViewModels
 
             SaveFileRequest.Raise( notification, n => { } );
 
-            if ( !notification.Confirmed )
+            if( !notification.Confirmed )
             {
                 return;
             }
 
-            var project = myProjectService.CreateEmptyProject( notification.FileName );
+            myProjectService.CreateEmptyProject( notification.FileName );
 
-            myPersistenceService.Save( project );
-
-            myProjectService.Project = project;
+            myProjectService.Save();
         }
 
         public ICommand OpenCommand { get; private set; }
@@ -99,7 +95,7 @@ namespace Plainion.AppFw.Wpf.ViewModels
             var args = new CancelEventArgs( false );
             HandleUnsavedData( args );
 
-            if ( args.Cancel )
+            if( args.Cancel )
             {
                 return;
             }
@@ -113,9 +109,9 @@ namespace Plainion.AppFw.Wpf.ViewModels
             OpenFileRequest.Raise( notification,
                 n =>
                 {
-                    if ( n.Confirmed )
+                    if( n.Confirmed )
                     {
-                        myProjectService.Project = myPersistenceService.Load( n.FileName );
+                        myProjectService.Load( n.FileName );
                     }
                 } );
         }
@@ -128,12 +124,12 @@ namespace Plainion.AppFw.Wpf.ViewModels
         {
             TextBoxBinding.ForceSourceUpdate();
 
-            if ( !myProjectService.Project.IsDirty )
+            if( !myProjectService.Project.IsDirty )
             {
                 return true;
             }
 
-            if ( string.IsNullOrEmpty( myProjectService.Project.Location ) )
+            if( string.IsNullOrEmpty( myProjectService.Project.Location ) )
             {
                 var notification = new SaveFileDialogNotification();
                 notification.RestoreDirectory = true;
@@ -143,19 +139,19 @@ namespace Plainion.AppFw.Wpf.ViewModels
 
                 SaveFileRequest.Raise( notification, n =>
                 {
-                    if ( n.Confirmed )
+                    if( n.Confirmed )
                     {
                         myProjectService.Project.Location = n.FileName;
                     }
                 } );
 
-                if ( !notification.Confirmed )
+                if( !notification.Confirmed )
                 {
                     return false;
                 }
             }
 
-            myPersistenceService.Save( myProjectService.Project );
+            myProjectService.Save();
 
             return true;
         }
@@ -173,7 +169,7 @@ namespace Plainion.AppFw.Wpf.ViewModels
         {
             TextBoxBinding.ForceSourceUpdate();
 
-            if ( myProjectService.Project == null || !myProjectService.Project.IsDirty )
+            if( myProjectService.Project == null || !myProjectService.Project.IsDirty )
             {
                 return;
             }
@@ -183,11 +179,11 @@ namespace Plainion.AppFw.Wpf.ViewModels
 
             ClosingConfirmationRequest.Raise( notification, c =>
                 {
-                    if ( c.Response == ExitWithoutSaveNotification.ResponseType.Yes )
+                    if( c.Response == ExitWithoutSaveNotification.ResponseType.Yes )
                     {
                         eventArgs.Cancel = !OnSave();
                     }
-                    else if ( c.Response == ExitWithoutSaveNotification.ResponseType.No )
+                    else if( c.Response == ExitWithoutSaveNotification.ResponseType.No )
                     {
                         eventArgs.Cancel = false;
                     }
@@ -205,7 +201,7 @@ namespace Plainion.AppFw.Wpf.ViewModels
             var args = new CancelEventArgs( false );
             HandleUnsavedData( args );
 
-            if ( !args.Cancel )
+            if( !args.Cancel )
             {
                 Application.Current.Shutdown();
             }

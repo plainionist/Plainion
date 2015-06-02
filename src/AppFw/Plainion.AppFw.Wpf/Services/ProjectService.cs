@@ -4,56 +4,75 @@ using Plainion.AppFw.Wpf.Model;
 
 namespace Plainion.AppFw.Wpf.Services
 {
-    public class ProjectService<TProject> : IProjectService<TProject> where TProject : ProjectBase, new()
+    public abstract class ProjectService<TProject> : IProjectService<TProject> where TProject : ProjectBase, new()
     {
         private TProject myProject;
 
         public TProject Project
         {
             get { return myProject; }
-            set
+            private set
             {
-                if ( object.ReferenceEquals( myProject, value ) )
+                if( object.ReferenceEquals( myProject, value ) )
                 {
                     return;
                 }
 
-                var args = new ProjectChangeEventArgs<TProject>( myProject, value );
-
-                OnProjectChanging( args );
+                OnProjectChanging( myProject );
 
                 myProject = value;
 
-                OnProjectChanged( args );
+                OnProjectChanged( myProject );
             }
         }
 
-        protected virtual void OnProjectChanging( ProjectChangeEventArgs<TProject> args )
+        protected virtual void OnProjectChanging( TProject oldProject )
         {
-            if ( ProjectChanging != null )
+            if( ProjectChanging != null )
             {
-                ProjectChanging( this, args );
+                ProjectChanging( oldProject );
             }
         }
 
-        protected virtual void OnProjectChanged( ProjectChangeEventArgs<TProject> args )
+        protected virtual void OnProjectChanged( TProject newProject )
         {
-            if ( ProjectChanged != null )
+            if( ProjectChanged != null )
             {
-                ProjectChanged( this, args );
+                ProjectChanged( newProject );
             }
         }
 
-        public event EventHandler<ProjectChangeEventArgs<TProject>> ProjectChanging;
-        public event EventHandler<ProjectChangeEventArgs<TProject>> ProjectChanged;
+        public event Action<TProject> ProjectChanging;
+        public event Action<TProject> ProjectChanged;
 
-        public virtual TProject CreateEmptyProject( string location )
+        public virtual void CreateEmptyProject( string location )
         {
             var project = new TProject();
             project.IsDirty = false;
             project.Location = location;
 
-            return project;
+            Project = project;
         }
+
+        public void Load( string file )
+        {
+            var project = Deserialize( file );
+
+            project.Location = file;
+            project.IsDirty = false;
+
+            Project = project;
+        }
+
+        protected abstract void Serialize( TProject project );
+
+        public void Save()
+        {
+            Serialize( Project );
+
+            Project.IsDirty = false;
+        }
+
+        protected abstract TProject Deserialize( string file );
     }
 }
