@@ -1,6 +1,5 @@
 ﻿using System;
-using System.ComponentModel.Composition;
-using Plainion.AppFw.Wpf.Model;
+using Plainion.AppFw.Wpf.Infrastructure;
 
 namespace Plainion.AppFw.Wpf.Services
 {

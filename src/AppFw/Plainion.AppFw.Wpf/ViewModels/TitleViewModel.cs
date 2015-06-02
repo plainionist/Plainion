@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.Composition;
 using Microsoft.Practices.Prism.Mvvm;
-using Plainion.AppFw.Wpf.Model;
-using Plainion.AppFw.Wpf.Services;
+using Plainion.AppFw.Wpf.Infrastructure;
 
 namespace Plainion.AppFw.Wpf.ViewModels
 {

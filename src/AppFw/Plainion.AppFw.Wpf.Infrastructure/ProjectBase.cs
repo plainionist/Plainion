@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Microsoft.Practices.Prism.Mvvm;
 
-namespace Plainion.AppFw.Wpf.Model
+namespace Plainion.AppFw.Wpf.Infrastructure
 {
     public class ProjectBase : BindableBase
     {
@@ -16,7 +16,7 @@ namespace Plainion.AppFw.Wpf.Model
         public string Location
         {
             get { return myLocation; }
-            internal set
+            set
             {
                 var location = value != null ? Path.GetFullPath( value ) : null;
 

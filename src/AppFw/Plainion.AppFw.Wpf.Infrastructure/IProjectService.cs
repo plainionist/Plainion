@@ -1,8 +1,7 @@
 ﻿using System;
 using System.ComponentModel.Composition;
-using Plainion.AppFw.Wpf.Model;
 
-namespace Plainion.AppFw.Wpf.Services
+namespace Plainion.AppFw.Wpf.Infrastructure
 {
     [InheritedExport( typeof( IProjectService<> ) )]
     public interface IProjectService<TProject> where TProject : ProjectBase

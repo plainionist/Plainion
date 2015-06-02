@@ -2,11 +2,10 @@
 using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Input;
-using Plainion.AppFw.Wpf.Model;
-using Plainion.AppFw.Wpf.Services;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Mvvm;
+using Plainion.AppFw.Wpf.Infrastructure;
 using Plainion.Prism.Interactivity.InteractionRequest;
 using Plainion.Windows.Controls;
 
