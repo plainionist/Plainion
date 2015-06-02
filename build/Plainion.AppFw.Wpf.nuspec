@@ -3,14 +3,18 @@
   <metadata>
     <id>Plainion.AppFw.Wpf</id>
     <title>Plainion.AppFw.Wpf</title>
-    <version>1.0.0.0</version>
+    <version>2.0.0.0</version>
     <authors>ronin4net</authors>
     <owners>ronin4net</owners>
     <licenseUrl>http://opensource.org/licenses/BSD-3-Clause</licenseUrl>
     <projectUrl>https://github.com/ronin4net/Plainion/wiki/Plainion.AppFw.Wpf</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Provides a simple application framework for writing WPF/Prism based software engineering tools</description>
-    <releaseNotes>initial release</releaseNotes>
+    <releaseNotes>
+rework of Project lifecycle management
+- ProjectService and PersistenceService merged
+- APIs simplified
+    </releaseNotes>
     <copyright>Copyright 2015</copyright>
     <dependencies>
       <dependency id="Plainion.Core" version="2.1.0.0" />
