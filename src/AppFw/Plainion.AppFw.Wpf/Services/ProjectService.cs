@@ -50,16 +50,11 @@ namespace Plainion.AppFw.Wpf.Services
 
         public void Create( string location )
         {
-            Create( location, new NullProgress(), default( CancellationToken ) );
-        }
-
-        private void Create( string location, IProgress<IProgressInfo> progress, CancellationToken cancellationToken )
-        {
             var project = new TProject();
             project.IsDirty = false;
             project.Location = location;
 
-            InitializeProject( project, progress, cancellationToken );
+            InitializeProject( project, new NullProgress(), default( CancellationToken ) );
 
             Project = project;
         }
@@ -70,17 +65,23 @@ namespace Plainion.AppFw.Wpf.Services
 
         public Task CreateAsync( string location, IProgress<IProgressInfo> progress, CancellationToken cancellationToken )
         {
-            return Task.Run( () => Create( location, progress, cancellationToken ), cancellationToken );
+            return Task.Run<TProject>( () =>
+            {
+                var project = new TProject();
+                project.IsDirty = false;
+                project.Location = location;
+
+                InitializeProject( project, progress, cancellationToken );
+
+                return project;
+            }, cancellationToken )
+            .ContinueWith( t => Project = t.Result,
+                cancellationToken, TaskContinuationOptions.OnlyOnRanToCompletion, TaskScheduler.FromCurrentSynchronizationContext() );
         }
 
         public void Load( string location )
         {
-            Load( location, new NullProgress(), default( CancellationToken ) );
-        }
-
-        private void Load( string location, IProgress<IProgressInfo> progress, CancellationToken cancellationToken )
-        {
-            var project = Deserialize( location, progress, cancellationToken );
+            var project = Deserialize( location, new NullProgress(), default( CancellationToken ) );
 
             project.Location = location;
             project.IsDirty = false;
@@ -92,17 +93,22 @@ namespace Plainion.AppFw.Wpf.Services
 
         public Task LoadAsync( string location, IProgress<IProgressInfo> progress, CancellationToken cancellationToken )
         {
-            return Task.Run( () => Load( location, progress, cancellationToken ), cancellationToken );
+            return Task.Run<TProject>( () =>
+            {
+                var project = Deserialize( location, progress, cancellationToken );
+
+                project.Location = location;
+                project.IsDirty = false;
+
+                return project;
+            }, cancellationToken )
+            .ContinueWith( t => Project = t.Result,
+                cancellationToken, TaskContinuationOptions.OnlyOnRanToCompletion, TaskScheduler.FromCurrentSynchronizationContext() );
         }
 
         public void Save()
         {
-            Save( new NullProgress(), default( CancellationToken ) );
-        }
-
-        public void Save( IProgress<IProgressInfo> progress, CancellationToken cancellationToken )
-        {
-            Serialize( Project, progress, cancellationToken );
+            Serialize( Project, new NullProgress(), default( CancellationToken ) );
 
             Project.IsDirty = false;
         }
@@ -111,7 +117,12 @@ namespace Plainion.AppFw.Wpf.Services
 
         public Task SaveAsync( IProgress<IProgressInfo> progress, CancellationToken cancellationToken )
         {
-            return Task.Run( () => Save( progress, cancellationToken ), cancellationToken );
+            return Task.Run( () =>
+            {
+                Serialize( Project, progress, cancellationToken );
+            }, cancellationToken )
+            .ContinueWith( t => Project.IsDirty = false,
+                cancellationToken, TaskContinuationOptions.OnlyOnRanToCompletion, TaskScheduler.FromCurrentSynchronizationContext() );
         }
     }
 }

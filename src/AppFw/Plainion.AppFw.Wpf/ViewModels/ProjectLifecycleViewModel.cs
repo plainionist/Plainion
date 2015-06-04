@@ -1,5 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
@@ -7,20 +10,19 @@ using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Mvvm;
 using Plainion.AppFw.Wpf.Infrastructure;
 using Plainion.Prism.Interactivity.InteractionRequest;
+using Plainion.Progress;
 using Plainion.Windows.Controls;
 
 namespace Plainion.AppFw.Wpf.ViewModels
 {
-
-    // TODO: ASYNC commands
-    // - busy?
-    // - progress?
-    // - cancel only implicitly
-
     [Export( typeof( ProjectLifecycleViewModel<> ) )]
     public class ProjectLifecycleViewModel<TProject> : BindableBase where TProject : ProjectBase
     {
         private IProjectService<TProject> myProjectService;
+        private bool myIsBusy;
+        private IProgressInfo myCurrentProgress;
+        private CancellationTokenSource myCTS;
+        private object myLock = new object();
 
         [ImportingConstructor]
         public ProjectLifecycleViewModel( IProjectService<TProject> projectService )
@@ -29,9 +31,14 @@ namespace Plainion.AppFw.Wpf.ViewModels
 
             myProjectService.ProjectChanged += OnProjectChanged;
 
-            NewCommand = new DelegateCommand( OnNew );
-            OpenCommand = new DelegateCommand( OnOpen );
-            SaveCommand = new DelegateCommand( () => OnSave(), () => myProjectService.Project != null );
+            NewCommand = new DelegateCommand( () => OnNew( async: false ) );
+            OpenCommand = new DelegateCommand( () => OnOpen( async: false ) );
+            SaveCommand = new DelegateCommand( () => OnSave( async: false ), () => myProjectService.Project != null );
+
+            NewAsyncCommand = new DelegateCommand( () => OnNew( async: true ) );
+            OpenAsyncCommand = new DelegateCommand( () => OnOpen( async: true ) );
+            SaveAsyncCommand = new DelegateCommand( () => OnSave( async: true ), () => myProjectService.Project != null );
+
             ClosingCommand = new DelegateCommand<CancelEventArgs>( OnClosing );
             CloseCommand = new DelegateCommand( OnClose );
 
@@ -55,9 +62,29 @@ namespace Plainion.AppFw.Wpf.ViewModels
 
         public bool AutoSaveNewProject { get; set; }
 
+        /// <summary>
+        /// Indicate that async activity is running.
+        /// </summary>
+        public bool IsBusy
+        {
+            get { return myIsBusy; }
+            set { SetProperty( ref myIsBusy, value ); }
+        }
+
+        /// <summary>
+        /// Progress of async activity
+        /// </summary>
+        public IProgressInfo Progress
+        {
+            get { return myCurrentProgress; }
+            set { SetProperty( ref myCurrentProgress, value ); }
+        }
+
         public ICommand NewCommand { get; private set; }
 
-        private void OnNew()
+        public ICommand NewAsyncCommand { get; private set; }
+
+        private void OnNew( bool async )
         {
             var args = new CancelEventArgs( false );
             HandleUnsavedData( args );
@@ -69,7 +96,14 @@ namespace Plainion.AppFw.Wpf.ViewModels
 
             if( !AutoSaveNewProject )
             {
-                myProjectService.Create( null );
+                if( async )
+                {
+                    RunAsync( ( progress, cancel ) => myProjectService.CreateAsync( null, progress, cancel ) );
+                }
+                else
+                {
+                    myProjectService.Create( null );
+                }
                 return;
             }
 
@@ -86,16 +120,56 @@ namespace Plainion.AppFw.Wpf.ViewModels
                 return;
             }
 
-            myProjectService.Create( notification.FileName );
+            if( async )
+            {
+                RunAsync( ( progress, cancel ) =>
+                    {
+                        return myProjectService.CreateAsync( notification.FileName, progress, cancel )
+                            .ContinueWith( t => myProjectService.SaveAsync( progress, cancel ).Wait() );
+                    } );
+            }
+            else
+            {
+                myProjectService.Create( notification.FileName );
 
-            myProjectService.Save();
+                myProjectService.Save();
+            }
+        }
+
+        private void RunAsync( Func<IProgress<IProgressInfo>, CancellationToken, Task> action )
+        {
+            lock( myLock )
+            {
+                if( myCTS != null )
+                {
+                    myCTS.Cancel();
+                    myCTS = null;
+                }
+
+                IsBusy = true;
+                var progress = new Progress<IProgressInfo>( pi => Progress = pi );
+
+                var cts = new CancellationTokenSource();
+
+                action( progress, cts.Token )
+                    .ContinueWith( t =>
+                    {
+                        myCTS = null;
+                        IsBusy = false;
+                        Progress = null;
+                    }, cts.Token, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext() );
+
+                myCTS = cts;
+            }
         }
 
         public ICommand OpenCommand { get; private set; }
 
+        public ICommand OpenAsyncCommand { get; private set; }
+
         public InteractionRequest<OpenFileDialogNotification> OpenFileRequest { get; private set; }
 
-        private void OnOpen()
+        private void OnOpen( bool async )
         {
             var args = new CancelEventArgs( false );
             HandleUnsavedData( args );
@@ -123,9 +197,11 @@ namespace Plainion.AppFw.Wpf.ViewModels
 
         public DelegateCommand SaveCommand { get; private set; }
 
+        public DelegateCommand SaveAsyncCommand { get; private set; }
+
         public InteractionRequest<SaveFileDialogNotification> SaveFileRequest { get; private set; }
 
-        private bool OnSave()
+        private bool OnSave( bool async )
         {
             TextBoxBinding.ForceSourceUpdate();
 
@@ -183,7 +259,7 @@ namespace Plainion.AppFw.Wpf.ViewModels
                 {
                     if( c.Response == ExitWithoutSaveNotification.ResponseType.Yes )
                     {
-                        eventArgs.Cancel = !OnSave();
+                        eventArgs.Cancel = !OnSave( async: false );
                     }
                     else if( c.Response == ExitWithoutSaveNotification.ResponseType.No )
                     {
