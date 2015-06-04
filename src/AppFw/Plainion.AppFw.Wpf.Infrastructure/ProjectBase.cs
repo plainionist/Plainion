@@ -30,6 +30,7 @@ namespace Plainion.AppFw.Wpf.Infrastructure
 
                 myLocation = location;
 
+                OnLocationChanged();
             }
         }
 

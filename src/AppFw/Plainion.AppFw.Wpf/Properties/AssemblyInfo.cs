@@ -6,7 +6,7 @@ using System.Windows.Markup;
 
 [assembly: AssemblyTitle( "Plainion.AppFw.Wpf" )]
 [assembly: ComVisible( false )]
-[assembly: AssemblyVersion( "2.2.0.0" )]
+[assembly: AssemblyVersion( "2.3.0.0" )]
 
 [assembly: XmlnsPrefix( "http://github.com/ronin4net/plainion/appfw/wpf", "pnfw" )]
 [assembly: XmlnsDefinition( "http://github.com/ronin4net/plainion/appfw/wpf", "Plainion.AppFw.Wpf" )]
