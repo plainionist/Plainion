@@ -48,13 +48,15 @@ namespace Plainion.AppFw.Wpf.Services
         public event Action<TProject> ProjectChanging;
         public event Action<TProject> ProjectChanged;
 
-        public void Create( string location )
+        public void Create( string location, bool autoSave )
         {
             var project = new TProject();
             project.IsDirty = false;
             project.Location = location;
 
             InitializeProject( project, new NullProgress(), default( CancellationToken ) );
+
+            Serialize( project, new NullProgress(), default( CancellationToken ) );
 
             Project = project;
         }
@@ -63,7 +65,7 @@ namespace Plainion.AppFw.Wpf.Services
         {
         }
 
-        public Task CreateAsync( string location, IProgress<IProgressInfo> progress, CancellationToken cancellationToken )
+        public Task CreateAsync( string location, bool autoSave, IProgress<IProgressInfo> progress, CancellationToken cancellationToken )
         {
             return Task.Run<TProject>( () =>
             {
@@ -73,6 +75,8 @@ namespace Plainion.AppFw.Wpf.Services
 
                 InitializeProject( project, progress, cancellationToken );
 
+                Serialize( project, progress, cancellationToken );
+                
                 return project;
             }, cancellationToken )
             .ContinueWith( t => Project = t.Result,
@@ -83,7 +87,10 @@ namespace Plainion.AppFw.Wpf.Services
         {
             var project = Deserialize( location, new NullProgress(), default( CancellationToken ) );
 
-            project.Location = location;
+            if( project.Location == null )
+            {
+                project.Location = location;
+            }
             project.IsDirty = false;
 
             Project = project;
@@ -97,7 +104,10 @@ namespace Plainion.AppFw.Wpf.Services
             {
                 var project = Deserialize( location, progress, cancellationToken );
 
-                project.Location = location;
+                if( project.Location == null )
+                {
+                    project.Location = location;
+                }
                 project.IsDirty = false;
 
                 return project;

@@ -98,11 +98,11 @@ namespace Plainion.AppFw.Wpf.ViewModels
             {
                 if( async )
                 {
-                    RunAsync( ( progress, cancel ) => myProjectService.CreateAsync( null, progress, cancel ) );
+                    RunAsync( ( progress, cancel ) => myProjectService.CreateAsync( null, false, progress, cancel ) );
                 }
                 else
                 {
-                    myProjectService.Create( null );
+                    myProjectService.Create( null, false );
                 }
                 return;
             }
@@ -124,13 +124,12 @@ namespace Plainion.AppFw.Wpf.ViewModels
             {
                 RunAsync( ( progress, cancel ) =>
                     {
-                        return myProjectService.CreateAsync( notification.FileName, progress, cancel )
-                            .ContinueWith( t => myProjectService.SaveAsync( progress, cancel ).Wait() );
+                        return myProjectService.CreateAsync( notification.FileName, true, progress, cancel );
                     } );
             }
             else
             {
-                myProjectService.Create( notification.FileName );
+                myProjectService.Create( notification.FileName, true );
 
                 myProjectService.Save();
             }
@@ -190,7 +189,17 @@ namespace Plainion.AppFw.Wpf.ViewModels
                 {
                     if( n.Confirmed )
                     {
-                        myProjectService.Load( n.FileName );
+                        if( async )
+                        {
+                            RunAsync( ( progress, cancel ) =>
+                            {
+                                return myProjectService.LoadAsync( n.FileName, progress, cancel );
+                            } );
+                        }
+                        else
+                        {
+                            myProjectService.Load( n.FileName );
+                        }
                     }
                 } );
         }
@@ -212,26 +221,39 @@ namespace Plainion.AppFw.Wpf.ViewModels
 
             if( !string.IsNullOrEmpty( myProjectService.Project.Location ) )
             {
-                myProjectService.Save();
-                return true;
+                var notification = new SaveFileDialogNotification();
+                notification.RestoreDirectory = true;
+                notification.Filter = FileFilter;
+                notification.FilterIndex = FileFilterIndex;
+                notification.DefaultExt = DefaultFileExtension;
+
+                SaveFileRequest.Raise( notification, n =>
+                {
+                    if( n.Confirmed )
+                    {
+                        myProjectService.Project.Location = n.FileName;
+                    }
+                } );
+
+                if( !notification.Confirmed )
+                {
+                    return false;
+                }
             }
 
-            var notification = new SaveFileDialogNotification();
-            notification.RestoreDirectory = true;
-            notification.Filter = FileFilter;
-            notification.FilterIndex = FileFilterIndex;
-            notification.DefaultExt = DefaultFileExtension;
-
-            SaveFileRequest.Raise( notification, n =>
+            if( async )
             {
-                if( n.Confirmed )
+                RunAsync( ( progress, cancel ) =>
                 {
-                    myProjectService.Project.Location = n.FileName;
-                    myProjectService.Save();
-                }
-            } );
+                    return myProjectService.SaveAsync( progress, cancel );
+                } );
+            }
+            else
+            {
+                myProjectService.Save();
+            }
 
-            return notification.Confirmed;
+            return true;
         }
 
         public ICommand ClosingCommand { get; private set; }

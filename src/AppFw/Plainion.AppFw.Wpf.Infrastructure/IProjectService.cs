@@ -14,11 +14,11 @@ namespace Plainion.AppFw.Wpf.Infrastructure
         event Action<TProject> ProjectChanging;
         event Action<TProject> ProjectChanged;
 
-        void Create( string location );
+        void Create( string location, bool autoSave );
         void Load( string location );
         void Save();
 
-        Task CreateAsync( string location, IProgress<IProgressInfo> progress, CancellationToken cancellationToken );
+        Task CreateAsync( string location, bool autoSave, IProgress<IProgressInfo> progress, CancellationToken cancellationToken );
         Task LoadAsync( string location, IProgress<IProgressInfo> progress, CancellationToken cancellationToken );
         Task SaveAsync( IProgress<IProgressInfo> progress, CancellationToken cancellationToken );
     }

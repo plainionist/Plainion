@@ -7,16 +7,16 @@ namespace Plainion.AppFw.Wpf.Infrastructure
 {
     public static class ProjectServiceExtensions
     {
-        public static Task CreateAsync<TProject>( this IProjectService<TProject> self, string location )
+        public static Task CreateAsync<TProject>( this IProjectService<TProject> self, string location, bool autoSave )
             where TProject : ProjectBase
         {
-            return self.CreateAsync( location, new NullProgress() );
+            return self.CreateAsync( location, autoSave, new NullProgress() );
         }
 
-        public static Task CreateAsync<TProject>( this IProjectService<TProject> self, string location, IProgress<IProgressInfo> progress )
+        public static Task CreateAsync<TProject>( this IProjectService<TProject> self, string location, bool autoSave, IProgress<IProgressInfo> progress )
             where TProject : ProjectBase
         {
-            return self.CreateAsync( location, progress, default( CancellationToken ) );
+            return self.CreateAsync( location, autoSave, progress, default( CancellationToken ) );
         }
 
         public static Task LoadAsync<TProject>( this IProjectService<TProject> self, string location )
