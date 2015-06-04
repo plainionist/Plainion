@@ -43,10 +43,17 @@
   <ItemGroup>
     <Compile Include="IProjectService.cs" />
     <Compile Include="ProjectBase.cs" />
+    <Compile Include="ProjectServiceExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Foundation\Plainion.Core\Plainion.Core.csproj">
+      <Project>{3cbd40b6-84fc-4898-8c64-cd602da8ef79}</Project>
+      <Name>Plainion.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

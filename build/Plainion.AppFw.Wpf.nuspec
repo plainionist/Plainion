@@ -13,7 +13,7 @@
     <releaseNotes>Infrastructure moved to separate assembly</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <dependencies>
-      <dependency id="Plainion.Core" version="2.1.0.0" />
+      <dependency id="Plainion.Core" version="2.3.0.0" />
       <dependency id="Plainion.Windows" version="1.4.0.0" />
       <dependency id="Plainion.Prism" version="1.4.0.0" />
       <dependency id="Expression.Blend.Sdk" version="1.0.2" />

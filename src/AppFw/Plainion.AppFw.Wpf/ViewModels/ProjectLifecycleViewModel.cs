@@ -11,6 +11,12 @@ using Plainion.Windows.Controls;
 
 namespace Plainion.AppFw.Wpf.ViewModels
 {
+
+    // TODO: ASYNC commands
+    // - busy?
+    // - progress?
+    // - cancel only implicitly
+
     [Export( typeof( ProjectLifecycleViewModel<> ) )]
     public class ProjectLifecycleViewModel<TProject> : BindableBase where TProject : ProjectBase
     {
@@ -63,7 +69,7 @@ namespace Plainion.AppFw.Wpf.ViewModels
 
             if( !AutoSaveNewProject )
             {
-                myProjectService.CreateEmptyProject( null );
+                myProjectService.Create( null );
                 return;
             }
 
@@ -80,7 +86,7 @@ namespace Plainion.AppFw.Wpf.ViewModels
                 return;
             }
 
-            myProjectService.CreateEmptyProject( notification.FileName );
+            myProjectService.Create( notification.FileName );
 
             myProjectService.Save();
         }
@@ -128,31 +134,28 @@ namespace Plainion.AppFw.Wpf.ViewModels
                 return true;
             }
 
-            if( string.IsNullOrEmpty( myProjectService.Project.Location ) )
+            if( !string.IsNullOrEmpty( myProjectService.Project.Location ) )
             {
-                var notification = new SaveFileDialogNotification();
-                notification.RestoreDirectory = true;
-                notification.Filter = FileFilter;
-                notification.FilterIndex = FileFilterIndex;
-                notification.DefaultExt = DefaultFileExtension;
-
-                SaveFileRequest.Raise( notification, n =>
-                {
-                    if( n.Confirmed )
-                    {
-                        myProjectService.Project.Location = n.FileName;
-                    }
-                } );
-
-                if( !notification.Confirmed )
-                {
-                    return false;
-                }
+                myProjectService.Save();
+                return true;
             }
 
-            myProjectService.Save();
+            var notification = new SaveFileDialogNotification();
+            notification.RestoreDirectory = true;
+            notification.Filter = FileFilter;
+            notification.FilterIndex = FileFilterIndex;
+            notification.DefaultExt = DefaultFileExtension;
 
-            return true;
+            SaveFileRequest.Raise( notification, n =>
+            {
+                if( n.Confirmed )
+                {
+                    myProjectService.Project.Location = n.FileName;
+                    myProjectService.Save();
+                }
+            } );
+
+            return notification.Confirmed;
         }
 
         public ICommand ClosingCommand { get; private set; }

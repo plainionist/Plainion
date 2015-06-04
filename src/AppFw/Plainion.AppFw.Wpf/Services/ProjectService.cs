@@ -1,5 +1,9 @@
 ﻿using System;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 using Plainion.AppFw.Wpf.Infrastructure;
+using Plainion.Progress;
 
 namespace Plainion.AppFw.Wpf.Services
 {
@@ -44,34 +48,70 @@ namespace Plainion.AppFw.Wpf.Services
         public event Action<TProject> ProjectChanging;
         public event Action<TProject> ProjectChanged;
 
-        public virtual void CreateEmptyProject( string location )
+        public void Create( string location )
+        {
+            Create( location, new NullProgress(), default( CancellationToken ) );
+        }
+
+        private void Create( string location, IProgress<IProgressInfo> progress, CancellationToken cancellationToken )
         {
             var project = new TProject();
             project.IsDirty = false;
             project.Location = location;
 
+            InitializeProject( project, progress, cancellationToken );
+
             Project = project;
         }
 
-        public void Load( string file )
+        protected virtual void InitializeProject( TProject project, IProgress<IProgressInfo> progress, CancellationToken cancellationToken )
         {
-            var project = Deserialize( file );
+        }
 
-            project.Location = file;
+        public Task CreateAsync( string location, IProgress<IProgressInfo> progress, CancellationToken cancellationToken )
+        {
+            return Task.Run( () => Create( location, progress, cancellationToken ), cancellationToken );
+        }
+
+        public void Load( string location )
+        {
+            Load( location, new NullProgress(), default( CancellationToken ) );
+        }
+
+        private void Load( string location, IProgress<IProgressInfo> progress, CancellationToken cancellationToken )
+        {
+            var project = Deserialize( location, progress, cancellationToken );
+
+            project.Location = location;
             project.IsDirty = false;
 
             Project = project;
         }
 
-        protected abstract void Serialize( TProject project );
+        protected abstract TProject Deserialize( string location, IProgress<IProgressInfo> progress, CancellationToken cancellationToken );
+
+        public Task LoadAsync( string location, IProgress<IProgressInfo> progress, CancellationToken cancellationToken )
+        {
+            return Task.Run( () => Load( location, progress, cancellationToken ), cancellationToken );
+        }
 
         public void Save()
         {
-            Serialize( Project );
+            Save( new NullProgress(), default( CancellationToken ) );
+        }
+
+        public void Save( IProgress<IProgressInfo> progress, CancellationToken cancellationToken )
+        {
+            Serialize( Project, progress, cancellationToken );
 
             Project.IsDirty = false;
         }
 
-        protected abstract TProject Deserialize( string file );
+        protected abstract void Serialize( TProject project, IProgress<IProgressInfo> progress, CancellationToken cancellationToken );
+
+        public Task SaveAsync( IProgress<IProgressInfo> progress, CancellationToken cancellationToken )
+        {
+            return Task.Run( () => Save( progress, cancellationToken ), cancellationToken );
+        }
     }
 }
