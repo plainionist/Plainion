@@ -30,6 +30,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Progress\NullProgress.cs" />
     <Compile Include="Xaml\IncludeExtension.cs" />
     <Compile Include="Xaml\ValidatingXamlReader.cs" />
     <Compile Include="Objects.cs" />
