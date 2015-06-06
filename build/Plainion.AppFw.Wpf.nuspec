@@ -3,22 +3,18 @@
   <metadata>
     <id>Plainion.AppFw.Wpf</id>
     <title>Plainion.AppFw.Wpf</title>
-    <version>2.4.0.0</version>
+    <version>2.5.0.0</version>
     <authors>ronin4net</authors>
     <owners>ronin4net</owners>
     <licenseUrl>http://opensource.org/licenses/BSD-3-Clause</licenseUrl>
     <projectUrl>https://github.com/ronin4net/Plainion/wiki/Plainion.AppFw.Wpf</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Provides a simple application framework for writing WPF/Prism based software engineering tools</description>
-    <releaseNotes>
-ProjectLifecycle:
-- fixed autoSave on create
-- fixed async in open and saave
-    </releaseNotes>
+    <releaseNotes>exception handling improved</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <dependencies>
       <dependency id="Plainion.Core" version="2.3.0.0" />
-      <dependency id="Plainion.Windows" version="1.4.0.0" />
+      <dependency id="Plainion.Windows" version="1.5.0.0" />
       <dependency id="Plainion.Prism" version="1.4.0.0" />
       <dependency id="Expression.Blend.Sdk" version="1.0.2" />
       <dependency id="CommonServiceLocator" version="1.2" />

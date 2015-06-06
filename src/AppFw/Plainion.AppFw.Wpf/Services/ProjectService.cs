@@ -79,6 +79,7 @@ namespace Plainion.AppFw.Wpf.Services
                 
                 return project;
             }, cancellationToken )
+            .RethrowExceptionsInUIThread()
             .ContinueWith( t => Project = t.Result,
                 cancellationToken, TaskContinuationOptions.OnlyOnRanToCompletion, TaskScheduler.FromCurrentSynchronizationContext() );
         }
@@ -112,6 +113,7 @@ namespace Plainion.AppFw.Wpf.Services
 
                 return project;
             }, cancellationToken )
+            .RethrowExceptionsInUIThread()
             .ContinueWith( t => Project = t.Result,
                 cancellationToken, TaskContinuationOptions.OnlyOnRanToCompletion, TaskScheduler.FromCurrentSynchronizationContext() );
         }
@@ -131,6 +133,7 @@ namespace Plainion.AppFw.Wpf.Services
             {
                 Serialize( Project, progress, cancellationToken );
             }, cancellationToken )
+            .RethrowExceptionsInUIThread()
             .ContinueWith( t => Project.IsDirty = false,
                 cancellationToken, TaskContinuationOptions.OnlyOnRanToCompletion, TaskScheduler.FromCurrentSynchronizationContext() );
         }
