@@ -6,6 +6,11 @@ using Microsoft.Practices.Prism.Regions;
 
 namespace Plainion.Prism.Interactivity
 {
+    /// <summary>
+    /// Allows defining regions on PopupWindowAction instances.
+    /// ATTENTION: make sure you configured "KeepAliveDelayedRegionCreationBehavior" as well otherwise sporadically 
+    /// your region will not get updated. See API doc of KeepAliveDelayedRegionCreationBehavior for more details.
+    /// </summary>
     [Export( typeof( PopupWindowActionRegionAdapter ) )]
     public class PopupWindowActionRegionAdapter : RegionAdapterBase<PopupWindowAction>
     {
