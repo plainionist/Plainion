@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Plainion.AppFw.Wpf
+namespace Plainion.Windows
 {
     public static class TaskExtensions
     {
