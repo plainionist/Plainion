@@ -4,8 +4,14 @@ using System.Reflection;
 
 namespace Plainion
 {
+    /// <summary>
+    /// Provides extension methods to <see cref="Exception"/> objects.
+    /// </summary>
     public static class ExceptionExtensions
     {
+        /// <summary>
+        /// Dumps the given exception content to a string and returns it.
+        /// </summary>
         public static string Dump( this Exception exception )
         {
             Contract.RequiresNotNull( exception, "exception" );
@@ -17,14 +23,22 @@ namespace Plainion
             }
         }
 
-        public static void DumpTo( this Exception exception, TextWriter writer )
+        /// <summary>
+        /// Dumps the given exception content to the given TextWriter.
+        /// </summary>
+        public static void DumpTo(this Exception exception, TextWriter writer)
         {
             Contract.RequiresNotNull( exception, "exception" );
 
             DumpTo( exception, writer, 0 );
         }
 
-        private static void DumpTo( this Exception exception, TextWriter writer, int level )
+        /// <summary>
+        /// Dumps the given exception content to the given TextWriter.
+        /// Content will be: exception type, message, exception.Data, StackTrace. 
+        /// InnerException is handled recursively. ReflectionTypeLoadException is expanded and LoaderExceptions are dummed.
+        /// </summary>
+        private static void DumpTo(this Exception exception, TextWriter writer, int level)
         {
             string padding = " ".PadRight( level );
             writer.WriteLine( padding + exception.GetType() + ": " + exception.Message );
@@ -69,6 +83,9 @@ namespace Plainion
             preserveStackTrace.Invoke( exception, null );
         }
 
+        /// <summary>
+        /// Adds a key/value pair to Exception.Data
+        /// </summary>
         public static Exception AddContext( this Exception exception, string key, object value )
         {
             Contract.RequiresNotNull( exception, "exception" );
