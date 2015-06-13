@@ -77,12 +77,12 @@ namespace Plainion.AppFw.Wpf.Services
                 InitializeProject( project, progress, cancellationToken );
 
                 Serialize( project, progress, cancellationToken );
-                
+
                 return project;
             }, cancellationToken )
             .RethrowExceptionsInUIThread()
-            .ContinueWith( t => Project = t.Result,
-                cancellationToken, TaskContinuationOptions.OnlyOnRanToCompletion, TaskScheduler.FromCurrentSynchronizationContext() );
+            .ContinueWith( t => Project = t.Result, cancellationToken, TaskContinuationOptions.OnlyOnRanToCompletion, TaskScheduler.FromCurrentSynchronizationContext() )
+            .RethrowExceptionsInUIThread();
         }
 
         public void Load( string location )
@@ -115,8 +115,8 @@ namespace Plainion.AppFw.Wpf.Services
                 return project;
             }, cancellationToken )
             .RethrowExceptionsInUIThread()
-            .ContinueWith( t => Project = t.Result,
-                cancellationToken, TaskContinuationOptions.OnlyOnRanToCompletion, TaskScheduler.FromCurrentSynchronizationContext() );
+            .ContinueWith( t => Project = t.Result, cancellationToken, TaskContinuationOptions.OnlyOnRanToCompletion, TaskScheduler.FromCurrentSynchronizationContext() )
+            .RethrowExceptionsInUIThread();
         }
 
         public void Save()
@@ -135,8 +135,8 @@ namespace Plainion.AppFw.Wpf.Services
                 Serialize( Project, progress, cancellationToken );
             }, cancellationToken )
             .RethrowExceptionsInUIThread()
-            .ContinueWith( t => Project.IsDirty = false,
-                cancellationToken, TaskContinuationOptions.OnlyOnRanToCompletion, TaskScheduler.FromCurrentSynchronizationContext() );
+            .ContinueWith( t => Project.IsDirty = false, cancellationToken, TaskContinuationOptions.OnlyOnRanToCompletion, TaskScheduler.FromCurrentSynchronizationContext() )
+            .RethrowExceptionsInUIThread();
         }
     }
 }
