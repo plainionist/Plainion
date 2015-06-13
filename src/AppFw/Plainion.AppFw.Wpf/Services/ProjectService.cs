@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Plainion.AppFw.Wpf.Infrastructure;
 using Plainion.Progress;
+using Plainion.Windows;
 
 namespace Plainion.AppFw.Wpf.Services
 {
