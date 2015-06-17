@@ -6,7 +6,7 @@ namespace Plainion
     public static class Objects
     {
         /// <summary>
-        /// Generic deep clone using serializers.
+        /// Generic object tree deep clone using BinaryFormatter.
         /// </summary>
         public static T Clone<T>( T source )
         {
