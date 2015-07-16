@@ -5,6 +5,9 @@ using System.Windows.Data;
 
 namespace Plainion.Windows
 {
+    /// <summary>
+    /// Returns true if the given value is null, an empty string or an empty collection, false otherwise.
+    /// </summary>
     public class IsEmptyConverter : IValueConverter
     {
         public object Convert( object value, Type targetType, object parameter, CultureInfo culture )
@@ -26,7 +29,8 @@ namespace Plainion.Windows
                 return string.IsNullOrEmpty( str );
             }
 
-            throw new NotSupportedException( value.GetType().ToString() );
+            // not null instance of unknown type -> interpret as not empty
+            return false;
         }
 
         public object ConvertBack( object value, Type targetType, object parameter, CultureInfo culture )
