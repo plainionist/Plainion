@@ -75,22 +75,22 @@
             <ContentPresenter.Resources>
                 <DataTemplate DataType="{x:Type c:PercentageProgress}">
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding Activity}" Margin="3" HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding Progress, StringFormat={}{0:F2} %}" Margin="3" HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding Details}" Margin="3" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding Activity, Mode=OneTime}" Margin="3" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding Progress, Mode=OneTime, StringFormat={}{0:F2} %}" Margin="3" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding Details, Mode=OneTime}" Margin="3" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type c:CountingProgress}">
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding Activity}" Margin="3" HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding Progress, StringFormat={}{0:F0}}" Margin="3" HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding Details}" Margin="3" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding Activity, Mode=OneTime}" Margin="3" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding Progress, Mode=OneTime, StringFormat={}{0:F0}}" Margin="3" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding Details, Mode=OneTime}" Margin="3" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type c:UndefinedProgress}">
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding Activity}" Margin="3" HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding Details}" Margin="3" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding Activity, Mode=OneTime}" Margin="3" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding Details, Mode=OneTime}" Margin="3" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </DataTemplate>
             </ContentPresenter.Resources>
