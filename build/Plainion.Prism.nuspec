@@ -3,14 +3,14 @@
   <metadata>
     <id>Plainion.Prism</id>
     <title>Plainion.Prism</title>
-    <version>1.5.0.0</version>
+    <version>1.6.0.0</version>
     <authors>ronin4net</authors>
     <owners>ronin4net</owners>
     <licenseUrl>http://opensource.org/licenses/BSD-3-Clause</licenseUrl>
     <projectUrl>https://github.com/ronin4net/Plainion/wiki/Plainion.Prism</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Provides extensions to Prism to simplify development of software engineering tools</description>
-    <releaseNotes>KeepAliveDelayedRegionCreationBehavior added to stabilize usage of PopupWindowActionRegionAdapter</releaseNotes>
+    <releaseNotes>fixed memory leak in PopupViewAction</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <dependencies>
       <dependency id="Plainion.Core" version="2.1.0.0" />

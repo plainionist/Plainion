@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Markup;
 using Microsoft.Practices.Prism.Interactivity;
@@ -73,10 +74,12 @@ namespace Plainion.Prism.Interactivity
                 window.DataContext = notification.Content;
             }
 
+            window.Closed += OnWindowClosed;
+
             return window;
         }
 
-        private void OnSizeToContentChanged( object sender, System.EventArgs e )
+        private void OnSizeToContentChanged( object sender, EventArgs e )
         {
             var window = ( Window )sender;
 
@@ -92,6 +95,16 @@ namespace Plainion.Prism.Interactivity
             {
                 window.SizeToContent = SizeToContent.Width;
             }
+        }
+
+        private void OnWindowClosed( object sender, EventArgs e )
+        {
+            var window = ( Window )sender;
+            
+            var d = DependencyPropertyDescriptor.FromProperty( Window.SizeToContentProperty, typeof( Window ) );
+            d.RemoveValueChanged( window, OnSizeToContentChanged );
+
+            window.Closed -= OnWindowClosed;
         }
     }
 }
