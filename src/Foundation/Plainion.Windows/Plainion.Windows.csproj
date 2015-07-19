@@ -41,6 +41,13 @@
     <Compile Include="BoolToVisibilityConverter.cs" />
     <Compile Include="ConverterChain.cs" />
     <Compile Include="AndConverter.cs" />
+    <Compile Include="Diagnostics\DebugTextWriter.cs" />
+    <Compile Include="Diagnostics\DiagnosticFinding.cs" />
+    <Compile Include="Diagnostics\InspectionWindow.xaml.cs">
+      <DependentUpon>InspectionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Diagnostics\InspectionWindowModel.cs" />
+    <Compile Include="Diagnostics\WpfStatics.cs" />
     <Compile Include="IsEmptyConverter.cs" />
     <Compile Include="DependencyObjectExtensions.cs" />
     <Compile Include="Interactivity\DragDrop\DropLocation.cs" />
@@ -81,6 +88,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\CircularProgressIndicator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Diagnostics\InspectionWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
