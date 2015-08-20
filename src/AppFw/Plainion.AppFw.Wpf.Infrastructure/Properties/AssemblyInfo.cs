@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Plainion.AppFw.Wpf.Infrastructure")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion( "2.6.0.0" )]
+[assembly: AssemblyVersion( "2.7.0.0" )]
 
 [assembly: Guid("55b4ce11-2072-46dc-9e66-7594764fe9df")]
 

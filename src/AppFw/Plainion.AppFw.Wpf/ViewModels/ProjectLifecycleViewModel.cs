@@ -219,7 +219,7 @@ namespace Plainion.AppFw.Wpf.ViewModels
                 return true;
             }
 
-            if( !string.IsNullOrEmpty( myProjectService.Project.Location ) )
+            if( string.IsNullOrEmpty( myProjectService.Project.Location ) )
             {
                 var notification = new SaveFileDialogNotification();
                 notification.RestoreDirectory = true;
