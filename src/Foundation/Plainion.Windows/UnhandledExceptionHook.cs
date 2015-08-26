@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Threading;
+using Plainion;
 
 namespace Plainion.Windows
 {
@@ -15,7 +16,7 @@ namespace Plainion.Windows
 
         private void OnUnhandledException( object sender, DispatcherUnhandledExceptionEventArgs e )
         {
-            MessageBox.Show( e.Exception.ToString(), "Unhandled exception", MessageBoxButton.OK, MessageBoxImage.Error );
+            MessageBox.Show( e.Exception.Dump(), "Unhandled exception", MessageBoxButton.OK, MessageBoxImage.Error );
 
             e.Handled = true;
         }
