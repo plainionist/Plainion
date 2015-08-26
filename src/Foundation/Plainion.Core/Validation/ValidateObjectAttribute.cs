@@ -13,20 +13,20 @@ namespace Plainion.Validation
     {
         protected override ValidationResult IsValid( object value, ValidationContext validationContext )
         {
-            if ( value == null )
+            if( value == null )
             {
                 // we cannot validate the properties of the given object when it is null
                 return ValidationResult.Success;
             }
 
             var dictionary = value as IDictionary;
-            if ( dictionary != null )
+            if( dictionary != null )
             {
                 return ValidateDictionary( dictionary, validationContext );
             }
 
             var enumerable = value as IEnumerable;
-            if ( enumerable != null )
+            if( enumerable != null )
             {
                 return ValidateEnumerable( enumerable.OfType<object>(), validationContext );
             }
@@ -36,16 +36,16 @@ namespace Plainion.Validation
 
         private ValidationResult ValidateDictionary( IDictionary dictionary, ValidationContext validationContext )
         {
-            var compositeResults = new CompositeValidationResult( string.Format( "Validation for {0} failed!", validationContext.DisplayName ) );
+            var compositeResults = new CompositeValidationResult( validationContext.DisplayName, string.Format( "Validation for {0} failed!", validationContext.DisplayName ) );
 
             var resultForKeys = ValidateEnumerable( dictionary.Keys.OfType<object>(), validationContext );
-            if ( resultForKeys != ValidationResult.Success )
+            if( resultForKeys != ValidationResult.Success )
             {
                 compositeResults.AddResult( resultForKeys );
             }
 
             var resultForValues = ValidateEnumerable( dictionary.Values.OfType<object>(), validationContext );
-            if ( resultForValues != ValidationResult.Success )
+            if( resultForValues != ValidationResult.Success )
             {
                 compositeResults.AddResult( resultForValues );
             }
@@ -57,16 +57,16 @@ namespace Plainion.Validation
         private ValidationResult ValidateEnumerable( IEnumerable<object> enumerable, ValidationContext validationContext )
         {
             var results = enumerable
-                .Select( item => ValidateObject( item, new ValidationContext( item, null, null ) ) )
+                .Select( item => IsValid( item, new ValidationContext( item, null, null ) ) )
                 .Where( result => result != ValidationResult.Success )
                 .ToList();
 
-            if ( !results.Any() )
+            if( !results.Any() )
             {
                 return ValidationResult.Success;
             }
 
-            var compositeResults = new CompositeValidationResult( string.Format( "Validation for {0} failed!", validationContext.DisplayName ) );
+            var compositeResults = new CompositeValidationResult( validationContext.DisplayName, string.Format( "Validation for {0} failed!", validationContext.DisplayName ) );
             results.ForEach( compositeResults.AddResult );
 
             return compositeResults;
@@ -78,12 +78,12 @@ namespace Plainion.Validation
             var context = new ValidationContext( value, null, null );
 
             Validator.TryValidateObject( value, context, results, true );
-            if ( results.Count == 0 )
+            if( results.Count == 0 )
             {
                 return ValidationResult.Success;
             }
 
-            var compositeResults = new CompositeValidationResult( string.Format( "Validation for {0} failed!", validationContext.DisplayName ) );
+            var compositeResults = new CompositeValidationResult( validationContext.DisplayName, string.Format( "Validation for {0} failed!", validationContext.DisplayName ) );
             results.ForEach( compositeResults.AddResult );
 
             return compositeResults;

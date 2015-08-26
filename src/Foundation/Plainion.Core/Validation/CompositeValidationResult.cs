@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Plainion.Validation
@@ -7,28 +8,21 @@ namespace Plainion.Validation
     {
         private readonly List<ValidationResult> myResults = new List<ValidationResult>();
 
-        public CompositeValidationResult( string errorMessage )
+        public CompositeValidationResult( string context, string errorMessage )
             : base( errorMessage )
         {
+            Context = context;
         }
 
-        public CompositeValidationResult( string errorMessage, IEnumerable<string> memberNames )
+        public CompositeValidationResult( string validatedType, string errorMessage, IEnumerable<string> memberNames )
             : base( errorMessage, memberNames )
         {
+            Context = validatedType;
         }
 
-        protected CompositeValidationResult( ValidationResult validationResult )
-            : base( validationResult )
-        {
-        }
+        public string Context { get; private set; }
 
-        public IEnumerable<ValidationResult> Results
-        {
-            get
-            {
-                return myResults;
-            }
-        }
+        public IEnumerable<ValidationResult> Results { get { return myResults; } }
 
         public void AddResult( ValidationResult validationResult )
         {

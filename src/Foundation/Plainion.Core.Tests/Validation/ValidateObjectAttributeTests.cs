@@ -37,7 +37,7 @@ namespace Plainion.UnitTests.Validation
             var results = Validate( model );
 
             Assert.That( results.Count(), Is.EqualTo( 1 ) );
-            Assert.That( results.Single().ErrorMessage, Is.EqualTo( "The Description field is required." ) );
+            Assert.That( results.Single(), Is.StringContaining( "The Description field is required." ) );
         }
 
         [Test]
@@ -56,7 +56,28 @@ namespace Plainion.UnitTests.Validation
             var results = Validate( model );
 
             Assert.That( results.Count(), Is.EqualTo( 1 ) );
-            Assert.That( results.Single().ErrorMessage, Is.EqualTo( "The field Value must be between 1 and 10." ) );
+            Assert.That( results.Single(), Is.StringContaining( "The field Value must be between 1 and 10." ) );
+        }
+
+        [Test]
+        public void GetValidationResult_ItemInNestedCollectionViolates_ViolationReturned()
+        {
+            var model = new Model();
+            model.Name = "dummy";
+            model.Node = null; // ignore
+            model.CollectionOfItems = new List<IEnumerable<Item>> {
+                new List<Item>{
+                    new Item()
+                    { 
+                        Value=1000 // here is the error
+                    } 
+                }
+            };
+
+            var results = Validate( model );
+
+            Assert.That( results.Count(), Is.EqualTo( 1 ) );
+            Assert.That( results.Single(), Is.StringContaining( "The field Value must be between 1 and 10." ) );
         }
 
         [Test]
@@ -68,22 +89,22 @@ namespace Plainion.UnitTests.Validation
             var results = Validate( dict );
 
             Assert.That( results.Count(), Is.EqualTo( 1 ) );
-            Assert.That( results.Single().ErrorMessage, Is.EqualTo( "The Description field is required." ) );
+            Assert.That( results.Single(), Is.StringContaining( "The Description field is required." ) );
         }
 
         [Test]
         public void GetValidationResult_ValuesInDictionary_ViolationReturned()
         {
-            var dict = new Dictionary<string,Node>();
+            var dict = new Dictionary<string, Node>();
             dict.Add( string.Empty, new Node() );
 
             var results = Validate( dict );
 
             Assert.That( results.Count(), Is.EqualTo( 1 ) );
-            Assert.That( results.Single().ErrorMessage, Is.EqualTo( "The Description field is required." ) );
+            Assert.That( results.Single(), Is.StringContaining( "The Description field is required." ) );
         }
 
-        private static IEnumerable<ValidationResult> Validate( object model )
+        private static IEnumerable<string> Validate( object model )
         {
             var ctx = new ValidationContext( model, null, null );
 
