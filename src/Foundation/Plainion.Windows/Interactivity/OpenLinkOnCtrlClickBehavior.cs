@@ -18,6 +18,7 @@ namespace Plainion.Windows.Interactivity
 
             AssociatedObject.PreviewMouseDown += OnPreviewMouseDown;
             AssociatedObject.PreviewMouseMove += OnPreviewMouseMove;
+            AssociatedObject.MouseLeave +=OnMouseLeave;
         }
 
         protected override void OnDetaching()
@@ -27,16 +28,11 @@ namespace Plainion.Windows.Interactivity
             base.OnDetaching();
         }
 
-        protected void OnPreviewMouseMove( object sender, MouseEventArgs e )
+        private void OnPreviewMouseMove( object sender, MouseEventArgs e )
         {
             if ( myToolTip != null )
             {
                 myToolTip.IsOpen = false;
-            }
-
-            if ( ( Keyboard.Modifiers & ModifierKeys.Control ) != ModifierKeys.Control )
-            {
-                return;
             }
 
             e.Handled = true;
@@ -69,6 +65,14 @@ namespace Plainion.Windows.Interactivity
             AssociatedObject.ToolTip = myToolTip;
 
             myLastTooltipUrl = url;
+        }
+
+        private void OnMouseLeave( object sender, MouseEventArgs e )
+        {
+            if( myToolTip != null )
+            {
+                myToolTip.IsOpen = false;
+            }
         }
 
         private void OnPreviewMouseDown( object sender, MouseButtonEventArgs e )
