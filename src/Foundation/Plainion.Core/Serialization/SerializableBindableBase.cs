@@ -12,7 +12,7 @@ namespace Plainion.Serialization
     /// have DataContractAttribute applied which is mandatory
     /// </remarks>
     [DataContract]
-    abstract class SerializableBindableBase : INotifyPropertyChanged
+    public abstract class SerializableBindableBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
