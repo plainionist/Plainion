@@ -1,13 +1,12 @@
 
+using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System;
 using System.Security;
-using System.Runtime.CompilerServices;
 
 [assembly: AssemblyTitle( "Plainion.Core" )]
 [assembly: CLSCompliant( true )]
-[assembly: AssemblyVersion( "2.4.0.0" )]
+[assembly: AssemblyVersion( "2.5.0.0" )]
 
 // required since .NET 4.0 to allow calls to other assemblies
 [assembly: AllowPartiallyTrustedCallersAttribute()]
