@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 
@@ -9,9 +10,10 @@ namespace Plainion.Serialization
     /// </summary>
     /// <remarks>
     /// BindableBase from Prism cannot be used with DataContractSerializer because it does not
-    /// have DataContractAttribute applied which is mandatory
+    /// have DataContractAttribute applied which is mandatory.
+    /// (Same for BinaryFormatter)
     /// </remarks>
-    [DataContract]
+    [DataContract, Serializable]
     public abstract class SerializableBindableBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
