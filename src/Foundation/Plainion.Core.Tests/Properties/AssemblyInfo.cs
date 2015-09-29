@@ -6,7 +6,7 @@ using System.Security;
 
 [assembly: AssemblyTitle( "Plainion.Core.Tests" )]
 [assembly: CLSCompliant( true )]
-[assembly: AssemblyVersion( "2.7.0.0" )]
+[assembly: AssemblyVersion( "2.8.0.0" )]
 
 // required since .NET 4.0 to allow calls to other assemblies
 [assembly: AllowPartiallyTrustedCallersAttribute()]

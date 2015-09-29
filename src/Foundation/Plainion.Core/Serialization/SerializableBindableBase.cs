@@ -16,6 +16,7 @@ namespace Plainion.Serialization
     [DataContract, Serializable]
     public abstract class SerializableBindableBase : INotifyPropertyChanged
     {
+        [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
