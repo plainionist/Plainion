@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="Plainion.Windows.Controls.NotePad"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:l="clr-namespace:Plainion.Windows.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500">
+    <DockPanel LastChildFill="True">
+        <ToolBar DockPanel.Dock="Top">
+            <ToggleButton Command="EditingCommands.ToggleBold" Name="myBold" ToolTip="Bold">
+                <Image Source="/RaynMaker.Infrastructure;Component/Resources/Bold.png" Width="17" Height="17"/>
+            </ToggleButton>
+            <ToggleButton Command="EditingCommands.ToggleItalic" Name="myItalic" ToolTip="Italic">
+                <Image Source="/RaynMaker.Infrastructure;Component/Resources/Italic.png" Width="17" Height="17"/>
+            </ToggleButton>
+            <ToggleButton Command="EditingCommands.ToggleUnderline" Name="myUnderline" ToolTip="Underline">
+                <Image Source="/RaynMaker.Infrastructure;Component/Resources/Underline.png" Width="17" Height="17"/>
+            </ToggleButton>
+
+            <Separator/>
+
+            <ToggleButton Click="OnHeadlineClick" Name="myHeadline" Content="Headline" ToolTip="Headline"/>
+
+            <Separator/>
+
+            <ToggleButton Command="EditingCommands.ToggleBullets" ToolTip="Bullets">
+                <Image Source="/RaynMaker.Infrastructure;Component/Resources/Bullets.png" Width="17" Height="17"/>
+            </ToggleButton>
+            <ToggleButton Command="EditingCommands.ToggleNumbering" ToolTip="Numbering">
+                <Image Source="/RaynMaker.Infrastructure;Component/Resources/Numbering.png" Width="17" Height="17"/>
+            </ToggleButton>
+        </ToolBar>
+
+        <l:RichTextEditor x:Name="myEditor"  SelectionChanged="OnSelectionChanged" Background="White"/>
+    </DockPanel>
+</UserControl>

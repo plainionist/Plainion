@@ -36,6 +36,11 @@
   <ItemGroup>
     <Compile Include="Controls\AdornedControl.cs" />
     <Compile Include="AdornerPlacement.cs" />
+    <Compile Include="Controls\DocumentFacade.cs" />
+    <Compile Include="Controls\NotePad.xaml.cs">
+      <DependentUpon>NotePad.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RichTextEditor.cs" />
     <Compile Include="Controls\TextBoxBinding.cs" />
     <Compile Include="BindingProxy.cs" />
     <Compile Include="BoolToVisibilityConverter.cs" />
@@ -90,6 +95,10 @@
     <Page Include="Controls\CircularProgressIndicator.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\NotePad.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Diagnostics\InspectionWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
