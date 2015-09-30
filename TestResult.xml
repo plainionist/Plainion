@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="D:\seb\workspace\Plainion\Plainion\bin\gc\Plainion.gen.nunit" total="50" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2015-09-30" time="11:35:54">
+  <environment nunit-version="2.6.3.13283" clr-version="2.0.50727.5485" os-version="Microsoft Windows NT 6.1.7601 Service Pack 1" platform="Win32NT" cwd="D:\seb\workspace\Plainion\Plainion" machine-name="MD11U59C" user="ssmosett" user-domain="WW005" />
+  <culture-info current-culture="en-US" current-uiculture="en-US" />
+  <test-suite type="Project" name="D:\seb\workspace\Plainion\Plainion\bin\gc\Plainion.gen.nunit" executed="True" result="Success" success="True" time="0.766" asserts="0">
+    <results>
+      <test-suite type="Assembly" name="D:\seb\workspace\Plainion\Plainion\bin\gc\Plainion.AppFw.Shell.Tests.dll" executed="True" result="Success" success="True" time="0.066" asserts="0">
+        <results>
+          <test-suite type="Namespace" name="Plainion" executed="True" result="Success" success="True" time="0.066" asserts="0">
+            <results>
+              <test-suite type="Namespace" name="AppFw" executed="True" result="Success" success="True" time="0.065" asserts="0">
+                <results>
+                  <test-suite type="Namespace" name="Shell" executed="True" result="Success" success="True" time="0.065" asserts="0">
+                    <results>
+                      <test-suite type="Namespace" name="UnitTests" executed="True" result="Success" success="True" time="0.065" asserts="0">
+                        <results>
+                          <test-suite type="TestFixture" name="GenericControlTests" executed="True" result="Success" success="True" time="0.063" asserts="0">
+                            <results>
+                              <test-case name="Plainion.AppFw.Shell.UnitTests.GenericControlTests.TryBind_WithBool_PropertyIsTrue" executed="True" result="Success" success="True" time="0.030" asserts="2" />
+                              <test-case name="Plainion.AppFw.Shell.UnitTests.GenericControlTests.TryBind_WithDictionary_KeyAndValueSet" executed="True" result="Success" success="True" time="0.014" asserts="3" />
+                              <test-case name="Plainion.AppFw.Shell.UnitTests.GenericControlTests.TryBind_WithList_ValueAdded" executed="True" result="Success" success="True" time="0.001" asserts="2" />
+                              <test-case name="Plainion.AppFw.Shell.UnitTests.GenericControlTests.TryBind_WithString_PropertyReturnsValue" executed="True" result="Success" success="True" time="0.002" asserts="2" />
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+      <test-suite type="Assembly" name="D:\seb\workspace\Plainion\Plainion\bin\gc\Plainion.Core.Tests.dll" executed="True" result="Success" success="True" time="0.417" asserts="0">
+        <results>
+          <test-suite type="Namespace" name="Plainion" executed="True" result="Success" success="True" time="0.416" asserts="0">
+            <results>
+              <test-suite type="Namespace" name="Core" executed="True" result="Success" success="True" time="0.104" asserts="0">
+                <results>
+                  <test-suite type="Namespace" name="Tests" executed="True" result="Success" success="True" time="0.104" asserts="0">
+                    <results>
+                      <test-suite type="Namespace" name="Composition" executed="True" result="Success" success="True" time="0.061" asserts="0">
+                        <results>
+                          <test-suite type="TestFixture" name="DecoratorChainCatalogTests" executed="True" result="Success" success="True" time="0.061" asserts="0">
+                            <results>
+                              <test-case name="Plainion.Core.Tests.Composition.DecoratorChainCatalogTests.Compose_DecoratorGiven_DecoratedInstanceIsImported" executed="True" result="Success" success="True" time="0.061" asserts="1" />
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                      <test-suite type="Namespace" name="Serialization" executed="True" result="Success" success="True" time="0.041" asserts="0">
+                        <results>
+                          <test-suite type="TestFixture" name="SerializableBindableBaseTests" executed="True" result="Success" success="True" time="0.040" asserts="0">
+                            <results>
+                              <test-case name="Plainion.Core.Tests.Serialization.SerializableBindableBaseTests.Serialize_WithBinaryFormatter_NoException" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                              <test-case name="Plainion.Core.Tests.Serialization.SerializableBindableBaseTests.Serialize_WithDataContractSerializer_NoException" executed="True" result="Success" success="True" time="0.038" asserts="0" />
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+              <test-suite type="Namespace" name="UnitTests" executed="True" result="Success" success="True" time="0.310" asserts="0">
+                <results>
+                  <test-suite type="Namespace" name="IO" executed="True" result="Success" success="True" time="0.184" asserts="0">
+                    <results>
+                      <test-suite type="Namespace" name="MemoryFS" executed="True" result="Success" success="True" time="0.184" asserts="0">
+                        <results>
+                          <test-suite type="TestFixture" name="DirectoryImplTest" executed="True" result="Success" success="True" time="0.142" asserts="0">
+                            <results>
+                              <test-case name="Plainion.UnitTests.IO.MemoryFS.DirectoryImplTest.Create_WhenCalled_ExistsReturnsTrue" executed="True" result="Success" success="True" time="0.004" asserts="1" />
+                              <test-case name="Plainion.UnitTests.IO.MemoryFS.DirectoryImplTest.Create_WhenCalled_ParentDirectoriesWillBeCreatedOnDemand" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                              <test-case name="Plainion.UnitTests.IO.MemoryFS.DirectoryImplTest.Ctor_WhenCalled_ExistsReturnsFalse" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                              <test-case name="Plainion.UnitTests.IO.MemoryFS.DirectoryImplTest.Ctor_WithDriveRoot_ExistsReturnsTrue" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+                              <test-case name="Plainion.UnitTests.IO.MemoryFS.DirectoryImplTest.Delete_DirectoryWithContentAndRecursiveTrue_ShouldDeleteDirectoryWithContent" executed="True" result="Success" success="True" time="0.008" asserts="4" />
+                              <test-case name="Plainion.UnitTests.IO.MemoryFS.DirectoryImplTest.Delete_WithEmptyDirectory_ExistsShouldReturnFalse" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                              <test-case name="Plainion.UnitTests.IO.MemoryFS.DirectoryImplTest.Delete_WithNonEmptyDirectory_ShouldThrow" executed="True" result="Success" success="True" time="0.004" asserts="1" />
+                              <test-case name="Plainion.UnitTests.IO.MemoryFS.DirectoryImplTest.GetFiles_DirectoryContainsFilesAndDirectories_ReturnsCreatedFilesOnly" executed="True" result="Success" success="True" time="0.006" asserts="1" />
+                              <test-case name="Plainion.UnitTests.IO.MemoryFS.DirectoryImplTest.GetFiles_Recursively_ReturnsAllFiles" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                              <test-case name="Plainion.UnitTests.IO.MemoryFS.DirectoryImplTest.GetFiles_WithEmptyDirectory_ReturnsEmptyList" executed="True" result="Success" success="True" time="0.002" asserts="1" />
+                              <test-case name="Plainion.UnitTests.IO.MemoryFS.DirectoryImplTest.GetFiles_WithPatternAndNonEmptyDirectory_ReturnsMatchingFilesOnly" executed="True" result="Success" success="True" time="0.110" asserts="1" />
+                            </results>
+                          </test-suite>
+                          <test-suite type="TestFixture" name="FileImplTest" executed="True" result="Success" success="True" time="0.038" asserts="0">
+                            <results>
+                              <test-suite type="ParameterizedTest" name="AllReadActions_WhenCalled_TimestampsShouldBeUpdatedProperly" executed="True" result="Success" success="True" time="0.016" asserts="0">
+                                <results>
+                                  <test-case name="Plainion.UnitTests.IO.MemoryFS.FileImplTest.AllReadActions_WhenCalled_TimestampsShouldBeUpdatedProperly(&quot;CreateReader&quot;)" executed="True" result="Success" success="True" time="0.008" asserts="2" />
+                                  <test-case name="Plainion.UnitTests.IO.MemoryFS.FileImplTest.AllReadActions_WhenCalled_TimestampsShouldBeUpdatedProperly(&quot;ReadAllLines&quot;)" executed="True" result="Success" success="True" time="0.007" asserts="2" />
+                                </results>
+                              </test-suite>
+                              <test-suite type="ParameterizedTest" name="AllWriteActions_WhenCalled_TimestampsShouldBeUpdatedProperly" executed="True" result="Success" success="True" time="0.011" asserts="0">
+                                <results>
+                                  <test-case name="Plainion.UnitTests.IO.MemoryFS.FileImplTest.AllWriteActions_WhenCalled_TimestampsShouldBeUpdatedProperly(&quot;CreateWriter&quot;)" executed="True" result="Success" success="True" time="0.005" asserts="2" />
+                                  <test-case name="Plainion.UnitTests.IO.MemoryFS.FileImplTest.AllWriteActions_WhenCalled_TimestampsShouldBeUpdatedProperly(&quot;WriteAll&quot;)" executed="True" result="Success" success="True" time="0.005" asserts="2" />
+                                </results>
+                              </test-suite>
+                              <test-case name="Plainion.UnitTests.IO.MemoryFS.FileImplTest.Create_ParentDirectoryDoesNotExist_Throws" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                              <test-case name="Plainion.UnitTests.IO.MemoryFS.FileImplTest.Create_WhenCalled_ExistsReturnsTrue" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+                              <test-case name="Plainion.UnitTests.IO.MemoryFS.FileImplTest.Create_WhenCalled_FileIsEmpty" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+                              <test-case name="Plainion.UnitTests.IO.MemoryFS.FileImplTest.CreateReader_WhenCalledAndRead_ContentWillBeReturned" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                              <test-case name="Plainion.UnitTests.IO.MemoryFS.FileImplTest.CreateWriter_WhenCalledAndWritten_ContentIsFilled" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                              <test-case name="Plainion.UnitTests.IO.MemoryFS.FileImplTest.Ctor_WhenCalled_ExistsReturnsFalse" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+                              <test-case name="Plainion.UnitTests.IO.MemoryFS.FileImplTest.Delete_WhenCalled_ExistsReturnsFalse" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+                            </results>
+                          </test-suite>
+                          <test-suite type="TestFixture" name="FileSystemImplTest" executed="True" result="Success" success="True" time="0.002" asserts="0">
+                            <results>
+                              <test-case name="Plainion.UnitTests.IO.MemoryFS.FileSystemImplTest.GetTempFile_WhenCalled_ParentAlwaysExists" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                              <test-case name="Plainion.UnitTests.IO.MemoryFS.FileSystemImplTest.GetTempPath_WhenCalled_AlwaysExists" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                  <test-suite type="Namespace" name="Validation" executed="True" result="Success" success="True" time="0.121" asserts="0">
+                    <results>
+                      <test-suite type="TestFixture" name="ValidateObjectAttributeTests" executed="True" result="Success" success="True" time="0.121" asserts="0">
+                        <results>
+                          <test-case name="Plainion.UnitTests.Validation.ValidateObjectAttributeTests.GetValidationResult_ChildViolates_ViolationReturned" executed="True" result="Success" success="True" time="0.105" asserts="2" />
+                          <test-case name="Plainion.UnitTests.Validation.ValidateObjectAttributeTests.GetValidationResult_ItemInCollectionViolates_ViolationReturned" executed="True" result="Success" success="True" time="0.008" asserts="2" />
+                          <test-case name="Plainion.UnitTests.Validation.ValidateObjectAttributeTests.GetValidationResult_ItemInNestedCollectionViolates_ViolationReturned" executed="True" result="Success" success="True" time="0.001" asserts="2" />
+                          <test-case name="Plainion.UnitTests.Validation.ValidateObjectAttributeTests.GetValidationResult_KeysInDictionary_ViolationReturned" executed="True" result="Success" success="True" time="0.002" asserts="2" />
+                          <test-case name="Plainion.UnitTests.Validation.ValidateObjectAttributeTests.GetValidationResult_ValuesInDictionary_ViolationReturned" executed="True" result="Success" success="True" time="0.001" asserts="2" />
+                          <test-case name="Plainion.UnitTests.Validation.ValidateObjectAttributeTests.GetValidationResult_WithNull_SuccessReturned" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+      <test-suite type="Assembly" name="D:\seb\workspace\Plainion\Plainion\bin\gc\Plainion.Windows.Tests.dll" executed="True" result="Success" success="True" time="0.254" asserts="0">
+        <results>
+          <test-suite type="Namespace" name="Plainion" executed="True" result="Success" success="True" time="0.254" asserts="0">
+            <results>
+              <test-suite type="Namespace" name="Windows" executed="True" result="Success" success="True" time="0.253" asserts="0">
+                <results>
+                  <test-suite type="Namespace" name="Tests" executed="True" result="Success" success="True" time="0.253" asserts="0">
+                    <results>
+                      <test-suite type="TestFixture" name="BindablePropertyTests" executed="True" result="Success" success="True" time="0.059" asserts="0">
+                        <results>
+                          <test-suite type="ParameterizedTest" name="Create_ExpressionPath_OwnerAndPropertyCorrectlyDetected" executed="True" result="Success" success="True" time="0.049" asserts="0">
+                            <results>
+                              <test-case name="Plainion.Windows.Tests.BindablePropertyTests.Create_ExpressionPath_OwnerAndPropertyCorrectlyDetected()" executed="True" result="Success" success="True" time="0.048" asserts="2" />
+                            </results>
+                          </test-suite>
+                          <test-suite type="ParameterizedTest" name="Create_ExpressionWithFieldMemberPath_OwnerAndPropertyCorrectlyDetected" executed="True" result="Success" success="True" time="0.001" asserts="0">
+                            <results>
+                              <test-case name="Plainion.Windows.Tests.BindablePropertyTests.Create_ExpressionWithFieldMemberPath_OwnerAndPropertyCorrectlyDetected()" executed="True" result="Success" success="True" time="0.001" asserts="2" />
+                            </results>
+                          </test-suite>
+                          <test-suite type="ParameterizedTest" name="Create_ExpressionWithLocalVariable_OwnerAndPropertyCorrectlyDetected" executed="True" result="Success" success="True" time="0.001" asserts="0">
+                            <results>
+                              <test-case name="Plainion.Windows.Tests.BindablePropertyTests.Create_ExpressionWithLocalVariable_OwnerAndPropertyCorrectlyDetected()" executed="True" result="Success" success="True" time="0.001" asserts="2" />
+                            </results>
+                          </test-suite>
+                          <test-suite type="ParameterizedTest" name="Create_ExpressionWithPropertyMember_OwnerAndPropertyCorrectlyDetected" executed="True" result="Success" success="True" time="0.001" asserts="0">
+                            <results>
+                              <test-case name="Plainion.Windows.Tests.BindablePropertyTests.Create_ExpressionWithPropertyMember_OwnerAndPropertyCorrectlyDetected()" executed="True" result="Success" success="True" time="0.001" asserts="2" />
+                            </results>
+                          </test-suite>
+                          <test-suite type="ParameterizedTest" name="Create_ExpressionWithPropertyMemberPath_OwnerAndPropertyCorrectlyDetected" executed="True" result="Success" success="True" time="0.001" asserts="0">
+                            <results>
+                              <test-case name="Plainion.Windows.Tests.BindablePropertyTests.Create_ExpressionWithPropertyMemberPath_OwnerAndPropertyCorrectlyDetected()" executed="True" result="Success" success="True" time="0.001" asserts="2" />
+                            </results>
+                          </test-suite>
+                          <test-suite type="ParameterizedTest" name="Create_InstanceAndPropertyName_OwnerAndPropertyCorrectlyDetected" executed="True" result="Success" success="True" time="0.001" asserts="0">
+                            <results>
+                              <test-case name="Plainion.Windows.Tests.BindablePropertyTests.Create_InstanceAndPropertyName_OwnerAndPropertyCorrectlyDetected()" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                      <test-suite type="TestFixture" name="PropertyBindingTests" executed="True" result="Success" success="True" time="0.193" asserts="0">
+                        <results>
+                          <test-suite type="ParameterizedTest" name="OneWayBinding_ChangesOnSourceSyncedToTarget" executed="True" result="Success" success="True" time="0.091" asserts="0">
+                            <results>
+                              <test-case name="Plainion.Windows.Tests.PropertyBindingTests.OneWayBinding_ChangesOnSourceSyncedToTarget()" executed="True" result="Success" success="True" time="0.090" asserts="1" />
+                            </results>
+                          </test-suite>
+                          <test-suite type="ParameterizedTest" name="OneWayBinding_ChangesOnTargetNotSyncedtoSource" executed="True" result="Success" success="True" time="0.006" asserts="0">
+                            <results>
+                              <test-case name="Plainion.Windows.Tests.PropertyBindingTests.OneWayBinding_ChangesOnTargetNotSyncedtoSource()" executed="True" result="Success" success="True" time="0.006" asserts="1" />
+                            </results>
+                          </test-suite>
+                          <test-suite type="ParameterizedTest" name="OneWayToSourceBinding_ChangesOnSourceSyncedToTarget" executed="True" result="Success" success="True" time="0.001" asserts="0">
+                            <results>
+                              <test-case name="Plainion.Windows.Tests.PropertyBindingTests.OneWayToSourceBinding_ChangesOnSourceSyncedToTarget()" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                            </results>
+                          </test-suite>
+                          <test-suite type="ParameterizedTest" name="OneWayToSourceBinding_ChangesOnTargetNotSyncedtoSource" executed="True" result="Success" success="True" time="0.001" asserts="0">
+                            <results>
+                              <test-case name="Plainion.Windows.Tests.PropertyBindingTests.OneWayToSourceBinding_ChangesOnTargetNotSyncedtoSource()" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                            </results>
+                          </test-suite>
+                          <test-suite type="ParameterizedTest" name="PropertyOwnersMarkedForGC_BindingReleased" executed="True" result="Success" success="True" time="0.041" asserts="0">
+                            <results>
+                              <test-case name="Plainion.Windows.Tests.PropertyBindingTests.PropertyOwnersMarkedForGC_BindingReleased()" executed="True" result="Success" success="True" time="0.041" asserts="2" />
+                            </results>
+                          </test-suite>
+                          <test-suite type="ParameterizedTest" name="PropertyOwnersStillAlive_BindingsSurvivesGC" executed="True" result="Success" success="True" time="0.046" asserts="0">
+                            <results>
+                              <test-case name="Plainion.Windows.Tests.PropertyBindingTests.PropertyOwnersStillAlive_BindingsSurvivesGC()" executed="True" result="Success" success="True" time="0.045" asserts="1" />
+                            </results>
+                          </test-suite>
+                          <test-suite type="ParameterizedTest" name="TwoWayBinding_ChangesOnEitherEndSyncedToTheOtherOne" executed="True" result="Success" success="True" time="0.001" asserts="0">
+                            <results>
+                              <test-case name="Plainion.Windows.Tests.PropertyBindingTests.TwoWayBinding_ChangesOnEitherEndSyncedToTheOtherOne()" executed="True" result="Success" success="True" time="0.001" asserts="2" />
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>
