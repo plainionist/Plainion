@@ -19,38 +19,35 @@ namespace Plainion.Windows.Controls
         private TextPointer mySelectionStartPosition;
         private TextPointer mySelectionEndPosition;
 
-        static RichTextEditor()
-        {
-            EventManager.RegisterClassHandler(typeof(RichTextEditor), KeyDownEvent, new KeyEventHandler(OnKeyDown), handledEventsToo: true);
-        }
-
         public RichTextEditor()
         {
-            DataObject.AddPastingHandler( this, OnPasted );
+            DataObject.AddPastingHandler(this, OnPasted);
 
             TextChanged += OnTextChanged;
+
+            AddHandler(KeyDownEvent, new KeyEventHandler(OnKeyDown), handledEventsToo: true);
 
             // required to get hyperlinks working
             IsDocumentEnabled = true;
         }
 
-        private static void OnKeyDown( object sender, KeyEventArgs e )
+        private void OnKeyDown(object sender, KeyEventArgs e)
         {
             var richTextBox = (RichTextEditor)sender;
 
-            if( e.Key != Key.Back && e.Key != Key.Space && e.Key != Key.Return )
+            if (e.Key != Key.Back && e.Key != Key.Space && e.Key != Key.Return)
             {
                 return;
             }
 
-            if( !richTextBox.Selection.IsEmpty )
+            if (!richTextBox.Selection.IsEmpty)
             {
                 richTextBox.Selection.Text = String.Empty;
             }
 
             var caretPosition = richTextBox.Selection.Start;
 
-            if( e.Key == Key.Space || e.Key == Key.Return )
+            if (e.Key == Key.Space || e.Key == Key.Return)
             {
                 // We don't check for hyperlink match here, just set the necessary flags.
                 // Once base RTB handles the KeyDown event, it will raise a TextChanged event, 
@@ -58,19 +55,19 @@ namespace Plainion.Windows.Controls
 
                 richTextBox.myWordsAddedFlag = true;
                 richTextBox.mySelectionStartPosition = richTextBox.Selection.Start;
-                richTextBox.mySelectionEndPosition = richTextBox.Selection.End.GetPositionAtOffset( 0, LogicalDirection.Forward );
+                richTextBox.mySelectionEndPosition = richTextBox.Selection.End.GetPositionAtOffset(0, LogicalDirection.Forward);
             }
             else // Key.Back
             {
-                RemoveHyperlink( richTextBox, caretPosition );
+                RemoveHyperlink(richTextBox, caretPosition);
             }
         }
 
-        private static void RemoveHyperlink( RichTextEditor myRichTextBox, TextPointer caretPosition )
+        private static void RemoveHyperlink(RichTextEditor myRichTextBox, TextPointer caretPosition)
         {
-            var backspacePosition = caretPosition.GetNextInsertionPosition( LogicalDirection.Backward );
+            var backspacePosition = caretPosition.GetNextInsertionPosition(LogicalDirection.Backward);
             Hyperlink hyperlink;
-            if( backspacePosition == null || !DocumentFacade.IsHyperlinkBoundaryCrossed( caretPosition, backspacePosition, out hyperlink ) )
+            if (backspacePosition == null || !DocumentFacade.IsHyperlinkBoundaryCrossed(caretPosition, backspacePosition, out hyperlink))
             {
                 return;
             }
@@ -80,64 +77,64 @@ namespace Plainion.Windows.Controls
             // (with backward gravity) will follow content preceeding the hyperlink. 
             // We want to remember content following the hyperlink to set new caret position at.
 
-            var newCaretPosition = caretPosition.GetPositionAtOffset( 0, LogicalDirection.Forward );
+            var newCaretPosition = caretPosition.GetPositionAtOffset(0, LogicalDirection.Forward);
 
             // Deleting the hyperlink is done using logic below.
 
             // 1. Copy its children Inline to a temporary array.
             var hyperlinkChildren = hyperlink.Inlines;
-            var inlines = new Inline[ hyperlinkChildren.Count ];
-            hyperlinkChildren.CopyTo( inlines, 0 );
+            var inlines = new Inline[hyperlinkChildren.Count];
+            hyperlinkChildren.CopyTo(inlines, 0);
 
             // 2. Remove each child from parent hyperlink element and insert it after the hyperlink.
-            for( int i = inlines.Length - 1; i >= 0; i-- )
+            for (int i = inlines.Length - 1; i >= 0; i--)
             {
-                hyperlinkChildren.Remove( inlines[ i ] );
-                hyperlink.SiblingInlines.InsertAfter( hyperlink, inlines[ i ] );
+                hyperlinkChildren.Remove(inlines[i]);
+                hyperlink.SiblingInlines.InsertAfter(hyperlink, inlines[i]);
             }
 
             // 3. Apply hyperlink's local formatting properties to inlines (which are now outside hyperlink scope).
             var localProperties = hyperlink.GetLocalValueEnumerator();
-            var inlineRange = new TextRange( inlines[ 0 ].ContentStart, inlines[ inlines.Length - 1 ].ContentEnd );
+            var inlineRange = new TextRange(inlines[0].ContentStart, inlines[inlines.Length - 1].ContentEnd);
 
-            while( localProperties.MoveNext() )
+            while (localProperties.MoveNext())
             {
                 var property = localProperties.Current;
                 var dp = property.Property;
                 object value = property.Value;
 
-                if( !dp.ReadOnly &&
+                if (!dp.ReadOnly &&
                     dp != Inline.TextDecorationsProperty && // Ignore hyperlink defaults.
                     dp != TextElement.ForegroundProperty &&
                     dp != BaseUriHelper.BaseUriProperty &&
-                    !DocumentFacade.IsHyperlinkProperty( dp ) )
+                    !DocumentFacade.IsHyperlinkProperty(dp))
                 {
-                    inlineRange.ApplyPropertyValue( dp, value );
+                    inlineRange.ApplyPropertyValue(dp, value);
                 }
             }
 
             // 4. Delete the (empty) hyperlink element.
-            hyperlink.SiblingInlines.Remove( hyperlink );
+            hyperlink.SiblingInlines.Remove(hyperlink);
 
             // 5. Update selection, since we deleted Hyperlink element and caretPosition was at that Hyperlink's end boundary.
-            myRichTextBox.Selection.Select( newCaretPosition, newCaretPosition );
+            myRichTextBox.Selection.Select(newCaretPosition, newCaretPosition);
         }
 
-        private void OnPasted( object sender, DataObjectPastingEventArgs e )
+        private void OnPasted(object sender, DataObjectPastingEventArgs e)
         {
             myWordsAddedFlag = true;
             mySelectionStartPosition = Selection.Start;
             mySelectionEndPosition = Selection.IsEmpty ?
-                Selection.End.GetPositionAtOffset( 0, LogicalDirection.Forward ) :
+                Selection.End.GetPositionAtOffset(0, LogicalDirection.Forward) :
                 Selection.End;
 
             // We don't handle the event here. Let the base RTB handle the paste operation.
             // This will raise a TextChanged event, which we handle below to scan for any matching hyperlinks.
         }
 
-        private void OnTextChanged( object sender, TextChangedEventArgs e )
+        private void OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            if( !myWordsAddedFlag || Document == null )
+            if (!myWordsAddedFlag || Document == null)
             {
                 return;
             }
@@ -147,29 +144,29 @@ namespace Plainion.Windows.Controls
             TextChanged -= OnTextChanged;
 
             var navigator = mySelectionStartPosition;
-            while( navigator != null && navigator.CompareTo( mySelectionEndPosition ) <= 0 )
+            while (navigator != null && navigator.CompareTo(mySelectionEndPosition) <= 0)
             {
-                var wordRange = DocumentFacade.GetWordRange( navigator );
-                if( wordRange == null || wordRange.IsEmpty )
+                var wordRange = DocumentFacade.GetWordRange(navigator);
+                if (wordRange == null || wordRange.IsEmpty)
                 {
                     // No more words in the document.
                     break;
                 }
 
                 string wordText = wordRange.Text;
-                if( IsHyperlink( wordText ) &&
-                    !DocumentFacade.IsInHyperlinkScope( wordRange.Start ) &&
-                    !DocumentFacade.IsInHyperlinkScope( wordRange.End ) )
+                if (IsHyperlink(wordText) &&
+                    !DocumentFacade.IsInHyperlinkScope(wordRange.Start) &&
+                    !DocumentFacade.IsInHyperlinkScope(wordRange.End))
                 {
-                    var hyperlink = new Hyperlink( wordRange.Start, wordRange.End );
-                    hyperlink.NavigateUri = new Uri( wordText.StartsWith( "http", StringComparison.OrdinalIgnoreCase ) ? wordText : "http://" + wordText );
-                    WeakEventManager<Hyperlink, RequestNavigateEventArgs>.AddHandler( hyperlink, "RequestNavigate", OnHyperlinkRequestNavigate );
+                    var hyperlink = new Hyperlink(wordRange.Start, wordRange.End);
+                    hyperlink.NavigateUri = new Uri(wordText.StartsWith("http", StringComparison.OrdinalIgnoreCase) ? wordText : "http://" + wordText);
+                    WeakEventManager<Hyperlink, RequestNavigateEventArgs>.AddHandler(hyperlink, "RequestNavigate", OnHyperlinkRequestNavigate);
 
-                    navigator = hyperlink.ElementEnd.GetNextInsertionPosition( LogicalDirection.Forward );
+                    navigator = hyperlink.ElementEnd.GetNextInsertionPosition(LogicalDirection.Forward);
                 }
                 else
                 {
-                    navigator = wordRange.End.GetNextInsertionPosition( LogicalDirection.Forward );
+                    navigator = wordRange.End.GetNextInsertionPosition(LogicalDirection.Forward);
                 }
             }
 
@@ -180,17 +177,17 @@ namespace Plainion.Windows.Controls
             mySelectionEndPosition = null;
         }
 
-        private void OnHyperlinkRequestNavigate( object sender, RequestNavigateEventArgs e )
+        private void OnHyperlinkRequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-            Process.Start( e.Uri.AbsoluteUri );
+            Process.Start(e.Uri.AbsoluteUri);
             e.Handled = true;
         }
 
-        private bool IsHyperlink( string wordText )
+        private bool IsHyperlink(string wordText)
         {
-            return wordText.StartsWith( "http://", StringComparison.OrdinalIgnoreCase ) ||
-                wordText.StartsWith( "https://", StringComparison.OrdinalIgnoreCase ) ||
-                wordText.StartsWith( "www.", StringComparison.OrdinalIgnoreCase );
+            return wordText.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
+                wordText.StartsWith("https://", StringComparison.OrdinalIgnoreCase) ||
+                wordText.StartsWith("www.", StringComparison.OrdinalIgnoreCase);
         }
 
     }

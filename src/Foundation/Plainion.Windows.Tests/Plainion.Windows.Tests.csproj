@@ -23,8 +23,11 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -36,6 +39,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BindablePropertyTests.cs" />
+    <Compile Include="Controls\RichTextEditorTests.cs" />
     <Compile Include="Fakes\Model.cs" />
     <Compile Include="Fakes\ViewModel2.cs" />
     <Compile Include="Fakes\ViewModel1.cs" />
@@ -47,6 +51,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Plainion.Core\Plainion.Core.csproj">
+      <Project>{3cbd40b6-84fc-4898-8c64-cd602da8ef79}</Project>
+      <Name>Plainion.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Plainion.Windows\Plainion.Windows.csproj">
       <Project>{b76263b3-b4c6-4111-865d-1ce6b578d34a}</Project>
       <Name>Plainion.Windows</Name>
