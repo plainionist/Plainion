@@ -1,5 +1,9 @@
-﻿using System.Windows;
+﻿using System;
+using System.Diagnostics;
+using System.Windows;
 using System.Windows.Documents;
+using System.Windows.Navigation;
+
 
 namespace Plainion.Windows.Controls
 {
@@ -134,6 +138,105 @@ namespace Plainion.Windows.Controls
             }
 
             return isAtWordBoundary;
+        }
+
+        public static void MakeHyperlinks(TextRange range)
+        {
+            var navigator = range.Start;
+            while (navigator != null && navigator.CompareTo(range.End) <= 0)
+            {
+                var wordRange = DocumentFacade.GetWordRange(navigator);
+                if (wordRange == null || wordRange.IsEmpty)
+                {
+                    // No more words in the document.
+                    break;
+                }
+
+                string wordText = wordRange.Text;
+                if (IsHyperlink(wordText) &&
+                    !IsInHyperlinkScope(wordRange.Start) &&
+                    !IsInHyperlinkScope(wordRange.End))
+                {
+                    var hyperlink = new Hyperlink(wordRange.Start, wordRange.End);
+                    hyperlink.NavigateUri = new Uri(wordText.StartsWith("http", StringComparison.OrdinalIgnoreCase) ? wordText : "http://" + wordText);
+                    WeakEventManager<Hyperlink, RequestNavigateEventArgs>.AddHandler(hyperlink, "RequestNavigate", OnHyperlinkRequestNavigate);
+
+                    navigator = hyperlink.ElementEnd.GetNextInsertionPosition(LogicalDirection.Forward);
+                }
+                else
+                {
+                    navigator = wordRange.End.GetNextInsertionPosition(LogicalDirection.Forward);
+                }
+            }
+        }
+
+        private static void OnHyperlinkRequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(e.Uri.AbsoluteUri);
+            e.Handled = true;
+        }
+
+        private static bool IsHyperlink(string wordText)
+        {
+            return wordText.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
+                wordText.StartsWith("https://", StringComparison.OrdinalIgnoreCase) ||
+                wordText.StartsWith("www.", StringComparison.OrdinalIgnoreCase);
+        }
+
+        public static TextPointer RemoveHyperlink(TextPointer start)
+        {
+            var backspacePosition = start.GetNextInsertionPosition(LogicalDirection.Backward);
+            Hyperlink hyperlink;
+            if (backspacePosition == null || !IsHyperlinkBoundaryCrossed(start, backspacePosition, out hyperlink))
+            {
+                return null;
+            }
+
+            // Remember caretPosition with forward gravity. This is necessary since we are going to delete 
+            // the hyperlink element preceeding caretPosition and after deletion current caretPosition 
+            // (with backward gravity) will follow content preceeding the hyperlink. 
+            // We want to remember content following the hyperlink to set new caret position at.
+
+            var newCaretPosition = start.GetPositionAtOffset(0, LogicalDirection.Forward);
+
+            // Deleting the hyperlink is done using logic below.
+
+            // 1. Copy its children Inline to a temporary array.
+            var hyperlinkChildren = hyperlink.Inlines;
+            var inlines = new Inline[hyperlinkChildren.Count];
+            hyperlinkChildren.CopyTo(inlines, 0);
+
+            // 2. Remove each child from parent hyperlink element and insert it after the hyperlink.
+            for (int i = inlines.Length - 1; i >= 0; i--)
+            {
+                hyperlinkChildren.Remove(inlines[i]);
+                hyperlink.SiblingInlines.InsertAfter(hyperlink, inlines[i]);
+            }
+
+            // 3. Apply hyperlink's local formatting properties to inlines (which are now outside hyperlink scope).
+            var localProperties = hyperlink.GetLocalValueEnumerator();
+            var inlineRange = new TextRange(inlines[0].ContentStart, inlines[inlines.Length - 1].ContentEnd);
+
+            while (localProperties.MoveNext())
+            {
+                var property = localProperties.Current;
+                var dp = property.Property;
+                object value = property.Value;
+
+                if (!dp.ReadOnly &&
+                    dp != Inline.TextDecorationsProperty && // Ignore hyperlink defaults.
+                    dp != TextElement.ForegroundProperty &&
+                    dp != BaseUriHelper.BaseUriProperty &&
+                    !IsHyperlinkProperty(dp))
+                {
+                    inlineRange.ApplyPropertyValue(dp, value);
+                }
+            }
+
+            // 4. Delete the (empty) hyperlink element.
+            hyperlink.SiblingInlines.Remove(hyperlink);
+
+            return newCaretPosition;
         }
     }
 }

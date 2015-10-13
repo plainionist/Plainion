@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using NUnit.Framework;
@@ -11,28 +12,18 @@ namespace Plainion.Windows.Tests.Controls
     [TestFixture]
     class RichTextEditorTests
     {
-        public class FakePresentationSource : PresentationSource
-        {
-            protected override CompositionTarget GetCompositionTargetCore()
-            {
-                return null;
-            }
-
-            public override Visual RootVisual { get; set; }
-
-            public override bool IsDisposed { get { return false; } }
-        }
-
         [Test]
-        public void KeyDown_WhenCalled_Throws()
+        public void KeyDown_WithSpecialKey_SelectionIsCleared([Values(Key.Space, Key.Return, Key.Back)]Key key)
         {
             var editor = new RichTextEditor();
+            editor.Document.Blocks.Add(new Paragraph(new Run("Some dummy text")));
+            editor.Selection.Select(editor.Document.ContentStart, editor.Document.ContentEnd);
 
-            editor.RaiseEvent(
-                new KeyEventArgs(Keyboard.PrimaryDevice, new FakePresentationSource(), 0, Key.Space)
-                {
-                    RoutedEvent = UIElement.KeyDownEvent
-                });
+            Assert.That(editor.Selection.IsEmpty, Is.False, "Failed to select some text");
+
+            editor.RaiseKeyboardEvent(UIElement.KeyDownEvent, key);
+
+            Assert.That(editor.Selection.IsEmpty, Is.True, "Selection not empty");
         }
     }
 }
