@@ -145,7 +145,7 @@ namespace Plainion.Windows.Controls
             var navigator = range.Start;
             while (navigator != null && navigator.CompareTo(range.End) <= 0)
             {
-                var wordRange = DocumentFacade.GetWordRange(navigator);
+                var wordRange = GetWordRange(navigator);
                 if (wordRange == null || wordRange.IsEmpty)
                 {
                     // No more words in the document.

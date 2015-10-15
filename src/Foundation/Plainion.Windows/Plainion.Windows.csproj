@@ -37,6 +37,7 @@
     <Compile Include="Controls\AdornedControl.cs" />
     <Compile Include="AdornerPlacement.cs" />
     <Compile Include="Controls\DocumentFacade.cs" />
+    <Compile Include="Controls\FlowDocumentVisitor.cs" />
     <Compile Include="Controls\NotePad.xaml.cs">
       <DependentUpon>NotePad.xaml</DependentUpon>
     </Compile>
