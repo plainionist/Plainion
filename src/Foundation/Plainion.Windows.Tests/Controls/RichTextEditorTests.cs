@@ -1,9 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Windows;
+﻿using System.Linq;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using NUnit.Framework;
 using Plainion.Windows.Controls;
 
@@ -22,7 +19,7 @@ namespace Plainion.Windows.Tests.Controls
 
             Assert.That(editor.Selection.IsEmpty, Is.False, "Failed to select some text");
 
-            editor.RaiseKeyboardEvent(UIElement.KeyDownEvent, key);
+            editor.TriggerInput(key);
 
             Assert.That(editor.Selection.IsEmpty, Is.True, "Selection not empty");
         }
@@ -34,11 +31,14 @@ namespace Plainion.Windows.Tests.Controls
             editor.Document.Blocks.Add(new Paragraph(new Run("Some dummy text")));
             editor.CaretPosition = editor.Document.ContentEnd;
 
-            editor.RaiseKeyboardEvent(UIElement.KeyDownEvent, key);
+            editor.TriggerInput(key);
 
-            Assert.That(new FlowDocumentVisitor(e => e is Hyperlink).Results, Is.Empty);
+            var visitor = new FlowDocumentVisitor(e => e is Hyperlink);
+            visitor.Accept(editor.Document);
+            Assert.That(visitor.Results, Is.Empty);
         }
 
+        // http://stackoverflow.com/questions/1645815/how-can-i-programmatically-generate-keypress-events-in-c
         [Test]
         public void OnWordCompleted_AfterHttpLink_HyperlinkInserted([Values(Key.Space, Key.Return)]Key key)
         {
@@ -46,12 +46,13 @@ namespace Plainion.Windows.Tests.Controls
             editor.Document.Blocks.Add(new Paragraph(new Run("Some dummy http://github.com/")));
             editor.CaretPosition = editor.Document.ContentEnd;
 
-            editor.RaiseKeyboardEvent(UIElement.KeyDownEvent, key);
+            editor.TriggerInput(key);
 
-            var links = new FlowDocumentVisitor(e => e is Hyperlink).Results;
-            Assert.That(links.Count, Is.EqualTo(1));
+            var visitor = new FlowDocumentVisitor(e => e is Hyperlink);
+            visitor.Accept(editor.Document);
+            Assert.That(visitor.Results.Count, Is.EqualTo(1));
 
-            var hyperlink = links.OfType<Hyperlink>().Single();
+            var hyperlink = visitor.Results.OfType<Hyperlink>().Single();
             Assert.That(hyperlink.Inlines.OfType<Run>().Single().Text, Is.EqualTo("http://github.com/"));
             Assert.That(hyperlink.NavigateUri.ToString(), Is.EqualTo("http://github.com/"));
         }

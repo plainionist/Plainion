@@ -49,6 +49,8 @@ namespace Plainion.Windows.Controls
                 {
                     if (!TryMatch(inner)) return false;
                 }
+
+                return true;
             }
 
             if (block is Paragraph)
@@ -57,11 +59,14 @@ namespace Plainion.Windows.Controls
                 {
                     if (!TryMatch(inner)) return false;
                 }
+
+                return true;
             }
 
             if (block is BlockUIContainer)
             {
                 // ignore children
+                return true;
             }
 
             if (block is List)
@@ -70,6 +75,8 @@ namespace Plainion.Windows.Controls
                 {
                     if (!TryMatch(inner)) return false;
                 }
+
+                return true;
             }
 
             throw new InvalidOperationException("Unknown block type: " + block.GetType());

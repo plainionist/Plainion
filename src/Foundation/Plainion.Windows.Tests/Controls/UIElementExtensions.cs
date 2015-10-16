@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
 namespace Plainion.Windows.Tests.Controls
@@ -11,6 +13,12 @@ namespace Plainion.Windows.Tests.Controls
             {
                 RoutedEvent = evt
             });
+        }
+
+        public static void TriggerInput(this TextBoxBase self, Key key)
+        {
+            self.RaiseKeyboardEvent(UIElement.KeyDownEvent, key);
+            self.RaiseEvent(new TextChangedEventArgs(TextBox.TextChangedEvent, UndoAction.None));
         }
     }
 }
