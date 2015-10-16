@@ -103,6 +103,21 @@ namespace Plainion.Windows.Tests.Controls
             Assert.That(visitor.Results, Is.Empty);
         }
 
-        // TODO: backspace
+        [Test]
+        public void OnBackspace_AfterLink_HyperlinkRemoved()
+        {
+            var editor = new RichTextEditor();
+            editor.Document.Blocks.Add(new Paragraph(new Run("Some dummy http://github.org/")));
+            editor.CaretPosition = editor.Document.ContentEnd;
+
+            // we know from other tests that this works
+            editor.TriggerInput(Key.Space);
+
+            editor.TriggerInput(Key.Back);
+
+            var visitor = new FlowDocumentVisitor(e => e is Hyperlink);
+            visitor.Accept(editor.Document);
+            Assert.That(visitor.Results, Is.Empty);
+        }
     }
 }
