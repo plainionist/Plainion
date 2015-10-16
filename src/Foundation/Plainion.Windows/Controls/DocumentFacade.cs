@@ -153,12 +153,13 @@ namespace Plainion.Windows.Controls
                 }
 
                 string wordText = wordRange.Text;
-                if (IsHyperlink(wordText) &&
+                var url = TryCreateUrl(wordText);
+                if ( url !=null &&
                     !IsInHyperlinkScope(wordRange.Start) &&
                     !IsInHyperlinkScope(wordRange.End))
                 {
                     var hyperlink = new Hyperlink(wordRange.Start, wordRange.End);
-                    hyperlink.NavigateUri = new Uri(wordText.StartsWith("http", StringComparison.OrdinalIgnoreCase) ? wordText : "http://" + wordText);
+                    hyperlink.NavigateUri = url;
                     WeakEventManager<Hyperlink, RequestNavigateEventArgs>.AddHandler(hyperlink, "RequestNavigate", OnHyperlinkRequestNavigate);
 
                     navigator = hyperlink.ElementEnd.GetNextInsertionPosition(LogicalDirection.Forward);
@@ -176,11 +177,21 @@ namespace Plainion.Windows.Controls
             e.Handled = true;
         }
 
-        private static bool IsHyperlink(string wordText)
+        private static Uri TryCreateUrl(string wordText)
         {
-            return wordText.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
+            if (wordText.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
                 wordText.StartsWith("https://", StringComparison.OrdinalIgnoreCase) ||
-                wordText.StartsWith("www.", StringComparison.OrdinalIgnoreCase);
+                wordText.StartsWith("ftp://", StringComparison.OrdinalIgnoreCase))
+            {
+                return new Uri(wordText);
+            }
+
+            if (wordText.StartsWith("www.", StringComparison.OrdinalIgnoreCase))
+            {
+                return new Uri("http://" + wordText);
+            }
+
+            return null;
         }
 
         public static TextPointer RemoveHyperlink(TextPointer start)

@@ -38,12 +38,12 @@ namespace Plainion.Windows.Tests.Controls
             Assert.That(visitor.Results, Is.Empty);
         }
 
-        // http://stackoverflow.com/questions/1645815/how-can-i-programmatically-generate-keypress-events-in-c
         [Test]
-        public void OnWordCompleted_AfterHttpLink_HyperlinkInserted([Values(Key.Space, Key.Return)]Key key)
+        public void OnWordCompleted_AfterLink_HyperlinkInserted([Values(Key.Space, Key.Return)]Key key,
+            [Values("http://github.com/", "https://github.com/", "ftp://github.com/")]string url)
         {
             var editor = new RichTextEditor();
-            editor.Document.Blocks.Add(new Paragraph(new Run("Some dummy http://github.com/")));
+            editor.Document.Blocks.Add(new Paragraph(new Run("Some dummy " + url)));
             editor.CaretPosition = editor.Document.ContentEnd;
 
             editor.TriggerInput(key);
@@ -53,10 +53,56 @@ namespace Plainion.Windows.Tests.Controls
             Assert.That(visitor.Results.Count, Is.EqualTo(1));
 
             var hyperlink = visitor.Results.OfType<Hyperlink>().Single();
-            Assert.That(hyperlink.Inlines.OfType<Run>().Single().Text, Is.EqualTo("http://github.com/"));
-            Assert.That(hyperlink.NavigateUri.ToString(), Is.EqualTo("http://github.com/"));
+            Assert.That(hyperlink.Inlines.OfType<Run>().Single().Text, Is.EqualTo(url));
+            Assert.That(hyperlink.NavigateUri.ToString(), Is.EqualTo(url));
         }
 
-        // TODO: https, ftp://
+        [Test]
+        public void OnWordCompleted_AfterIncompleteWwwLink_HyperlinkWithHttpPrefixInserted([Values(Key.Space, Key.Return)]Key key)
+        {
+            var editor = new RichTextEditor();
+            editor.Document.Blocks.Add(new Paragraph(new Run("Some dummy www.host.org")));
+            editor.CaretPosition = editor.Document.ContentEnd;
+
+            editor.TriggerInput(key);
+
+            var visitor = new FlowDocumentVisitor(e => e is Hyperlink);
+            visitor.Accept(editor.Document);
+            Assert.That(visitor.Results.Count, Is.EqualTo(1));
+
+            var hyperlink = visitor.Results.OfType<Hyperlink>().Single();
+            Assert.That(hyperlink.Inlines.OfType<Run>().Single().Text, Is.EqualTo("www.host.org"));
+            Assert.That(hyperlink.NavigateUri.ToString(), Is.EqualTo("http://www.host.org/"));
+        }
+
+        [Test]
+        public void OnWordContinued_AfterNonLink_NoHyperlinkInserted()
+        {
+            var editor = new RichTextEditor();
+            editor.Document.Blocks.Add(new Paragraph(new Run("Some dummy text")));
+            editor.CaretPosition = editor.Document.ContentEnd;
+
+            editor.TriggerInput(Key.A);
+
+            var visitor = new FlowDocumentVisitor(e => e is Hyperlink);
+            visitor.Accept(editor.Document);
+            Assert.That(visitor.Results, Is.Empty);
+        }
+
+        [Test]
+        public void OnWordContinued_AfterHttpLink_NoHyperlinkInserted([Values("http://github.com", "https://github.com", "ftp://github.com", "www.host.org")]string url)
+        {
+            var editor = new RichTextEditor();
+            editor.Document.Blocks.Add(new Paragraph(new Run("Some dummy " + url)));
+            editor.CaretPosition = editor.Document.ContentEnd;
+
+            editor.TriggerInput(Key.A);
+
+            var visitor = new FlowDocumentVisitor(e => e is Hyperlink);
+            visitor.Accept(editor.Document);
+            Assert.That(visitor.Results, Is.Empty);
+        }
+
+        // TODO: backspace
     }
 }
