@@ -129,5 +129,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Bold.png" />
+    <Resource Include="Resources\Bullets.png" />
+    <Resource Include="Resources\Italic.png" />
+    <Resource Include="Resources\Numbering.png" />
+    <Resource Include="Resources\Underline.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

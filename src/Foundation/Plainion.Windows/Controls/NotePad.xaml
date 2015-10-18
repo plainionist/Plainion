@@ -9,13 +9,13 @@
     <DockPanel LastChildFill="True">
         <ToolBar DockPanel.Dock="Top">
             <ToggleButton Command="EditingCommands.ToggleBold" Name="myBold" ToolTip="Bold">
-                <Image Source="/RaynMaker.Infrastructure;Component/Resources/Bold.png" Width="17" Height="17"/>
+                <Image Source="/Plainion.Windows;Component/Resources/Bold.png" Width="17" Height="17"/>
             </ToggleButton>
             <ToggleButton Command="EditingCommands.ToggleItalic" Name="myItalic" ToolTip="Italic">
-                <Image Source="/RaynMaker.Infrastructure;Component/Resources/Italic.png" Width="17" Height="17"/>
+                <Image Source="/Plainion.Windows;Component/Resources/Italic.png" Width="17" Height="17"/>
             </ToggleButton>
             <ToggleButton Command="EditingCommands.ToggleUnderline" Name="myUnderline" ToolTip="Underline">
-                <Image Source="/RaynMaker.Infrastructure;Component/Resources/Underline.png" Width="17" Height="17"/>
+                <Image Source="/Plainion.Windows;Component/Resources/Underline.png" Width="17" Height="17"/>
             </ToggleButton>
 
             <Separator/>
@@ -25,10 +25,10 @@
             <Separator/>
 
             <ToggleButton Command="EditingCommands.ToggleBullets" ToolTip="Bullets">
-                <Image Source="/RaynMaker.Infrastructure;Component/Resources/Bullets.png" Width="17" Height="17"/>
+                <Image Source="/Plainion.Windows;Component/Resources/Bullets.png" Width="17" Height="17"/>
             </ToggleButton>
             <ToggleButton Command="EditingCommands.ToggleNumbering" ToolTip="Numbering">
-                <Image Source="/RaynMaker.Infrastructure;Component/Resources/Numbering.png" Width="17" Height="17"/>
+                <Image Source="/Plainion.Windows;Component/Resources/Numbering.png" Width="17" Height="17"/>
             </ToggleButton>
         </ToolBar>
 
