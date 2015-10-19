@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
 using NUnit.Framework;
@@ -6,6 +7,7 @@ using Plainion.Windows.Controls;
 
 namespace Plainion.Windows.Tests.Controls
 {
+    // TODO: reduce hyperlink variations once DocumentFacade tests are in place
     [RequiresSTA]
     [TestFixture]
     class RichTextEditorTests
@@ -114,6 +116,40 @@ namespace Plainion.Windows.Tests.Controls
             editor.TriggerInput(Key.Space);
 
             editor.TriggerInput(Key.Back);
+
+            var visitor = new FlowDocumentVisitor(e => e is Hyperlink);
+            visitor.Accept(editor.Document);
+            Assert.That(visitor.Results, Is.Empty);
+        }
+
+        [Test]
+        public void OnPaste_WithLink_HyperlinkInserted([Values("http://github.com/", "https://github.com/", "ftp://github.com/")]string url)
+        {
+            var editor = new RichTextEditor();
+            editor.Document.Blocks.Add(new Paragraph(new Run("Some dummy ")));
+            editor.CaretPosition = editor.Document.ContentEnd;
+
+            Clipboard.SetData(DataFormats.Text, url);
+            editor.Paste();
+
+            var visitor = new FlowDocumentVisitor(e => e is Hyperlink);
+            visitor.Accept(editor.Document);
+            Assert.That(visitor.Results.Count, Is.EqualTo(1));
+
+            var hyperlink = visitor.Results.OfType<Hyperlink>().Single();
+            Assert.That(hyperlink.Inlines.OfType<Run>().Single().Text, Is.EqualTo(url));
+            Assert.That(hyperlink.NavigateUri.ToString(), Is.EqualTo(url));
+        }
+
+        [Test]
+        public void OnPaste_NonLink_NoHyperlinkInserted()
+        {
+            var editor = new RichTextEditor();
+            editor.Document.Blocks.Add(new Paragraph(new Run("Some dummy ")));
+            editor.CaretPosition = editor.Document.ContentEnd;
+
+            Clipboard.SetData(DataFormats.Text, "some-other-text");
+            editor.Paste();
 
             var visitor = new FlowDocumentVisitor(e => e is Hyperlink);
             visitor.Accept(editor.Document);
