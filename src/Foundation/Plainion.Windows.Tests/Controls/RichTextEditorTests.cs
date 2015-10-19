@@ -41,11 +41,11 @@ namespace Plainion.Windows.Tests.Controls
         }
 
         [Test]
-        public void OnWordCompleted_AfterLink_HyperlinkInserted([Values(Key.Space, Key.Return)]Key key,
-            [Values("http://github.com/", "https://github.com/", "ftp://github.com/")]string url)
+        public void OnWordCompleted_AfterLink_HyperlinkInserted([Values(Key.Space, Key.Return)]Key key)
         {
+            var url = "http://github.com/";
             var editor = new RichTextEditor();
-            editor.Document.Blocks.Add(new Paragraph(new Run("Some dummy " + url)));
+            editor.Document.Blocks.Add(new Paragraph(new Run("Some dummy "+url)));
             editor.CaretPosition = editor.Document.ContentEnd;
 
             editor.TriggerInput(key);
@@ -92,8 +92,10 @@ namespace Plainion.Windows.Tests.Controls
         }
 
         [Test]
-        public void OnWordContinued_AfterHttpLink_NoHyperlinkInserted([Values("http://github.com", "https://github.com", "ftp://github.com", "www.host.org")]string url)
+        public void OnWordContinued_AfterHttpLink_NoHyperlinkInserted()
         {
+            var url = "http://github.com/";
+            
             var editor = new RichTextEditor();
             editor.Document.Blocks.Add(new Paragraph(new Run("Some dummy " + url)));
             editor.CaretPosition = editor.Document.ContentEnd;
@@ -123,8 +125,10 @@ namespace Plainion.Windows.Tests.Controls
         }
 
         [Test]
-        public void OnPaste_WithLink_HyperlinkInserted([Values("http://github.com/", "https://github.com/", "ftp://github.com/")]string url)
+        public void OnPaste_WithLink_HyperlinkInserted()
         {
+            var url = "http://github.com/";
+
             var editor = new RichTextEditor();
             editor.Document.Blocks.Add(new Paragraph(new Run("Some dummy ")));
             editor.CaretPosition = editor.Document.ContentEnd;

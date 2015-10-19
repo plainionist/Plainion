@@ -4,12 +4,11 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Navigation;
 
-
 namespace Plainion.Windows.Controls
 {
     static class DocumentFacade
     {
-        public static void MakeHyperlinks(TextRange range)
+        public static void TryMakeHyperlinks(TextRange range)
         {
             var navigator = range.Start;
             while (navigator != null && navigator.CompareTo(range.End) <= 0)

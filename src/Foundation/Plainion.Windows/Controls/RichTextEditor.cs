@@ -77,7 +77,7 @@ namespace Plainion.Windows.Controls
 
             TextChanged -= OnTextChanged;
 
-            DocumentFacade.MakeHyperlinks(new TextRange(mySelectionStartPosition, mySelectionEndPosition));
+            DocumentFacade.TryMakeHyperlinks(new TextRange(mySelectionStartPosition, mySelectionEndPosition));
 
             TextChanged += OnTextChanged;
 
