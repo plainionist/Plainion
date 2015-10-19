@@ -18,7 +18,7 @@ namespace Plainion.Windows.Controls
             ContinueAfterMatch = true;
         }
 
-        public bool ContinueAfterMatch { get; private set; }
+        public bool ContinueAfterMatch { get; set; }
 
         public IReadOnlyCollection<TextElement> Results
         {
@@ -47,7 +47,7 @@ namespace Plainion.Windows.Controls
                     .SelectMany(x => x.Cells)
                     .SelectMany(x => x.Blocks))
                 {
-                    if (!TryMatch(inner)) return false;
+                    if (!Accept(inner)) return false;
                 }
 
                 return true;
@@ -73,7 +73,7 @@ namespace Plainion.Windows.Controls
             {
                 foreach (var inner in  ((List) block).ListItems.SelectMany(listItem => listItem.Blocks))
                 {
-                    if (!TryMatch(inner)) return false;
+                    if (!Accept(inner)) return false;
                 }
 
                 return true;

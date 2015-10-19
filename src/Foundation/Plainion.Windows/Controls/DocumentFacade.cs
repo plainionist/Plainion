@@ -9,43 +9,35 @@ namespace Plainion.Windows.Controls
 {
     static class DocumentFacade
     {
-        // Helper that returns true when passed property applies to Hyperlink only.
-        public static bool IsHyperlinkProperty(DependencyProperty dp)
+        public static void MakeHyperlinks(TextRange range)
         {
-            return dp == Hyperlink.CommandProperty ||
-                dp == Hyperlink.CommandParameterProperty ||
-                dp == Hyperlink.CommandTargetProperty ||
-                dp == Hyperlink.NavigateUriProperty ||
-                dp == Hyperlink.TargetNameProperty;
-        }
-
-        // Helper that returns true if passed caretPosition and backspacePosition cross a hyperlink end boundary
-        // (under the assumption that caretPosition and backSpacePosition are adjacent insertion positions).
-        public static bool IsHyperlinkBoundaryCrossed(TextPointer caretPosition, TextPointer backspacePosition, out Hyperlink backspacePositionHyperlink)
-        {
-            var caretPositionHyperlink = GetHyperlinkAncestor(caretPosition);
-            backspacePositionHyperlink = GetHyperlinkAncestor(backspacePosition);
-
-            return (caretPositionHyperlink == null && backspacePositionHyperlink != null) ||
-                (caretPositionHyperlink != null && backspacePositionHyperlink != null && caretPositionHyperlink != backspacePositionHyperlink);
-        }
-
-        // Helper that returns a Hyperlink ancestor of passed TextPointer.
-        private static Hyperlink GetHyperlinkAncestor(TextPointer position)
-        {
-            var parent = position.Parent as Inline;
-            while (parent != null && !(parent is Hyperlink))
+            var navigator = range.Start;
+            while (navigator != null && navigator.CompareTo(range.End) <= 0)
             {
-                parent = parent.Parent as Inline;
+                var wordRange = GetWordRange(navigator);
+                if (wordRange == null || wordRange.IsEmpty)
+                {
+                    // No more words in the document.
+                    break;
+                }
+
+                string wordText = wordRange.Text;
+                var url = TryCreateUrl(wordText);
+                if ( url !=null &&
+                    !IsInHyperlinkScope(wordRange.Start) &&
+                    !IsInHyperlinkScope(wordRange.End))
+                {
+                    var hyperlink = new Hyperlink(wordRange.Start, wordRange.End);
+                    hyperlink.NavigateUri = url;
+                    WeakEventManager<Hyperlink, RequestNavigateEventArgs>.AddHandler(hyperlink, "RequestNavigate", OnHyperlinkRequestNavigate);
+
+                    navigator = hyperlink.ElementEnd.GetNextInsertionPosition(LogicalDirection.Forward);
+                }
+                else
+                {
+                    navigator = wordRange.End.GetNextInsertionPosition(LogicalDirection.Forward);
+                }
             }
-
-            return parent as Hyperlink;
-        }
-
-        // Helper that returns true when passed TextPointer is within the scope of a Hyperlink element.
-        public static bool IsInHyperlinkScope(TextPointer position)
-        {
-            return GetHyperlinkAncestor(position) != null;
         }
 
         /// <summary>
@@ -56,7 +48,7 @@ namespace Plainion.Windows.Controls
         /// If this TextPointer is between two words, the following word range is returned.
         /// If this TextPointer is at trailing word boundary, the following word range is returned.
         /// </remarks>
-        public static TextRange GetWordRange(TextPointer position)
+        private static TextRange GetWordRange(TextPointer position)
         {
             TextRange wordRange = null;
             TextPointer wordStartPosition = null;
@@ -140,37 +132,24 @@ namespace Plainion.Windows.Controls
             return isAtWordBoundary;
         }
 
-        public static void MakeHyperlinks(TextRange range)
+        // Helper that returns true when passed TextPointer is within the scope of a Hyperlink element.
+        private static bool IsInHyperlinkScope(TextPointer position)
         {
-            var navigator = range.Start;
-            while (navigator != null && navigator.CompareTo(range.End) <= 0)
-            {
-                var wordRange = GetWordRange(navigator);
-                if (wordRange == null || wordRange.IsEmpty)
-                {
-                    // No more words in the document.
-                    break;
-                }
-
-                string wordText = wordRange.Text;
-                var url = TryCreateUrl(wordText);
-                if ( url !=null &&
-                    !IsInHyperlinkScope(wordRange.Start) &&
-                    !IsInHyperlinkScope(wordRange.End))
-                {
-                    var hyperlink = new Hyperlink(wordRange.Start, wordRange.End);
-                    hyperlink.NavigateUri = url;
-                    WeakEventManager<Hyperlink, RequestNavigateEventArgs>.AddHandler(hyperlink, "RequestNavigate", OnHyperlinkRequestNavigate);
-
-                    navigator = hyperlink.ElementEnd.GetNextInsertionPosition(LogicalDirection.Forward);
-                }
-                else
-                {
-                    navigator = wordRange.End.GetNextInsertionPosition(LogicalDirection.Forward);
-                }
-            }
+            return GetHyperlinkAncestor(position) != null;
         }
 
+        // Helper that returns a Hyperlink ancestor of passed TextPointer.
+        private static Hyperlink GetHyperlinkAncestor(TextPointer position)
+        {
+            var parent = position.Parent as Inline;
+            while (parent != null && !(parent is Hyperlink))
+            {
+                parent = parent.Parent as Inline;
+            }
+
+            return parent as Hyperlink;
+        }
+        
         private static void OnHyperlinkRequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             Process.Start(e.Uri.AbsoluteUri);
@@ -248,6 +227,27 @@ namespace Plainion.Windows.Controls
             hyperlink.SiblingInlines.Remove(hyperlink);
 
             return newCaretPosition;
+        }
+
+        // Helper that returns true if passed caretPosition and backspacePosition cross a hyperlink end boundary
+        // (under the assumption that caretPosition and backSpacePosition are adjacent insertion positions).
+        private static bool IsHyperlinkBoundaryCrossed(TextPointer caretPosition, TextPointer backspacePosition, out Hyperlink backspacePositionHyperlink)
+        {
+            var caretPositionHyperlink = GetHyperlinkAncestor(caretPosition);
+            backspacePositionHyperlink = GetHyperlinkAncestor(backspacePosition);
+
+            return (caretPositionHyperlink == null && backspacePositionHyperlink != null) ||
+                (caretPositionHyperlink != null && backspacePositionHyperlink != null && caretPositionHyperlink != backspacePositionHyperlink);
+        }
+        
+        // Helper that returns true when passed property applies to Hyperlink only.
+        private static bool IsHyperlinkProperty(DependencyProperty dp)
+        {
+            return dp == Hyperlink.CommandProperty ||
+                dp == Hyperlink.CommandParameterProperty ||
+                dp == Hyperlink.CommandTargetProperty ||
+                dp == Hyperlink.NavigateUriProperty ||
+                dp == Hyperlink.TargetNameProperty;
         }
     }
 }
