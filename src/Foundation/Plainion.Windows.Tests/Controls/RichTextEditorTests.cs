@@ -7,7 +7,6 @@ using Plainion.Windows.Controls;
 
 namespace Plainion.Windows.Tests.Controls
 {
-    // TODO: reduce hyperlink variations once DocumentFacade tests are in place
     [RequiresSTA]
     [TestFixture]
     class RichTextEditorTests
