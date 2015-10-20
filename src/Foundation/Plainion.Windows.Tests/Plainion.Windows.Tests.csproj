@@ -42,6 +42,7 @@
     <Compile Include="Controls\DocumentFacadeTests.cs" />
     <Compile Include="Controls\FakePresentationSource.cs" />
     <Compile Include="Controls\FlowDocumentVisitorTests.cs" />
+    <Compile Include="Controls\NotePadTests.cs" />
     <Compile Include="Controls\RichTextEditorTests.cs" />
     <Compile Include="Controls\UIElementExtensions.cs" />
     <Compile Include="Fakes\Model.cs" />

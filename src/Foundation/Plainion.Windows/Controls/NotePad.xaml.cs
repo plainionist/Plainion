@@ -18,11 +18,17 @@ namespace Plainion.Windows.Controls
         {
             Document = myEditor.Document;
             Document.FontFamily = new FontFamily("Arial");
-            Document.FontSize = 13;
+            Document.FontSize = 13d;
         }
 
         public static readonly DependencyProperty DocumentProperty = DependencyProperty.Register("Document",
-            typeof(FlowDocument), typeof(NotePad), new PropertyMetadata(null));
+            typeof(FlowDocument), typeof(NotePad), new PropertyMetadata(null, OnDocumentChanged));
+
+        private static void OnDocumentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var self = (NotePad)d;
+            self.myEditor.Document = self.Document;
+        }
 
         public FlowDocument Document
         {
