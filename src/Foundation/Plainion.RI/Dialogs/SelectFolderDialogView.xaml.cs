@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel.Composition;
-using System.Windows;
+using System.Windows.Controls;
 
-namespace Plainion.RI
+namespace Plainion.RI.Dialogs
 {
     [Export]
-    public partial class Shell : Window
+    public partial class SelectFolderDialogView : UserControl
     {
         [ImportingConstructor]
-        internal Shell( ShellViewModel viewModel )
+        internal SelectFolderDialogView( SelectFolderDialogViewModel viewModel )
         {
             InitializeComponent();
 

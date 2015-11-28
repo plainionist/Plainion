@@ -92,6 +92,7 @@
     </Compile>
     <Compile Include="Events\ApplicationReadyEvent.cs" />
     <Compile Include="Events\ApplicationShutdownEvent.cs" />
+    <Compile Include="Regions\StackPanelRegionAdapter.cs" />
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
