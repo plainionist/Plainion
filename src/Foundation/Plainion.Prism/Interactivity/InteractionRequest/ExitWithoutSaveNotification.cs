@@ -23,29 +23,13 @@ namespace Plainion.Prism.Interactivity.InteractionRequest
             Response = ResponseType.Cancel;
         }
 
-        public ResponseType Response
-        {
-            get;
-            private set;
-        }
+        public ResponseType Response { get; private set; }
 
-        public ICommand YesCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand YesCommand { get; private set; }
 
-        public ICommand NoCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand NoCommand { get; private set; }
 
-        public ICommand CancelCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand CancelCommand { get; private set; }
 
         private void OnConfirmed( ResponseType response )
         {
@@ -53,16 +37,8 @@ namespace Plainion.Prism.Interactivity.InteractionRequest
             FinishInteraction();
         }
 
-        public Action FinishInteraction
-        {
-            get;
-            set;
-        }
+        public Action FinishInteraction { get; set; }
 
-        public INotification Notification
-        {
-            get;
-            set;
-        }
+        public INotification Notification { get; set; }
     }
 }

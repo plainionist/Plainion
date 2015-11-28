@@ -8,5 +8,8 @@
         <TabItem Header="Dialogs">
             <StackPanel Orientation="Vertical" prism:RegionManager.RegionName="{x:Static l:RegionNames.Dialogs}"/>
         </TabItem>
+        <TabItem Header="InteractionRequests">
+            <StackPanel Orientation="Vertical" prism:RegionManager.RegionName="{x:Static l:RegionNames.InteractionRequests}"/>
+        </TabItem>
     </TabControl>
 </Window>

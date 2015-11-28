@@ -3,6 +3,7 @@ using Microsoft.Practices.Prism.MefExtensions.Modularity;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Plainion.RI.Dialogs;
+using Plainion.RI.InteractionRequests;
 
 namespace Plainion.RI
 {
@@ -15,6 +16,7 @@ namespace Plainion.RI
         public void Initialize()
         {
             RegionManager.RegisterViewWithRegion( RegionNames.Dialogs, typeof( SelectFolderDialogView ) );
+            RegionManager.RegisterViewWithRegion( RegionNames.InteractionRequests, typeof( DefaultConfirmationView ) );
         }
     }
 }
