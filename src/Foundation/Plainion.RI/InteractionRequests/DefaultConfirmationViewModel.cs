@@ -51,8 +51,8 @@ namespace Plainion.RI.InteractionRequests
         {
             var confirmation = new Confirmation();
             confirmation.Title = "Really?";
-            // we assume there is a DataTemplate somewhere which will "style" this content
-            confirmation.Content = new ConfirmationContent("Here goes the question, doesn't it?");
+            // TODO: unfort. i couldnt find a way to provide a DataTemplate for ConfirmationContent to the new window
+            confirmation.Content = new ConfirmationContent( "Here goes the question, doesn't it?" );
 
             ConfirmationRequest.Raise( confirmation, c => Response = c.Confirmed ? "yes" : "no" );
         }
