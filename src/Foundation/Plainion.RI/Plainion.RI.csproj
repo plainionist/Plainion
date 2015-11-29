@@ -84,9 +84,13 @@
     </Compile>
     <Compile Include="Dialogs\SelectFolderInteractionRequestViewModel.cs" />
     <Compile Include="Dialogs\SelectFolderDialogViewModel.cs" />
+    <Compile Include="InteractionRequests\RegionWithPopupWindowActionExtensionsView.xaml.cs">
+      <DependentUpon>RegionWithPopupWindowActionExtensionsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InteractionRequests\RegionOnPopupWindowContentControlView.xaml.cs">
       <DependentUpon>RegionOnPopupWindowContentControlView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InteractionRequests\RegionWithPopupWindowActionExtensionsViewModel.cs" />
     <Compile Include="InteractionRequests\RegionOnPopupWindowContentControlViewModel.cs" />
     <Compile Include="InteractionRequests\RegionOnPopupWindowActionView.xaml.cs">
       <DependentUpon>RegionOnPopupWindowActionView.xaml</DependentUpon>
@@ -122,6 +126,10 @@
     <Page Include="Dialogs\SelectFolderDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InteractionRequests\RegionWithPopupWindowActionExtensionsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="InteractionRequests\RegionOnPopupWindowContentControlView.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -25,10 +25,12 @@ namespace Plainion.RI
             RegionManager.RegisterViewWithRegion( RegionNames.InteractionRequests, typeof( RegionOnContentControlView ) );
             RegionManager.RegisterViewWithRegion( RegionNames.InteractionRequests, typeof( RegionOnPopupWindowActionView ) );
             RegionManager.RegisterViewWithRegion( RegionNames.InteractionRequests, typeof( RegionOnPopupWindowContentControlView ) );
+            RegionManager.RegisterViewWithRegion( RegionNames.InteractionRequests, typeof( RegionWithPopupWindowActionExtensionsView ) );
 
             RegionManager.RegisterViewWithRegion( "RegionOnContentControlView", typeof( ComplexDialog ) );
             RegionManager.RegisterViewWithRegion( "RegionOnPopupWindowActionView", typeof( ComplexDialog ) );
             RegionManager.RegisterViewWithRegion( "RegionOnPopupWindowContentControlView", typeof( ComplexDialog ) );
+            RegionManager.RegisterViewWithRegion( "RegionWithPopupWindowActionExtensionsView", typeof( ComplexDialog ) );
         }
     }
 }
