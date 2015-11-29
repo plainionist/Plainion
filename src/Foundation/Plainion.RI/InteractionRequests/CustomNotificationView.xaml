@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="Plainion.RI.InteractionRequests.CustomNotificationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:prism="http://www.codeplex.com/prism"
+             xmlns:l="clr-namespace:Plainion.RI.InteractionRequests"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="600">
+    <i:Interaction.Triggers>
+        <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmationRequest, Mode=OneWay}">
+            <prism:PopupWindowAction>
+                <prism:PopupWindowAction.WindowContent>
+                    <!-- Usually the actual content would be put into separate UserControl/File-->
+                    <DockPanel LastChildFill="True">
+                        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="3" FlowDirection="RightToLeft">
+                            <Button Content="Cancel" Margin="3,3,3,3" MinWidth="75" Command="{Binding CancelCommand}"/>
+                            <Button Content="No" Margin="3,3,3,3" MinWidth="75" Command="{Binding NoCommand}"/>
+                            <Button Content="Yes" Margin="3,3,3,3" MinWidth="75" Command="{Binding YesCommand}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="pack://application:,,,/Plainion.Prism;component/Images/Warning.png" Width="38" Height="38" Margin="10,0,0,0"/>
+                            <TextBlock DockPanel.Dock="Top" Text="{Binding Question}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25,0,0,0"/>
+                        </StackPanel>
+                    </DockPanel>
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    
+    <GroupBox Header="Custom confirmation (custom view, custom notification as viewmodel)">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Content="Show confirmation" Command="{Binding ShowConfirmationCommand}" Margin="5" Padding="3"/>
+            <TextBlock Grid.Column="2" Text="Response" Margin="5" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="3" IsReadOnly="True" Text="{Binding Response}" Margin="5"/>
+        </Grid>
+    </GroupBox>
+</UserControl>

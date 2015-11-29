@@ -81,15 +81,23 @@
     </Compile>
     <Compile Include="Dialogs\SelectFolderDialogViewModel.cs" />
     <Compile Include="InteractionRequests\ConfirmationContent.cs" />
+    <Compile Include="InteractionRequests\CustomNotificationView.xaml.cs">
+      <DependentUpon>CustomNotificationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InteractionRequests\DefaultConfirmationView.xaml.cs">
       <DependentUpon>DefaultConfirmationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InteractionRequests\CustomNotificationViewModel.cs" />
     <Compile Include="InteractionRequests\DefaultConfirmationViewModel.cs" />
     <Compile Include="RegionNames.cs" />
     <Compile Include="ShellViewModel.cs" />
     <Page Include="Dialogs\SelectFolderDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InteractionRequests\CustomNotificationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="InteractionRequests\DefaultConfirmationView.xaml">
       <SubType>Designer</SubType>

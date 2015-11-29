@@ -1,7 +1,5 @@
-﻿using System;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using System.Windows.Controls;
-using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using Microsoft.Practices.Prism.Commands;
@@ -13,6 +11,9 @@ namespace Plainion.RI.InteractionRequests
     /// <summary>
     /// This sample does not provide any "WindowContent" to the PopupWindowAction. PopupWindowAction will then create a "default" window and 
     /// assign the notification as DataContext. The default window contains a ContentControl which binds INotification.Content to its Content property.
+    /// <para>
+    /// This approach works well for simple notifications and simple yes/no confirmations to the user.
+    /// </para>
     /// </summary>
     [Export]
     class DefaultConfirmationViewModel : BindableBase

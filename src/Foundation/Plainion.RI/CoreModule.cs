@@ -16,7 +16,9 @@ namespace Plainion.RI
         public void Initialize()
         {
             RegionManager.RegisterViewWithRegion( RegionNames.Dialogs, typeof( SelectFolderDialogView ) );
+
             RegionManager.RegisterViewWithRegion( RegionNames.InteractionRequests, typeof( DefaultConfirmationView ) );
+            RegionManager.RegisterViewWithRegion( RegionNames.InteractionRequests, typeof( CustomNotificationView ) );
         }
     }
 }
