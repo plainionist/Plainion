@@ -27,7 +27,7 @@ namespace Plainion.RI
             base.ConfigureAggregateCatalog();
 
             AggregateCatalog.Catalogs.Add( new AssemblyCatalog( GetType().Assembly ) );
-            AggregateCatalog.Catalogs.Add( new AssemblyCatalog( typeof( StackPanelRegionAdapter ).Assembly ) );
+            AggregateCatalog.Catalogs.Add( new TypeCatalog( typeof( StackPanelRegionAdapter ) ) );
         }
 
         protected override CompositionContainer CreateContainer()

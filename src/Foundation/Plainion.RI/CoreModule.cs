@@ -19,6 +19,7 @@ namespace Plainion.RI
 
             RegionManager.RegisterViewWithRegion( RegionNames.InteractionRequests, typeof( DefaultConfirmationView ) );
             RegionManager.RegisterViewWithRegion( RegionNames.InteractionRequests, typeof( CustomNotificationView ) );
+            RegionManager.RegisterViewWithRegion( RegionNames.InteractionRequests, typeof( ComplexCustomViewView) );
         }
     }
 }

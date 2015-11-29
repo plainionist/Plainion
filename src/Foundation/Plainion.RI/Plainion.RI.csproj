@@ -80,10 +80,16 @@
       <DependentUpon>SelectFolderDialogView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\SelectFolderDialogViewModel.cs" />
-    <Compile Include="InteractionRequests\ConfirmationContent.cs" />
+    <Compile Include="InteractionRequests\ComplexCustomView_DialogView.xaml.cs">
+      <DependentUpon>ComplexCustomView_DialogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InteractionRequests\ComplexCustomViewView.xaml.cs">
+      <DependentUpon>ComplexCustomViewView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InteractionRequests\CustomNotificationView.xaml.cs">
       <DependentUpon>CustomNotificationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InteractionRequests\ComplexCustomViewViewModel.cs" />
     <Compile Include="InteractionRequests\DefaultConfirmationView.xaml.cs">
       <DependentUpon>DefaultConfirmationView.xaml</DependentUpon>
     </Compile>
@@ -92,6 +98,14 @@
     <Compile Include="RegionNames.cs" />
     <Compile Include="ShellViewModel.cs" />
     <Page Include="Dialogs\SelectFolderDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InteractionRequests\ComplexCustomViewView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="InteractionRequests\ComplexCustomView_DialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

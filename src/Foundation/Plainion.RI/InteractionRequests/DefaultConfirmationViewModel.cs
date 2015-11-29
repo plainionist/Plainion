@@ -66,4 +66,14 @@ namespace Plainion.RI.InteractionRequests
             set { SetProperty( ref myResponse, value ); }
         }
     }
+
+    class ConfirmationContent
+    {
+        public ConfirmationContent( string question )
+        {
+            Question = question;
+        }
+
+        public string Question { get; private set; }
+    }
 }
