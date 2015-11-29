@@ -40,11 +40,9 @@ namespace Plainion.RI.InteractionRequests
             var notification = new Notification();
             notification.Title = "Really?";
 
-            // that approach would fail for 2 reasons
-            // 1. the viewmodel has to handle the case that it is bound to the view after the view is created. that means also the commands have 
-            //    to send "PropertyChanged". (see sample with apply button)
-            // 2. the PopupWindowAction does not "know" about the viewmodel so it cannot satisfy IInteractionRequestAware
-            //    (so the buttons canot work because FinishInteraction action is not supplied)
+            // DOES NOT WORK
+            // - we fail to update the DataContext to Notification.Content without logic in code behind of view
+            // - we fail to update the DataContext of the view in a way that PopupWindowAction considers viewmodel for check of IInteractionRequestAware
             notification.Content = new ComplexCustomView_DialogViewModel( Model );
 
             ConfirmationRequest.Raise( notification, n => { } );
@@ -70,9 +68,6 @@ namespace Plainion.RI.InteractionRequests
             ApplyCommand = new DelegateCommand( OnApply );
             OkCommand = new DelegateCommand( OnOk );
             CancelCommand = new DelegateCommand( OnCancel );
-
-            // would have to be done for all commands to ensure that view gets updated when viewmodel is added later
-            OnPropertyChanged( () => ApplyCommand );
         }
 
         public ICommand ApplyCommand { get; private set; }

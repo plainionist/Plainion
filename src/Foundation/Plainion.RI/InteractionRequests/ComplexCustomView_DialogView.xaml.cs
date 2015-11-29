@@ -17,17 +17,6 @@ namespace Plainion.RI.InteractionRequests
             // cannot just create it here
         }
 
-        protected override void OnVisualParentChanged( DependencyObject oldParent )
-        {
-            base.OnVisualParentChanged( oldParent );
-
-            var notification = ( ( FrameworkElement )Parent ).DataContext as INotification;
-            if( notification != null )
-            {
-                DataContext = notification.Content;
-            }
-        }
-
         /// <summary>
         /// Usually of course we would have only one constructor but in order to keep the sample small ...
         /// </summary>
