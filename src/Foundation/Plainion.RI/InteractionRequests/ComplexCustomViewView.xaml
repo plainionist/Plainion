@@ -6,6 +6,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:prism="http://www.codeplex.com/prism"
              xmlns:l="clr-namespace:Plainion.RI.InteractionRequests"
+             xmlns:dialogs="clr-namespace:Plainion.RI.InteractionRequests.Dialogs"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="600">
     <i:Interaction.Triggers>
@@ -13,7 +14,7 @@
             <prism:PopupWindowAction>
                 <prism:PopupWindowAction.WindowContent>
                     <!-- set INotification.Content as DataContext to our custom view - unfortunatelly that does not work :( -->
-                    <l:ComplexCustomView_DialogView DataContext="{Binding Content}"/>
+                    <dialogs:ComplexDialog DataContext="{Binding Content}"/>
                 </prism:PopupWindowAction.WindowContent>
             </prism:PopupWindowAction>
         </prism:InteractionRequestTrigger>

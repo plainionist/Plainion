@@ -1,9 +1,9 @@
-﻿using System;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Mvvm;
+using Plainion.RI.InteractionRequests.Dialogs;
 
 namespace Plainion.RI.InteractionRequests
 {
@@ -41,68 +41,11 @@ namespace Plainion.RI.InteractionRequests
             // - we fail to update the DataContext to Notification.Content without logic in code behind of view
             // - we fail to update the DataContext of the view in a way that PopupWindowAction considers viewmodel for check of IInteractionRequestAware
             // Looks like binding inside PopupWindowAction does not work
-            notification.Content = new ComplexCustomView_DialogViewModel( Model );
+            notification.Content = new ComplexDialogModel( Model );
 
             ConfirmationRequest.Raise( notification, n => { } );
         }
 
         public InteractionRequest<INotification> ConfirmationRequest { get; private set; }
-    }
-
-    [Export]
-    public class ComplexCustomView_DialogViewModel : BindableBase, IInteractionRequestAware
-    {
-        private Model myModel;
-
-        /// <summary>
-        /// Usually we can assume that for complex UI we have a complex ViewModel with dependencies.
-        /// Ideally we let MEF create it in order to resolve dependencies automatically.
-        /// </summary>
-        [ImportingConstructor]
-        public ComplexCustomView_DialogViewModel( Model model )
-        {
-            myModel = model;
-
-            ApplyCommand = new DelegateCommand( OnApply );
-            OkCommand = new DelegateCommand( OnOk );
-            CancelCommand = new DelegateCommand( OnCancel );
-        }
-
-        public ICommand ApplyCommand { get; private set; }
-
-        private void OnApply()
-        {
-            myModel.JustMySampleState = "Apply";
-        }
-
-        public ICommand OkCommand { get; private set; }
-
-        private void OnOk()
-        {
-            myModel.JustMySampleState = "Ok";
-            FinishInteraction();
-        }
-
-        public ICommand CancelCommand { get; private set; }
-
-        private void OnCancel()
-        {
-            FinishInteraction();
-        }
-
-        public Action FinishInteraction { get; set; }
-
-        public INotification Notification { get; set; }
-    }
-
-    public class Model : BindableBase
-    {
-        private string myJustMySampleState;
-
-        public string JustMySampleState
-        {
-            get { return myJustMySampleState; }
-            set { SetProperty( ref myJustMySampleState, value ); }
-        }
     }
 }

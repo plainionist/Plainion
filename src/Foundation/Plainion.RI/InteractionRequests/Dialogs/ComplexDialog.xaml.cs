@@ -4,12 +4,12 @@ using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
-namespace Plainion.RI.InteractionRequests
+namespace Plainion.RI.InteractionRequests.Dialogs
 {
     [Export]
-    public partial class ComplexCustomView_DialogView : UserControl
+    public partial class ComplexDialog : UserControl
     {
-        public ComplexCustomView_DialogView()
+        public ComplexDialog()
         {
             InitializeComponent();
 
@@ -21,7 +21,7 @@ namespace Plainion.RI.InteractionRequests
         /// Usually of course we would have only one constructor but in order to keep the sample small ...
         /// </summary>
         [ImportingConstructor]
-        internal ComplexCustomView_DialogView( ComplexCustomView_DialogViewModel viewModel )
+        internal ComplexDialog( ComplexDialogModel viewModel )
         {
             InitializeComponent();
 

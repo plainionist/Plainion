@@ -84,12 +84,13 @@
     </Compile>
     <Compile Include="Dialogs\SelectFolderInteractionRequestViewModel.cs" />
     <Compile Include="Dialogs\SelectFolderDialogViewModel.cs" />
-    <Compile Include="InteractionRequests\ComplexCustomView_DialogView.xaml.cs">
-      <DependentUpon>ComplexCustomView_DialogView.xaml</DependentUpon>
+    <Compile Include="InteractionRequests\Dialogs\ComplexDialog.xaml.cs">
+      <DependentUpon>ComplexDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="InteractionRequests\ComplexCustomViewView.xaml.cs">
       <DependentUpon>ComplexCustomViewView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InteractionRequests\Dialogs\ComplexDialogModel.cs" />
     <Compile Include="InteractionRequests\CustomNotificationView.xaml.cs">
       <DependentUpon>CustomNotificationView.xaml</DependentUpon>
     </Compile>
@@ -99,6 +100,7 @@
     </Compile>
     <Compile Include="InteractionRequests\CustomNotificationViewModel.cs" />
     <Compile Include="InteractionRequests\DefaultConfirmationViewModel.cs" />
+    <Compile Include="InteractionRequests\Model.cs" />
     <Compile Include="RegionNames.cs" />
     <Compile Include="ShellViewModel.cs" />
     <Page Include="Dialogs\SelectFolderInteractionRequestView.xaml">
@@ -113,7 +115,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="InteractionRequests\ComplexCustomView_DialogView.xaml">
+    <Page Include="InteractionRequests\Dialogs\ComplexDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
