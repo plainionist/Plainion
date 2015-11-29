@@ -17,10 +17,10 @@ namespace Plainion.RI.InteractionRequests
     [Export]
     class ComplexCustomViewViewModel : BindableBase
     {
-        public ComplexCustomViewViewModel()
+        [ImportingConstructor]
+        public ComplexCustomViewViewModel( Model model )
         {
-            // of course in real application we would NOT create the model here but import it from MEF
-            Model = new Model();
+            Model = model;
 
             ShowConfirmationCommand = new DelegateCommand( OnShowConfirmation );
             ConfirmationRequest = new InteractionRequest<INotification>();

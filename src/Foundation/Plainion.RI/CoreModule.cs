@@ -23,8 +23,10 @@ namespace Plainion.RI
             RegionManager.RegisterViewWithRegion( RegionNames.InteractionRequests, typeof( CustomNotificationView ) );
             RegionManager.RegisterViewWithRegion( RegionNames.InteractionRequests, typeof( ComplexCustomViewView ) );
             RegionManager.RegisterViewWithRegion( RegionNames.InteractionRequests, typeof( RegionOnContentControlView ) );
+            RegionManager.RegisterViewWithRegion( RegionNames.InteractionRequests, typeof( RegionOnPopupWindowActionView ) );
 
             RegionManager.RegisterViewWithRegion( "RegionOnContentControlView", typeof( ComplexDialog ) );
+            RegionManager.RegisterViewWithRegion( "RegionOnPopupWindowActionView", typeof( ComplexDialog ) );
         }
     }
 }

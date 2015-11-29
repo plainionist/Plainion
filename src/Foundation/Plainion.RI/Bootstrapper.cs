@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.Composition.Hosting;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Practices.Prism.Interactivity;
 using Microsoft.Practices.Prism.MefExtensions;
 using Microsoft.Practices.Prism.Regions;
+using Plainion.Prism.Interactivity;
 using Plainion.Prism.Regions;
 
 namespace Plainion.RI
@@ -28,6 +30,9 @@ namespace Plainion.RI
 
             AggregateCatalog.Catalogs.Add( new AssemblyCatalog( GetType().Assembly ) );
             AggregateCatalog.Catalogs.Add( new TypeCatalog( typeof( StackPanelRegionAdapter ) ) );
+
+            AggregateCatalog.Catalogs.Add( new TypeCatalog( typeof( PopupWindowActionRegionAdapter ) ) );
+            AggregateCatalog.Catalogs.Add( new TypeCatalog( typeof( KeepAliveDelayedRegionCreationBehavior ) ) );
         }
 
         protected override CompositionContainer CreateContainer()
@@ -40,6 +45,7 @@ namespace Plainion.RI
             var mappings = base.ConfigureRegionAdapterMappings();
 
             mappings.RegisterMapping( typeof( StackPanel ), Container.GetExportedValue<StackPanelRegionAdapter>() );
+            mappings.RegisterMapping( typeof( PopupWindowAction ), Container.GetExportedValue<PopupWindowActionRegionAdapter>() );
 
             return mappings;
         }
@@ -47,7 +53,7 @@ namespace Plainion.RI
         public override void Run( bool runWithDefaultConfiguration )
         {
             base.Run( runWithDefaultConfiguration );
-
+            
             Application.Current.Exit += OnShutdown;
         }
 
