@@ -7,7 +7,7 @@ using Microsoft.Practices.Prism.Mvvm;
 
 namespace Plainion.RI.InteractionRequests.Dialogs
 {
-    [Export]
+    [Export, PartCreationPolicy( CreationPolicy.NonShared )]
     public class ComplexDialogModel : BindableBase, IInteractionRequestAware
     {
         private Model myModel;

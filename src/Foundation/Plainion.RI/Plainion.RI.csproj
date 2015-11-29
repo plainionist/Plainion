@@ -84,6 +84,10 @@
     </Compile>
     <Compile Include="Dialogs\SelectFolderInteractionRequestViewModel.cs" />
     <Compile Include="Dialogs\SelectFolderDialogViewModel.cs" />
+    <Compile Include="InteractionRequests\RegionOnContentControlView.xaml.cs">
+      <DependentUpon>RegionOnContentControlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InteractionRequests\RegionOnContentControlViewModel.cs" />
     <Compile Include="InteractionRequests\Dialogs\ComplexDialog.xaml.cs">
       <DependentUpon>ComplexDialog.xaml</DependentUpon>
     </Compile>
@@ -110,6 +114,10 @@
     <Page Include="Dialogs\SelectFolderDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InteractionRequests\RegionOnContentControlView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="InteractionRequests\ComplexCustomViewView.xaml">
       <Generator>MSBuild:Compile</Generator>

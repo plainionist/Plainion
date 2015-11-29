@@ -4,6 +4,7 @@ using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Plainion.RI.Dialogs;
 using Plainion.RI.InteractionRequests;
+using Plainion.RI.InteractionRequests.Dialogs;
 
 namespace Plainion.RI
 {
@@ -20,7 +21,10 @@ namespace Plainion.RI
 
             RegionManager.RegisterViewWithRegion( RegionNames.InteractionRequests, typeof( DefaultConfirmationView ) );
             RegionManager.RegisterViewWithRegion( RegionNames.InteractionRequests, typeof( CustomNotificationView ) );
-            RegionManager.RegisterViewWithRegion( RegionNames.InteractionRequests, typeof( ComplexCustomViewView) );
+            RegionManager.RegisterViewWithRegion( RegionNames.InteractionRequests, typeof( ComplexCustomViewView ) );
+            RegionManager.RegisterViewWithRegion( RegionNames.InteractionRequests, typeof( RegionOnContentControlView ) );
+
+            RegionManager.RegisterViewWithRegion( "RegionOnContentControlView", typeof( ComplexDialog ) );
         }
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
 namespace Plainion.RI.InteractionRequests.Dialogs
 {
-    [Export]
+    [Export,PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class ComplexDialog : UserControl
     {
         public ComplexDialog()
