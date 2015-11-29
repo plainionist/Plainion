@@ -45,6 +45,7 @@ namespace Plainion.RI.InteractionRequests.Dialogs
 
         private void OnCancel()
         {
+            myModel.JustMySampleState = "Cancel";
             FinishInteraction();
         }
 
