@@ -1,9 +1,6 @@
 ﻿using System;
 using System.ComponentModel.Composition;
-using System.Windows.Controls;
-using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Media;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Mvvm;
@@ -43,6 +40,7 @@ namespace Plainion.RI.InteractionRequests
             // DOES NOT WORK
             // - we fail to update the DataContext to Notification.Content without logic in code behind of view
             // - we fail to update the DataContext of the view in a way that PopupWindowAction considers viewmodel for check of IInteractionRequestAware
+            // Looks like binding inside PopupWindowAction does not work
             notification.Content = new ComplexCustomView_DialogViewModel( Model );
 
             ConfirmationRequest.Raise( notification, n => { } );

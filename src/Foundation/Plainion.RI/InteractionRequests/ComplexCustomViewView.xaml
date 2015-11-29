@@ -12,8 +12,8 @@
         <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmationRequest, Mode=OneWay}">
             <prism:PopupWindowAction>
                 <prism:PopupWindowAction.WindowContent>
-                    <!-- set INotification.Content as DataContext to our custom view -->
-                    <l:ComplexCustomView_DialogView/>
+                    <!-- set INotification.Content as DataContext to our custom view - unfortunatelly that does not work :( -->
+                    <l:ComplexCustomView_DialogView DataContext="{Binding Content}"/>
                 </prism:PopupWindowAction.WindowContent>
             </prism:PopupWindowAction>
         </prism:InteractionRequestTrigger>
@@ -27,9 +27,19 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Content="Show confirmation" Command="{Binding ShowConfirmationCommand}" Margin="5" Padding="3"/>
-            <TextBlock Grid.Column="2" Text="Response" Margin="5" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="3" IsReadOnly="True" Text="{Binding Model.JustMySampleState}" Margin="5"/>
+            <Button Grid.Column="0" Command="{Binding ShowConfirmationCommand}" Margin="5" Padding="3">
+                <Button.Content>
+                    <TextBlock TextAlignment="Center">
+                        <Run>Show confirmation</Run>
+                        <LineBreak/>
+                        <Run>(INotification.Content as viewmodel,</Run>
+                        <LineBreak/>
+                        <Run>does NOT work)</Run>
+                    </TextBlock>
+                </Button.Content>
+            </Button>
+            <TextBlock Grid.Column="1" Text="Response" Margin="5" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="2" IsReadOnly="True" Text="{Binding Model.JustMySampleState}" Margin="5"/>
         </Grid>
     </GroupBox>
 </UserControl>
