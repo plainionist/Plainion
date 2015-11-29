@@ -20,8 +20,8 @@
             <prism:PopupWindowAction/>
         </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
-    
-    <GroupBox Header="Default confirmation (no view, no viewmodel)">
+
+    <GroupBox Header="Default confirmation (no view, no viewmodel)" BorderBrush="Black">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>

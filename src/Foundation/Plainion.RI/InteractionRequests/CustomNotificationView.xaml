@@ -28,8 +28,8 @@
             </prism:PopupWindowAction>
         </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
-    
-    <GroupBox Header="Custom confirmation (custom view, custom notification as viewmodel)">
+
+    <GroupBox Header="Custom confirmation (custom view, custom notification as viewmodel)" BorderBrush="Black">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>

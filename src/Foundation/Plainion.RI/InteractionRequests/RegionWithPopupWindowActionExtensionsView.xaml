@@ -16,7 +16,7 @@
         </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
 
-    <GroupBox Header="Region using PopupWindowActionExtensions (view with custom viewmodel)">
+    <GroupBox Header="Region using PopupWindowActionExtensions (view with custom viewmodel)" BorderBrush="Black">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>

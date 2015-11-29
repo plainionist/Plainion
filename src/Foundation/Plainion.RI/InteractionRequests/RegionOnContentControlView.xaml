@@ -18,8 +18,8 @@
             </prism:PopupWindowAction>
         </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
-    
-    <GroupBox Header="Region on ContentControl (view with custom viewmodel)">
+
+    <GroupBox Header="Region on ContentControl (view with custom viewmodel)" BorderBrush="Black">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>

@@ -6,24 +6,28 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:prism="http://www.codeplex.com/prism"
              xmlns:pn="http://github.com/ronin4net/plainion"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d" d:DesignWidth="300">
     <i:Interaction.Triggers>
         <prism:InteractionRequestTrigger SourceObject="{Binding SelectFolderRequest, Mode=OneWay}">
             <pn:PopupCommonDialogAction FileDialogType="{x:Type pn:SelectFolderDialog}"/>
         </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
-    <GroupBox Header="SelectFolderDialog (with InteractionRequest)">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+    <GroupBox Header="SelectFolderDialog (with InteractionRequest)" BorderBrush="Black">
+        <StackPanel Orientation="Vertical">
+            <TextBlock Grid.Column="0" TextWrapping="Wrap" Margin="5">
+                Opens SelectFolderDialog using InteractionRequest and PopupCommonDialogAction.
+            </TextBlock>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Content="Select folder ..." Command="{Binding SelectFolderCommand}" Margin="5" Padding="3"/>
-            <TextBlock Grid.Column="1" Text="Selected folder" Margin="5" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="2" IsReadOnly="True" Text="{Binding SelectedFolder}" Margin="5"/>
-        </Grid>
+                <Button Grid.Column="0" Content="Select folder ..." Command="{Binding SelectFolderCommand}" Margin="5" Padding="3"/>
+                <TextBlock Grid.Column="1" Text="Selected folder" Margin="5" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="2" IsReadOnly="True" Text="{Binding SelectedFolder}" Margin="5"/>
+            </Grid>
+        </StackPanel>
     </GroupBox>
 </UserControl>
