@@ -79,8 +79,9 @@
     <Compile Include="Interactivity\InteractionRequest\IPrintRequestAware.cs" />
     <Compile Include="Interactivity\InteractionRequest\OpenFileDialogNotification.cs" />
     <Compile Include="Interactivity\InteractionRequest\SaveFileDialogNotification.cs" />
+    <Compile Include="Interactivity\InteractionRequest\SelectFolderDialogNotification.cs" />
     <Compile Include="Interactivity\KeepAliveDelayedRegionCreationBehavior.cs" />
-    <Compile Include="Interactivity\PopupFileDialogAction.cs" />
+    <Compile Include="Interactivity\PopupCommonDialogAction.cs" />
     <Compile Include="Interactivity\PopupPrintDialogAction.cs" />
     <Compile Include="Interactivity\PopupViewAction.cs" />
     <Compile Include="Interactivity\PopupWindowActionRegionAdapter.cs" />

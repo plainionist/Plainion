@@ -16,10 +16,10 @@
             </pn:PopupViewAction>
         </prism:InteractionRequestTrigger>
         <prism:InteractionRequestTrigger SourceObject="{Binding ProjectLifecycleViewModel.OpenFileRequest, Mode=OneWay}">
-            <pn:PopupFileDialogAction FileDialogType="{x:Type win32:OpenFileDialog}"/>
+            <pn:PopupCommonDialogAction FileDialogType="{x:Type win32:OpenFileDialog}"/>
         </prism:InteractionRequestTrigger>
         <prism:InteractionRequestTrigger SourceObject="{Binding ProjectLifecycleViewModel.SaveFileRequest, Mode=OneWay}">
-            <pn:PopupFileDialogAction FileDialogType="{x:Type win32:SaveFileDialog}"/>
+            <pn:PopupCommonDialogAction FileDialogType="{x:Type win32:SaveFileDialog}"/>
         </prism:InteractionRequestTrigger>
     </pn:Triggers>
 

@@ -7,17 +7,17 @@ using Microsoft.Win32;
 
 namespace Plainion.Prism.Interactivity
 {
-    public class PopupFileDialogAction : TriggerAction<FrameworkElement>
+    public class PopupCommonDialogAction : TriggerAction<FrameworkElement>
     {
         public static readonly DependencyProperty FileDialogTypeProperty =
             DependencyProperty.Register(
                 "FileDialogType",
                 typeof( Type ),
-                typeof( PopupFileDialogAction ),
+                typeof( PopupCommonDialogAction ),
                 new PropertyMetadata( null ) );
 
         /// <summary>
-        /// Microsoft.Win32.OpenFileDialog or Microsoft.Win32.SaveFileDialog
+        /// Some derived type of Microsoft.Win32.CommonDialog e.g. Microsoft.Win32.OpenFileDialog or Microsoft.Win32.SaveFileDialog
         /// </summary>
         public Type FileDialogType
         {
@@ -38,7 +38,7 @@ namespace Plainion.Prism.Interactivity
                 throw new ArgumentException( "FileDialogType not set" );
             }
 
-            var dialog = ( FileDialog )Activator.CreateInstance( FileDialogType );
+            var dialog = ( CommonDialog )Activator.CreateInstance( FileDialogType );
 
             // bind from ViewModel to View
             foreach( var prop in args.Context.GetType().GetProperties() )
