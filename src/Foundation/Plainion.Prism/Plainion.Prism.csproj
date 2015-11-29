@@ -85,6 +85,7 @@
     <Compile Include="Interactivity\PopupPrintDialogAction.cs" />
     <Compile Include="Interactivity\PopupViewAction.cs" />
     <Compile Include="Interactivity\PopupWindowActionRegionAdapter.cs" />
+    <Compile Include="Interactivity\PopupWindowContentControl.cs" />
     <Compile Include="Mvvm\Severity.cs" />
     <Compile Include="Mvvm\ValidatableBindableBase.cs" />
     <Compile Include="Mvvm\ValidationFailure.cs" />
