@@ -4,10 +4,10 @@ using System.Windows.Controls;
 namespace Plainion.RI.InteractionRequests
 {
     [Export]
-    public partial class DefaultConfirmationView : UserControl
+    public partial class DefaultWindowWithViewAsContentView : UserControl
     {
         [ImportingConstructor]
-        internal DefaultConfirmationView(DefaultConfirmationViewModel viewModel)
+        internal DefaultWindowWithViewAsContentView( DefaultWindowWithViewAsContentViewModel viewModel )
         {
             InitializeComponent();
 

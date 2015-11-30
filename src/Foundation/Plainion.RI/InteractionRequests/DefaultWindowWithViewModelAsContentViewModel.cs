@@ -16,39 +16,19 @@ namespace Plainion.RI.InteractionRequests
     /// </para>
     /// </summary>
     [Export]
-    class DefaultConfirmationViewModel : BindableBase
+    class DefaultWindowWithViewModelAsContentViewModel : BindableBase
     {
         private string myResponse;
 
-        public DefaultConfirmationViewModel()
+        public DefaultWindowWithViewModelAsContentViewModel()
         {
-            ShowConfirmationViewCommand = new DelegateCommand( OnShowConfirmationView );
-            ShowConfirmationViewModelCommand = new DelegateCommand( OnShowConfirmationViewModel );
+            ShowConfirmationCommand = new DelegateCommand( OnShowConfirmation );
             ConfirmationRequest = new InteractionRequest<IConfirmation>();
         }
 
-        public ICommand ShowConfirmationViewCommand { get; private set; }
+        public ICommand ShowConfirmationCommand { get; private set; }
 
-        private void OnShowConfirmationView()
-        {
-            var confirmation = new Confirmation();
-            confirmation.Title = "Really?";
-
-            // applying "view" elements directly here wouldnt be the prefered approach but at least it is simple
-            confirmation.Content = new Border
-            {
-                BorderBrush = Brushes.Green,
-                BorderThickness = new System.Windows.Thickness( 2 ),
-                Padding = new System.Windows.Thickness( 10 ),
-                Child = new TextBlock { Text = "Here goes the question, doesn't it?" }
-            };
-
-            ConfirmationRequest.Raise( confirmation, c => Response = c.Confirmed ? "yes" : "no" );
-        }
-
-        public ICommand ShowConfirmationViewModelCommand { get; private set; }
-
-        private void OnShowConfirmationViewModel()
+        private void OnShowConfirmation()
         {
             var confirmation = new Confirmation();
             confirmation.Title = "Really?";

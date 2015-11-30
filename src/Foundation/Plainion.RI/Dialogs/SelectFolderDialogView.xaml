@@ -4,9 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" d:DesignWidth="300">
-    <GroupBox Header="SelectFolderDialog" BorderBrush="Black">
+    <GroupBox Header="SelectFolderDialog (ShowDialog())" BorderBrush="Black">
         <StackPanel Orientation="Vertical">
-            <TextBlock Grid.Column="0" TextWrapping="Wrap" Margin="5">
+            <TextBlock TextWrapping="Wrap" Margin="5">
                 Opens SelectFolderDialog directly from ViewModel via ShowDialog(). Not the prefered solution as this creates
                 dependencies in ViewModel to View but at least it is simple.
             </TextBlock>

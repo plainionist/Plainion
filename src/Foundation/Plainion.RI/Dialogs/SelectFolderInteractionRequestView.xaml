@@ -14,8 +14,9 @@
     </i:Interaction.Triggers>
     <GroupBox Header="SelectFolderDialog (with InteractionRequest)" BorderBrush="Black">
         <StackPanel Orientation="Vertical">
-            <TextBlock Grid.Column="0" TextWrapping="Wrap" Margin="5">
-                Opens SelectFolderDialog using InteractionRequest and PopupCommonDialogAction.
+            <TextBlock TextWrapping="Wrap" Margin="5">
+                Opens SelectFolderDialog using InteractionRequest, PopupCommonDialogAction and SelectFolderDialogNotification.
+                Slightly more complex due to usage of InteractionRequest as abstraction but keeps ViewModel independent of View.
             </TextBlock>
             <Grid>
                 <Grid.ColumnDefinitions>

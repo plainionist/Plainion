@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Plainion.RI.InteractionRequests.DefaultConfirmationView"
+﻿<UserControl x:Class="Plainion.RI.InteractionRequests.DefaultWindowWithViewModelAsContentView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -26,20 +26,10 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Command="{Binding ShowConfirmationViewCommand}" Margin="5" Padding="3">
-                <Button.Content>
-                    <TextBlock TextAlignment="Center">
-                        <Run>Show confirmation</Run>
-                        <LineBreak/>
-                        <Run>(INotification.Content = view)</Run>
-                    </TextBlock>
-                </Button.Content>
-            </Button>
-            <Button Grid.Column="1" Command="{Binding ShowConfirmationViewModelCommand}" Margin="5" Padding="3">
+            <Button Grid.Column="0" Command="{Binding ShowConfirmationCommand}" Margin="5" Padding="3">
                 <Button.Content>
                     <TextBlock TextAlignment="Center">
                         <Run>Show confirmation</Run>
@@ -48,8 +38,8 @@
                     </TextBlock>
                 </Button.Content>
             </Button>
-            <TextBlock Grid.Column="2" Text="Response" Margin="5" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="3" IsReadOnly="True" Text="{Binding Response}" Margin="5"/>
+            <TextBlock Grid.Column="1" Text="Response" Margin="5" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="2" IsReadOnly="True" Text="{Binding Response}" Margin="5"/>
         </Grid>
     </GroupBox>
 </UserControl>

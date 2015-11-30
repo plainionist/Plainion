@@ -3,13 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://www.codeplex.com/prism"
         xmlns:l="clr-namespace:Plainion.RI"
-        Title="Plainion - Reference Implementation" Height="600" Width="800">
+        Title="Plainion - Reference Implementation" Height="800" Width="1000">
     <TabControl TabStripPlacement="Left" Margin="3">
         <TabItem Header="Dialogs">
-            <StackPanel Orientation="Vertical" prism:RegionManager.RegionName="{x:Static l:RegionNames.Dialogs}"/>
+            <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <StackPanel Orientation="Vertical" prism:RegionManager.RegionName="{x:Static l:RegionNames.Dialogs}"/>
+            </ScrollViewer>
         </TabItem>
         <TabItem Header="InteractionRequests">
-            <StackPanel Orientation="Vertical" prism:RegionManager.RegionName="{x:Static l:RegionNames.InteractionRequests}"/>
+            <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <StackPanel Orientation="Vertical" prism:RegionManager.RegionName="{x:Static l:RegionNames.InteractionRequests}"/>
+            </ScrollViewer>
         </TabItem>
     </TabControl>
 </Window>
