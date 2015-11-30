@@ -1,25 +1,12 @@
 ﻿using System;
 using System.ComponentModel.Composition;
-using System.Windows.Controls;
-using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Media;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Mvvm;
 
 namespace Plainion.RI.InteractionRequests
 {
-    /// <summary>
-    /// This sample provides a custom PopupWindowAction.WindowContent (directly in Xaml)and a custom 
-    /// INotification. This notification serves as DataContext for the custom view.
-    /// <para>
-    /// This approach works well for simple notifications and confirmations with minimal customized view or logic.
-    /// In these simple cases it is fine to create the notification with new in the requesting viewmodel and just provide
-    /// additional parameters directly. One drawback of this approach is that the notification object has two responsibilities:
-    /// it is used by the requestion viewmodel to pass "parameters" to the popup window and acts as DataContext for the custom view of the popup window.
-    /// </para>
-    /// </summary>
     [Export]
     class CustomNotificationViewModel : BindableBase
     {

@@ -30,16 +30,33 @@
     </i:Interaction.Triggers>
 
     <GroupBox Header="Custom confirmation (custom view, custom notification as viewmodel)" BorderBrush="Black">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical">
+            <TextBlock TextWrapping="Wrap" Margin="5">
+                <Run>
+                    Invokes InteractionRequest with custom INotification object. A custom WindowContent is given to PopupWindowAction.
+                    PopupWindowAction creates a DefaultConfirmationWindow with the given WindowContent as view. The provided Notification will be set as DataContext to the Window.
+                </Run>
+                <LineBreak/>
+                <Run>
+                    This approach works well for simple notifications and confirmations with minimal customized view. In these simple cases it is fine 
+                    to create the INotification object with new directly in the requesting ViewModel and just set additional parameters directly as properties. 
+                    One drawback of this approach is that the INotification object has two responsibilities: it is used by the requested ViewModel to pass 
+                    "parameters" to the popup window and acts as DataContext for the custom view of the popup window. 
+                    Another drawback is that the requesting ViewModel is tightly coupled to the ViewModel of the popup window (the INotification object). Any 
+                    dependency required by the INotification object has to be passed to it from the requesting ViewModel directly.
+                </Run>
+            </TextBlock>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Content="Show confirmation" Command="{Binding ShowConfirmationCommand}" Margin="5" Padding="3"/>
-            <TextBlock Grid.Column="1" Text="Response" Margin="5" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="2" IsReadOnly="True" Text="{Binding Response}" Margin="5"/>
-        </Grid>
+                <Button Grid.Column="0" Content="Show confirmation" Command="{Binding ShowConfirmationCommand}" Margin="5" Padding="3"/>
+                <TextBlock Grid.Column="1" Text="Response" Margin="5" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="2" IsReadOnly="True" Text="{Binding Response}" Margin="5"/>
+            </Grid>
+        </StackPanel>
     </GroupBox>
 </UserControl>
