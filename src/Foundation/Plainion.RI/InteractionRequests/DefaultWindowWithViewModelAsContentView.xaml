@@ -7,7 +7,7 @@
              xmlns:prism="http://www.codeplex.com/prism"
              xmlns:l="clr-namespace:Plainion.RI.InteractionRequests"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="600">
+             d:DesignHeight="300" d:DesignWidth="600">
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type l:ConfirmationContent}">
             <Border BorderBrush="Green" BorderThickness="2" Padding="10">
@@ -22,24 +22,32 @@
     </i:Interaction.Triggers>
 
     <GroupBox Header="Default confirmation (no view, no viewmodel)" BorderBrush="Black">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical">
+            <TextBlock TextWrapping="Wrap" Margin="5">
+                <Run>
+                    Invokes InteractionRequest with default Confirmation class and without custom view. PopupWindowAction creates a DefaultConfirmationWindow.
+                    The WindowContent will be a ContentControl which "Content" property will be bound to INotification.Content. In this sample 
+                    INotification.Content is set to kind of "ViewModel". The idea is to provide a DataTemplate to apply a view to this ViewModel.
+                </Run>
+                <LineBreak/>
+                <Run FontWeight="Bold">
+                    This approach does not work.
+                </Run>
+                <Run>
+                    We couldn't find a way to apply a DataTemplate.
+                </Run>
+            </TextBlock>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Command="{Binding ShowConfirmationCommand}" Margin="5" Padding="3">
-                <Button.Content>
-                    <TextBlock TextAlignment="Center">
-                        <Run>Show confirmation</Run>
-                        <LineBreak/>
-                        <Run>(INotification.Content = viewmodel)</Run>
-                    </TextBlock>
-                </Button.Content>
-            </Button>
-            <TextBlock Grid.Column="1" Text="Response" Margin="5" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="2" IsReadOnly="True" Text="{Binding Response}" Margin="5"/>
-        </Grid>
+                <Button Grid.Column="0" Content="Show confirmation" Command="{Binding ShowConfirmationCommand}" Margin="5" Padding="3"/>
+                <TextBlock Grid.Column="1" Text="Response" Margin="5" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="2" IsReadOnly="True" Text="{Binding Response}" Margin="5"/>
+            </Grid>
+        </StackPanel>
     </GroupBox>
 </UserControl>
