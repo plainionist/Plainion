@@ -21,7 +21,7 @@
         </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
 
-    <GroupBox Header="Default confirmation (no view, no viewmodel)" BorderBrush="Black">
+    <GroupBox Header="Default window (ViewModel via INotification.Content)" BorderBrush="Black">
         <StackPanel Orientation="Vertical">
             <TextBlock TextWrapping="Wrap" Margin="5">
                 <Run>

@@ -29,7 +29,7 @@
         </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
 
-    <GroupBox Header="Custom confirmation (custom view, custom notification as viewmodel)" BorderBrush="Black">
+    <GroupBox Header="Custom confirmation (custom view, custom notification as ViewModel)" BorderBrush="Black">
         <StackPanel Orientation="Vertical">
             <TextBlock TextWrapping="Wrap" Margin="5">
                 <Run>
