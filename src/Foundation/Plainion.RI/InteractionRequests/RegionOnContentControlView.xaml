@@ -5,10 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:prism="http://www.codeplex.com/prism"
-             xmlns:l="clr-namespace:Plainion.RI.InteractionRequests"
-             xmlns:dialogs="clr-namespace:Plainion.RI.InteractionRequests.Dialogs"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="600">
+             d:DesignHeight="300" d:DesignWidth="600">
     <i:Interaction.Triggers>
         <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmationRequest, Mode=OneWay}">
             <prism:PopupWindowAction>
@@ -19,25 +17,36 @@
         </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
 
-    <GroupBox Header="Region on ContentControl (view with custom viewmodel)" BorderBrush="Black">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+    <GroupBox Header="View injection into WindowContent (region on ContentControl)" BorderBrush="Black">
+        <StackPanel Orientation="Vertical">
+            <TextBlock TextWrapping="Wrap" Margin="5">
+                <Run>
+                    The PopupWindowAction.WindowContent contains a ContentControl with a RegionName assigned. The PopupWindowAction will create an 
+                    empty window and assign the WindowContent as child. The RegionManager injects the view registered for the given RegionName 
+                    into the ContentControl. The view can import the ViewModel through MEF as usual.
+                </Run>
+                <LineBreak/>
+                <Run>
+                    With this approach View and ViewModel of the popup window are completely decoupled from the requesting View/ViewModel.
+                </Run>
+                <LineBreak/>
+                <Run>
+                    This approach works well for complex dialogs like "Settings" dialogs. This approach does NOT support 
+                    IInteractionRequestAware for the dialog ViewModel because PopupWindowAction only checks value of WindowContent property 
+                    and its DataContext for IInteractionRequestAware - which is not the case as here a normal ContentControl is the value.
+                </Run>
+            </TextBlock>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Command="{Binding ShowConfirmationCommand}" Margin="5" Padding="3">
-                <Button.Content>
-                    <TextBlock TextAlignment="Center">
-                        <Run>Show confirmation</Run>
-                        <LineBreak/>
-                        <Run>(does NOT work)</Run>
-                    </TextBlock>
-                </Button.Content>
-            </Button>
-            <TextBlock Grid.Column="1" Text="Response" Margin="5" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="2" IsReadOnly="True" Text="{Binding Model.JustMySampleState}" Margin="5"/>
-        </Grid>
+                <Button Grid.Column="0" Content="Show confirmation" Command="{Binding ShowConfirmationCommand}" Margin="5" Padding="3"/>
+                <TextBlock Grid.Column="1" Text="Response" Margin="5" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="2" IsReadOnly="True" Text="{Binding Model.JustMySampleState}" Margin="5"/>
+            </Grid>
+        </StackPanel>
     </GroupBox>
 </UserControl>

@@ -4,19 +4,9 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Regions;
-using Plainion.RI.InteractionRequests.Dialogs;
 
 namespace Plainion.RI.InteractionRequests
 {
-    /// <summary>
-    /// This sample defines a region on the PopupWindowAction directly. This way the requesting
-    /// viewmodel doesnt need to know anything about the concreate view/model.
-    /// <para>
-    /// This approach only works IF PopupWindowActionRegionAdapter is registers which requires KeepAliveDelayedRegionCreationBehavior to be 
-    /// in the CompositionContainer.
-    /// This approach supports view importing there viewmodel directly AND supports IInteractionRequestAware for the viewmodel.
-    /// </para>
-    /// </summary>
     [Export]
     class RegionOnPopupWindowActionViewModel : BindableBase
     {
@@ -38,9 +28,7 @@ namespace Plainion.RI.InteractionRequests
             var notification = new Notification();
             notification.Title = "Really?";
 
-            // view imported via region, viewmodel imported by view directly
-            // BUT we have to call this here to trigger import of view into region. Seems that as PopupWindowAction is no 
-            // FrameworkElement Prism misses some trigger to create and update the region for the PopupWindowAction.
+            // trigger region creation and view injection
             RegionManager.UpdateRegions();
 
             ConfirmationRequest.Raise( notification, n => { } );
