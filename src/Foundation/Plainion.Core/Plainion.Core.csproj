@@ -89,5 +89,8 @@
     <Compile Include="Validation\RecursiveValidator.cs" />
     <Compile Include="Validation\ValidateObjectAttribute.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Composition\ReadMe.md" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
