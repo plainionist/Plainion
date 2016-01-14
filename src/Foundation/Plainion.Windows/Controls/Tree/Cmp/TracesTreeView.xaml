@@ -85,11 +85,5 @@
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>
-
-        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,3,0,0">
-            <CheckBox Content="Show/hide all" IsChecked="{Binding TracesSource.IsChecked, ElementName=_this}" IsThreeState="True" VerticalAlignment="Center"/>
-            <Button Content="Show all visible" Margin="5,3,0,3" Command="{Binding TracesSource.ShowAllCommand, ElementName=_this}"/>
-            <Button Content="Hide all visible" Margin="3,3,0,3" Command="{Binding TracesSource.HideAllCommand, ElementName=_this}"/>
-        </StackPanel>
     </Grid>
 </UserControl>

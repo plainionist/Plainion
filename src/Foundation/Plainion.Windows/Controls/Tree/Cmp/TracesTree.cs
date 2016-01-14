@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
-using System.Windows.Input;
 
 namespace Plainion.Windows.Controls.Tree.Cmp
 {
@@ -11,27 +10,6 @@ namespace Plainion.Windows.Controls.Tree.Cmp
         private ICollectionView myVisibleProcesses;
         private string myFilter;
         private IReadOnlyCollection<TraceProcessNode> myProcesses;
-
-        public TracesTree()
-        {
-            ShowAllCommand = new DelegateCommand( () => ShowHideAllVisible( true ) );
-            HideAllCommand = new DelegateCommand( () => ShowHideAllVisible( false ) );
-        }
-
-        private void ShowHideAllVisible( bool isMarked )
-        {
-            foreach( TraceProcessNode process in VisibleProcesses )
-            {
-                foreach( TraceThreadNode thread in process.VisibleThreads )
-                {
-                    thread.IsChecked = isMarked;
-                }
-            }
-        }
-
-        public ICommand ShowAllCommand { get; private set; }
-
-        public ICommand HideAllCommand { get; private set; }
 
         public IReadOnlyCollection<TraceProcessNode> Processes
         {

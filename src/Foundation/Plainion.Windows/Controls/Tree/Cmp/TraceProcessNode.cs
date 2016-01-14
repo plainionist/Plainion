@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows.Data;
 
 namespace Plainion.Windows.Controls.Tree.Cmp
 {
-    [DebuggerDisplay("{Name}, PID={Model.ProcessId}")]
-    public class TraceProcessNode : NodeBase<TraceProcess>
+    public class TraceProcessNode : NodeBase
     {
         private IReadOnlyCollection<TraceThreadNode> myThreads;
         private ICollectionView myVisibleThreads;
@@ -16,8 +14,7 @@ namespace Plainion.Windows.Controls.Tree.Cmp
         // only used if here are no threads
         private bool myIsChecked;
 
-        public TraceProcessNode(TraceProcess model)
-            : base(model)
+        public TraceProcessNode()
         {
             // default if there are no threads
             myIsChecked = false;
@@ -25,15 +22,7 @@ namespace Plainion.Windows.Controls.Tree.Cmp
 
         public string ProcessIdText
         {
-            get { return Name == null ? string.Format("Pid={0}", Model.ProcessId) : string.Format("(Pid={0})", Model.ProcessId); }
-        }
-
-        protected override void OnModelPropertyChanged(string propertyName)
-        {
-            if (propertyName == "Name")
-            {
-                OnPropertyChanged("ProcessIdText");
-            }
+            get { return Name == null ? string.Format("Pid={0}", 4242) : string.Format("(Pid={0})", 4242); }
         }
 
         public IReadOnlyCollection<TraceThreadNode> Threads
@@ -133,7 +122,7 @@ namespace Plainion.Windows.Controls.Tree.Cmp
             else
             {
                 IsFilteredOut = (Name == null || !Name.Contains(filter, StringComparison.OrdinalIgnoreCase))
-                    && !Model.ProcessId.ToString().Contains(filter);
+                    && !4242.ToString().Contains(filter);
             }
 
             foreach (var thread in Threads)

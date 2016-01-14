@@ -54,10 +54,7 @@
     <Compile Include="BindingProxy.cs" />
     <Compile Include="BoolToVisibilityConverter.cs" />
     <Compile Include="Controls\Tree\BindableBase.cs" />
-    <Compile Include="Controls\Tree\Cmp\TraceProcess.cs" />
-    <Compile Include="Controls\Tree\Cmp\TraceThread.cs" />
     <Compile Include="Controls\Tree\DelegateCommand.cs" />
-    <Compile Include="Controls\Tree\Cmp\ModelBase.cs" />
     <Compile Include="Controls\Tree\Cmp\NodeBase.cs" />
     <Compile Include="Controls\Tree\Cmp\TraceProcessNode.cs" />
     <Compile Include="Controls\Tree\Cmp\TracesTree.cs" />

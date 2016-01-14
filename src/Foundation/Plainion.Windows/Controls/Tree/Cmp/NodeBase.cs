@@ -1,40 +1,21 @@
-﻿using System.ComponentModel;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace Plainion.Windows.Controls.Tree.Cmp
 {
-    public abstract class NodeBase<T> : BindableBase where T : ModelBase
+    public abstract class NodeBase : BindableBase 
     {
         private bool myIsInEditMode;
+        private string myName;
 
-        public NodeBase( T model )
+        public NodeBase( )
         {
-            Model = model;
-            PropertyChangedEventManager.AddHandler( Model, OnModelPropertyChanged,string.Empty );
-
             EditNodeCommand = new DelegateCommand( () => IsInEditMode = true );
         }
 
-        private void OnModelPropertyChanged( object sender, PropertyChangedEventArgs e )
-        {
-            OnModelPropertyChanged( e.PropertyName );
-
-            if( e.PropertyName == "Name" )
-            {
-                OnPropertyChanged( "Name" );
-            }
-        }
-
-        protected virtual void OnModelPropertyChanged( string propertyName )
-        {
-        }
-
-        public T Model { get; private set; }
-
         public string Name
         {
-            get { return Model.Name; }
-            set { Model.Name = value; }
+            get { return myName; }
+            set { SetProperty(ref myName, value); }
         }
 
         public bool IsInEditMode

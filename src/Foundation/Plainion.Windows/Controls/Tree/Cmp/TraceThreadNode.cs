@@ -2,50 +2,35 @@
 
 namespace Plainion.Windows.Controls.Tree.Cmp
 {
-    public class TraceThreadNode : NodeBase<TraceThread>
+    public class TraceThreadNode : NodeBase
     {
-        public TraceThreadNode( TraceThread model )
-            : base( model )
-        {
-        }
+        private bool myIsChecked;
 
         public string ThreadIdText
         {
-            get { return Name == null ? string.Format( "Tid={0}", Model.ThreadId ) : string.Format( "(Tid={0})", Model.ThreadId ); }
-        }
-
-        protected override void OnModelPropertyChanged( string propertyName )
-        {
-            if( propertyName == "Name" )
-            {
-                OnPropertyChanged( "ThreadIdText" );
-            }
-            else if( propertyName == "IsSelected" )
-            {
-                OnPropertyChanged( "IsChecked" );
-            }
+            get { return Name == null ? string.Format("Tid={0}", 2525) : string.Format("(Tid={0})", 2525); }
         }
 
         public bool IsChecked
         {
-            get { return Model.IsSelected; }
-            set { Model.IsSelected = value; }
+            get { return myIsChecked; }
+            set { SetProperty(ref myIsChecked, value); }
         }
 
-        internal override void ApplyFilter( string filter )
+        internal override void ApplyFilter(string filter)
         {
-            if( string.IsNullOrWhiteSpace( filter ) )
+            if (string.IsNullOrWhiteSpace(filter))
             {
                 IsFilteredOut = false;
             }
-            else if( filter == "*" )
+            else if (filter == "*")
             {
                 IsFilteredOut = Name == null;
             }
             else
             {
-                IsFilteredOut = ( Name == null || !Name.Contains( filter, StringComparison.OrdinalIgnoreCase ) )
-                    && !Model.ThreadId.ToString().Contains( filter );
+                IsFilteredOut = (Name == null || !Name.Contains(filter, StringComparison.OrdinalIgnoreCase))
+                    && !2525.ToString().Contains(filter);
             }
         }
     }
