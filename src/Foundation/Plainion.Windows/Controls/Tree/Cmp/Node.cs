@@ -3,22 +3,57 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace Plainion.Windows.Controls.Tree.Cmp
 {
-    public class Node : NodeBase
+    public class Node : BindableBase
     {
         private IReadOnlyCollection<Node> myChildren;
         private ICollectionView myVisibleChildren;
 
-        // only used if here are no threads
+        // only used if here are no children
         private bool myIsChecked;
+        private bool myIsInEditMode;
+        private string myName;
 
         public Node()
         {
-            // default if there are no threads
+            // default if there are no children
             myIsChecked = false;
+            EditNodeCommand = new DelegateCommand(() => IsInEditMode = true);
         }
+
+        public string Name
+        {
+            get { return myName; }
+            set { SetProperty(ref myName, value); }
+        }
+
+        public bool IsInEditMode
+        {
+            get { return myIsInEditMode; }
+            set
+            {
+                if (Name == null && value == true)
+                {
+                    // we first need to set some dummy text so that the EditableTextBlock control becomes visible again
+                    Name = "<empty>";
+                }
+
+                if (SetProperty(ref myIsInEditMode, value))
+                {
+                    if (!myIsInEditMode && Name == "<empty>")
+                    {
+                        Name = null;
+                    }
+                }
+            }
+        }
+
+        public ICommand EditNodeCommand { get; private set; }
+
+        public bool IsFilteredOut { get; protected set; }
 
         public string DisplayText
         {
@@ -36,7 +71,7 @@ namespace Plainion.Windows.Controls.Tree.Cmp
                     {
                         foreach (var t in myChildren)
                         {
-                            PropertyChangedEventManager.AddHandler(t, OnThreadIsCheckedChanged, "IsChecked");
+                            PropertyChangedEventManager.AddHandler(t, OnChildIsCheckedChanged, "IsChecked");
                         }
                     }
                 }
@@ -46,7 +81,7 @@ namespace Plainion.Windows.Controls.Tree.Cmp
             }
         }
 
-        private void OnThreadIsCheckedChanged(object sender, PropertyChangedEventArgs e)
+        private void OnChildIsCheckedChanged(object sender, PropertyChangedEventArgs e)
         {
             OnPropertyChanged(() => IsChecked);
         }
@@ -86,7 +121,7 @@ namespace Plainion.Windows.Controls.Tree.Cmp
                     }
                 }
 
-                OnPropertyChanged("IsChecked");
+                OnPropertyChanged(() => IsChecked);
             }
         }
 
@@ -99,13 +134,13 @@ namespace Plainion.Windows.Controls.Tree.Cmp
                     myVisibleChildren = CollectionViewSource.GetDefaultView(Children);
                     myVisibleChildren.Filter = i => !((Node)i).IsFilteredOut;
 
-                    OnPropertyChanged("VisibleThreads");
+                    OnPropertyChanged(() => VisibleChildren);
                 }
                 return myVisibleChildren;
             }
         }
 
-        internal override void ApplyFilter(string filter)
+        internal void ApplyFilter(string filter)
         {
             var tokens = filter.Split('|');
             filter = tokens[0];

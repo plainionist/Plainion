@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Plainion.Windows.Controls.Tree.Cmp.TracesTreeView"
+﻿<UserControl x:Class="Plainion.Windows.Controls.Tree.Cmp.TreeEditor"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -27,6 +27,10 @@
                 <TextBlock Margin="2,0,0,0" VerticalAlignment="Center" Text="{Binding DisplayText}"/>
             </StackPanel>
         </DataTemplate>
+
+        <InputBindingCollection x:Shared="false"  x:Key="InputBindings">
+            <KeyBinding Key="F2" Command="{Binding EditNodeCommand}" />
+        </InputBindingCollection>
     </UserControl.Resources>
     
     <Grid>
@@ -37,19 +41,12 @@
         </Grid.RowDefinitions>
 
         <controls:SearchTextBox Grid.Row="0" SearchMode="Instant" 
-                  Text="{Binding TracesSource.Filter, ElementName=_this, Mode=TwoWay}" 
+                  Text="{Binding Filter, ElementName=_this, Mode=TwoWay}" 
                   SearchEventTimeDelay="0" 
                   LabelText="Filter processes by name or PID"/>
 
         <!-- http://www.codeproject.com/Articles/28306/Working-with-Checkboxes-in-the-WPF-TreeView -->
-        <TreeView Grid.Row="1" ItemsSource="{Binding TracesSource.VisibleProcesses, ElementName=_this}" 
-                  Margin="0,3,0,0" BorderThickness="1">
-            <TreeView.Resources>
-                <InputBindingCollection x:Shared="false"  x:Key="InputBindings">
-                    <KeyBinding Key="F2" Command="{Binding EditNodeCommand}" />
-                </InputBindingCollection>
-            </TreeView.Resources>
-
+        <TreeView Grid.Row="1" ItemsSource="{Binding Root.VisibleChildren, ElementName=_this}" Margin="0,3,0,0" BorderThickness="1">
             <TreeView.ItemContainerStyle>
                 <Style TargetType="TreeViewItem" BasedOn="{StaticResource {x:Type TreeViewItem}}">
                     <Setter Property="windows:InputBindingsExtension.InputBindings" Value="{StaticResource InputBindings}"/>
@@ -58,7 +55,7 @@
             </TreeView.ItemContainerStyle>
 
             <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding VisibleThreads}" ItemTemplate="{StaticResource NodeTemplate}">
+                <HierarchicalDataTemplate ItemsSource="{Binding VisibleChildren}" ItemTemplate="{StaticResource NodeTemplate}">
                     <ContentControl Content="{Binding}" ContentTemplate="{StaticResource NodeTemplate}"/>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
