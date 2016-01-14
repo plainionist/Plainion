@@ -38,7 +38,13 @@
     <Compile Include="Controls\AdornedControl.cs" />
     <Compile Include="AdornerPlacement.cs" />
     <Compile Include="Controls\DocumentFacade.cs" />
+    <Compile Include="Controls\DocumentNavigationPane.xaml.cs">
+      <DependentUpon>DocumentNavigationPane.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\FlowDocumentVisitor.cs" />
+    <Compile Include="Controls\NoteBook.xaml.cs">
+      <DependentUpon>NoteBook.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NotePad.xaml.cs">
       <DependentUpon>NotePad.xaml</DependentUpon>
     </Compile>
@@ -98,6 +104,14 @@
     <Page Include="Controls\CircularProgressIndicator.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\DocumentNavigationPane.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NoteBook.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\NotePad.xaml">
       <SubType>Designer</SubType>

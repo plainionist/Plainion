@@ -121,6 +121,9 @@
     <Compile Include="InteractionRequests\CustomNotificationViewModel.cs" />
     <Compile Include="InteractionRequests\DefaultWindowWithViewAsContentViewModel.cs" />
     <Compile Include="InteractionRequests\Model.cs" />
+    <Compile Include="NotePad\NoteBookView.xaml.cs">
+      <DependentUpon>NoteBookView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NotePad\NotePadView.xaml.cs">
       <DependentUpon>NotePadView.xaml</DependentUpon>
     </Compile>
@@ -169,6 +172,10 @@
     <Page Include="InteractionRequests\DefaultWindowWithViewAsContentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NotePad\NoteBookView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="NotePad\NotePadView.xaml">
       <SubType>Designer</SubType>

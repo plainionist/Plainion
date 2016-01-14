@@ -35,6 +35,7 @@ namespace Plainion.RI
             RegionManager.RegisterViewWithRegion("RegionWithPopupWindowActionExtensionsView", typeof(ComplexDialog));
 
             RegionManager.RegisterViewWithRegion(RegionNames.NotePad, typeof(NotePadView));
+            RegionManager.RegisterViewWithRegion(RegionNames.NotePad, typeof(NoteBookView));
         }
     }
 }
