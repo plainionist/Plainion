@@ -7,27 +7,25 @@ using System.Windows.Input;
 
 namespace Plainion.Windows.Controls.Tree.Cmp
 {
+    // TODO: how to connect model?
     public class Node : BindableBase
     {
         private IReadOnlyCollection<Node> myChildren;
         private ICollectionView myVisibleChildren;
 
-        // only used if here are no children
         private bool myIsChecked;
         private bool myIsInEditMode;
-        private string myName;
+        private string myText;
 
         public Node()
         {
-            // default if there are no children
-            myIsChecked = false;
             EditNodeCommand = new DelegateCommand(() => IsInEditMode = true);
         }
 
-        public string Name
+        public string Text
         {
-            get { return myName; }
-            set { SetProperty(ref myName, value); }
+            get { return myText; }
+            set { SetProperty(ref myText, value); }
         }
 
         public bool IsInEditMode
@@ -35,17 +33,17 @@ namespace Plainion.Windows.Controls.Tree.Cmp
             get { return myIsInEditMode; }
             set
             {
-                if (Name == null && value == true)
+                if (Text == null && value == true)
                 {
                     // we first need to set some dummy text so that the EditableTextBlock control becomes visible again
-                    Name = "<empty>";
+                    Text = "<empty>";
                 }
 
                 if (SetProperty(ref myIsInEditMode, value))
                 {
-                    if (!myIsInEditMode && Name == "<empty>")
+                    if (!myIsInEditMode && Text == "<empty>")
                     {
-                        Name = null;
+                        Text = null;
                     }
                 }
             }
@@ -53,11 +51,12 @@ namespace Plainion.Windows.Controls.Tree.Cmp
 
         public ICommand EditNodeCommand { get; private set; }
 
-        public bool IsFilteredOut { get; protected set; }
+        public bool IsFilteredOut { get; private set; }
 
-        public string DisplayText
+        // TODO: implement
+        public string FormattedText
         {
-            get { return Name == null ? string.Format("Pid={0}", 4242) : string.Format("(Pid={0})", 4242); }
+            get { return Text; }
         }
 
         public IReadOnlyCollection<Node> Children
@@ -152,11 +151,11 @@ namespace Plainion.Windows.Controls.Tree.Cmp
             }
             else if (filter == "*")
             {
-                IsFilteredOut = Name == null;
+                IsFilteredOut = Text == null;
             }
             else
             {
-                IsFilteredOut = (Name == null || !Name.Contains(filter, StringComparison.OrdinalIgnoreCase))
+                IsFilteredOut = (Text == null || !Text.Contains(filter, StringComparison.OrdinalIgnoreCase))
                     && !4242.ToString().Contains(filter);
             }
 

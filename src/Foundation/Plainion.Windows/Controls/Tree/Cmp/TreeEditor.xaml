@@ -11,9 +11,9 @@
         <DataTemplate x:Key="NodeTemplate">
             <StackPanel Orientation="Horizontal" Height="22">
                 <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}" IsThreeState="True" Focusable="False" VerticalAlignment="Center" Margin="0,0,3,0"/>
-                <controls:EditableTextBlock VerticalAlignment="Center" Text="{Binding Name}" IsInEditMode="{Binding IsInEditMode, Mode=TwoWay}">
+                <controls:EditableTextBlock VerticalAlignment="Center" Text="{Binding Text}" IsInEditMode="{Binding IsInEditMode, Mode=TwoWay}">
                     <controls:EditableTextBlock.Visibility>
-                        <Binding Path="Name">
+                        <Binding Path="Text">
                             <Binding.Converter>
                                 <windows:ConverterChain>
                                     <windows:IsEmptyConverter/>
@@ -24,7 +24,7 @@
                         </Binding>
                     </controls:EditableTextBlock.Visibility>
                 </controls:EditableTextBlock>
-                <TextBlock Margin="2,0,0,0" VerticalAlignment="Center" Text="{Binding DisplayText}"/>
+                <TextBlock Margin="2,0,0,0" VerticalAlignment="Center" Text="{Binding FormattedText}"/>
             </StackPanel>
         </DataTemplate>
 
