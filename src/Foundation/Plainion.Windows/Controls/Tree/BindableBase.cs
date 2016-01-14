@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 
 namespace Plainion.Windows.Controls.Tree
@@ -8,6 +10,10 @@ namespace Plainion.Windows.Controls.Tree
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected void OnPropertyChanged<T>(Expression<Func<T>> propertyExpression)
+		{
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

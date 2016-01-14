@@ -9,9 +9,9 @@ namespace Plainion.Windows.Controls.Tree.Cmp
     {
         private ICollectionView myVisibleProcesses;
         private string myFilter;
-        private IReadOnlyCollection<TraceProcessNode> myProcesses;
+        private IReadOnlyCollection<Node> myProcesses;
 
-        public IReadOnlyCollection<TraceProcessNode> Processes
+        public IReadOnlyCollection<Node> Processes
         {
             get { return myProcesses; }
             set
@@ -93,7 +93,7 @@ namespace Plainion.Windows.Controls.Tree.Cmp
                 if( myVisibleProcesses == null && myProcesses != null )
                 {
                     myVisibleProcesses = CollectionViewSource.GetDefaultView( Processes );
-                    myVisibleProcesses.Filter = i => !( ( TraceProcessNode )i ).IsFilteredOut;
+                    myVisibleProcesses.Filter = i => !( ( Node )i ).IsFilteredOut;
 
                     OnPropertyChanged( "VisibleProcesses" );
                 }

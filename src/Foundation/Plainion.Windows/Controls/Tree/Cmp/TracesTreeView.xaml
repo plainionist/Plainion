@@ -3,13 +3,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:pn="http://github.com/ronin4net/plainion"
              xmlns:controls="clr-namespace:Plainion.Windows.Controls"
              xmlns:windows="clr-namespace:Plainion.Windows"
              x:Name="_this"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-
+             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <DataTemplate x:Key="NodeTemplate">
+            <StackPanel Orientation="Horizontal" Height="22">
+                <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}" IsThreeState="True" Focusable="False" VerticalAlignment="Center" Margin="0,0,3,0"/>
+                <controls:EditableTextBlock VerticalAlignment="Center" Text="{Binding Name}" IsInEditMode="{Binding IsInEditMode, Mode=TwoWay}">
+                    <controls:EditableTextBlock.Visibility>
+                        <Binding Path="Name">
+                            <Binding.Converter>
+                                <windows:ConverterChain>
+                                    <windows:IsEmptyConverter/>
+                                    <windows:NotConverter/>
+                                    <windows:BoolToVisibilityConverter/>
+                                </windows:ConverterChain>
+                            </Binding.Converter>
+                        </Binding>
+                    </controls:EditableTextBlock.Visibility>
+                </controls:EditableTextBlock>
+                <TextBlock Margin="2,0,0,0" VerticalAlignment="Center" Text="{Binding DisplayText}"/>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -18,9 +37,9 @@
         </Grid.RowDefinitions>
 
         <controls:SearchTextBox Grid.Row="0" SearchMode="Instant" 
-                          Text="{Binding TracesSource.Filter, ElementName=_this, Mode=TwoWay}" 
-                          SearchEventTimeDelay="0" 
-                          LabelText="Filter processes by name or PID"/>
+                  Text="{Binding TracesSource.Filter, ElementName=_this, Mode=TwoWay}" 
+                  SearchEventTimeDelay="0" 
+                  LabelText="Filter processes by name or PID"/>
 
         <!-- http://www.codeproject.com/Articles/28306/Working-with-Checkboxes-in-the-WPF-TreeView -->
         <TreeView Grid.Row="1" ItemsSource="{Binding TracesSource.VisibleProcesses, ElementName=_this}" 
@@ -33,55 +52,14 @@
 
             <TreeView.ItemContainerStyle>
                 <Style TargetType="TreeViewItem" BasedOn="{StaticResource {x:Type TreeViewItem}}">
-                    <Setter Property="pn:InputBindingsExtension.InputBindings" Value="{StaticResource InputBindings}"/>
+                    <Setter Property="windows:InputBindingsExtension.InputBindings" Value="{StaticResource InputBindings}"/>
                     <Setter Property="IsExpanded" Value="True"/>
                 </Style>
             </TreeView.ItemContainerStyle>
 
             <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding VisibleThreads}">
-                    <HierarchicalDataTemplate.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Height="22">
-                                <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}" Focusable="False" VerticalAlignment="Center"
-                                          Margin="0,0,3,0"/>
-                                <controls:EditableTextBlock VerticalAlignment="Center" Text="{Binding Name}" 
-                                                      IsInEditMode="{Binding IsInEditMode, Mode=TwoWay}">
-                                    <controls:EditableTextBlock.Visibility>
-                                        <Binding Path="Name">
-                                            <Binding.Converter>
-                                                <windows:ConverterChain>
-                                                    <windows:IsEmptyConverter/>
-                                                    <windows:NotConverter/>
-                                                    <windows:BoolToVisibilityConverter/>
-                                                </windows:ConverterChain>
-                                            </Binding.Converter>
-                                        </Binding>
-                                    </controls:EditableTextBlock.Visibility>
-                                </controls:EditableTextBlock>
-                                <TextBlock Margin="2,0,0,0" VerticalAlignment="Center" Text="{Binding ThreadIdText}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </HierarchicalDataTemplate.ItemTemplate>
-                    <StackPanel Orientation="Horizontal" Height="22">
-                        <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}" IsThreeState="True" Focusable="False"
-                                  VerticalAlignment="Center" Margin="0,0,3,0"/>
-                        <controls:EditableTextBlock VerticalAlignment="Center" Text="{Binding Name}" 
-                                              IsInEditMode="{Binding IsInEditMode, Mode=TwoWay}">
-                            <controls:EditableTextBlock.Visibility>
-                                <Binding Path="Name">
-                                    <Binding.Converter>
-                                        <windows:ConverterChain>
-                                            <windows:IsEmptyConverter/>
-                                            <windows:NotConverter/>
-                                            <windows:BoolToVisibilityConverter/>
-                                        </windows:ConverterChain>
-                                    </Binding.Converter>
-                                </Binding>
-                            </controls:EditableTextBlock.Visibility>
-                        </controls:EditableTextBlock>
-                        <TextBlock Margin="2,0,0,0" VerticalAlignment="Center" Text="{Binding ProcessIdText}"/>
-                    </StackPanel>
+                <HierarchicalDataTemplate ItemsSource="{Binding VisibleThreads}" ItemTemplate="{StaticResource NodeTemplate}">
+                    <ContentControl Content="{Binding}" ContentTemplate="{StaticResource NodeTemplate}"/>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>
