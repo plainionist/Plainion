@@ -15,5 +15,10 @@
                 <StackPanel Orientation="Vertical" prism:RegionManager.RegionName="{x:Static l:RegionNames.InteractionRequests}"/>
             </ScrollViewer>
         </TabItem>
+        <TabItem Header="NotePad">
+            <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <StackPanel Orientation="Vertical" prism:RegionManager.RegionName="{x:Static l:RegionNames.NotePad}"/>
+            </ScrollViewer>
+        </TabItem>
     </TabControl>
 </Window>
