@@ -53,6 +53,33 @@
     <Compile Include="Controls\TextBoxBinding.cs" />
     <Compile Include="BindingProxy.cs" />
     <Compile Include="BoolToVisibilityConverter.cs" />
+    <Compile Include="Controls\Tree\BindableBase.cs" />
+    <Compile Include="Controls\Tree\Cmp\TraceProcess.cs" />
+    <Compile Include="Controls\Tree\Cmp\TraceThread.cs" />
+    <Compile Include="Controls\Tree\DelegateCommand.cs" />
+    <Compile Include="Controls\Tree\Cmp\ModelBase.cs" />
+    <Compile Include="Controls\Tree\Cmp\NodeBase.cs" />
+    <Compile Include="Controls\Tree\Cmp\TraceProcessNode.cs" />
+    <Compile Include="Controls\Tree\Cmp\TracesTree.cs" />
+    <Compile Include="Controls\Tree\Cmp\TracesTreeView.xaml.cs">
+      <DependentUpon>TracesTreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Tree\Cmp\TraceThreadNode.cs" />
+    <Compile Include="Controls\Tree\Flames\EditableTreeNode.cs" />
+    <Compile Include="Controls\Tree\Flames\TraceProcessNode.cs" />
+    <Compile Include="Controls\Tree\Flames\TracesTree.cs" />
+    <Compile Include="Controls\Tree\Flames\TracesTreeView.xaml.cs">
+      <DependentUpon>TracesTreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Tree\Flames\TraceThreadNode.cs" />
+    <Compile Include="Controls\Tree\Forest\ExtendedTreeView.xaml.cs">
+      <DependentUpon>ExtendedTreeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Tree\Forest\INode.cs" />
+    <Compile Include="Controls\Tree\Forest\INodeViewModelFactory.cs" />
+    <Compile Include="Controls\Tree\Forest\NodeViewModel.cs" />
+    <Compile Include="Controls\Tree\Forest\NodeViewModelBase.cs" />
+    <Compile Include="Controls\Tree\Forest\TreeViewModel.cs" />
     <Compile Include="ConverterChain.cs" />
     <Compile Include="AndConverter.cs" />
     <Compile Include="Diagnostics\DebugTextWriter.cs" />
@@ -116,6 +143,18 @@
     <Page Include="Controls\NotePad.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Tree\Cmp\TracesTreeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Tree\Flames\TracesTreeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Tree\Forest\ExtendedTreeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Diagnostics\InspectionWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
