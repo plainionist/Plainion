@@ -65,13 +65,6 @@
       <DependentUpon>TracesTreeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Tree\Cmp\TraceThreadNode.cs" />
-    <Compile Include="Controls\Tree\Flames\EditableTreeNode.cs" />
-    <Compile Include="Controls\Tree\Flames\TraceProcessNode.cs" />
-    <Compile Include="Controls\Tree\Flames\TracesTree.cs" />
-    <Compile Include="Controls\Tree\Flames\TracesTreeView.xaml.cs">
-      <DependentUpon>TracesTreeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Tree\Flames\TraceThreadNode.cs" />
     <Compile Include="Controls\Tree\Forest\ExtendedTreeView.xaml.cs">
       <DependentUpon>ExtendedTreeView.xaml</DependentUpon>
     </Compile>
@@ -145,10 +138,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Tree\Cmp\TracesTreeView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\Tree\Flames\TracesTreeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
