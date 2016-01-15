@@ -16,34 +16,26 @@ namespace Plainion.Windows.Controls.Tree.Forest
         private INodeViewModelFactory myNodeViewModelFactory;
         private bool myShowContentHint;
 
-        protected NodeViewModelBase( INodeViewModelFactory nodeViewModelFactory)
+        protected NodeViewModelBase(INodeViewModelFactory nodeViewModelFactory)
         {
-            Contract.RequiresNotNull( nodeViewModelFactory, "nodeViewModelFactory" );
+            Contract.RequiresNotNull(nodeViewModelFactory, "nodeViewModelFactory");
 
             myNodeViewModelFactory = nodeViewModelFactory;
 
-            NewCommand = new DelegateCommand( AddNewChild );
-            ExpandAllCommand = new DelegateCommand( ExpandAll );
-            CollapseAllCommand = new DelegateCommand( CollapseAll );
+            NewCommand = new DelegateCommand(AddNewChild);
+            ExpandAllCommand = new DelegateCommand(ExpandAll);
+            CollapseAllCommand = new DelegateCommand(CollapseAll);
 
             ShowContentHint = false;
         }
 
-        public ICommand ExpandAllCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand ExpandAllCommand { get; private set; }
 
-        public ICommand CollapseAllCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand CollapseAllCommand { get; private set; }
 
         protected virtual void ExpandAll()
         {
-            foreach( var child in Children )
+            foreach (var child in Children)
             {
                 child.ExpandAll();
             }
@@ -51,7 +43,7 @@ namespace Plainion.Windows.Controls.Tree.Forest
 
         protected virtual void CollapseAll()
         {
-            foreach( var child in Children )
+            foreach (var child in Children)
             {
                 child.CollapseAll();
             }
@@ -63,11 +55,7 @@ namespace Plainion.Windows.Controls.Tree.Forest
             //EventAggregator.GetEvent<NodeActivatedEvent>().Publish( child );
         }
 
-        public ICommand NewCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand NewCommand { get; private set; }
 
         public INode Node
         {
@@ -77,7 +65,7 @@ namespace Plainion.Windows.Controls.Tree.Forest
             }
             protected set
             {
-                if( myNode == value )
+                if (myNode == value)
                 {
                     return;
                 }
@@ -88,46 +76,46 @@ namespace Plainion.Windows.Controls.Tree.Forest
 
                 myNode.Children.CollectionChanged += OnNodeChildrenChanged;
 
-                OnPropertyChanged( "Root" );
+                OnPropertyChanged("Root");
             }
         }
 
-        private void OnNodeChildrenChanged( object sender, NotifyCollectionChangedEventArgs e )
+        private void OnNodeChildrenChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if( e.Action == NotifyCollectionChangedAction.Add )
+            if (e.Action == NotifyCollectionChangedAction.Add)
             {
                 var pos = e.NewStartingIndex;
-                foreach( INode node in e.NewItems )
+                foreach (INode node in e.NewItems)
                 {
-                    var m = myNodeViewModelFactory.Create( node );
+                    var m = myNodeViewModelFactory.Create(node);
                     m.ShowContentHint = ShowContentHint;
-                    Children.Insert( pos, m );
+                    Children.Insert(pos, m);
                 }
             }
-            else if( e.Action == NotifyCollectionChangedAction.Move )
+            else if (e.Action == NotifyCollectionChangedAction.Move)
             {
-                Children.Move( e.OldStartingIndex, e.NewStartingIndex );
+                Children.Move(e.OldStartingIndex, e.NewStartingIndex);
             }
-            else if( e.Action == NotifyCollectionChangedAction.Remove )
+            else if (e.Action == NotifyCollectionChangedAction.Remove)
             {
-                foreach( var child in Children.ToList() )
+                foreach (var child in Children.ToList())
                 {
-                    if( e.OldItems.Contains( child.Node ) )
+                    if (e.OldItems.Contains(child.Node))
                     {
-                        Children.Remove( child );
+                        Children.Remove(child);
                     }
                 }
             }
-            else if( e.Action == NotifyCollectionChangedAction.Replace )
+            else if (e.Action == NotifyCollectionChangedAction.Replace)
             {
                 throw new NotImplementedException();
             }
-            else if( e.Action == NotifyCollectionChangedAction.Reset )
+            else if (e.Action == NotifyCollectionChangedAction.Reset)
             {
                 UpdateChildren();
             }
 
-            OnPropertyChanged( "ContentHint" );
+            OnPropertyChanged("ContentHint");
         }
 
         public bool ShowContentHint
@@ -135,14 +123,14 @@ namespace Plainion.Windows.Controls.Tree.Forest
             get { return myShowContentHint; }
             set
             {
-                if( myShowContentHint == value )
+                if (myShowContentHint == value)
                 {
                     return;
                 }
 
                 myShowContentHint = value;
 
-                foreach( var child in Children )
+                foreach (var child in Children)
                 {
                     child.ShowContentHint = myShowContentHint;
                 }
@@ -154,7 +142,7 @@ namespace Plainion.Windows.Controls.Tree.Forest
             get
             {
                 return ShowContentHint && Children.Count > 0
-                    ? string.Format( "[{0}]", Children.Count )
+                    ? string.Format("[{0}]", Children.Count)
                     : string.Empty;
             }
         }
@@ -163,13 +151,13 @@ namespace Plainion.Windows.Controls.Tree.Forest
         {
             get
             {
-                if( myChildren == null )
+                if (myChildren == null)
                 {
                     myChildren = new ObservableCollection<NodeViewModel>();
 
                     UpdateChildren();
 
-                    OnPropertyChanged( "Children" );
+                    OnPropertyChanged("Children");
                 }
 
                 return myChildren;
@@ -180,17 +168,17 @@ namespace Plainion.Windows.Controls.Tree.Forest
         {
             Children.Clear();
 
-            if( Node != null )
+            if (Node != null)
             {
-                foreach( var child in Node.Children )
+                foreach (var child in Node.Children)
                 {
-                    var m = myNodeViewModelFactory.Create( child );
+                    var m = myNodeViewModelFactory.Create(child);
                     m.ShowContentHint = ShowContentHint;
-                    Children.Add( m );
+                    Children.Add(m);
                 }
             }
 
-            OnPropertyChanged( "ContentHint" );
+            OnPropertyChanged("ContentHint");
             VisibleChildren.Refresh();
         }
 
@@ -198,12 +186,12 @@ namespace Plainion.Windows.Controls.Tree.Forest
         {
             get
             {
-                if( myVisibleChildren == null )
+                if (myVisibleChildren == null)
                 {
-                    myVisibleChildren = CollectionViewSource.GetDefaultView( Children );
-                    myVisibleChildren.Filter = i => !( ( NodeViewModel )i ).IsFilteredOut;
+                    myVisibleChildren = CollectionViewSource.GetDefaultView(Children);
+                    myVisibleChildren.Filter = i => !((NodeViewModel)i).IsFilteredOut;
 
-                    OnPropertyChanged( "VisibleChildren" );
+                    OnPropertyChanged("VisibleChildren");
                 }
                 return myVisibleChildren;
             }

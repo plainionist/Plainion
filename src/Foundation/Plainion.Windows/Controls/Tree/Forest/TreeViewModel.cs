@@ -5,40 +5,11 @@ namespace Plainion.Windows.Controls.Tree.Forest
     public class TreeViewModel : NodeViewModelBase, IDropable
     {
         private string myFilter;
-        private string myScope;
         private bool myIsSelected;
 
         public TreeViewModel( INodeViewModelFactory nodeViewModelFactory)
             : base( nodeViewModelFactory )
         {
-            //ProjectService.ProjectChanged += OnSourceLoaded;
-        }
-
-        //private void OnSourceLoaded( object sender, EventArgs e )
-        //{
-        //    Node = ProjectService.Project.GetScope( Scope );
-
-        //    if( AutoExpandAllAfterLoaded )
-        //    {
-        //        ExpandAll();
-        //    }
-        //}
-
-        public string Scope
-        {
-            get { return myScope; }
-            set { SetProperty( ref myScope, value ); }
-        }
-
-        public bool AutoExpandAllAfterLoaded
-        {
-            get;
-            set;
-        }
-
-        public string Title
-        {
-            get { return Scope; }
         }
 
         // needed for tab selection

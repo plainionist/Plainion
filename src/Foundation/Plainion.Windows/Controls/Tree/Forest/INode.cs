@@ -9,11 +9,7 @@ namespace Plainion.Windows.Controls.Tree.Forest
 
         bool IsExpanded { get; set; }
 
-        string Caption { get; set; }
-
-        string Id { get; set; }
-
-        string Origin { get; set; }
+        string Text { get; set; }
 
         ObservableCollection<INode> Children { get; }
     }

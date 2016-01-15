@@ -4,21 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:pn="http://github.com/ronin4net/plainion"
-             xmlns:prism="http://www.codeplex.com/prism"
              xmlns:controls="clr-namespace:Plainion.Windows.Controls"
              xmlns:interactivity="clr-namespace:Plainion.Windows.Interactivity"
              xmlns:dragDrop="clr-namespace:Plainion.Windows.Interactivity.DragDrop"
+             xmlns:windows="clr-namespace:Plainion.Windows"
              mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300" Focusable="True">
     <DockPanel LastChildFill="True">
         <Grid DockPanel.Dock="Top"  HorizontalAlignment="Stretch">
             <controls:SearchTextBox SearchMode="Instant" Text="{Binding Path=Filter, Mode=TwoWay}" SearchEventTimeDelay="0" LabelText="Filter"/>
         </Grid>
+        
         <TreeView Margin="0,3,0,0" ItemsSource="{Binding VisibleChildren}" BorderThickness="0" Focusable="True">
             <i:Interaction.Behaviors>
                 <interactivity:FocusOnClickBehavior/>
                 <dragDrop:FrameworkElementDropBehavior/>
             </i:Interaction.Behaviors>
+            
             <TreeView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="New" Command="{Binding NewCommand}" InputGestureText="Ctrl+N"/>
@@ -27,11 +28,13 @@
                     <MenuItem Header="Collapse all" Command="{Binding CollapseAllCommand}" InputGestureText="Ctrl+-"/>
                 </ContextMenu>
             </TreeView.ContextMenu>
+            
             <TreeView.InputBindings>
                 <KeyBinding Key="OemPlus" Modifiers="Control" Command="{Binding ExpandAllCommand}"/>
                 <KeyBinding Key="OemMinus" Modifiers="Control" Command="{Binding CollapseAllCommand}"/>
                 <KeyBinding Key="N" Modifiers="Control" Command="{Binding NewCommand}" />
             </TreeView.InputBindings>
+            
             <TreeView.Resources>
                 <!-- x:Shared="False" forces the new creation of that object whenever referenced -->
                 <InputBindingCollection x:Shared="False" x:Key="InputBindings">
@@ -39,6 +42,7 @@
                     <KeyBinding Key="N" Modifiers="Control" Command="{Binding NewCommand}" />
                 </InputBindingCollection>
             </TreeView.Resources>
+            
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding VisibleChildren}">
                     <Grid HorizontalAlignment="Stretch">
@@ -47,14 +51,12 @@
                                 <MenuItem Header="New" Command="{Binding NewCommand}" InputGestureText="Ctrl+N"/>
                                 <MenuItem Header="Delete" Command="{Binding DeleteCommand}"/>
                                 <Separator/>
-                                <MenuItem Header="Push back to origin" Command="{Binding PushBackToOriginCommand}"/>
-                                <Separator/>
                                 <MenuItem Header="Expand all" Command="{Binding ExpandAllCommand}" InputGestureText="Ctrl++"/>
                                 <MenuItem Header="Collapse all" Command="{Binding CollapseAllCommand}" InputGestureText="Ctrl+-"/>
                             </ContextMenu>
                         </Grid.ContextMenu>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch" Background="Transparent">
-                            <TextBlock VerticalAlignment="Center" Text="{Binding Caption}" Padding="3" HorizontalAlignment="Stretch" />
+                            <TextBlock VerticalAlignment="Center" Text="{Binding Text}" Padding="3" HorizontalAlignment="Stretch" />
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding ContentHint}"
                                    Margin="5,0,0,0" Foreground="Green"/>
                             <i:Interaction.Behaviors>
@@ -70,13 +72,14 @@
                     </Grid>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
+            
             <TreeView.ItemContainerStyle>
                 <!-- http://leecampbell.blogspot.de/2009/01/horizontal-stretch-on-treeviewitems.html -->
                 <Style TargetType="TreeViewItem" BasedOn="{StaticResource {x:Type TreeViewItem}}">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                     <Setter Property="IsExpanded" Value="{Binding Path=IsExpanded, Mode=TwoWay}"/>
                     <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay}"/>
-                    <Setter Property="pn:InputBindingsExtension.InputBindings" Value="{StaticResource InputBindings}"/>
+                    <Setter Property="windows:InputBindingsExtension.InputBindings" Value="{StaticResource InputBindings}"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="TreeViewItem">

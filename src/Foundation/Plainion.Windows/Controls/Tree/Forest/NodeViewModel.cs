@@ -9,49 +9,32 @@ namespace Plainion.Windows.Controls.Tree.Forest
     {
         private bool myIsSelected;
 
-        internal NodeViewModel( INode node, INodeViewModelFactory nodeViewModelFactory )
-            : base( nodeViewModelFactory)
+        internal NodeViewModel(INode node, INodeViewModelFactory nodeViewModelFactory)
+            : base(nodeViewModelFactory)
         {
             Node = node;
 
             node.PropertyChanged += OnNodePropertyChanged;
 
-            MouseDownCommand = new DelegateCommand<MouseButtonEventArgs>( OnMouseDown );
-            EditNodeCommand = new DelegateCommand( OnEditNode );
-            DeleteCommand = new DelegateCommand( DeleteChild );
-            PushBackToOriginCommand = new DelegateCommand( PushBackToOrigin, () => Origin != null );
+            MouseDownCommand = new DelegateCommand<MouseButtonEventArgs>(OnMouseDown);
+            EditNodeCommand = new DelegateCommand(OnEditNode);
+            DeleteCommand = new DelegateCommand(DeleteChild);
         }
 
-        public DelegateCommand PushBackToOriginCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand EditNodeCommand { get; private set; }
 
-        public ICommand EditNodeCommand
+        private void OnActivated(INode node)
         {
-            get;
-            private set;
-        }
-
-        private void PushBackToOrigin()
-        {
-            //var originNode = ProjectService.Project.GetNode( Origin );
-            //ProjectService.Project.AddChildTo( Node, originNode );
-        }
-
-        private void OnActivated( INode node )
-        {
-            if( Node == node )
+            if (Node == node)
             {
                 Node.Parent.IsExpanded = true;
                 IsSelected = true;
             }
         }
 
-        private void OnSelected( INode node )
+        private void OnSelected(INode node)
         {
-            if( Node == node )
+            if (Node == node)
             {
                 IsSelected = true;
             }
@@ -68,53 +51,18 @@ namespace Plainion.Windows.Controls.Tree.Forest
             private set;
         }
 
-        private void OnNodePropertyChanged( object sender, PropertyChangedEventArgs e )
+        private void OnNodePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if( e.PropertyName == "Caption" || e.PropertyName == "IsExpanded" )
+            if (e.PropertyName == "Caption" || e.PropertyName == "IsExpanded")
             {
-                OnPropertyChanged( e.PropertyName );
+                OnPropertyChanged(e.PropertyName);
             }
-
-            if( e.PropertyName == "Origin" )
-            {
-                PushBackToOriginCommand.RaiseCanExecuteChanged();
-            }
-        }
-
-        public string Id
-        {
-            get { return Node.Id; }
         }
 
         public string Caption
         {
-            get { return string.IsNullOrEmpty( Node.Caption ) ? "<empty>" : Node.Caption; }
+            get { return string.IsNullOrEmpty(Node.Text) ? "<empty>" : Node.Text; }
             set { /*ProjectService.Project.ChangeCaption( Node, value );*/ }
-        }
-
-        public string Origin
-        {
-            get { return Node.Origin; }
-        }
-
-        public string ToolTip
-        {
-            get
-            {
-                if( string.IsNullOrEmpty( Origin ) )
-                {
-                    return null;
-                }
-
-                //var originNode = ProjectService.Project.GetNode( Origin );
-                //if( originNode == null )
-                //{
-                //    return null;
-                //}
-
-                //return string.Join( "/", originNode.GetPathToRoot().Reverse().Select( n => n.Caption ) );
-                return string.Empty;
-            }
         }
 
         public bool IsSelected
@@ -122,17 +70,17 @@ namespace Plainion.Windows.Controls.Tree.Forest
             get { return myIsSelected; }
             set
             {
-                if( myIsSelected == value )
+                if (myIsSelected == value)
                 {
                     return;
                 }
 
                 myIsSelected = value;
-                OnPropertyChanged( "IsSelected" );
+                OnPropertyChanged("IsSelected");
 
-                if( myIsSelected )
+                if (myIsSelected)
                 {
-                   // EventAggregator.GetEvent<NodeSelectedEvent>().Publish( Node );
+                    // EventAggregator.GetEvent<NodeSelectedEvent>().Publish( Node );
                 }
             }
         }
@@ -145,24 +93,24 @@ namespace Plainion.Windows.Controls.Tree.Forest
 
         string IDropable.DataFormat
         {
-            get { return typeof( NodeViewModel ).FullName; }
+            get { return typeof(NodeViewModel).FullName; }
         }
 
-        bool IDropable.IsDropAllowed( object data, DropLocation location )
+        bool IDropable.IsDropAllowed(object data, DropLocation location)
         {
             return true;
         }
 
-        void IDropable.Drop( object data, DropLocation location )
+        void IDropable.Drop(object data, DropLocation location)
         {
             var droppedElement = data as NodeViewModel;
 
-            if( droppedElement == null )
+            if (droppedElement == null)
             {
                 return;
             }
 
-            if( droppedElement.Id == Id )
+            if (object.ReferenceEquals(droppedElement, this))
             {
                 //if dragged and dropped yourself, don't need to do anything
                 return;
@@ -185,7 +133,7 @@ namespace Plainion.Windows.Controls.Tree.Forest
         {
             get
             {
-                return typeof( NodeViewModel );
+                return typeof(NodeViewModel);
             }
         }
 
@@ -195,15 +143,15 @@ namespace Plainion.Windows.Controls.Tree.Forest
             private set;
         }
 
-        internal void ApplyFilter( string filter )
+        internal void ApplyFilter(string filter)
         {
-            IsFilteredOut = Caption.IndexOf( filter, StringComparison.OrdinalIgnoreCase ) < 0;
+            IsFilteredOut = Caption.IndexOf(filter, StringComparison.OrdinalIgnoreCase) < 0;
 
-            foreach( var child in Children )
+            foreach (var child in Children)
             {
-                child.ApplyFilter( filter );
+                child.ApplyFilter(filter);
 
-                if( !child.IsFilteredOut )
+                if (!child.IsFilteredOut)
                 {
                     IsFilteredOut = false;
                 }
@@ -226,15 +174,11 @@ namespace Plainion.Windows.Controls.Tree.Forest
             base.ExpandAll();
         }
 
-        public ICommand MouseDownCommand
-        {
-            get;
-            private set;
-        }
+        public ICommand MouseDownCommand { get; private set; }
 
-        private void OnMouseDown( MouseButtonEventArgs args )
+        private void OnMouseDown(MouseButtonEventArgs args)
         {
-            if( args.ClickCount == 2 )
+            if (args.ClickCount == 2)
             {
                 //EventAggregator.GetEvent<NodeActivatedEvent>().Publish( Node );
             }
