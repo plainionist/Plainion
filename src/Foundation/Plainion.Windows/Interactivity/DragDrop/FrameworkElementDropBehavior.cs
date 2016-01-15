@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Interactivity;
 
 namespace Plainion.Windows.Interactivity.DragDrop
@@ -41,7 +40,7 @@ namespace Plainion.Windows.Interactivity.DragDrop
         {
             if( myDataFormat != null && e.Data.GetDataPresent( myDataFormat ) )
             {
-                var target = AssociatedObject.DataContext as IDropable;
+                var target = AssociatedObject as IDropable ?? AssociatedObject.DataContext as IDropable;
                 target.Drop( e.Data.GetData( myDataFormat ), DropLocation.InPlace );
             }
 
@@ -59,8 +58,8 @@ namespace Plainion.Windows.Interactivity.DragDrop
 
             if( myDataFormat != null && e.Data.GetDataPresent( myDataFormat ) )
             {
-                var target = AssociatedObject.DataContext as IDropable;
-                if( target.IsDropAllowed( e.Data.GetData( myDataFormat ), DropLocation.InPlace ) )
+                var target = AssociatedObject as IDropable ?? AssociatedObject.DataContext as IDropable;
+                if (target.IsDropAllowed(e.Data.GetData(myDataFormat), DropLocation.InPlace))
                 {
                     e.Effects = DropAcceptedEffect;
                 }
@@ -74,10 +73,10 @@ namespace Plainion.Windows.Interactivity.DragDrop
             //if the DataContext implements IDropable, record the data type that can be dropped
             if( myDataFormat == null )
             {
-                var dropObject = AssociatedObject.DataContext as IDropable;
-                if( dropObject != null )
+                var target = AssociatedObject as IDropable ?? AssociatedObject.DataContext as IDropable;
+                if (target != null)
                 {
-                    myDataFormat = dropObject.DataFormat;
+                    myDataFormat = target.DataFormat;
                 }
             }
 

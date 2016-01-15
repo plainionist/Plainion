@@ -5,18 +5,10 @@ namespace Plainion.Windows.Controls.Tree.Forest
     public class TreeViewModel : NodeViewModelBase, IDropable
     {
         private string myFilter;
-        private bool myIsSelected;
 
         public TreeViewModel( INodeViewModelFactory nodeViewModelFactory)
             : base( nodeViewModelFactory )
         {
-        }
-
-        // needed for tab selection
-        public bool IsSelected
-        {
-            get { return myIsSelected; }
-            set { SetProperty( ref myIsSelected, value ); }
         }
 
         public string Filter
