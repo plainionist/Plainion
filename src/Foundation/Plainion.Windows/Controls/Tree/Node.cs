@@ -1,22 +1,25 @@
 ﻿using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.Linq;
 using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Input;
 using Plainion.Windows.Interactivity.DragDrop;
 
-namespace Plainion.Windows.Controls.Tree.Forest
+namespace Plainion.Windows.Controls.Tree
 {
     public class Node : BindableBase, IDropable, IDragable
     {
         private string myText;
-        private bool myIsSelected;
-        private ObservableCollection<Node> myChildren;
+        private IReadOnlyCollection<Node> myChildren;
         private ICollectionView myVisibleChildren;
         private bool myShowContentHint;
+        private bool myIsSelected;
         private bool myIsExpanded;
+        private bool myIsChecked;
+        private bool myIsInEditMode;
 
-        internal Node()
+        public Node()
         {
             NewCommand = new DelegateCommand(OnAddNewChild);
             ExpandAllCommand = new DelegateCommand(ExpandAll);
@@ -27,8 +30,160 @@ namespace Plainion.Windows.Controls.Tree.Forest
             MouseDownCommand = new DelegateCommand<MouseButtonEventArgs>(OnMouseDown);
             EditNodeCommand = new DelegateCommand(OnEditNode);
             DeleteCommand = new DelegateCommand(DeleteChild);
+
+            EditNodeCommand = new DelegateCommand(() => IsInEditMode = true);
         }
 
+        public string Text
+        {
+            get { return myText; }
+            set { SetProperty(ref myText, value); }
+        }
+
+        public bool IsInEditMode
+        {
+            get { return myIsInEditMode; }
+            set
+            {
+                if (Text == null && value == true)
+                {
+                    // we first need to set some dummy text so that the EditableTextBlock control becomes visible again
+                    Text = "<empty>";
+                }
+
+                if (SetProperty(ref myIsInEditMode, value))
+                {
+                    if (!myIsInEditMode && Text == "<empty>")
+                    {
+                        Text = null;
+                    }
+                }
+            }
+        }
+
+        public ICommand EditNodeCommand { get; private set; }
+
+        public bool IsFilteredOut { get; private set; }
+
+        // TODO: implement
+        public string FormattedText
+        {
+            get { return Text; }
+        }
+
+        public IReadOnlyCollection<Node> Children
+        {
+            get { return myChildren; }
+            set
+            {
+                if (SetProperty(ref myChildren, value))
+                {
+                    if (myChildren != null)
+                    {
+                        foreach (var t in myChildren)
+                        {
+                            PropertyChangedEventManager.AddHandler(t, OnChildIsCheckedChanged, "IsChecked");
+                        }
+                    }
+                }
+
+                myVisibleChildren = null;
+                OnPropertyChanged(() => VisibleChildren);
+            }
+        }
+
+        private void OnChildIsCheckedChanged(object sender, PropertyChangedEventArgs e)
+        {
+            OnPropertyChanged(() => IsChecked);
+        }
+
+        public bool? IsChecked
+        {
+            get
+            {
+                if (myChildren == null)
+                {
+                    return myIsChecked;
+                }
+
+                if (Children.All(t => t.IsChecked == true))
+                {
+                    return true;
+                }
+
+                if (Children.All(t => !t.IsChecked == true))
+                {
+                    return false;
+                }
+
+                return null;
+            }
+            set
+            {
+                if (myChildren == null)
+                {
+                    myIsChecked = value == null ? false : value.Value;
+                }
+                else
+                {
+                    foreach (var t in Children)
+                    {
+                        t.IsChecked = value.HasValue && value.Value;
+                    }
+                }
+
+                OnPropertyChanged(() => IsChecked);
+            }
+        }
+
+        public ICollectionView VisibleChildren
+        {
+            get
+            {
+                if (myVisibleChildren == null && myChildren != null)
+                {
+                    myVisibleChildren = CollectionViewSource.GetDefaultView(Children);
+                    myVisibleChildren.Filter = i => !((Node)i).IsFilteredOut;
+
+                    OnPropertyChanged(() => VisibleChildren);
+                }
+                return myVisibleChildren;
+            }
+        }
+
+        internal void ApplyFilter(string filter)
+        {
+            var tokens = filter.Split('|');
+            filter = tokens[0];
+            var threadFilter = tokens.Length > 1 ? tokens[1] : filter;
+
+            if (string.IsNullOrWhiteSpace(filter))
+            {
+                IsFilteredOut = false;
+            }
+            else if (filter == "*")
+            {
+                IsFilteredOut = Text == null;
+            }
+            else
+            {
+                IsFilteredOut = (Text == null || !Text.Contains(filter, StringComparison.OrdinalIgnoreCase))
+                    && !4242.ToString().Contains(filter);
+            }
+
+            foreach (var thread in Children)
+            {
+                thread.ApplyFilter(threadFilter);
+
+                if (!thread.IsFilteredOut && tokens.Length == 1)
+                {
+                    IsFilteredOut = false;
+                }
+            }
+
+            VisibleChildren.Refresh();
+        }
+        
         public ICommand ExpandAllCommand { get; private set; }
 
         public ICommand CollapseAllCommand { get; private set; }
@@ -62,7 +217,7 @@ namespace Plainion.Windows.Controls.Tree.Forest
         public ICommand NewCommand { get; private set; }
 
 
-       public bool ShowContentHint
+        public bool ShowContentHint
         {
             get { return myShowContentHint; }
             set
@@ -91,37 +246,6 @@ namespace Plainion.Windows.Controls.Tree.Forest
             }
         }
 
-        public ObservableCollection<Node> Children
-        {
-            get { return myChildren; }
-            set
-            {
-                if (SetProperty(ref myChildren, value))
-                {
-                }
-
-                myVisibleChildren = null;
-                OnPropertyChanged(() => VisibleChildren);
-            }
-        }
-
-        public ICollectionView VisibleChildren
-        {
-            get
-            {
-                if (myVisibleChildren == null)
-                {
-                    myVisibleChildren = CollectionViewSource.GetDefaultView(Children);
-                    myVisibleChildren.Filter = i => !((Node)i).IsFilteredOut;
-
-                    OnPropertyChanged("VisibleChildren");
-                }
-                return myVisibleChildren;
-            }
-        }
-
-        public ICommand EditNodeCommand { get; private set; }
-
         //private void OnActivated(INode node)
         //{
         //    if (Node == node)
@@ -144,17 +268,7 @@ namespace Plainion.Windows.Controls.Tree.Forest
             //ProjectService.Project.DeleteNode( Node );
         }
 
-        public ICommand DeleteCommand
-        {
-            get;
-            private set;
-        }
-
-        public string Text
-        {
-            get { return myText; }
-            set { myText=value;}
-        }
+        public ICommand DeleteCommand{get;private set;}
 
         public bool IsSelected
         {
@@ -226,29 +340,6 @@ namespace Plainion.Windows.Controls.Tree.Forest
             {
                 return typeof(Node);
             }
-        }
-
-        public bool IsFilteredOut
-        {
-            get;
-            private set;
-        }
-
-        internal void ApplyFilter(string filter)
-        {
-            IsFilteredOut = Text.IndexOf(filter, StringComparison.OrdinalIgnoreCase) < 0;
-
-            foreach (var child in Children)
-            {
-                child.ApplyFilter(filter);
-
-                if (!child.IsFilteredOut)
-                {
-                    IsFilteredOut = false;
-                }
-            }
-
-            VisibleChildren.Refresh();
         }
 
         public ICommand MouseDownCommand { get; private set; }
