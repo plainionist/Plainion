@@ -59,14 +59,10 @@
     <Compile Include="Controls\Tree\Cmp\TreeEditor.xaml.cs">
       <DependentUpon>TreeEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Tree\Forest\ExtendedTreeView.xaml.cs">
-      <DependentUpon>ExtendedTreeView.xaml</DependentUpon>
+    <Compile Include="Controls\Tree\Forest\TreeEditor.xaml.cs">
+      <DependentUpon>TreeEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Tree\Forest\INode.cs" />
-    <Compile Include="Controls\Tree\Forest\INodeViewModelFactory.cs" />
-    <Compile Include="Controls\Tree\Forest\NodeViewModel.cs" />
-    <Compile Include="Controls\Tree\Forest\NodeViewModelBase.cs" />
-    <Compile Include="Controls\Tree\Forest\TreeViewModel.cs" />
+    <Compile Include="Controls\Tree\Forest\Node.cs" />
     <Compile Include="ConverterChain.cs" />
     <Compile Include="AndConverter.cs" />
     <Compile Include="Diagnostics\DebugTextWriter.cs" />
@@ -135,7 +131,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Tree\Forest\ExtendedTreeView.xaml">
+    <Page Include="Controls\Tree\Forest\TreeEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

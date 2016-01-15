@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Plainion.Windows.Controls.Tree.Forest.ExtendedTreeView"
+﻿<UserControl x:Class="Plainion.Windows.Controls.Tree.Forest.TreeEditor"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,13 +8,14 @@
              xmlns:interactivity="clr-namespace:Plainion.Windows.Interactivity"
              xmlns:dragDrop="clr-namespace:Plainion.Windows.Interactivity.DragDrop"
              xmlns:windows="clr-namespace:Plainion.Windows"
+             x:Name="_this"
              mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300" Focusable="True">
     <DockPanel LastChildFill="True">
         <Grid DockPanel.Dock="Top"  HorizontalAlignment="Stretch">
-            <controls:SearchTextBox SearchMode="Instant" Text="{Binding Path=Filter, Mode=TwoWay}" SearchEventTimeDelay="0" LabelText="Filter"/>
+            <controls:SearchTextBox SearchMode="Instant" Text="{Binding Path=Filter, Mode=TwoWay, ElementName=_this}" SearchEventTimeDelay="0" LabelText="Filter"/>
         </Grid>
-        
-        <TreeView Margin="0,3,0,0" ItemsSource="{Binding VisibleChildren}" BorderThickness="0" Focusable="True">
+
+        <TreeView Margin="0,3,0,0" ItemsSource="{Binding Root.VisibleChildren, ElementName=_this}" BorderThickness="0" Focusable="True">
             <i:Interaction.Behaviors>
                 <interactivity:FocusOnClickBehavior/>
                 <dragDrop:FrameworkElementDropBehavior/>
@@ -44,7 +45,7 @@
             </TreeView.Resources>
             
             <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding VisibleChildren}">
+                <HierarchicalDataTemplate ItemsSource="{Binding Root.VisibleChildren, ElementName=_this}">
                     <Grid HorizontalAlignment="Stretch">
                         <Grid.ContextMenu>
                             <ContextMenu>
