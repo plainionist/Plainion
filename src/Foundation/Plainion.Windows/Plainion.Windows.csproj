@@ -62,6 +62,7 @@
       <DependentUpon>TreeEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Tree\Node.cs" />
+    <Compile Include="Controls\Tree\TreeEditorBase.cs" />
     <Compile Include="ConverterChain.cs" />
     <Compile Include="AndConverter.cs" />
     <Compile Include="Diagnostics\DebugTextWriter.cs" />

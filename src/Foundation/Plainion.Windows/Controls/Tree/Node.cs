@@ -8,6 +8,12 @@ using Plainion.Windows.Interactivity.DragDrop;
 
 namespace Plainion.Windows.Controls.Tree
 {
+    /// <summary>
+    /// TODO:
+    /// - how to handle modification commands?
+    /// - how to sync with model?
+    /// - how to separate aspects?
+    /// </summary>
     public class Node : BindableBase, IDropable, IDragable
     {
         private string myText;
@@ -21,17 +27,16 @@ namespace Plainion.Windows.Controls.Tree
 
         public Node()
         {
-            NewCommand = new DelegateCommand(OnAddNewChild);
             ExpandAllCommand = new DelegateCommand(ExpandAll);
             CollapseAllCommand = new DelegateCommand(CollapseAll);
 
             ShowContentHint = false;
 
             MouseDownCommand = new DelegateCommand<MouseButtonEventArgs>(OnMouseDown);
+
+            NewCommand = new DelegateCommand(OnAddNewChild);
             EditNodeCommand = new DelegateCommand(OnEditNode);
             DeleteCommand = new DelegateCommand(DeleteChild);
-
-            EditNodeCommand = new DelegateCommand(() => IsInEditMode = true);
         }
 
         public string Text
@@ -183,7 +188,7 @@ namespace Plainion.Windows.Controls.Tree
 
             VisibleChildren.Refresh();
         }
-        
+
         public ICommand ExpandAllCommand { get; private set; }
 
         public ICommand CollapseAllCommand { get; private set; }
@@ -215,7 +220,6 @@ namespace Plainion.Windows.Controls.Tree
         }
 
         public ICommand NewCommand { get; private set; }
-
 
         public bool ShowContentHint
         {
@@ -268,7 +272,7 @@ namespace Plainion.Windows.Controls.Tree
             //ProjectService.Project.DeleteNode( Node );
         }
 
-        public ICommand DeleteCommand{get;private set;}
+        public ICommand DeleteCommand { get; private set; }
 
         public bool IsSelected
         {
@@ -336,10 +340,7 @@ namespace Plainion.Windows.Controls.Tree
 
         Type IDragable.DataType
         {
-            get
-            {
-                return typeof(Node);
-            }
+            get { return typeof(Node); }
         }
 
         public ICommand MouseDownCommand { get; private set; }
@@ -354,6 +355,7 @@ namespace Plainion.Windows.Controls.Tree
 
         private void OnEditNode()
         {
+            IsInEditMode = true;
             //EventAggregator.GetEvent<NodeActivatedEvent>().Publish( Node );
         }
     }

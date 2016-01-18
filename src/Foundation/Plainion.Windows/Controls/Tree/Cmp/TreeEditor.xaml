@@ -1,13 +1,14 @@
-﻿<UserControl x:Class="Plainion.Windows.Controls.Tree.Cmp.TreeEditor"
+﻿<tree:TreeEditorBase x:Class="Plainion.Windows.Controls.Tree.Cmp.TreeEditor"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:controls="clr-namespace:Plainion.Windows.Controls"
              xmlns:windows="clr-namespace:Plainion.Windows"
+             xmlns:tree="clr-namespace:Plainion.Windows.Controls.Tree"
              x:Name="_this"
              mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.Resources>
+    <tree:TreeEditorBase.Resources>
         <DataTemplate x:Key="NodeTemplate">
             <StackPanel Orientation="Horizontal" Height="22">
                 <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}" IsThreeState="True" Focusable="False" VerticalAlignment="Center" Margin="0,0,3,0"/>
@@ -31,7 +32,7 @@
         <InputBindingCollection x:Shared="false"  x:Key="InputBindings">
             <KeyBinding Key="F2" Command="{Binding EditNodeCommand}" />
         </InputBindingCollection>
-    </UserControl.Resources>
+    </tree:TreeEditorBase.Resources>
     
     <Grid>
         <Grid.RowDefinitions>
@@ -61,4 +62,4 @@
             </TreeView.ItemTemplate>
         </TreeView>
     </Grid>
-</UserControl>
+</tree:TreeEditorBase>
