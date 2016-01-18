@@ -2,10 +2,10 @@
 using Microsoft.Practices.Prism.MefExtensions.Modularity;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
+using Plainion.RI.Controls;
 using Plainion.RI.Dialogs;
 using Plainion.RI.InteractionRequests;
 using Plainion.RI.InteractionRequests.Dialogs;
-using Plainion.RI.NotePad;
 
 namespace Plainion.RI
 {
@@ -34,8 +34,9 @@ namespace Plainion.RI
             RegionManager.RegisterViewWithRegion("RegionOnPopupWindowContentControlView", typeof(ComplexDialog));
             RegionManager.RegisterViewWithRegion("RegionWithPopupWindowActionExtensionsView", typeof(ComplexDialog));
 
-            RegionManager.RegisterViewWithRegion(RegionNames.NotePad, typeof(NotePadView));
-            RegionManager.RegisterViewWithRegion(RegionNames.NotePad, typeof(NoteBookView));
+            RegionManager.RegisterViewWithRegion(RegionNames.Controls, typeof(NotePadView));
+            RegionManager.RegisterViewWithRegion(RegionNames.Controls, typeof(NoteBookView));
+            RegionManager.RegisterViewWithRegion(RegionNames.Controls, typeof(TreeEditorView));
         }
     }
 }

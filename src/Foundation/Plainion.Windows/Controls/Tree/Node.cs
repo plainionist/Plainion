@@ -14,7 +14,7 @@ namespace Plainion.Windows.Controls.Tree
     /// - how to sync with model?
     /// - how to separate aspects?
     /// </summary>
-    public class Node : BindableBase, IDropable, IDragable
+    public class Node : DummyBindableBase, IDropable, IDragable
     {
         private string myText;
         private IReadOnlyCollection<Node> myChildren;

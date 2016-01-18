@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.Composition;
 using System.Windows.Controls;
 
-namespace Plainion.RI.NotePad
+namespace Plainion.RI.Controls
 {
     [Export]
-    public partial class NotePadView : UserControl
+    public partial class NoteBookView : UserControl
     {
-        public NotePadView()
+        public NoteBookView()
         {
             InitializeComponent();
         }

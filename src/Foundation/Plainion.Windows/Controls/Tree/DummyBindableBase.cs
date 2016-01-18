@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace Plainion.Windows.Controls.Tree
 {
-    public class BindableBase : INotifyPropertyChanged
+    public class DummyBindableBase : INotifyPropertyChanged
     {
         protected void OnPropertyChanged(string propertyName)
         {

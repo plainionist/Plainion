@@ -75,6 +75,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Controls\TreeEditorView.xaml.cs">
+      <DependentUpon>TreeEditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TreeEditorViewModel.cs" />
     <Compile Include="CoreModule.cs" />
     <Compile Include="Dialogs\SelectFolderInteractionRequestView.xaml.cs">
       <DependentUpon>SelectFolderInteractionRequestView.xaml</DependentUpon>
@@ -121,14 +125,18 @@
     <Compile Include="InteractionRequests\CustomNotificationViewModel.cs" />
     <Compile Include="InteractionRequests\DefaultWindowWithViewAsContentViewModel.cs" />
     <Compile Include="InteractionRequests\Model.cs" />
-    <Compile Include="NotePad\NoteBookView.xaml.cs">
+    <Compile Include="Controls\NoteBookView.xaml.cs">
       <DependentUpon>NoteBookView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NotePad\NotePadView.xaml.cs">
+    <Compile Include="Controls\NotePadView.xaml.cs">
       <DependentUpon>NotePadView.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegionNames.cs" />
     <Compile Include="ShellViewModel.cs" />
+    <Page Include="Controls\TreeEditorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\SelectFolderInteractionRequestView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -173,11 +181,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="NotePad\NoteBookView.xaml">
+    <Page Include="Controls\NoteBookView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="NotePad\NotePadView.xaml">
+    <Page Include="Controls\NotePadView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
