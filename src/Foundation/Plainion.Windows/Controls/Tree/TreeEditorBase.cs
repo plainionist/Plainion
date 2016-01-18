@@ -7,8 +7,17 @@ namespace Plainion.Windows.Controls.Tree
 {
     public class TreeEditorBase : UserControl, IDropable
     {
-        public static DependencyProperty RootProperty = DependencyProperty.Register("Root", typeof(Node), typeof(TreeEditor),
+        public static DependencyProperty FilterLabelProperty = DependencyProperty.Register("FilterLabel", typeof(string), typeof(TreeEditorBase),
          new FrameworkPropertyMetadata(null));
+
+        public string FilterLabel
+        {
+            get { return (string)GetValue(FilterLabelProperty); }
+            set { SetValue(FilterLabelProperty, value); }
+        }
+
+        public static DependencyProperty RootProperty = DependencyProperty.Register("Root", typeof(Node), typeof(TreeEditorBase),
+            new FrameworkPropertyMetadata(null));
 
         public Node Root
         {
@@ -16,7 +25,7 @@ namespace Plainion.Windows.Controls.Tree
             set { SetValue(RootProperty, value); }
         }
 
-        public static DependencyProperty FilterProperty = DependencyProperty.Register("Filter", typeof(string), typeof(TreeEditor),
+        public static DependencyProperty FilterProperty = DependencyProperty.Register("Filter", typeof(string), typeof(TreeEditorBase),
             new FrameworkPropertyMetadata(OnFilterChanged));
 
         private static void OnFilterChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

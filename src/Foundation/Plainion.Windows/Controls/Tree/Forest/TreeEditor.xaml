@@ -11,9 +11,18 @@
              xmlns:tree="clr-namespace:Plainion.Windows.Controls.Tree"
              x:Name="_this"
              mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300" Focusable="True">
+    <tree:TreeEditorBase.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Controls/Tree/TreeEditorBase.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </tree:TreeEditorBase.Resources>
+    
     <DockPanel LastChildFill="True">
         <Grid DockPanel.Dock="Top"  HorizontalAlignment="Stretch">
-            <controls:SearchTextBox SearchMode="Instant" Text="{Binding Path=Filter, Mode=TwoWay, ElementName=_this}" SearchEventTimeDelay="0" LabelText="Filter"/>
+            <controls:SearchTextBox SearchMode="Instant" Text="{Binding Path=Filter, Mode=TwoWay, ElementName=_this}" SearchEventTimeDelay="0" 
+                                    LabelText="{Binding FilterLabel, ElementName=_this}"/>
         </Grid>
 
         <TreeView Margin="0,3,0,0" ItemsSource="{Binding Root.VisibleChildren, ElementName=_this}" BorderThickness="0" Focusable="True">
