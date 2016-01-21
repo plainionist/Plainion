@@ -1,4 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 namespace Plainion.Windows.Controls.Tree
@@ -10,6 +13,24 @@ namespace Plainion.Windows.Controls.Tree
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             RaisePropertyChanged(propertyName);
+        }
+
+        protected string GetPropertyName<T>(Expression<Func<T>> expr)
+        {
+            Contract.RequiresNotNull(expr, "expr");
+
+            var memberExpr = expr.Body as MemberExpression;
+            Contract.Requires(memberExpr != null, "Given expression is not a member expression");
+
+            var propertyInfo = memberExpr.Member as PropertyInfo;
+            Contract.Requires(propertyInfo != null, "Given member expression is not a property");
+
+            return propertyInfo.Name;
+        }
+
+        protected void OnPropertyChanged<T>(Expression<Func<T>> expr)
+        {
+            OnPropertyChanged(GetPropertyName(expr));
         }
 
         private void RaisePropertyChanged(string propertyName)
@@ -26,7 +47,7 @@ namespace Plainion.Windows.Controls.Tree
             {
                 return false;
             }
-            
+
             storage = value;
 
             RaisePropertyChanged(propertyName);

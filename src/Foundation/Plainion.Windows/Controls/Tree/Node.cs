@@ -87,7 +87,7 @@ namespace Plainion.Windows.Controls.Tree
                     {
                         foreach (var t in myChildren)
                         {
-                            PropertyChangedEventManager.AddHandler(t, OnChildIsCheckedChanged, "IsChecked");
+                            PropertyBinding.Observe(() => t.IsChecked, OnChildIsCheckedChanged);
                         }
                     }
                 }
@@ -98,7 +98,7 @@ namespace Plainion.Windows.Controls.Tree
 
         private void OnChildIsCheckedChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnPropertyChanged("IsChecked");
+            OnPropertyChanged(e.PropertyName);
         }
 
         public bool? IsChecked
@@ -277,7 +277,7 @@ namespace Plainion.Windows.Controls.Tree
             get { return myIsSelected; }
             set
             {
-                if ( SetProperty(ref myIsSelected,value))
+                if (SetProperty(ref myIsSelected, value))
                 {
                     // EventAggregator.GetEvent<NodeSelectedEvent>().Publish( Node );
                 }

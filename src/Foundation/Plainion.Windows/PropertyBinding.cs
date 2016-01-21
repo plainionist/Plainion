@@ -64,5 +64,11 @@ namespace Plainion.Windows
 
             PropertyChangedEventManager.AddHandler( source.Owner, handler, source.PropertyName );
         }
+
+        public static void Observe<T>(Expression<Func<T>> source, EventHandler<PropertyChangedEventArgs> handler)
+        {
+            var prop = BindableProperty.Create(source);
+            BindHandler(prop, handler);
+        }
     }
 }
