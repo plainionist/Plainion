@@ -9,11 +9,30 @@ namespace Plainion.RI.Controls
     {
         public TreeEditorViewModel()
         {
-            Root = new Node { Text = "Root" };
-            Root.Children = new[]
+            Root = new Node
             {
-                new Node{Text="C1"},
-                new Node{Text="C2"}
+                Text = "Root",
+                Children = new[]
+                {
+                    new Node
+                    {
+                        Text="1",
+                        Children = new[]
+                        {
+                            new Node{Text="a"},
+                            new Node{Text="b"}
+                        }
+                    },
+                    new Node
+                    {
+                        Text="2",
+                        Children = new[]
+                        {
+                            new Node{Text="c"},
+                            new Node{Text="d"}
+                        }
+                    }
+                }
             };
         }
 

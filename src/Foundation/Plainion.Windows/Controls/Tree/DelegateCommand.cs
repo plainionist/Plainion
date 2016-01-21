@@ -15,14 +15,13 @@ namespace Plainion.Windows.Controls.Tree
 
         public bool CanExecute(object parameter)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public event EventHandler CanExecuteChanged;
 
         public void Execute(object parameter)
         {
-            throw new NotImplementedException();
         }
 
         internal void RaiseCanExecuteChanged()

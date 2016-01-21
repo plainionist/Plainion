@@ -14,7 +14,7 @@ namespace Plainion.Windows.Controls.Tree
     /// - how to sync with model?
     /// - how to separate aspects?
     /// </summary>
-    public class Node : DummyBindableBase, IDropable, IDragable
+    public class Node : NotifyingBase, IDropable, IDragable
     {
         private string myText;
         private IReadOnlyCollection<Node> myChildren;
@@ -92,14 +92,13 @@ namespace Plainion.Windows.Controls.Tree
                     }
                 }
 
-                myVisibleChildren = null;
-                OnPropertyChanged(() => VisibleChildren);
+                VisibleChildren = null;
             }
         }
 
         private void OnChildIsCheckedChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnPropertyChanged(() => IsChecked);
+            OnPropertyChanged("IsChecked");
         }
 
         public bool? IsChecked
@@ -127,7 +126,7 @@ namespace Plainion.Windows.Controls.Tree
             {
                 if (myChildren == null)
                 {
-                    myIsChecked = value == null ? false : value.Value;
+                    myIsChecked = value != null && value.Value;
                 }
                 else
                 {
@@ -137,7 +136,7 @@ namespace Plainion.Windows.Controls.Tree
                     }
                 }
 
-                OnPropertyChanged(() => IsChecked);
+                OnPropertyChanged();
             }
         }
 
@@ -149,11 +148,10 @@ namespace Plainion.Windows.Controls.Tree
                 {
                     myVisibleChildren = CollectionViewSource.GetDefaultView(Children);
                     myVisibleChildren.Filter = i => !((Node)i).IsFilteredOut;
-
-                    OnPropertyChanged(() => VisibleChildren);
                 }
                 return myVisibleChildren;
             }
+            set { SetProperty(ref myVisibleChildren, value); }
         }
 
         internal void ApplyFilter(string filter)
@@ -279,15 +277,7 @@ namespace Plainion.Windows.Controls.Tree
             get { return myIsSelected; }
             set
             {
-                if (myIsSelected == value)
-                {
-                    return;
-                }
-
-                myIsSelected = value;
-                OnPropertyChanged("IsSelected");
-
-                if (myIsSelected)
+                if ( SetProperty(ref myIsSelected,value))
                 {
                     // EventAggregator.GetEvent<NodeSelectedEvent>().Publish( Node );
                 }

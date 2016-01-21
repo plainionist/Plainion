@@ -92,10 +92,10 @@
             </TreeView.InputBindings>
 
             <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Root.VisibleChildren, ElementName=_this}" ItemTemplate="{StaticResource NodeTemplate}">
-                    <!--
+                <HierarchicalDataTemplate ItemsSource="{Binding VisibleChildren}"
+                                          DataType="{x:Type tree:Node}"
+                                          ItemTemplate="{StaticResource NodeTemplate}">
                     <ContentControl Content="{Binding}" ContentTemplate="{StaticResource NodeTemplate}"/>
-                    -->
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
 
