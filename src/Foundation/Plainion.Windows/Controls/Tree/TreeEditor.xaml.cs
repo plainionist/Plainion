@@ -1,14 +1,19 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using Plainion.Windows.Interactivity.DragDrop;
 
 namespace Plainion.Windows.Controls.Tree
 {
     public partial class TreeEditor : UserControl, IDropable
     {
+        private static readonly RoutedCommand DefaultExpandAllCommand = new RoutedCommand();
+
         public TreeEditor()
         {
             InitializeComponent();
+
+            CommandBindings.Add(new CommandBinding(DefaultExpandAllCommand, OnExpandAll));
         }
 
         public static DependencyProperty FilterLabelProperty = DependencyProperty.Register("FilterLabel", typeof(string), typeof(TreeEditor),
@@ -81,6 +86,27 @@ namespace Plainion.Windows.Controls.Tree
         bool IDropable.IsDropAllowed(object data, DropLocation location)
         {
             return true;
+        }
+
+        public static DependencyProperty ExpandAllCommandProperty = DependencyProperty.Register("ExpandAllCommand", typeof(ICommand), typeof(TreeEditor),
+            new FrameworkPropertyMetadata(DefaultExpandAllCommand));
+
+        public ICommand ExpandAllCommand
+        {
+            get { return (ICommand)GetValue(ExpandAllCommandProperty); }
+            set { SetValue(ExpandAllCommandProperty, value); }
+        }
+
+        private void OnExpandAll(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Parameter != null)
+            {
+                ((Node)e.Parameter).ExpandAll();
+            }
+            else
+            {
+                Root.ExpandAll();
+            }
         }
     }
 }

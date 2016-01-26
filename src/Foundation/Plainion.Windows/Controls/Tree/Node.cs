@@ -27,9 +27,6 @@ namespace Plainion.Windows.Controls.Tree
 
         public Node()
         {
-            ExpandAllCommand = new DelegateCommand(ExpandAll);
-            CollapseAllCommand = new DelegateCommand(CollapseAll);
-
             ShowContentHint = false;
 
             MouseDownCommand = new DelegateCommand<MouseButtonEventArgs>(OnMouseDown);
@@ -187,13 +184,14 @@ namespace Plainion.Windows.Controls.Tree
             VisibleChildren.Refresh();
         }
 
-        public ICommand ExpandAllCommand { get; private set; }
-
-        public ICommand CollapseAllCommand { get; private set; }
-
-        private void ExpandAll()
+        public void ExpandAll()
         {
             IsExpanded = true;
+
+            if (Children == null)
+            {
+                return;
+            }
 
             foreach (var child in Children)
             {
@@ -201,9 +199,14 @@ namespace Plainion.Windows.Controls.Tree
             }
         }
 
-        private void CollapseAll()
+        public void CollapseAll()
         {
             IsExpanded = false;
+
+            if (Children == null)
+            {
+                return;
+            }
 
             foreach (var child in Children)
             {
@@ -287,7 +290,7 @@ namespace Plainion.Windows.Controls.Tree
         public bool IsExpanded
         {
             get { return myIsExpanded; }
-            set { myIsExpanded = value; }
+            set { SetProperty(ref myIsExpanded, value); }
         }
 
         string IDropable.DataFormat
