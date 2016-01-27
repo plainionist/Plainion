@@ -7,13 +7,11 @@ namespace Plainion.Windows.Controls.Tree
 {
     public partial class TreeEditor : UserControl, IDropable
     {
-        private static readonly RoutedCommand DefaultExpandAllCommand = new RoutedCommand();
-
         public TreeEditor()
         {
             InitializeComponent();
 
-            CommandBindings.Add(new CommandBinding(DefaultExpandAllCommand, OnExpandAll));
+            TreeEditorCommands.RegisterCommandBindings(this);
         }
 
         public static DependencyProperty FilterLabelProperty = DependencyProperty.Register("FilterLabel", typeof(string), typeof(TreeEditor),
@@ -89,7 +87,7 @@ namespace Plainion.Windows.Controls.Tree
         }
 
         public static DependencyProperty ExpandAllCommandProperty = DependencyProperty.Register("ExpandAllCommand", typeof(ICommand), typeof(TreeEditor),
-            new FrameworkPropertyMetadata(DefaultExpandAllCommand));
+            new FrameworkPropertyMetadata(TreeEditorCommands.ExpandAll));
 
         public ICommand ExpandAllCommand
         {
@@ -97,16 +95,13 @@ namespace Plainion.Windows.Controls.Tree
             set { SetValue(ExpandAllCommandProperty, value); }
         }
 
-        private void OnExpandAll(object sender, ExecutedRoutedEventArgs e)
+        public static DependencyProperty CollapseAllCommandProperty = DependencyProperty.Register("CollapseAllCommand", typeof(ICommand), typeof(TreeEditor),
+            new FrameworkPropertyMetadata(TreeEditorCommands.CollapseAll));
+
+        public ICommand CollapseAllCommand
         {
-            if (e.Parameter != null)
-            {
-                ((Node)e.Parameter).ExpandAll();
-            }
-            else
-            {
-                Root.ExpandAll();
-            }
+            get { return (ICommand)GetValue(CollapseAllCommandProperty); }
+            set { SetValue(CollapseAllCommandProperty, value); }
         }
     }
 }

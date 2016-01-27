@@ -24,8 +24,9 @@
                             <MenuItem Header="Delete"/>
                             <Separator/>
                             <MenuItem Header="Expand all" InputGestureText="Ctrl++" 
-                                  Command="{Binding Data.ExpandAllCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
-                            <MenuItem Header="Collapse all" InputGestureText="Ctrl+-" />
+                                Command="{Binding Data.ExpandAllCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
+                            <MenuItem Header="Collapse all" InputGestureText="Ctrl+-"
+                                Command="{Binding Data.CollapseAllCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
                         </ContextMenu>
                     </StackPanel.ContextMenu>
 
@@ -86,13 +87,13 @@
                     <MenuItem Header="New" InputGestureText="Ctrl+N"/>
                     <Separator/>
                     <MenuItem Header="Expand all" InputGestureText="Ctrl++" Command="{Binding ExpandAllCommand}"/>
-                    <MenuItem Header="Collapse all" InputGestureText="Ctrl+-"/>
+                    <MenuItem Header="Collapse all" InputGestureText="Ctrl+-" Command="{Binding CollapseAllCommand}"/>
                 </ContextMenu>
             </TreeView.ContextMenu>
 
             <TreeView.InputBindings>
                 <KeyBinding Key="OemPlus" Modifiers="Control" Command="{Binding ExpandAllCommand}"/>
-                <KeyBinding Key="OemMinus" Modifiers="Control"/>
+                <KeyBinding Key="OemMinus" Modifiers="Control" Command="{Binding CollapseAllCommand}"/>
                 <KeyBinding Key="N" Modifiers="Control"/>
             </TreeView.InputBindings>
 
