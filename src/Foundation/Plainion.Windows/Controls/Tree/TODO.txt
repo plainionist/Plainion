@@ -1,0 +1,9 @@
+﻿
+
+activation ==> Edit
+Selection needs to be added as command and to modifier
+
+
+
+finally node should be s.th. internal like treeviewitem (TreeEditorItem)
+root would be then "object". binding of properties goes with style

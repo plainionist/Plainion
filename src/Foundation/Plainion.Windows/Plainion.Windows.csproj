@@ -53,6 +53,7 @@
     <Compile Include="Controls\TextBoxBinding.cs" />
     <Compile Include="BindingProxy.cs" />
     <Compile Include="BoolToVisibilityConverter.cs" />
+    <Compile Include="Controls\Tree\ITreeModifier.cs" />
     <Compile Include="Controls\Tree\NotifyingBase.cs" />
     <Compile Include="Controls\Tree\DelegateCommand.cs" />
     <Compile Include="Controls\Tree\TreeEditor.xaml.cs">
@@ -162,6 +163,9 @@
     <Resource Include="Resources\Italic.png" />
     <Resource Include="Resources\Numbering.png" />
     <Resource Include="Resources\Underline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\Tree\TODO.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

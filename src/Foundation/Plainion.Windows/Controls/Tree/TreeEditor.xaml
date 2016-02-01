@@ -20,8 +20,10 @@
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch" Background="Transparent">
                     <StackPanel.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="New" InputGestureText="Ctrl+N"/>
-                            <MenuItem Header="Delete"/>
+                            <MenuItem Header="New" InputGestureText="Ctrl+N"
+                                Command="{Binding Data.AddChildCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
+                            <MenuItem Header="Delete"
+                                Command="{Binding Data.DeleteCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
                             <Separator/>
                             <MenuItem Header="Expand all" InputGestureText="Ctrl++" 
                                 Command="{Binding Data.ExpandAllCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
@@ -65,8 +67,8 @@
 
             <!-- x:Shared="False" forces the new creation of that object whenever referenced -->
             <InputBindingCollection x:Shared="False" x:Key="InputBindings">
-                <KeyBinding Key="F2"/>
-                <KeyBinding Key="N" Modifiers="Control"/>
+                <KeyBinding Key="F2" Command="{Binding EditCommand}" CommandParameter="{Binding}"/>
+                <KeyBinding Key="N" Modifiers="Control" Command="{Binding AddChildCommand}" CommandParameter="{Binding}"/>
             </InputBindingCollection>
         </DockPanel.Resources>
 
@@ -84,7 +86,7 @@
 
             <TreeView.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="New" InputGestureText="Ctrl+N"/>
+                    <MenuItem Header="New" InputGestureText="Ctrl+N" Command="{Binding AddChildCommand}"/>
                     <Separator/>
                     <MenuItem Header="Expand all" InputGestureText="Ctrl++" Command="{Binding ExpandAllCommand}"/>
                     <MenuItem Header="Collapse all" InputGestureText="Ctrl+-" Command="{Binding CollapseAllCommand}"/>
@@ -94,7 +96,7 @@
             <TreeView.InputBindings>
                 <KeyBinding Key="OemPlus" Modifiers="Control" Command="{Binding ExpandAllCommand}"/>
                 <KeyBinding Key="OemMinus" Modifiers="Control" Command="{Binding CollapseAllCommand}"/>
-                <KeyBinding Key="N" Modifiers="Control"/>
+                <KeyBinding Key="N" Modifiers="Control" Command="{Binding AddChildCommand}"/>
             </TreeView.InputBindings>
 
             <TreeView.ItemTemplate>

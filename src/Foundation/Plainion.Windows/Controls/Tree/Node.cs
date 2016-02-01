@@ -30,10 +30,6 @@ namespace Plainion.Windows.Controls.Tree
             ShowContentHint = false;
 
             MouseDownCommand = new DelegateCommand<MouseButtonEventArgs>(OnMouseDown);
-
-            NewCommand = new DelegateCommand(OnAddNewChild);
-            EditNodeCommand = new DelegateCommand(OnEditNode);
-            DeleteCommand = new DelegateCommand(DeleteChild);
         }
 
         public string Text
@@ -62,8 +58,6 @@ namespace Plainion.Windows.Controls.Tree
                 }
             }
         }
-
-        public ICommand EditNodeCommand { get; private set; }
 
         public bool IsFilteredOut { get; private set; }
 
@@ -214,14 +208,6 @@ namespace Plainion.Windows.Controls.Tree
             }
         }
 
-        private void OnAddNewChild()
-        {
-            //var child = ProjectService.Project.CreateChild( Node );
-            //EventAggregator.GetEvent<NodeActivatedEvent>().Publish( child );
-        }
-
-        public ICommand NewCommand { get; private set; }
-
         public bool ShowContentHint
         {
             get { return myShowContentHint; }
@@ -267,13 +253,6 @@ namespace Plainion.Windows.Controls.Tree
         //        IsSelected = true;
         //    }
         //}
-
-        private void DeleteChild()
-        {
-            //ProjectService.Project.DeleteNode( Node );
-        }
-
-        public ICommand DeleteCommand { get; private set; }
 
         public bool IsSelected
         {
@@ -346,10 +325,6 @@ namespace Plainion.Windows.Controls.Tree
             }
         }
 
-        private void OnEditNode()
-        {
-            IsInEditMode = true;
-            //EventAggregator.GetEvent<NodeActivatedEvent>().Publish( Node );
-        }
+        public object Model { get; set; }
     }
 }
