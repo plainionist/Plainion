@@ -1,19 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Data;
-using System.Windows.Input;
 using Plainion.Windows.Interactivity.DragDrop;
 
 namespace Plainion.Windows.Controls.Tree
 {
-    /// <summary>
-    /// TODO:
-    /// - how to handle modification commands?
-    /// - how to sync with model?
-    /// - how to separate aspects?
-    /// </summary>
     public class Node : NotifyingBase, IDropable, IDragable
     {
         private string myText;
@@ -28,8 +21,6 @@ namespace Plainion.Windows.Controls.Tree
         public Node()
         {
             ShowContentHint = false;
-
-            MouseDownCommand = new DelegateCommand<MouseButtonEventArgs>(OnMouseDown);
         }
 
         public string Text
@@ -237,33 +228,10 @@ namespace Plainion.Windows.Controls.Tree
             }
         }
 
-        //private void OnActivated(INode node)
-        //{
-        //    if (Node == node)
-        //    {
-        //        Node.Parent.IsExpanded = true;
-        //        IsSelected = true;
-        //    }
-        //}
-
-        //private void OnSelected(INode node)
-        //{
-        //    if (Node == node)
-        //    {
-        //        IsSelected = true;
-        //    }
-        //}
-
         public bool IsSelected
         {
             get { return myIsSelected; }
-            set
-            {
-                if (SetProperty(ref myIsSelected, value))
-                {
-                    // EventAggregator.GetEvent<NodeSelectedEvent>().Publish( Node );
-                }
-            }
+            set { SetProperty(ref myIsSelected, value); } 
         }
 
         public bool IsExpanded
@@ -313,16 +281,6 @@ namespace Plainion.Windows.Controls.Tree
         Type IDragable.DataType
         {
             get { return typeof(Node); }
-        }
-
-        public ICommand MouseDownCommand { get; private set; }
-
-        private void OnMouseDown(MouseButtonEventArgs args)
-        {
-            if (args.ClickCount == 2)
-            {
-                //EventAggregator.GetEvent<NodeActivatedEvent>().Publish( Node );
-            }
         }
 
         public object Model { get; set; }

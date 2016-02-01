@@ -14,15 +14,6 @@ namespace Plainion.Windows.Controls.Tree
             TreeEditorCommands.RegisterCommandBindings(this);
         }
 
-        public static DependencyProperty TreeModifierProperty = DependencyProperty.Register("TreeModifier", typeof(ITreeModifier), typeof(TreeEditor),
-            new FrameworkPropertyMetadata(null));
-
-        public ITreeModifier TreeModifier
-        {
-            get { return (ITreeModifier)GetValue(TreeModifierProperty); }
-            set { SetValue(TreeModifierProperty, value); }
-        }
-
         public static DependencyProperty FilterLabelProperty = DependencyProperty.Register("FilterLabel", typeof(string), typeof(TreeEditor),
             new FrameworkPropertyMetadata(null));
 
@@ -114,7 +105,7 @@ namespace Plainion.Windows.Controls.Tree
         }
 
         public static DependencyProperty AddChildCommandProperty = DependencyProperty.Register("AddChildCommand", typeof(ICommand), typeof(TreeEditor),
-            new FrameworkPropertyMetadata(TreeEditorCommands.AddChild));
+            new FrameworkPropertyMetadata(null));
 
         public ICommand AddChildCommand
         {
@@ -123,7 +114,7 @@ namespace Plainion.Windows.Controls.Tree
         }
 
         public static DependencyProperty DeleteCommandProperty = DependencyProperty.Register("DeleteCommand", typeof(ICommand), typeof(TreeEditor),
-            new FrameworkPropertyMetadata(TreeEditorCommands.Delete));
+            new FrameworkPropertyMetadata(null));
 
         public ICommand DeleteCommand
         {

@@ -35,12 +35,9 @@
                     <i:Interaction.Behaviors>
                         <dragDrop:FrameworkElementDragBehavior/>
                         <dragDrop:DropSortableItemsBehavior/>
+                        <interactivity:RaiseCommandOnMouseGestureBehavior ClickCount="2" MouseButton="Left" 
+                                Command="{Binding Data.EditCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
                     </i:Interaction.Behaviors>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseDown">
-                            <i:InvokeCommandAction Command="{Binding MouseDownCommand}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
 
                     <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}" IsThreeState="True" Focusable="False" VerticalAlignment="Center" Margin="0,0,3,0"/>
                     <Grid>
@@ -67,8 +64,9 @@
 
             <!-- x:Shared="False" forces the new creation of that object whenever referenced -->
             <InputBindingCollection x:Shared="False" x:Key="InputBindings">
-                <KeyBinding Key="F2" Command="{Binding EditCommand}" CommandParameter="{Binding}"/>
-                <KeyBinding Key="N" Modifiers="Control" Command="{Binding AddChildCommand}" CommandParameter="{Binding}"/>
+                <KeyBinding Key="F2" Command="{Binding Data.EditCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
+                <KeyBinding Key="N" Modifiers="Control"
+                            Command="{Binding Data.AddChildCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
             </InputBindingCollection>
         </DockPanel.Resources>
 
