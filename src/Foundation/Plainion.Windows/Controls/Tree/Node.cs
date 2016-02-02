@@ -265,15 +265,12 @@ namespace Plainion.Windows.Controls.Tree
                 return;
             }
 
-            //if( location == DropLocation.Before || location == DropLocation.After )
-            //{
-            //    var operation = location == DropLocation.Before ? MoveOperation.MoveBefore : MoveOperation.MoveAfter;
-            //    ProjectService.Project.MoveNode( droppedElement.Node, Node, operation );
-            //}
-            //else
-            //{
-            //    ProjectService.Project.AddChildTo( droppedElement.Node, Node );
-            //}
+            var arg = new NodeDropRequest
+            {
+                DroppedNode = droppedElement.Model,
+                DropTarget = Model,
+                Operation = location
+            };
 
             IsExpanded = true;
         }

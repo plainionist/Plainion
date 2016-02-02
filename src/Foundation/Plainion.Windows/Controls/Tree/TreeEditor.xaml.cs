@@ -130,5 +130,17 @@ namespace Plainion.Windows.Controls.Tree
             get { return (ICommand)GetValue(EditCommandProperty); }
             set { SetValue(EditCommandProperty, value); }
         }
+
+        /// <summary>
+        /// Parameter will be of type <see cref="NodeDropRequest"/>.
+        /// </summary>
+        public static DependencyProperty DropCommandProperty = DependencyProperty.Register("DropCommand", typeof(ICommand), typeof(TreeEditor),
+            new FrameworkPropertyMetadata(null));
+
+        public ICommand DropCommand
+        {
+            get { return (ICommand)GetValue(DropCommandProperty); }
+            set { SetValue(DropCommandProperty, value); }
+        }
     }
 }

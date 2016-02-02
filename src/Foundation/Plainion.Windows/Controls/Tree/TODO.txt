@@ -1,9 +1,5 @@
 ﻿
 
-- D&D 
-
-
-
 - ininedit and isselected sync works with binding!
 
 - command customization via binding

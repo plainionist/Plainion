@@ -53,8 +53,8 @@
     <Compile Include="Controls\TextBoxBinding.cs" />
     <Compile Include="BindingProxy.cs" />
     <Compile Include="BoolToVisibilityConverter.cs" />
+    <Compile Include="Controls\Tree\NodeDropRequest.cs" />
     <Compile Include="Controls\Tree\NotifyingBase.cs" />
-    <Compile Include="Controls\Tree\DelegateCommand.cs" />
     <Compile Include="Controls\Tree\TreeEditor.xaml.cs">
       <DependentUpon>TreeEditor.xaml</DependentUpon>
     </Compile>
