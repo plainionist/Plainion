@@ -23,15 +23,20 @@ namespace Plainion.Windows.Controls.Tree
             set { SetValue(FilterLabelProperty, value); }
         }
 
-        public static DependencyProperty RootProperty = DependencyProperty.Register("Root", typeof(Node), typeof(TreeEditor),
+        public static DependencyProperty RootProperty = DependencyProperty.Register("Root", typeof(object), typeof(TreeEditor),
             new FrameworkPropertyMetadata(null));
 
-        public Node Root
+        public object Root
         {
-            get { return (Node)GetValue(RootProperty); }
+            get { return (object)GetValue(RootProperty); }
             set { SetValue(RootProperty, value); }
         }
 
+        internal NodeItem RootItem
+        {
+            get { return (NodeItem)myTree.ItemContainerGenerator.ContainerFromItem(Root); }
+        }
+        
         public static DependencyProperty FilterProperty = DependencyProperty.Register("Filter", typeof(string), typeof(TreeEditor),
             new FrameworkPropertyMetadata(OnFilterChanged));
 
@@ -52,7 +57,7 @@ namespace Plainion.Windows.Controls.Tree
                 return;
             }
 
-            Root.ApplyFilter(Filter);
+            RootItem.ApplyFilter(Filter);
         }
 
         public string Filter
@@ -63,7 +68,7 @@ namespace Plainion.Windows.Controls.Tree
 
         void IDropable.Drop(object data, DropLocation location)
         {
-            var droppedElement = data as Node;
+            var droppedElement = data as NodeItem;
 
             if (droppedElement == null)
             {
@@ -77,7 +82,7 @@ namespace Plainion.Windows.Controls.Tree
         {
             get
             {
-                return typeof(Node).FullName;
+                return typeof(NodeItem).FullName;
             }
         }
 

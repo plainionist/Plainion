@@ -3,10 +3,11 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Windows.Controls;
 
 namespace Plainion.Windows.Controls.Tree
 {
-    public class NotifyingBase : INotifyPropertyChanged
+    class NotifyingBase : TreeViewItem, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

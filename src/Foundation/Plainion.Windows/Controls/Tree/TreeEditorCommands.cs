@@ -11,13 +11,13 @@ namespace Plainion.Windows.Controls.Tree
 
         public static void RegisterCommandBindings(TreeEditor editor)
         {
-            editor.CommandBindings.Add(new CommandBinding(ExpandAll, (sender, e) => OnExpandAll(editor, (Node)e.Parameter)));
-            editor.CommandBindings.Add(new CommandBinding(CollapseAll, (sender, e) => OnCollapseAll(editor, (Node)e.Parameter)));
+            editor.CommandBindings.Add(new CommandBinding(ExpandAll, (sender, e) => OnExpandAll(editor, (NodeItem)e.Parameter)));
+            editor.CommandBindings.Add(new CommandBinding(CollapseAll, (sender, e) => OnCollapseAll(editor, (NodeItem)e.Parameter)));
 
-            editor.CommandBindings.Add(new CommandBinding(Edit, (sender, e) => OnEdit(editor, (Node)e.Parameter)));
+            editor.CommandBindings.Add(new CommandBinding(Edit, (sender, e) => OnEdit(editor, (NodeItem)e.Parameter)));
         }
 
-        private static void OnExpandAll(TreeEditor editor, Node node)
+        private static void OnExpandAll(TreeEditor editor, NodeItem node)
         {
             if (node != null)
             {
@@ -25,11 +25,11 @@ namespace Plainion.Windows.Controls.Tree
             }
             else
             {
-                editor.Root.ExpandAll();
+                editor.RootItem.ExpandAll();
             }
         }
 
-        private static void OnCollapseAll(TreeEditor editor, Node node)
+        private static void OnCollapseAll(TreeEditor editor, NodeItem node)
         {
             if (node != null)
             {
@@ -37,11 +37,11 @@ namespace Plainion.Windows.Controls.Tree
             }
             else
             {
-                editor.Root.CollapseAll();
+                editor.RootItem.CollapseAll();
             }
         }
 
-        private static void OnEdit(TreeEditor editor, Node node)
+        private static void OnEdit(TreeEditor editor, NodeItem node)
         {
             node.IsInEditMode = true;
         }

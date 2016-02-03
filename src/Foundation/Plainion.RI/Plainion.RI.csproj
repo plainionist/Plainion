@@ -75,6 +75,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Controls\Node.cs" />
     <Compile Include="Controls\TreeEditorView.xaml.cs">
       <DependentUpon>TreeEditorView.xaml</DependentUpon>
     </Compile>

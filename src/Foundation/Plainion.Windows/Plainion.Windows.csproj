@@ -53,12 +53,13 @@
     <Compile Include="Controls\TextBoxBinding.cs" />
     <Compile Include="BindingProxy.cs" />
     <Compile Include="BoolToVisibilityConverter.cs" />
+    <Compile Include="Controls\Tree\ExtendedTreeView.cs" />
     <Compile Include="Controls\Tree\NodeDropRequest.cs" />
     <Compile Include="Controls\Tree\NotifyingBase.cs" />
     <Compile Include="Controls\Tree\TreeEditor.xaml.cs">
       <DependentUpon>TreeEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Tree\Node.cs" />
+    <Compile Include="Controls\Tree\NodeItem.cs" />
     <Compile Include="Controls\Tree\TreeEditorCommands.cs" />
     <Compile Include="ConverterChain.cs" />
     <Compile Include="AndConverter.cs" />

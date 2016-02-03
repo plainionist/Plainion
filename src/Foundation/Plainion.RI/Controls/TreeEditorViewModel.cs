@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.Composition;
 using Microsoft.Practices.Prism.Mvvm;
-using Plainion.Windows.Controls.Tree;
 
 namespace Plainion.RI.Controls
 {

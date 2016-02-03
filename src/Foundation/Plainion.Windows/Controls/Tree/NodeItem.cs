@@ -2,27 +2,36 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Data;
 using Plainion.Windows.Interactivity.DragDrop;
 
 namespace Plainion.Windows.Controls.Tree
 {
-    public class Node : NotifyingBase, IDropable, IDragable
+    class NodeItem : NotifyingBase, IDropable, IDragable
     {
         private string myText;
-        private IReadOnlyCollection<Node> myChildren;
+        private IReadOnlyCollection<NodeItem> myChildren;
         private ICollectionView myVisibleChildren;
-        private bool myShowContentHint;
-        private bool myIsSelected;
-        private bool myIsExpanded;
+        private bool myShowChildrenCount;
         private bool myIsChecked;
         private bool myIsInEditMode;
 
-        public Node()
+        public NodeItem()
         {
-            ShowContentHint = false;
+            ShowChildrenCount = false;
         }
 
+        protected override DependencyObject GetContainerForItemOverride()
+        {
+            return new NodeItem();
+        }
+
+        protected override bool IsItemItsOwnContainerOverride(object item)
+        {
+            return item is NodeItem;
+        }
+        
         public string Text
         {
             get { return myText; }
@@ -52,13 +61,13 @@ namespace Plainion.Windows.Controls.Tree
 
         public bool IsFilteredOut { get; private set; }
 
-        // TODO: implement
+        // TODO: implement ("ProcessName (PID)")
         public string FormattedText
         {
             get { return Text; }
         }
 
-        public IReadOnlyCollection<Node> Children
+        public IReadOnlyCollection<NodeItem> Children
         {
             get { return myChildren; }
             set
@@ -129,7 +138,7 @@ namespace Plainion.Windows.Controls.Tree
                 if (myVisibleChildren == null && myChildren != null)
                 {
                     myVisibleChildren = CollectionViewSource.GetDefaultView(Children);
-                    myVisibleChildren.Filter = i => !((Node)i).IsFilteredOut;
+                    myVisibleChildren.Filter = i => !((NodeItem)i).IsFilteredOut;
                 }
                 return myVisibleChildren;
             }
@@ -199,50 +208,38 @@ namespace Plainion.Windows.Controls.Tree
             }
         }
 
-        public bool ShowContentHint
+        public bool ShowChildrenCount
         {
-            get { return myShowContentHint; }
+            get { return myShowChildrenCount; }
             set
             {
-                if (myShowContentHint == value)
+                if (myShowChildrenCount == value)
                 {
                     return;
                 }
 
-                myShowContentHint = value;
+                myShowChildrenCount = value;
 
                 foreach (var child in Children)
                 {
-                    child.ShowContentHint = myShowContentHint;
+                    child.ShowChildrenCount = myShowChildrenCount;
                 }
             }
         }
 
-        public string ContentHint
+        public string ChildrenCount
         {
             get
             {
-                return ShowContentHint && Children.Count > 0
+                return ShowChildrenCount && Children.Count > 0
                     ? string.Format("[{0}]", Children.Count)
                     : string.Empty;
             }
         }
 
-        public bool IsSelected
-        {
-            get { return myIsSelected; }
-            set { SetProperty(ref myIsSelected, value); } 
-        }
-
-        public bool IsExpanded
-        {
-            get { return myIsExpanded; }
-            set { SetProperty(ref myIsExpanded, value); }
-        }
-
         string IDropable.DataFormat
         {
-            get { return typeof(Node).FullName; }
+            get { return typeof(NodeItem).FullName; }
         }
 
         bool IDropable.IsDropAllowed(object data, DropLocation location)
@@ -252,7 +249,7 @@ namespace Plainion.Windows.Controls.Tree
 
         void IDropable.Drop(object data, DropLocation location)
         {
-            var droppedElement = data as Node;
+            var droppedElement = data as NodeItem;
 
             if (droppedElement == null)
             {
@@ -277,7 +274,7 @@ namespace Plainion.Windows.Controls.Tree
 
         Type IDragable.DataType
         {
-            get { return typeof(Node); }
+            get { return typeof(NodeItem); }
         }
 
         public object Model { get; set; }

@@ -16,7 +16,7 @@
             <!-- Binds to TreeEditor itself which only works because DockPanel DataContext is set to TreeEditor itself-->
             <windows:BindingProxy x:Key="ThisProxy" Data="{Binding}"/>
 
-            <DataTemplate x:Key="NodeTemplate" DataType="{x:Type tree:Node}">
+            <DataTemplate x:Key="NodeTemplate" DataType="{x:Type tree:NodeItem}">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch" Background="Transparent">
                     <StackPanel.ContextMenu>
                         <ContextMenu>
@@ -57,7 +57,7 @@
                         </controls:EditableTextBlock>
                         <TextBlock Margin="2,0,0,0" VerticalAlignment="Center" Text="{Binding FormattedText}" HorizontalAlignment="Stretch" Padding="3"/>
                     </Grid>
-                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding ContentHint}"
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding ChildrenCount}"
                            Margin="5,0,0,0" Foreground="Green"/>
                 </StackPanel>
             </DataTemplate>
@@ -75,37 +75,37 @@
                                     LabelText="{Binding FilterLabel}"/>
         </Grid>
 
-        <TreeView Margin="0,3,0,0" ItemsSource="{Binding Root.VisibleChildren}" 
+        <tree:ExtendedTreeView x:Name="myTree" Margin="0,3,0,0" ItemsSource="{Binding Root.VisibleChildren}" 
                   BorderThickness="0" Focusable="True">
             <i:Interaction.Behaviors>
                 <interactivity:FocusOnClickBehavior/>
                 <dragDrop:FrameworkElementDropBehavior/>
             </i:Interaction.Behaviors>
 
-            <TreeView.ContextMenu>
+            <tree:ExtendedTreeView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="New" InputGestureText="Ctrl+N" Command="{Binding AddChildCommand}"/>
                     <Separator/>
                     <MenuItem Header="Expand all" InputGestureText="Ctrl++" Command="{Binding ExpandAllCommand}"/>
                     <MenuItem Header="Collapse all" InputGestureText="Ctrl+-" Command="{Binding CollapseAllCommand}"/>
                 </ContextMenu>
-            </TreeView.ContextMenu>
+            </tree:ExtendedTreeView.ContextMenu>
 
-            <TreeView.InputBindings>
+            <tree:ExtendedTreeView.InputBindings>
                 <KeyBinding Key="OemPlus" Modifiers="Control" Command="{Binding ExpandAllCommand}"/>
                 <KeyBinding Key="OemMinus" Modifiers="Control" Command="{Binding CollapseAllCommand}"/>
                 <KeyBinding Key="N" Modifiers="Control" Command="{Binding AddChildCommand}"/>
-            </TreeView.InputBindings>
+            </tree:ExtendedTreeView.InputBindings>
 
-            <TreeView.ItemTemplate>
+            <tree:ExtendedTreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding VisibleChildren}"
-                                          DataType="{x:Type tree:Node}"
+                                          DataType="{x:Type tree:NodeItem}"
                                           ItemTemplate="{StaticResource NodeTemplate}">
                     <ContentControl Content="{Binding}" ContentTemplate="{StaticResource NodeTemplate}"/>
                 </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
+            </tree:ExtendedTreeView.ItemTemplate>
 
-            <TreeView.ItemContainerStyle>
+            <tree:ExtendedTreeView.ItemContainerStyle>
                 <!-- http://leecampbell.blogspot.de/2009/01/horizontal-stretch-on-treeviewitems.html -->
                 <Style TargetType="TreeViewItem" BasedOn="{StaticResource {x:Type TreeViewItem}}">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -219,7 +219,7 @@
                         </Setter.Value>
                     </Setter>
                 </Style>
-            </TreeView.ItemContainerStyle>
-        </TreeView>
+            </tree:ExtendedTreeView.ItemContainerStyle>
+        </tree:ExtendedTreeView>
     </DockPanel>
 </UserControl>
