@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using Plainion.Windows.Interactivity.DragDrop;
 
 namespace Plainion.Windows.Controls.Tree
 {
-    public class NodeItem : NotifyingBase, IDropable, IDragable
+    public class NodeItem : TreeViewItem, IDropable, IDragable
     {
-        private string myText;
         private IReadOnlyCollection<NodeItem> myChildren;
         private ICollectionView myVisibleChildren;
         private bool myShowChildrenCount;
@@ -20,6 +21,19 @@ namespace Plainion.Windows.Controls.Tree
         public NodeItem()
         {
             ShowChildrenCount = false;
+
+            var d = DependencyPropertyDescriptor.FromProperty(FrameworkElement.DataContextProperty, typeof(NodeItem));
+            d.AddValueChanged(this, OnDataContextChanged);
+        }
+
+        private void OnDataContextChanged(object sender, EventArgs e)
+        {
+            Children = this.Items.OfType<NodeItem>().ToList();
+        }
+
+        public INode Model
+        {
+            get { return (INode)DataContext; }
         }
 
         protected override DependencyObject GetContainerForItemOverride()
@@ -31,11 +45,14 @@ namespace Plainion.Windows.Controls.Tree
         {
             return item is NodeItem;
         }
-        
+
+        public static DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(TreeViewItem),
+            new FrameworkPropertyMetadata(null));
+
         public string Text
         {
-            get { return myText; }
-            set { SetProperty(ref myText, value); }
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
         }
 
         public bool IsInEditMode
@@ -57,6 +74,11 @@ namespace Plainion.Windows.Controls.Tree
                     }
                 }
             }
+        }
+
+        private bool SetProperty<T>(ref T storage, T value)
+        {
+            return true;
         }
 
         public bool IsFilteredOut { get; private set; }
@@ -90,6 +112,10 @@ namespace Plainion.Windows.Controls.Tree
         private void OnChildIsCheckedChanged(object sender, PropertyChangedEventArgs e)
         {
             OnPropertyChanged(e.PropertyName);
+        }
+
+        private void OnPropertyChanged([CallerMemberName]string p = null)
+        {
         }
 
         public bool? IsChecked
@@ -165,11 +191,11 @@ namespace Plainion.Windows.Controls.Tree
                     && !4242.ToString().Contains(filter);
             }
 
-            foreach (var thread in Children)
+            foreach (var child in Children)
             {
-                thread.ApplyFilter(threadFilter);
+                child.ApplyFilter(threadFilter);
 
-                if (!thread.IsFilteredOut && tokens.Length == 1)
+                if (!child.IsFilteredOut && tokens.Length == 1)
                 {
                     IsFilteredOut = false;
                 }
@@ -269,6 +295,12 @@ namespace Plainion.Windows.Controls.Tree
                 Operation = location
             };
 
+            var editor = (TreeEditor)LogicalTreeHelper.GetParent(this);
+            if (editor.DropCommand != null && editor.DropCommand.CanExecute(arg))
+            {
+                editor.DropCommand.Execute(arg);
+            }
+
             IsExpanded = true;
         }
 
@@ -276,7 +308,5 @@ namespace Plainion.Windows.Controls.Tree
         {
             get { return typeof(NodeItem); }
         }
-
-        public object Model { get; set; }
     }
 }

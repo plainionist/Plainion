@@ -28,12 +28,12 @@ namespace Plainion.Windows.Controls.Tree
             set { SetValue(FilterLabelProperty, value); }
         }
 
-        public static DependencyProperty RootProperty = DependencyProperty.Register("Root", typeof(object), typeof(TreeEditor),
+        public static DependencyProperty RootProperty = DependencyProperty.Register("Root", typeof(INode), typeof(TreeEditor),
             new FrameworkPropertyMetadata(null));
 
-        public object Root
+        public INode Root
         {
-            get { return (object)GetValue(RootProperty); }
+            get { return (INode)GetValue(RootProperty); }
             set { SetValue(RootProperty, value); }
         }
 
@@ -41,7 +41,7 @@ namespace Plainion.Windows.Controls.Tree
         {
             get { return (NodeItem)myTree.ItemContainerGenerator.ContainerFromItem(Root); }
         }
-        
+
         public static DependencyProperty FilterProperty = DependencyProperty.Register("Filter", typeof(string), typeof(TreeEditor),
             new FrameworkPropertyMetadata(OnFilterChanged));
 
@@ -80,7 +80,17 @@ namespace Plainion.Windows.Controls.Tree
                 return;
             }
 
-            //ProjectService.Project.AddChildTo( droppedElement.Node, Node );
+            var arg = new NodeDropRequest
+            {
+                DroppedNode = droppedElement.Model,
+                DropTarget = Root,
+                Operation = location
+            };
+
+            if (DropCommand != null && DropCommand.CanExecute(arg))
+            {
+                DropCommand.Execute(arg);
+            }
         }
 
         string IDropable.DataFormat
@@ -153,7 +163,7 @@ namespace Plainion.Windows.Controls.Tree
             set { SetValue(DropCommandProperty, value); }
         }
 
-        public static readonly DependencyProperty NodeStyleProperty = DependencyProperty.Register("NodeStyle", typeof(Style), typeof(ItemsControl), 
+        public static readonly DependencyProperty NodeStyleProperty = DependencyProperty.Register("NodeStyle", typeof(Style), typeof(ItemsControl),
             new FrameworkPropertyMetadata(null));
 
         public Style NodeStyle

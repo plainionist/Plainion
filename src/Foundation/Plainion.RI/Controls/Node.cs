@@ -1,13 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Microsoft.Practices.Prism.Mvvm;
+using Plainion.Collections;
+using Plainion.Windows.Controls.Tree;
 
 namespace Plainion.RI.Controls
 {
-    public class Node : BindableBase
+    public class Node : BindableBase, INode
     {
         private string myText;
-        private IReadOnlyCollection<Node> myChildren;
+        private ObservableCollection<Node> myChildren;
         private bool myIsSelected;
         private bool myIsExpanded;
         private bool myIsChecked;
@@ -36,10 +39,15 @@ namespace Plainion.RI.Controls
             get { return string.Format("{0} ({1})", Text, Text.Length); }
         }
 
-        public IReadOnlyCollection<Node> Children
+        IEnumerable<INode> INode.Children
         {
             get { return myChildren; }
-            set { SetProperty(ref myChildren, value); }
+        }
+
+        public IEnumerable<Node> Children
+        {
+            get { return myChildren; }
+            set { SetProperty(ref myChildren, new ObservableCollection<Node>(value)); }
         }
 
         public bool? IsChecked

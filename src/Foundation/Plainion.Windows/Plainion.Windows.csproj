@@ -54,8 +54,8 @@
     <Compile Include="BindingProxy.cs" />
     <Compile Include="BoolToVisibilityConverter.cs" />
     <Compile Include="Controls\Tree\ExtendedTreeView.cs" />
+    <Compile Include="Controls\Tree\INode.cs" />
     <Compile Include="Controls\Tree\NodeDropRequest.cs" />
-    <Compile Include="Controls\Tree\NotifyingBase.cs" />
     <Compile Include="Controls\Tree\TreeEditor.xaml.cs">
       <DependentUpon>TreeEditor.xaml</DependentUpon>
     </Compile>
