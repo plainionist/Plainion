@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace Plainion.Windows.Controls.Tree
 {
-    class NotifyingBase : TreeViewItem, INotifyPropertyChanged
+    public class NotifyingBase : TreeViewItem, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -12,6 +12,11 @@ namespace Plainion.Windows.Controls.Tree
             InitializeComponent();
 
             TreeEditorCommands.RegisterCommandBindings(this);
+
+            if (NodeStyle == null)
+            {
+                NodeStyle = (Style)Resources["DefaultNodeStyle"];
+            }
         }
 
         public static DependencyProperty FilterLabelProperty = DependencyProperty.Register("FilterLabel", typeof(string), typeof(TreeEditor),
@@ -146,6 +151,15 @@ namespace Plainion.Windows.Controls.Tree
         {
             get { return (ICommand)GetValue(DropCommandProperty); }
             set { SetValue(DropCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty NodeStyleProperty = DependencyProperty.Register("NodeStyle", typeof(Style), typeof(ItemsControl), 
+            new FrameworkPropertyMetadata(null));
+
+        public Style NodeStyle
+        {
+            get { return (Style)GetValue(NodeStyleProperty); }
+            set { SetValue(NodeStyleProperty, value); }
         }
     }
 }

@@ -8,7 +8,7 @@ using Plainion.Windows.Interactivity.DragDrop;
 
 namespace Plainion.Windows.Controls.Tree
 {
-    class NodeItem : NotifyingBase, IDropable, IDragable
+    public class NodeItem : NotifyingBase, IDropable, IDragable
     {
         private string myText;
         private IReadOnlyCollection<NodeItem> myChildren;

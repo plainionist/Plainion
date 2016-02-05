@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 
-
 namespace Plainion.Windows.Controls.Tree
 {
     class ExtendedTreeView : TreeView
