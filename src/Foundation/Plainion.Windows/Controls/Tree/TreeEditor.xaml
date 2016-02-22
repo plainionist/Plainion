@@ -83,7 +83,7 @@
                                     LabelText="{Binding FilterLabel}"/>
         </Grid>
 
-        <tree:ExtendedTreeView x:Name="myTree" Margin="0,3,0,0" ItemsSource="{Binding Root.VisibleChildren}" 
+        <tree:ExtendedTreeView x:Name="myTree" Margin="0,3,0,0" ItemsSource="{Binding Root.Children}" 
                                BorderThickness="0" Focusable="True"
                                ItemContainerStyle="{Binding NodeStyle}">
             <i:Interaction.Behaviors>

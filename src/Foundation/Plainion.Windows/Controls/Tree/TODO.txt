@@ -1,4 +1,6 @@
 ﻿
+Root.VisibleChildren cannot be bound
+
 
 - ininedit and isselected sync works with binding!
 
