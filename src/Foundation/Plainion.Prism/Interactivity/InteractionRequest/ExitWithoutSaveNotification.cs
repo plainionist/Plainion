@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
+using Prism.Interactivity.InteractionRequest;
 
 namespace Plainion.Prism.Interactivity.InteractionRequest
 {

@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.Composition;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Mvvm;
 using Plainion.RI.InteractionRequests.Dialogs;
+using Prism.Interactivity.InteractionRequest;
 
 namespace Plainion.RI.InteractionRequests
 {

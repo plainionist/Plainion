@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Interactivity;
-using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
+using Prism.Interactivity.InteractionRequest;
 using Microsoft.Win32;
 
 namespace Plainion.Prism.Interactivity
