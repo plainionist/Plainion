@@ -2,12 +2,12 @@
 using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Controls;
-using Microsoft.Practices.Prism.Regions;
+using Prism.Regions;
 
 namespace Plainion.Prism.Regions
 {
     [Export( typeof( StackPanelRegionAdapter ) )]
-    public class StackPanelRegionAdapter : RegionAdapterBase<StackPanel>
+    public class StackPanelRegionAdapter : RegionAdapterBase<StackPanel>, IRegionAdapter
     {
         [ImportingConstructor]
         public StackPanelRegionAdapter( IRegionBehaviorFactory factory )

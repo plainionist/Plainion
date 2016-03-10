@@ -1,6 +1,6 @@
 ﻿using System.Windows;
-using Microsoft.Practices.Prism.Interactivity;
-using Microsoft.Practices.Prism.Regions;
+using Prism.Interactivity;
+using Prism.Regions;
 
 namespace Plainion.Prism.Interactivity
 {
