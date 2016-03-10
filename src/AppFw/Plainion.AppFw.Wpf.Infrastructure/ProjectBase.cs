@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using Microsoft.Practices.Prism.Mvvm;
+using Prism.Mvvm;
 
 namespace Plainion.AppFw.Wpf.Infrastructure
 {

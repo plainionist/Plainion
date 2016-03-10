@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Microsoft.Practices.Prism.Mvvm;
-using Microsoft.Practices.Prism.ViewModel;
+using Prism.Mvvm;
 
 namespace Plainion.Prism.Mvvm
 {
