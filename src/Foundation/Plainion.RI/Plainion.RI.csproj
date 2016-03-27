@@ -93,7 +93,13 @@
     </Compile>
     <Compile Include="Dialogs\SelectFolderInteractionRequestViewModel.cs" />
     <Compile Include="Dialogs\SelectFolderDialogViewModel.cs" />
-    <Compile Include="Editors\Spec\Specification.cs" />
+    <Compile Include="Editors\Spec\Cluster.cs" />
+    <Compile Include="Editors\Spec\Exclude.cs" />
+    <Compile Include="Editors\Spec\Include.cs" />
+    <Compile Include="Editors\Spec\Package.cs" />
+    <Compile Include="Editors\Spec\PackageBase.cs" />
+    <Compile Include="Editors\Spec\SystemPackaging.cs" />
+    <Compile Include="Editors\Spec\Wildcard.cs" />
     <Compile Include="Editors\XmlEditorView.xaml.cs">
       <DependentUpon>XmlEditorView.xaml</DependentUpon>
     </Compile>

@@ -20,7 +20,7 @@ namespace Plainion.RI.Editors
             Document = new TextDocument();
 
             myCompletionData = GetType().Assembly.GetTypes()
-                .Where( t => t.Namespace == typeof( Specification ).Namespace )
+                .Where( t => t.Namespace == typeof( SystemPackaging ).Namespace )
                 .Where( t => !t.IsAbstract )
                 .Where( t => t.GetCustomAttributes( typeof( CompilerGeneratedAttribute ), true ).Length == 0 )
                 .Select( t => new KeywordCompletionData( t ) )
