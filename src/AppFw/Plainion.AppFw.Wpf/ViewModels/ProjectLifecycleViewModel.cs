@@ -5,13 +5,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
-using Microsoft.Practices.Prism.Mvvm;
+using Prism.Commands;
+using Prism.Mvvm;
 using Plainion.AppFw.Wpf.Infrastructure;
 using Plainion.Prism.Interactivity.InteractionRequest;
 using Plainion.Progress;
 using Plainion.Windows.Controls;
+using Prism.Interactivity.InteractionRequest;
 
 namespace Plainion.AppFw.Wpf.ViewModels
 {

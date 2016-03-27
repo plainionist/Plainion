@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.Composition;
-using Microsoft.Practices.Prism.MefExtensions.Modularity;
-using Microsoft.Practices.Prism.Modularity;
-using Microsoft.Practices.Prism.Regions;
 using Plainion.RI.Controls;
 using Plainion.RI.Dialogs;
 using Plainion.RI.Editors;
 using Plainion.RI.InteractionRequests;
 using Plainion.RI.InteractionRequests.Dialogs;
+using Prism.Mef.Modularity;
+using Prism.Modularity;
+using Prism.Regions;
 
 namespace Plainion.RI
 {

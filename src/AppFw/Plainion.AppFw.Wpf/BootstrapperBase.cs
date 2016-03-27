@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.Composition.Hosting;
 using System.Windows;
-using Microsoft.Practices.Prism.MefExtensions;
-using Microsoft.Practices.Prism.PubSubEvents;
 using Plainion.Prism.Events;
 using Plainion.Windows;
+using Prism.Events;
+using Prism.Mef;
 
 namespace Plainion.AppFw.Wpf
 {

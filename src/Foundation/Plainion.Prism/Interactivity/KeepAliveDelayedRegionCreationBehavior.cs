@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Windows;
-using Microsoft.Practices.Prism.Regions;
-using Microsoft.Practices.Prism.Regions.Behaviors;
+using Prism.Regions;
+using Prism.Regions.Behaviors;
 
 namespace Plainion.Prism.Interactivity
 {

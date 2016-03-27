@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
+using Prism.Interactivity.InteractionRequest;
 using Microsoft.Win32;
 
 namespace Plainion.Prism.Interactivity.InteractionRequest

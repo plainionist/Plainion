@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.Composition.Hosting;
 using System.Windows;
 using System.Windows.Controls;
-using Microsoft.Practices.Prism.Interactivity;
-using Microsoft.Practices.Prism.MefExtensions;
-using Microsoft.Practices.Prism.Regions;
 using Plainion.Prism.Interactivity;
 using Plainion.Prism.Regions;
+using Prism.Interactivity;
+using Prism.Mef;
+using Prism.Regions;
 
 namespace Plainion.RI
 {

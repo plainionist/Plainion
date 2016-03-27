@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interactivity;
 using Plainion.Prism.Interactivity.InteractionRequest;
-using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
+using Prism.Interactivity.InteractionRequest;
 
 namespace Plainion.Prism.Interactivity
 {

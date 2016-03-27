@@ -2,8 +2,8 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Markup;
-using Microsoft.Practices.Prism.Interactivity;
-using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
+using Prism.Interactivity;
+using Prism.Interactivity.InteractionRequest;
 
 namespace Plainion.Prism.Interactivity
 {
