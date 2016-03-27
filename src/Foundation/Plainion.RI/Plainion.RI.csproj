@@ -17,6 +17,10 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.1.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\AvalonEdit.5.0.2\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Practices.Prism.Composition, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\Prism.Composition.5.0.0\lib\NET45\Microsoft.Practices.Prism.Composition.dll</HintPath>
@@ -89,6 +93,11 @@
     </Compile>
     <Compile Include="Dialogs\SelectFolderInteractionRequestViewModel.cs" />
     <Compile Include="Dialogs\SelectFolderDialogViewModel.cs" />
+    <Compile Include="Editors\Spec\Specification.cs" />
+    <Compile Include="Editors\XmlEditorView.xaml.cs">
+      <DependentUpon>XmlEditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Editors\XmlEditorViewModel.cs" />
     <Compile Include="InteractionRequests\DefaultWindowWithViewModelAsContentView.xaml.cs">
       <DependentUpon>DefaultWindowWithViewModelAsContentView.xaml</DependentUpon>
     </Compile>
@@ -143,6 +152,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Dialogs\SelectFolderDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Editors\XmlEditorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -223,6 +236,10 @@
     <ProjectReference Include="..\Plainion.Prism\Plainion.Prism.csproj">
       <Project>{838852b7-5a0c-4acb-8436-db2d581708cb}</Project>
       <Name>Plainion.Prism</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plainion.Windows.Editors\Plainion.Windows.Editors.csproj">
+      <Project>{e230a130-4058-4ec5-89e7-523db5f59be2}</Project>
+      <Name>Plainion.Windows.Editors</Name>
     </ProjectReference>
     <ProjectReference Include="..\Plainion.Windows\Plainion.Windows.csproj">
       <Project>{b76263b3-b4c6-4111-865d-1ce6b578d34a}</Project>

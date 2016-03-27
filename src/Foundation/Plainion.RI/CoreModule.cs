@@ -4,6 +4,7 @@ using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Plainion.RI.Controls;
 using Plainion.RI.Dialogs;
+using Plainion.RI.Editors;
 using Plainion.RI.InteractionRequests;
 using Plainion.RI.InteractionRequests.Dialogs;
 
@@ -37,6 +38,8 @@ namespace Plainion.RI
             RegionManager.RegisterViewWithRegion(RegionNames.Controls, typeof(TreeEditorView));
             RegionManager.RegisterViewWithRegion(RegionNames.Controls, typeof(NotePadView));
             RegionManager.RegisterViewWithRegion(RegionNames.Controls, typeof(NoteBookView));
+
+            RegionManager.RegisterViewWithRegion( RegionNames.Editors, typeof( XmlEditorView ) );
         }
     }
 }
