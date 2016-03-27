@@ -1,20 +1,19 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Plainion.Windows</id>
-    <title>Plainion.Windows</title>
-    <version>1.12.0.0</version>
+    <id>Plainion.Windows.Editors</id>
+    <title>Plainion.Windows.Editors</title>
+    <version>1.0.0.0</version>
     <authors>ronin4net</authors>
     <owners>ronin4net</owners>
     <licenseUrl>http://opensource.org/licenses/BSD-3-Clause</licenseUrl>
     <projectUrl>https://github.com/ronin4net/Plainion/wiki/Plainion.Windows</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Provides extensions to WPF to simplify development of software engineering tools</description>
-    <releaseNotes>SelectFolderDialog added</releaseNotes>
+    <description>Provides simple editor controls which can be embedded into applications e.g. to support DSLs</description>
+    <releaseNotes>initial release</releaseNotes>
     <copyright>Copyright 2016</copyright>
     <dependencies>
-      <dependency id="Plainion.Core" version="2.3.0.0" />
-      <dependency id="Expression.Blend.Sdk" version="1.0.2" />
+      <dependency id="AvalonEdit" version="5.0.2" />
     </dependencies>
   </metadata>
 </package>

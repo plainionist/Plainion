@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "@Solution Items", "@Solution Items", "{E942AA64-1A87-4E87-AD6B-0C1778D0ED82}"
 	ProjectSection(SolutionItems) = preProject
@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "@Solution Items", "@Solutio
 		build\Plainion.AppFw.Wpf.nuspec = build\Plainion.AppFw.Wpf.nuspec
 		build\Plainion.Core.nuspec = build\Plainion.Core.nuspec
 		build\Plainion.Prism.nuspec = build\Plainion.Prism.nuspec
+		build\Plainion.Windows.Editors.nuspec = build\Plainion.Windows.Editors.nuspec
 		build\Plainion.Windows.nuspec = build\Plainion.Windows.nuspec
 		README.md = README.md
 	EndProjectSection
@@ -43,6 +44,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Prism.Tests", "src\Foundation\Plainion.Prism.Tests\Plainion.Prism.Tests.csproj", "{5BBD573F-3689-4A0E-BBB8-C6C7BA836509}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.RI", "src\Foundation\Plainion.RI\Plainion.RI.csproj", "{318B1687-68A2-4FE1-BDAD-52222617EA8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Windows.Editors", "src\Foundation\Plainion.Windows.Editors\Plainion.Windows.Editors.csproj", "{E230A130-4058-4EC5-89E7-523DB5F59BE2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -102,6 +105,10 @@ Global
 		{318B1687-68A2-4FE1-BDAD-52222617EA8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{318B1687-68A2-4FE1-BDAD-52222617EA8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{318B1687-68A2-4FE1-BDAD-52222617EA8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E230A130-4058-4EC5-89E7-523DB5F59BE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E230A130-4058-4EC5-89E7-523DB5F59BE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E230A130-4058-4EC5-89E7-523DB5F59BE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E230A130-4058-4EC5-89E7-523DB5F59BE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -120,5 +127,6 @@ Global
 		{7506BCCD-69D4-4E84-98D2-A4E51FA67B9A} = {BCAB08B5-5E40-437B-BE7F-10FCEC2518E0}
 		{5BBD573F-3689-4A0E-BBB8-C6C7BA836509} = {1FD0B599-85B4-410B-99DC-2306646BC5F5}
 		{318B1687-68A2-4FE1-BDAD-52222617EA8A} = {1FD0B599-85B4-410B-99DC-2306646BC5F5}
+		{E230A130-4058-4EC5-89E7-523DB5F59BE2} = {1FD0B599-85B4-410B-99DC-2306646BC5F5}
 	EndGlobalSection
 EndGlobal

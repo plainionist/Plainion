@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Provides a simple application framework for writing Xaml/C# shell scripts</description>
     <releaseNotes>Fixed loading assemblies referenced by Xaml scripts</releaseNotes>
-    <copyright>Copyright 2015</copyright>
+    <copyright>Copyright 2016</copyright>
     <dependencies>
       <dependency id="Plainion.Core" version="2.1.0.0" />
     </dependencies>

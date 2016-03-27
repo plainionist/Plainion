@@ -11,6 +11,6 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Provides .Net libraries to simplify development of software engineering tools</description>
     <releaseNotes>SerializableBindableBase fixed for BinaryFormatter</releaseNotes>
-    <copyright>Copyright 2015</copyright>
+    <copyright>Copyright 2016</copyright>
   </metadata>
 </package>

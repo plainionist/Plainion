@@ -18,7 +18,7 @@
       - PopupWindowContentControl added (ContentControl for regions with IInteractionRequestAware support)
       - PopupWindowActionExtensions added with AttachedProperty "RegionName" as shortcut for PopupWindowContentControl
     </releaseNotes>
-    <copyright>Copyright 2015</copyright>
+    <copyright>Copyright 2016</copyright>
     <dependencies>
       <dependency id="Plainion.Core" version="2.1.0.0" />
       <dependency id="CommonServiceLocator" version="1.2"/>
