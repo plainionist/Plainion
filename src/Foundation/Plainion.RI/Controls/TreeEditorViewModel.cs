@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.Composition;
-using Microsoft.Practices.Prism.Mvvm;
+using Prism.Mvvm;
 
 namespace Plainion.RI.Controls
 {

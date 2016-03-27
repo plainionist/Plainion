@@ -3,7 +3,7 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using ICSharpCode.AvalonEdit.Document;
-using Microsoft.Practices.Prism.Mvvm;
+using Prism.Mvvm;
 using Plainion.RI.Editors.Spec;
 using Plainion.Windows.Editors.Xml;
 
