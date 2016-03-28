@@ -20,7 +20,19 @@ namespace Plainion.Windows.Controls.Tree
         public NodeItem()
         {
             ShowChildrenCount = false;
-            SetBinding( FormattedTextProperty, new Binding() { Path = new PropertyPath("Text"), Source = this } );
+
+            Loaded += OnLoaded;
+        }
+
+        private void OnLoaded( object sender, RoutedEventArgs e )
+        {
+            Loaded -= OnLoaded;
+
+            if( BindingOperations.GetBindingExpression( this, FormattedTextProperty ) == null
+                && BindingOperations.GetMultiBindingExpression( this, FormattedTextProperty ) == null )
+            {
+                SetBinding( FormattedTextProperty, new Binding() { Path = new PropertyPath( "Text" ), Source = this } );
+            }
         }
 
         protected override DependencyObject GetContainerForItemOverride()
