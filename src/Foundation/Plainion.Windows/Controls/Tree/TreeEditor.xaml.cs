@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Plainion.Windows.Interactivity.DragDrop;
@@ -11,165 +13,180 @@ namespace Plainion.Windows.Controls.Tree
         {
             InitializeComponent();
 
-            TreeEditorCommands.RegisterCommandBindings(this);
+            TreeEditorCommands.RegisterCommandBindings( this );
 
-            if (NodeStyle == null)
+            if( NodeStyle == null )
             {
-                NodeStyle = (Style)Resources["DefaultNodeStyle"];
+                NodeStyle = ( Style )Resources[ "DefaultNodeStyle" ];
             }
+
+            myTree.ItemContainerStyle = NodeStyle;
         }
 
-        public static DependencyProperty FilterLabelProperty = DependencyProperty.Register("FilterLabel", typeof(string), typeof(TreeEditor),
-            new FrameworkPropertyMetadata(null));
+        public static DependencyProperty FilterLabelProperty = DependencyProperty.Register( "FilterLabel", typeof( string ), typeof( TreeEditor ),
+            new FrameworkPropertyMetadata( null ) );
 
         public string FilterLabel
         {
-            get { return (string)GetValue(FilterLabelProperty); }
-            set { SetValue(FilterLabelProperty, value); }
+            get { return ( string )GetValue( FilterLabelProperty ); }
+            set { SetValue( FilterLabelProperty, value ); }
         }
 
-        public static DependencyProperty RootProperty = DependencyProperty.Register("Root", typeof(INode), typeof(TreeEditor),
-            new FrameworkPropertyMetadata(null));
+        public static DependencyProperty RootProperty = DependencyProperty.Register( "Root", typeof( INode ), typeof( TreeEditor ),
+            new FrameworkPropertyMetadata( null ) );
 
         public INode Root
         {
-            get { return (INode)GetValue(RootProperty); }
-            set { SetValue(RootProperty, value); }
+            get { return ( INode )GetValue( RootProperty ); }
+            set { SetValue( RootProperty, value ); }
         }
 
-        internal NodeItem RootItem
+        internal IEnumerable<NodeItem> GetRootItems()
         {
-            get { return (NodeItem)myTree.ItemContainerGenerator.ContainerFromItem(Root); }
+            if( Root == null )
+            {
+                return Enumerable.Empty<NodeItem>();
+            }
+
+            return Root.Children
+                .Select( child => myTree.ItemContainerGenerator.ContainerFromItem( child ) )
+                .Cast<NodeItem>();
         }
 
-        public static DependencyProperty FilterProperty = DependencyProperty.Register("Filter", typeof(string), typeof(TreeEditor),
-            new FrameworkPropertyMetadata(OnFilterChanged));
+        public static DependencyProperty FilterProperty = DependencyProperty.Register( "Filter", typeof( string ), typeof( TreeEditor ),
+            new FrameworkPropertyMetadata( OnFilterChanged ) );
 
-        private static void OnFilterChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnFilterChanged( DependencyObject d, DependencyPropertyChangedEventArgs e )
         {
-            if (e.NewValue == e.OldValue)
+            if( e.NewValue == e.OldValue )
             {
                 return;
             }
 
-            ((TreeEditor)d).OnFilterChanged();
+            ( ( TreeEditor )d ).OnFilterChanged();
         }
 
         private void OnFilterChanged()
         {
-            if (Root == null)
+            if( Root == null )
             {
                 return;
             }
 
-            RootItem.ApplyFilter(Filter);
+            foreach( var item in GetRootItems() )
+            {
+                item.ApplyFilter( Filter );
+            }
         }
 
         public string Filter
         {
-            get { return (string)GetValue(FilterProperty); }
-            set { SetValue(FilterProperty, value); }
+            get { return ( string )GetValue( FilterProperty ); }
+            set { SetValue( FilterProperty, value ); }
         }
 
-        void IDropable.Drop(object data, DropLocation location)
+        void IDropable.Drop( object data, DropLocation location )
         {
             var droppedElement = data as NodeItem;
 
-            if (droppedElement == null)
+            if( droppedElement == null )
             {
                 return;
             }
 
             var arg = new NodeDropRequest
             {
-                DroppedNode = droppedElement.Model,
+                DroppedNode = droppedElement.DataContext,
                 DropTarget = Root,
                 Operation = location
             };
 
-            if (DropCommand != null && DropCommand.CanExecute(arg))
+            if( DropCommand != null && DropCommand.CanExecute( arg ) )
             {
-                DropCommand.Execute(arg);
+                DropCommand.Execute( arg );
             }
         }
 
         string IDropable.DataFormat
         {
-            get
-            {
-                return typeof(NodeItem).FullName;
-            }
+            get { return typeof( NodeItem ).FullName; }
         }
 
-        bool IDropable.IsDropAllowed(object data, DropLocation location)
+        bool IDropable.IsDropAllowed( object data, DropLocation location )
         {
             return true;
         }
 
-        public static DependencyProperty ExpandAllCommandProperty = DependencyProperty.Register("ExpandAllCommand", typeof(ICommand), typeof(TreeEditor),
-            new FrameworkPropertyMetadata(TreeEditorCommands.ExpandAll));
+        public static DependencyProperty ExpandAllCommandProperty = DependencyProperty.Register( "ExpandAllCommand", typeof( ICommand ), typeof( TreeEditor ),
+            new FrameworkPropertyMetadata( TreeEditorCommands.ExpandAll ) );
 
         public ICommand ExpandAllCommand
         {
-            get { return (ICommand)GetValue(ExpandAllCommandProperty); }
-            set { SetValue(ExpandAllCommandProperty, value); }
+            get { return ( ICommand )GetValue( ExpandAllCommandProperty ); }
+            set { SetValue( ExpandAllCommandProperty, value ); }
         }
 
-        public static DependencyProperty CollapseAllCommandProperty = DependencyProperty.Register("CollapseAllCommand", typeof(ICommand), typeof(TreeEditor),
-            new FrameworkPropertyMetadata(TreeEditorCommands.CollapseAll));
+        public static DependencyProperty CollapseAllCommandProperty = DependencyProperty.Register( "CollapseAllCommand", typeof( ICommand ), typeof( TreeEditor ),
+            new FrameworkPropertyMetadata( TreeEditorCommands.CollapseAll ) );
 
         public ICommand CollapseAllCommand
         {
-            get { return (ICommand)GetValue(CollapseAllCommandProperty); }
-            set { SetValue(CollapseAllCommandProperty, value); }
+            get { return ( ICommand )GetValue( CollapseAllCommandProperty ); }
+            set { SetValue( CollapseAllCommandProperty, value ); }
         }
 
-        public static DependencyProperty AddChildCommandProperty = DependencyProperty.Register("AddChildCommand", typeof(ICommand), typeof(TreeEditor),
-            new FrameworkPropertyMetadata(null));
+        public static DependencyProperty AddChildCommandProperty = DependencyProperty.Register( "AddChildCommand", typeof( ICommand ), typeof( TreeEditor ),
+            new FrameworkPropertyMetadata( null ) );
 
         public ICommand AddChildCommand
         {
-            get { return (ICommand)GetValue(AddChildCommandProperty); }
-            set { SetValue(AddChildCommandProperty, value); }
+            get { return ( ICommand )GetValue( AddChildCommandProperty ); }
+            set { SetValue( AddChildCommandProperty, value ); }
         }
 
-        public static DependencyProperty DeleteCommandProperty = DependencyProperty.Register("DeleteCommand", typeof(ICommand), typeof(TreeEditor),
-            new FrameworkPropertyMetadata(null));
+        public static DependencyProperty DeleteCommandProperty = DependencyProperty.Register( "DeleteCommand", typeof( ICommand ), typeof( TreeEditor ),
+            new FrameworkPropertyMetadata( null ) );
 
         public ICommand DeleteCommand
         {
-            get { return (ICommand)GetValue(DeleteCommandProperty); }
-            set { SetValue(DeleteCommandProperty, value); }
+            get { return ( ICommand )GetValue( DeleteCommandProperty ); }
+            set { SetValue( DeleteCommandProperty, value ); }
         }
 
-        public static DependencyProperty EditCommandProperty = DependencyProperty.Register("EditCommand", typeof(ICommand), typeof(TreeEditor),
-            new FrameworkPropertyMetadata(TreeEditorCommands.Edit));
+        public static DependencyProperty EditCommandProperty = DependencyProperty.Register( "EditCommand", typeof( ICommand ), typeof( TreeEditor ),
+            new FrameworkPropertyMetadata( TreeEditorCommands.Edit ) );
 
         public ICommand EditCommand
         {
-            get { return (ICommand)GetValue(EditCommandProperty); }
-            set { SetValue(EditCommandProperty, value); }
+            get { return ( ICommand )GetValue( EditCommandProperty ); }
+            set { SetValue( EditCommandProperty, value ); }
         }
 
         /// <summary>
         /// Parameter will be of type <see cref="NodeDropRequest"/>.
         /// </summary>
-        public static DependencyProperty DropCommandProperty = DependencyProperty.Register("DropCommand", typeof(ICommand), typeof(TreeEditor),
-            new FrameworkPropertyMetadata(null));
+        public static DependencyProperty DropCommandProperty = DependencyProperty.Register( "DropCommand", typeof( ICommand ), typeof( TreeEditor ),
+            new FrameworkPropertyMetadata( null ) );
 
         public ICommand DropCommand
         {
-            get { return (ICommand)GetValue(DropCommandProperty); }
-            set { SetValue(DropCommandProperty, value); }
+            get { return ( ICommand )GetValue( DropCommandProperty ); }
+            set { SetValue( DropCommandProperty, value ); }
         }
 
-        public static readonly DependencyProperty NodeStyleProperty = DependencyProperty.Register("NodeStyle", typeof(Style), typeof(ItemsControl),
-            new FrameworkPropertyMetadata(null));
+        public static readonly DependencyProperty NodeStyleProperty = DependencyProperty.Register( "NodeStyle", typeof( Style ), typeof( TreeEditor ),
+            new FrameworkPropertyMetadata( null, OnNodeStyleChanged ) );
+
+        private static void OnNodeStyleChanged( DependencyObject d, DependencyPropertyChangedEventArgs e )
+        {
+            var self = ( TreeEditor )d;
+            self.myTree.ItemContainerStyle = self.NodeStyle;
+        }
 
         public Style NodeStyle
         {
-            get { return (Style)GetValue(NodeStyleProperty); }
-            set { SetValue(NodeStyleProperty, value); }
+            get { return ( Style )GetValue( NodeStyleProperty ); }
+            set { SetValue( NodeStyleProperty, value ); }
         }
     }
 }

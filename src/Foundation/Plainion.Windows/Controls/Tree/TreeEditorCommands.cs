@@ -25,7 +25,10 @@ namespace Plainion.Windows.Controls.Tree
             }
             else
             {
-                editor.RootItem.ExpandAll();
+                foreach( var item in editor.GetRootItems() )
+                {
+                    item.ExpandAll();
+                }
             }
         }
 
@@ -37,7 +40,10 @@ namespace Plainion.Windows.Controls.Tree
             }
             else
             {
-                editor.RootItem.CollapseAll();
+                foreach( var item in editor.GetRootItems() )
+                {
+                    item.CollapseAll();
+                }
             }
         }
 
