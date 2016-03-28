@@ -1,11 +1,19 @@
 ﻿
-Root.VisibleChildren cannot be bound
+- formattedtext
 
+- filter on hidden model properties
+- 2 level filter
 
-- ininedit and isselected sync works with binding!
+- IsSelected as DP
+- IsExpanded as DP
 
-- command customization via binding
+- in place edit
 
-- finally node should be s.th. internal like treeviewitem (TreeEditorItem)
-  root would be then "object". binding of properties goes with style
-  - https://social.msdn.microsoft.com/Forums/vstudio/en-US/c64fdd6b-1f91-4e4f-ada3-e100aff83a00/custom-treeviewitem?forum=wpf
+- check box
+
+- d&d
+
+- contextmenu
+
+- CRUD
+

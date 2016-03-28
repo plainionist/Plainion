@@ -64,9 +64,13 @@
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controls\Node.cs" />
+    <Compile Include="Controls\EditableTextBlockView.xaml.cs">
+      <DependentUpon>EditableTextBlockView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TreeEditorView.xaml.cs">
       <DependentUpon>TreeEditorView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\EditableTextBlockViewModel.cs" />
     <Compile Include="Controls\TreeEditorViewModel.cs" />
     <Compile Include="CoreModule.cs" />
     <Compile Include="Dialogs\SelectFolderInteractionRequestView.xaml.cs">
@@ -133,6 +137,10 @@
     </Compile>
     <Compile Include="RegionNames.cs" />
     <Compile Include="ShellViewModel.cs" />
+    <Page Include="Controls\EditableTextBlockView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\TreeEditorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

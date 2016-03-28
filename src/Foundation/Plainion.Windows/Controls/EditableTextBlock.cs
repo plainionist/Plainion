@@ -1,13 +1,14 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace Plainion.Windows.Controls
 {
     [TemplatePart( Name = "PART_TextBlock", Type = typeof( EditableTextBlock ) )]
     [TemplatePart( Name = "PART_TextBox", Type = typeof( EditableTextBlock ) )]
-    public class EditableTextBlock : Control, INotifyPropertyChanged
+    public class EditableTextBlock : Control
     {
         private string myTextBeforeEdit;
         private TextBlock myTextBlock;
@@ -22,6 +23,8 @@ namespace Plainion.Windows.Controls
         {
             Focusable = true;
             FocusVisualStyle = null;
+
+            SetBinding( FormattedTextProperty, new Binding() { Path = new PropertyPath( "Text" ), Source = this } );
         }
 
         public override void OnApplyTemplate()
@@ -43,20 +46,22 @@ namespace Plainion.Windows.Controls
             OnIsInEditModeChanged();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register( "Text", typeof( string ),
-            typeof( EditableTextBlock ), new FrameworkPropertyMetadata( null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnTextChanged ) );
-
-        private static void OnTextChanged( DependencyObject d, DependencyPropertyChangedEventArgs e )
-        {
-           ((EditableTextBlock)d).RaiseFormattedTextChanged();
-        }
+            typeof( EditableTextBlock ), new FrameworkPropertyMetadata( null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault ) );
 
         public string Text
         {
             get { return ( string )GetValue( TextProperty ); }
             set { SetValue( TextProperty, value ); }
+        }
+
+        public static readonly DependencyProperty FormattedTextProperty = DependencyProperty.Register( "FormattedText", typeof( string ),
+            typeof( EditableTextBlock ), new FrameworkPropertyMetadata( null ) );
+
+        public string FormattedText
+        {
+            get { return ( string )GetValue( FormattedTextProperty ); }
+            set { SetValue( FormattedTextProperty, value ); }
         }
 
         public static readonly DependencyProperty IsEditableProperty = DependencyProperty.Register( "IsEditable", typeof( bool ),
@@ -69,7 +74,7 @@ namespace Plainion.Windows.Controls
         }
 
         public static readonly DependencyProperty IsInEditModeProperty = DependencyProperty.Register( "IsInEditMode", typeof( bool ),
-            typeof( EditableTextBlock ), new PropertyMetadata( false, OnIsInEditModeChanged, CoerceIsInEditModeChanged ) );
+            typeof( EditableTextBlock ), new FrameworkPropertyMetadata( false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnIsInEditModeChanged, CoerceIsInEditModeChanged ) );
 
         private static void OnIsInEditModeChanged( DependencyObject d, DependencyPropertyChangedEventArgs e )
         {
@@ -122,28 +127,6 @@ namespace Plainion.Windows.Controls
             set { SetValue( IsInEditModeProperty, value ); }
         }
 
-        public static readonly DependencyProperty TextFormatProperty = DependencyProperty.Register( "TextFormat", typeof( string ),
-            typeof( EditableTextBlock ), new PropertyMetadata( "{0}" ) );
-
-        public string TextFormat
-        {
-            get { return ( string )GetValue( TextFormatProperty ); }
-            set
-            {
-                if( string.IsNullOrWhiteSpace( value ) )
-                {
-                    value = "{0}";
-                }
-
-                SetValue( TextFormatProperty, value );
-            }
-        }
-
-        public string FormattedText
-        {
-            get { return string.Format( TextFormat, Text ); }
-        }
-
         private void OnTextBoxFocusLost( object sender, RoutedEventArgs e )
         {
             IsInEditMode = false;
@@ -159,8 +142,6 @@ namespace Plainion.Windows.Controls
                 var binding = myTextBox.GetBindingExpression( TextBox.TextProperty );
                 binding.UpdateSource();
 
-                RaiseFormattedTextChanged();
-
                 IsInEditMode = false;
                 e.Handled = true;
             }
@@ -170,14 +151,6 @@ namespace Plainion.Windows.Controls
 
                 IsInEditMode = false;
                 e.Handled = true;
-            }
-        }
-
-        private void RaiseFormattedTextChanged()
-        {
-            if( PropertyChanged != null )
-            {
-                PropertyChanged( this, new PropertyChangedEventArgs( "FormattedText" ) );
             }
         }
     }

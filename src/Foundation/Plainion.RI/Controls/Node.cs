@@ -9,17 +9,24 @@ namespace Plainion.RI.Controls
 {
     public class Node : BindableBase, INode
     {
-        private string myText;
-        private ObservableCollection<Node> myChildren;
+        private string myId;
+        private string myName;
+        private IList<Node> myChildren;
         private bool myIsSelected;
         private bool myIsExpanded;
         private bool myIsChecked;
         private bool myIsInEditMode;
 
-        public string Text
+        public string Id
         {
-            get { return myText; }
-            set { SetProperty(ref myText, value); }
+            get { return myId; }
+            set { SetProperty( ref myId, value ); }
+        }
+
+        public string Name
+        {
+            get { return myName; }
+            set { SetProperty( ref myName, value ); }
         }
 
         public bool IsInEditMode
@@ -27,16 +34,11 @@ namespace Plainion.RI.Controls
             get { return myIsInEditMode; }
             set
             {
-                if (SetProperty(ref myIsInEditMode, value))
+                if( SetProperty( ref myIsInEditMode, value ) )
                 {
-                    OnPropertyChanged(() => FormattedText);
+                    // OnPropertyChanged(() => FormattedText);
                 }
             }
-        }
-
-        public string FormattedText
-        {
-            get { return string.Format("{0} ({1})", Text, Text.Length); }
         }
 
         IEnumerable<INode> INode.Children
@@ -44,27 +46,27 @@ namespace Plainion.RI.Controls
             get { return myChildren; }
         }
 
-        public IEnumerable<Node> Children
+        public IList<Node> Children
         {
             get { return myChildren; }
-            set { SetProperty(ref myChildren, new ObservableCollection<Node>(value)); }
+            set { SetProperty( ref myChildren, value ); }
         }
 
         public bool? IsChecked
         {
             get
             {
-                if (myChildren == null)
+                if( myChildren == null )
                 {
                     return myIsChecked;
                 }
 
-                if (Children.All(t => t.IsChecked == true))
+                if( Children.All( t => t.IsChecked == true ) )
                 {
                     return true;
                 }
 
-                if (Children.All(t => !t.IsChecked == true))
+                if( Children.All( t => !t.IsChecked == true ) )
                 {
                     return false;
                 }
@@ -73,32 +75,32 @@ namespace Plainion.RI.Controls
             }
             set
             {
-                if (myChildren == null)
+                if( myChildren == null )
                 {
                     myIsChecked = value != null && value.Value;
                 }
                 else
                 {
-                    foreach (var t in Children)
+                    foreach( var t in Children )
                     {
                         t.IsChecked = value.HasValue && value.Value;
                     }
                 }
 
-                OnPropertyChanged(() => IsChecked);
+                OnPropertyChanged( () => IsChecked );
             }
         }
 
         public bool IsSelected
         {
             get { return myIsSelected; }
-            set { SetProperty(ref myIsSelected, value); }
+            set { SetProperty( ref myIsSelected, value ); }
         }
 
         public bool IsExpanded
         {
             get { return myIsExpanded; }
-            set { SetProperty(ref myIsExpanded, value); }
+            set { SetProperty( ref myIsExpanded, value ); }
         }
     }
 }

@@ -1,5 +1,8 @@
-﻿using System.ComponentModel.Composition;
+﻿using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Diagnostics;
 using Prism.Mvvm;
+using System.Linq;
 
 namespace Plainion.RI.Controls
 {
@@ -8,31 +11,20 @@ namespace Plainion.RI.Controls
     {
         public TreeEditorViewModel()
         {
-            Root = new Node
+            Root = new Node();
+
+            Root.Children = new List<Node>();
+
+            foreach( var process in Process.GetProcesses() )
             {
-                Text = "Root",
-                Children = new[]
-                {
-                    new Node
-                    {
-                        Text="1",
-                        Children = new[]
-                        {
-                            new Node{Text="a"},
-                            new Node{Text="b"}
-                        }
-                    },
-                    new Node
-                    {
-                        Text="2",
-                        Children = new[]
-                        {
-                            new Node{Text="c"},
-                            new Node{Text="d"}
-                        }
-                    }
-                }
-            };
+                var processNode = new Node() { Id = process.Id.ToString(), Name = process.ProcessName };
+                Root.Children.Add( processNode );
+
+                processNode.Children = process.Threads
+                    .OfType<ProcessThread>()
+                    .Select( t => new Node { Id = t.Id.ToString(), Name = "unknown" } )
+                    .ToList();
+            }
         }
 
         public Node Root { get; private set; }

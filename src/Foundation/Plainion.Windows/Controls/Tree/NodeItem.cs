@@ -20,6 +20,7 @@ namespace Plainion.Windows.Controls.Tree
         public NodeItem()
         {
             ShowChildrenCount = false;
+            SetBinding( FormattedTextProperty, new Binding() { Path = new PropertyPath("Text"), Source = this } );
         }
 
         protected override DependencyObject GetContainerForItemOverride()
@@ -39,6 +40,15 @@ namespace Plainion.Windows.Controls.Tree
         {
             get { return ( string )GetValue( TextProperty ); }
             set { SetValue( TextProperty, value ); }
+        }
+
+        public static DependencyProperty FormattedTextProperty = DependencyProperty.Register( "FormattedText", typeof( string ), typeof( TreeViewItem ),
+            new FrameworkPropertyMetadata( null ) );
+
+        public string FormattedText
+        {
+            get { return ( string )GetValue( FormattedTextProperty ); }
+            set { SetValue( FormattedTextProperty, value ); }
         }
 
         public bool IsInEditMode
@@ -82,12 +92,6 @@ namespace Plainion.Windows.Controls.Tree
         {
             get { return ( bool )GetValue( IsFilteredOutProperty ); }
             set { SetValue( IsFilteredOutProperty, value ); }
-        }
-
-        // TODO: implement ("ProcessName (PID)")
-        public string FormattedText
-        {
-            get { return Text; }
         }
 
         public IEnumerable<NodeItem> Children
