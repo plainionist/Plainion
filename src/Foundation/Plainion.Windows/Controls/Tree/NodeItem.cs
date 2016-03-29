@@ -180,7 +180,6 @@ namespace Plainion.Windows.Controls.Tree
 
         internal void ApplyFilter( string filter )
         {
-            // TODO: we may want to support several levels of filter (e.g. pid and tid)
             if( string.IsNullOrWhiteSpace( filter ) )
             {
                 IsFilteredOut = false;
@@ -191,9 +190,9 @@ namespace Plainion.Windows.Controls.Tree
             }
             else
             {
-                // TODO: do we need to support separate filter method so that we can filter on visible text but also on hidden attributes of the model?
-                // e.g. process name and PID or class name and namespace
-                IsFilteredOut = Text == null || !Text.Contains( filter, StringComparison.OrdinalIgnoreCase );
+                var node = (INode) DataContext;
+
+                IsFilteredOut = Text == null || !node.Matches(filter);
             }
 
             foreach( var child in Children )

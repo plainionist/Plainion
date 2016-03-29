@@ -1,7 +1,4 @@
 ﻿
-- formattedtext
-
-- filter on hidden model properties
 - 2 level filter
 
 - IsSelected as DP
