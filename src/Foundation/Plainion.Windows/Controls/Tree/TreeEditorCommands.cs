@@ -19,32 +19,32 @@ namespace Plainion.Windows.Controls.Tree
 
         private static void OnExpandAll(TreeEditor editor, NodeItem node)
         {
-            if (node != null)
-            {
-                node.ExpandAll();
-            }
-            else
-            {
-                foreach( var item in editor.GetRootItems() )
-                {
-                    item.ExpandAll();
-                }
-            }
+            //if (node != null)
+            //{
+            //    node.ExpandAll();
+            //}
+            //else
+            //{
+            //    foreach( var item in editor.GetRootItems() )
+            //    {
+            //        item.ExpandAll();
+            //    }
+            //}
         }
 
         private static void OnCollapseAll(TreeEditor editor, NodeItem node)
         {
-            if (node != null)
-            {
-                node.CollapseAll();
-            }
-            else
-            {
-                foreach( var item in editor.GetRootItems() )
-                {
-                    item.CollapseAll();
-                }
-            }
+            //if (node != null)
+            //{
+            //    node.CollapseAll();
+            //}
+            //else
+            //{
+            //    foreach( var item in editor.GetRootItems() )
+            //    {
+            //        item.CollapseAll();
+            //    }
+            //}
         }
 
         private static void OnEdit(TreeEditor editor, NodeItem node)

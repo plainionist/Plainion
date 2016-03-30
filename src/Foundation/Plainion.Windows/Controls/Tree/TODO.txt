@@ -1,5 +1,7 @@
 ﻿
+- keeping state in NodeItem is not possible due to virtualization
 - 2 level filter
+- "pattern" class
 
 - IsSelected as DP
 - IsExpanded as DP

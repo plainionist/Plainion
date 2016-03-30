@@ -102,10 +102,15 @@ namespace Plainion.RI.Controls
             set { SetProperty(ref myIsExpanded, value); }
         }
 
-
         bool INode.Matches(string pattern)
         {
-            return Name.Contains(pattern, StringComparison.OrdinalIgnoreCase) || Id.Contains(pattern, StringComparison.OrdinalIgnoreCase);
+            if (pattern == "*")
+            {
+                return Name != null;
+            }
+
+            return (Name != null && Name.Contains(pattern, StringComparison.OrdinalIgnoreCase))
+                || (Id != null && Id.Contains(pattern, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

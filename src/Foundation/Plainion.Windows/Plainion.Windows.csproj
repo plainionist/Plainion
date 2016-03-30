@@ -56,6 +56,8 @@
     <Compile Include="Controls\Tree\ExtendedTreeView.cs" />
     <Compile Include="Controls\Tree\INode.cs" />
     <Compile Include="Controls\Tree\NodeDropRequest.cs" />
+    <Compile Include="Controls\Tree\NodeState.cs" />
+    <Compile Include="Controls\Tree\StateContainer.cs" />
     <Compile Include="Controls\Tree\TreeEditor.xaml.cs">
       <DependentUpon>TreeEditor.xaml</DependentUpon>
     </Compile>
