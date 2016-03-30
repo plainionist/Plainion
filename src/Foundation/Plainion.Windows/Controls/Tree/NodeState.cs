@@ -53,7 +53,7 @@ namespace Plainion.Windows.Controls.Tree
         {
             myAttachedView = nodeItem;
 
-            IsFilteredOut = IsFilteredOut;
+            myAttachedView.IsFilteredOut = IsFilteredOut;
         }
 
         public void ApplyFilter(string filter)
