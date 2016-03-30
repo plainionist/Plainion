@@ -18,59 +18,59 @@ namespace Plainion.Windows.Controls.Tree
         private bool myIsInEditMode;
         private NodeState myState;
 
-        internal NodeItem(StateContainer stateContainer)
+        internal NodeItem( StateContainer stateContainer )
         {
             myStateContainer = stateContainer;
 
             //ShowChildrenCount = false;
-            
+
             DataContextChanged += OnDataContextChanged;
             Loaded += OnLoaded;
         }
 
-        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void OnDataContextChanged( object sender, DependencyPropertyChangedEventArgs e )
         {
-            myState = myStateContainer.GetOrCreate(DataContext);
-            myState.Attach(this);
+            myState = myStateContainer.GetOrCreate( DataContext );
+            myState.Attach( this );
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e)
+        private void OnLoaded( object sender, RoutedEventArgs e )
         {
             Loaded -= OnLoaded;
 
-            if (BindingOperations.GetBindingExpression(this, FormattedTextProperty) == null
-                && BindingOperations.GetMultiBindingExpression(this, FormattedTextProperty) == null)
+            if( BindingOperations.GetBindingExpression( this, FormattedTextProperty ) == null
+                && BindingOperations.GetMultiBindingExpression( this, FormattedTextProperty ) == null )
             {
-                SetBinding(FormattedTextProperty, new Binding { Path = new PropertyPath("Text"), Source = this });
+                SetBinding( FormattedTextProperty, new Binding { Path = new PropertyPath( "Text" ), Source = this } );
             }
         }
 
         protected override DependencyObject GetContainerForItemOverride()
         {
-            return new NodeItem(myStateContainer);
+            return new NodeItem( myStateContainer );
         }
 
-        protected override bool IsItemItsOwnContainerOverride(object item)
+        protected override bool IsItemItsOwnContainerOverride( object item )
         {
             return item is NodeItem;
         }
 
-        public static DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(TreeViewItem),
-            new FrameworkPropertyMetadata(null));
+        public static DependencyProperty TextProperty = DependencyProperty.Register( "Text", typeof( string ), typeof( TreeViewItem ),
+            new FrameworkPropertyMetadata( null ) );
 
         public string Text
         {
-            get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
+            get { return ( string )GetValue( TextProperty ); }
+            set { SetValue( TextProperty, value ); }
         }
 
-        public static DependencyProperty FormattedTextProperty = DependencyProperty.Register("FormattedText", typeof(string), typeof(TreeViewItem),
-            new FrameworkPropertyMetadata(null));
+        public static DependencyProperty FormattedTextProperty = DependencyProperty.Register( "FormattedText", typeof( string ), typeof( TreeViewItem ),
+            new FrameworkPropertyMetadata( null ) );
 
         public string FormattedText
         {
-            get { return (string)GetValue(FormattedTextProperty); }
-            set { SetValue(FormattedTextProperty, value); }
+            get { return ( string )GetValue( FormattedTextProperty ); }
+            set { SetValue( FormattedTextProperty, value ); }
         }
 
         public bool IsInEditMode
@@ -78,15 +78,15 @@ namespace Plainion.Windows.Controls.Tree
             get { return myIsInEditMode; }
             set
             {
-                if (Text == null && value == true)
+                if( Text == null && value == true )
                 {
                     // we first need to set some dummy text so that the EditableTextBlock control becomes visible again
                     Text = "<empty>";
                 }
 
-                if (SetProperty(ref myIsInEditMode, value))
+                if( SetProperty( ref myIsInEditMode, value ) )
                 {
-                    if (!myIsInEditMode && Text == "<empty>")
+                    if( !myIsInEditMode && Text == "<empty>" )
                     {
                         Text = null;
                     }
@@ -94,27 +94,27 @@ namespace Plainion.Windows.Controls.Tree
             }
         }
 
-        private bool SetProperty<T>(ref T storage, T value)
+        private bool SetProperty<T>( ref T storage, T value )
         {
             return true;
         }
 
-        public static DependencyProperty IsFilteredOutProperty = DependencyProperty.Register("IsFilteredOut", typeof(bool), typeof(TreeViewItem),
-            new FrameworkPropertyMetadata(false, OnIsFilteredOutChanged));
+        public static DependencyProperty IsFilteredOutProperty = DependencyProperty.Register( "IsFilteredOut", typeof( bool ), typeof( TreeViewItem ),
+            new FrameworkPropertyMetadata( false, OnIsFilteredOutChanged ) );
 
-        private static void OnIsFilteredOutChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnIsFilteredOutChanged( DependencyObject d, DependencyPropertyChangedEventArgs e )
         {
-            var self = (NodeItem)d;
+            var self = ( NodeItem )d;
             self.Visibility = self.IsFilteredOut ? Visibility.Collapsed : Visibility.Visible;
         }
 
         public bool IsFilteredOut
         {
-            get { return (bool)GetValue(IsFilteredOutProperty); }
-            set { SetValue(IsFilteredOutProperty, value); myState.IsFilteredOut = value; }
+            get { return ( bool )GetValue( IsFilteredOutProperty ); }
+            set { SetValue( IsFilteredOutProperty, value ); myState.IsFilteredOut = value; }
         }
 
-        private void OnPropertyChanged([CallerMemberName]string p = null)
+        private void OnPropertyChanged( [CallerMemberName]string p = null )
         {
         }
 
@@ -189,24 +189,24 @@ namespace Plainion.Windows.Controls.Tree
 
         string IDropable.DataFormat
         {
-            get { return typeof(NodeItem).FullName; }
+            get { return typeof( NodeItem ).FullName; }
         }
 
-        bool IDropable.IsDropAllowed(object data, DropLocation location)
+        bool IDropable.IsDropAllowed( object data, DropLocation location )
         {
             return true;
         }
 
-        void IDropable.Drop(object data, DropLocation location)
+        void IDropable.Drop( object data, DropLocation location )
         {
             var droppedElement = data as NodeItem;
 
-            if (droppedElement == null)
+            if( droppedElement == null )
             {
                 return;
             }
 
-            if (object.ReferenceEquals(droppedElement, this))
+            if( object.ReferenceEquals( droppedElement, this ) )
             {
                 //if dragged and dropped yourself, don't need to do anything
                 return;
@@ -219,10 +219,10 @@ namespace Plainion.Windows.Controls.Tree
                 Operation = location
             };
 
-            var editor = (TreeEditor)LogicalTreeHelper.GetParent(this);
-            if (editor.DropCommand != null && editor.DropCommand.CanExecute(arg))
+            var editor = ( TreeEditor )LogicalTreeHelper.GetParent( this );
+            if( editor.DropCommand != null && editor.DropCommand.CanExecute( arg ) )
             {
-                editor.DropCommand.Execute(arg);
+                editor.DropCommand.Execute( arg );
             }
 
             IsExpanded = true;
@@ -230,7 +230,7 @@ namespace Plainion.Windows.Controls.Tree
 
         Type IDragable.DataType
         {
-            get { return typeof(NodeItem); }
+            get { return typeof( NodeItem ); }
         }
     }
 }

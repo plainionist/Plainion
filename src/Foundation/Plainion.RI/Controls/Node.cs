@@ -19,13 +19,13 @@ namespace Plainion.RI.Controls
         public string Id
         {
             get { return myId; }
-            set { SetProperty(ref myId, value); }
+            set { SetProperty( ref myId, value ); }
         }
 
         public string Name
         {
             get { return myName; }
-            set { SetProperty(ref myName, value); }
+            set { SetProperty( ref myName, value ); }
         }
 
         public bool IsInEditMode
@@ -33,7 +33,7 @@ namespace Plainion.RI.Controls
             get { return myIsInEditMode; }
             set
             {
-                if (SetProperty(ref myIsInEditMode, value))
+                if( SetProperty( ref myIsInEditMode, value ) )
                 {
                     // OnPropertyChanged(() => FormattedText);
                 }
@@ -48,24 +48,26 @@ namespace Plainion.RI.Controls
         public IList<Node> Children
         {
             get { return myChildren; }
-            set { SetProperty(ref myChildren, value); }
+            set { SetProperty( ref myChildren, value ); }
         }
+
+        public INode Parent { get; set; }
 
         public bool? IsChecked
         {
             get
             {
-                if (myChildren == null)
+                if( myChildren == null )
                 {
                     return myIsChecked;
                 }
 
-                if (Children.All(t => t.IsChecked == true))
+                if( Children.All( t => t.IsChecked == true ) )
                 {
                     return true;
                 }
 
-                if (Children.All(t => !t.IsChecked == true))
+                if( Children.All( t => !t.IsChecked == true ) )
                 {
                     return false;
                 }
@@ -74,43 +76,43 @@ namespace Plainion.RI.Controls
             }
             set
             {
-                if (myChildren == null)
+                if( myChildren == null )
                 {
                     myIsChecked = value != null && value.Value;
                 }
                 else
                 {
-                    foreach (var t in Children)
+                    foreach( var t in Children )
                     {
                         t.IsChecked = value.HasValue && value.Value;
                     }
                 }
 
-                OnPropertyChanged(() => IsChecked);
+                OnPropertyChanged( () => IsChecked );
             }
         }
 
         public bool IsSelected
         {
             get { return myIsSelected; }
-            set { SetProperty(ref myIsSelected, value); }
+            set { SetProperty( ref myIsSelected, value ); }
         }
 
         public bool IsExpanded
         {
             get { return myIsExpanded; }
-            set { SetProperty(ref myIsExpanded, value); }
+            set { SetProperty( ref myIsExpanded, value ); }
         }
 
-        bool INode.Matches(string pattern)
+        bool INode.Matches( string pattern )
         {
-            if (pattern == "*")
+            if( pattern == "*" )
             {
                 return Name != null;
             }
 
-            return (Name != null && Name.Contains(pattern, StringComparison.OrdinalIgnoreCase))
-                || (Id != null && Id.Contains(pattern, StringComparison.OrdinalIgnoreCase));
+            return ( Name != null && Name.Contains( pattern, StringComparison.OrdinalIgnoreCase ) )
+                || ( Id != null && Id.Contains( pattern, StringComparison.OrdinalIgnoreCase ) );
         }
     }
 }
