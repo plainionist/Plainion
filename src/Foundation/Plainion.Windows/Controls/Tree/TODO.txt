@@ -1,6 +1,8 @@
 ﻿
-- IsSelected as DP
-- IsExpanded as DP
+
+- expandall/collapseall
+  - as nodes are streched there is NO space where i could open a contextmenu outside a node
+    -> how to do real expand all?
 
 - in place edit
 
@@ -9,8 +11,6 @@
 - d&d
 
 - contextmenu
-
-- expandall/collapseall
 
 - shortcut keys
 

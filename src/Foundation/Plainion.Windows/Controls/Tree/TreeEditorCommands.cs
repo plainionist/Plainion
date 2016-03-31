@@ -19,7 +19,8 @@ namespace Plainion.Windows.Controls.Tree
 
         private static void OnExpandAll(TreeEditor editor, NodeItem node)
         {
-            //if (node != null)
+            var x = editor.myTree.SelectedItem;
+            //if( node != null )
             //{
             //    node.ExpandAll();
             //}
@@ -34,7 +35,7 @@ namespace Plainion.Windows.Controls.Tree
 
         private static void OnCollapseAll(TreeEditor editor, NodeItem node)
         {
-            //if (node != null)
+            //if( node != null )
             //{
             //    node.CollapseAll();
             //}
