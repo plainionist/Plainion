@@ -53,8 +53,8 @@
                 <ContextMenu>
                     <MenuItem Header="New" InputGestureText="Ctrl+N" Command="{Binding AddChildCommand}"/>
                     <Separator/>
-                    <MenuItem Header="Expand all" InputGestureText="Ctrl++" Command="{Binding ExpandAllCommand}"/>
-                    <MenuItem Header="Collapse all" InputGestureText="Ctrl+-" Command="{Binding CollapseAllCommand}"/>
+                    <MenuItem Header="Expand all" InputGestureText="Ctrl++" Command="{Binding ExpandAllCommand}" CommandParameter="{Binding ItemForContextMenu, ElementName=myTree}"/>
+                    <MenuItem Header="Collapse all" InputGestureText="Ctrl+-" Command="{Binding CollapseAllCommand}" CommandParameter="{Binding ItemForContextMenu, ElementName=myTree}"/>
                 </ContextMenu>
             </tree:ExtendedTreeView.ContextMenu>
 
