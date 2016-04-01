@@ -1,18 +1,12 @@
 ﻿
 
-- expandall/collapseall
-  - as nodes are streched there is NO space where i could open a contextmenu outside a node
-    -> how to do real expand all?
-
 - in place edit
-
-- check box
 
 - d&d
 
-- contextmenu
-
-- shortcut keys
-
 - CRUD
 
+- check box
+
+
+- shortcut keys

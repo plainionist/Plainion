@@ -31,8 +31,6 @@
             <!-- x:Shared="False" forces the new creation of that object whenever referenced -->
             <InputBindingCollection x:Shared="False" x:Key="InputBindings">
                 <KeyBinding Key="F2" Command="{Binding Data.EditCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
-                <KeyBinding Key="N" Modifiers="Control"
-                            Command="{Binding Data.AddChildCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
             </InputBindingCollection>
         </DockPanel.Resources>
 
@@ -44,6 +42,10 @@
         <tree:ExtendedTreeView x:Name="myTree" Margin="0,3,0,0" ItemsSource="{Binding Root.Children}" 
                                BorderThickness="0" Focusable="True"
                                ItemContainerStyle="{Binding NodeStyle}">
+            <tree:ExtendedTreeView.Resources>
+                <windows:BindingProxy x:Key="TreeProxy" Data="{Binding ElementName=myTree}"/>
+            </tree:ExtendedTreeView.Resources>
+            
             <i:Interaction.Behaviors>
                 <interactivity:FocusOnClickBehavior/>
                 <dragDrop:FrameworkElementDropBehavior/>
@@ -51,18 +53,14 @@
 
             <tree:ExtendedTreeView.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="New" InputGestureText="Ctrl+N" Command="{Binding AddChildCommand}"/>
+                    <MenuItem Header="New" Command="{Binding AddChildCommand}"/>
                     <Separator/>
-                    <MenuItem Header="Expand all" InputGestureText="Ctrl++" Command="{Binding ExpandAllCommand}" CommandParameter="{Binding ItemForContextMenu, ElementName=myTree}"/>
-                    <MenuItem Header="Collapse all" InputGestureText="Ctrl+-" Command="{Binding CollapseAllCommand}" CommandParameter="{Binding ItemForContextMenu, ElementName=myTree}"/>
+                    <MenuItem Header="Expand all" Command="{Binding ExpandAllCommand}" 
+                              CommandParameter="{Binding Data.ItemForContextMenu.DataContext, Source={StaticResource TreeProxy}}"/>
+                    <MenuItem Header="Collapse all" Command="{Binding CollapseAllCommand}"
+                              CommandParameter="{Binding Data.ItemForContextMenu.DataContext, Source={StaticResource TreeProxy}}"/>
                 </ContextMenu>
             </tree:ExtendedTreeView.ContextMenu>
-
-            <tree:ExtendedTreeView.InputBindings>
-                <KeyBinding Key="OemPlus" Modifiers="Control" Command="{Binding ExpandAllCommand}"/>
-                <KeyBinding Key="OemMinus" Modifiers="Control" Command="{Binding CollapseAllCommand}"/>
-                <KeyBinding Key="N" Modifiers="Control" Command="{Binding AddChildCommand}"/>
-            </tree:ExtendedTreeView.InputBindings>
 
             <tree:ExtendedTreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Children}"

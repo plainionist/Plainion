@@ -11,41 +11,34 @@ namespace Plainion.Windows.Controls.Tree
 
         public static void RegisterCommandBindings(TreeEditor editor)
         {
-            editor.CommandBindings.Add(new CommandBinding(ExpandAll, (sender, e) => OnExpandAll(editor, (NodeItem)e.Parameter)));
-            editor.CommandBindings.Add(new CommandBinding(CollapseAll, (sender, e) => OnCollapseAll(editor, (NodeItem)e.Parameter)));
+            editor.CommandBindings.Add(new CommandBinding(ExpandAll, (sender, e) => OnExpandAll(editor, (INode)e.Parameter)));
+            editor.CommandBindings.Add(new CommandBinding(CollapseAll, (sender, e) => OnCollapseAll(editor, (INode)e.Parameter)));
 
             editor.CommandBindings.Add(new CommandBinding(Edit, (sender, e) => OnEdit(editor, (NodeItem)e.Parameter)));
         }
 
-        private static void OnExpandAll(TreeEditor editor, NodeItem node)
+        private static void OnExpandAll(TreeEditor editor, INode node)
         {
-            var x = editor.myTree.SelectedItem;
-            //if( node != null )
-            //{
-            //    node.ExpandAll();
-            //}
-            //else
-            //{
-            //    foreach( var item in editor.GetRootItems() )
-            //    {
-            //        item.ExpandAll();
-            //    }
-            //}
+            if (node == null)
+            {
+                node = editor.Root;
+            }
+
+            var nodeState = editor.myTree.StateContainer.GetOrCreate(node);
+
+            nodeState.ExpandAll();
         }
 
-        private static void OnCollapseAll(TreeEditor editor, NodeItem node)
+        private static void OnCollapseAll(TreeEditor editor, INode node)
         {
-            //if( node != null )
-            //{
-            //    node.CollapseAll();
-            //}
-            //else
-            //{
-            //    foreach( var item in editor.GetRootItems() )
-            //    {
-            //        item.CollapseAll();
-            //    }
-            //}
+            if (node == null)
+            {
+                node = editor.Root;
+            }
+
+            var nodeState = editor.myTree.StateContainer.GetOrCreate(node);
+
+            nodeState.CollapseAll();
         }
 
         private static void OnEdit(TreeEditor editor, NodeItem node)
