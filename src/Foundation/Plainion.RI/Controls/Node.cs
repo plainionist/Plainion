@@ -18,7 +18,7 @@ namespace Plainion.RI.Controls
 
         public Node()
         {
-            Children = new NodeCollection( this );
+            Children = new ObservableCollection<Node>();
         }
 
         public string Id
@@ -50,7 +50,7 @@ namespace Plainion.RI.Controls
             get { return Children; }
         }
 
-        public NodeCollection Children { get; private set; }
+        public ObservableCollection<Node> Children { get; private set; }
 
         public INode Parent { get; set; }
 

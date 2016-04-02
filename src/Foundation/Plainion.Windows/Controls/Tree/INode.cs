@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Plainion.Windows.Controls.Tree
 {
@@ -7,9 +8,6 @@ namespace Plainion.Windows.Controls.Tree
     {
         INode Parent { get; }
 
-        /// <summary>
-        /// Returned collection must implement INotifyCollectionChanged if Drag and Drop should be supported
-        /// </summary>
         IEnumerable<INode> Children { get; }
 
         bool Matches(string pattern);
