@@ -23,7 +23,7 @@ namespace Plainion.RI.Controls
                 var processNode = new Node() { Parent = Root, Id = process.Id.ToString(), Name = process.ProcessName };
                 Root.Children.Add( processNode );
 
-                processNode.Children = new ObservableCollection<Node>( process.Threads
+                processNode.Children.AddRange( process.Threads
                     .OfType<ProcessThread>()
                     .Select( t => new Node { Parent = processNode, Id = t.Id.ToString(), Name = "unknown" } ) );
             }
@@ -40,12 +40,12 @@ namespace Plainion.RI.Controls
             MoveBefore,
             MoveAfter
         }
-        
+
         private void OnDrop( NodeDropRequest request )
         {
             if( request.DropTarget == Root )
             {
-               AddChildTo( request.DroppedNode, Root );
+                AddChildTo( request.DroppedNode, Root );
             }
             else
             {
@@ -65,7 +65,7 @@ namespace Plainion.RI.Controls
         {
             MoveNode( ( Node )nodeToMove, ( Node )targetNode, operation );
 
-         //   IsDirty = true;
+            //   IsDirty = true;
         }
 
         private void MoveNode( Node nodeToMove, Node targetNode, MoveOperation operation )
@@ -108,7 +108,7 @@ namespace Plainion.RI.Controls
         {
             ( ( Node )newParent ).Children.Add( ( Node )child );
 
-           // IsDirty = true;
+            // IsDirty = true;
         }
     }
 }

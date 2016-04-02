@@ -7,19 +7,19 @@ using Prism.Mvvm;
 
 namespace Plainion.RI.Controls
 {
-    public class Node : BindableBase, INode
+    class Node : BindableBase, INode
     {
         private string myId;
         private string myName;
-        private ObservableCollection<Node> myChildren;
         private bool myIsSelected;
         private bool myIsExpanded;
         private bool myIsChecked;
         private bool myIsInEditMode;
+        private Node myParent;
 
         public Node()
         {
-            myChildren = new ObservableCollection<Node>();
+            Children = new NodeCollection( this );
         }
 
         public string Id
@@ -48,22 +48,35 @@ namespace Plainion.RI.Controls
 
         IEnumerable<INode> INode.Children
         {
-            get { return myChildren; }
+            get { return Children; }
         }
 
-        public ObservableCollection<Node> Children
+        public NodeCollection Children { get; private set; }
+
+        public INode Parent
         {
-            get { return myChildren; }
-            set { SetProperty( ref myChildren, value ); }
-        }
+            get { return myParent; }
+            internal set
+            {
+                if( myParent == value )
+                {
+                    return;
+                }
 
-        public INode Parent { get; set; }
+                if( myParent != null )
+                {
+                    myParent.Children.Remove( this );
+                }
+
+                SetProperty( ref myParent, (Node)value );
+            }
+        }
 
         public bool? IsChecked
         {
             get
             {
-                if( myChildren == null )
+                if( !Children.Any() )
                 {
                     return myIsChecked;
                 }
@@ -82,7 +95,7 @@ namespace Plainion.RI.Controls
             }
             set
             {
-                if( myChildren == null )
+                if( !Children.Any() )
                 {
                     myIsChecked = value != null && value.Value;
                 }
