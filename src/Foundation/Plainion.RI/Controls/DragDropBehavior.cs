@@ -66,22 +66,38 @@ namespace Plainion.RI.Controls
             {
                 if( dropPos < siblings.Count )
                 {
+                    var oldParent=(Node)nodeToMove.Parent;
+
+                    oldParent.Children.Remove( nodeToMove );
                     siblings.Insert( dropPos, nodeToMove );
+
+                    nodeToMove.Parent = targetNode.Parent;
                 }
                 else
                 {
+                    var oldParent = ( Node )nodeToMove.Parent;
+
+                    oldParent.Children.Remove( nodeToMove );
                     siblings.Add( nodeToMove );
+
+                    nodeToMove.Parent = targetNode.Parent;
                 }
             }
-
-            //IsDirty = true;
         }
 
-        public void AddChildTo( INode child, INode newParent )
+        private void AddChildTo( INode child, INode newParent )
         {
-            ( ( Node )newParent ).Children.Add( ( Node )child );
+            AddChildTo( ( Node )child, ( Node )newParent );
+        }
 
-            // IsDirty = true;
+        private void AddChildTo( Node child, Node newParent )
+        {
+            var oldParent = (Node)child.Parent;
+
+            oldParent.Children.Remove( child );
+            newParent.Children.Add( child );
+
+            child.Parent = newParent;
         }
     }
 }

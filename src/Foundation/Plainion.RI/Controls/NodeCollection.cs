@@ -13,28 +13,5 @@ namespace Plainion.RI.Controls
             myParent = parent;
         }
 
-        protected override void OnCollectionChanged( NotifyCollectionChangedEventArgs e )
-        {
-            if( e.Action != NotifyCollectionChangedAction.Move )
-            {
-                SetParent( e.NewItems, myParent );
-                SetParent( e.OldItems, null );
-            }
-
-            base.OnCollectionChanged( e );
-        }
-
-        private void SetParent( IList items, Node parent )
-        {
-            if( items == null )
-            {
-                return;
-            }
-
-            foreach( Node n in items )
-            {
-                n.Parent = parent;
-            }
-        }
     }
 }

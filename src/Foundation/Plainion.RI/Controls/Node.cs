@@ -15,7 +15,6 @@ namespace Plainion.RI.Controls
         private bool myIsExpanded;
         private bool myIsChecked;
         private bool myIsInEditMode;
-        private Node myParent;
 
         public Node()
         {
@@ -53,25 +52,7 @@ namespace Plainion.RI.Controls
 
         public NodeCollection Children { get; private set; }
 
-        public INode Parent
-        {
-            get { return myParent; }
-            internal set
-            {
-                if( myParent == value )
-                {
-                    return;
-                }
-
-                if( myParent != null )
-                {
-                    myParent.Children.Remove( this );
-                }
-
-                // Notifications about parent changes currently not required
-                myParent = ( Node )value;
-            }
-        }
+        public INode Parent { get; set; }
 
         public bool? IsChecked
         {
