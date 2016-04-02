@@ -63,8 +63,7 @@
             </tree:ExtendedTreeView.ContextMenu>
 
             <tree:ExtendedTreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Children}"
-                                          ItemTemplate="{StaticResource NodeTemplate}">
+                <HierarchicalDataTemplate ItemsSource="{Binding Children}">
                     <ContentControl Content="{Binding}" ContentTemplate="{StaticResource NodeTemplate}"/>
                 </HierarchicalDataTemplate>
             </tree:ExtendedTreeView.ItemTemplate>
