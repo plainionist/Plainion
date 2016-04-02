@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using Plainion.Windows.Controls.Tree;
 using Plainion.Windows.Interactivity.DragDrop;
 
@@ -19,26 +20,16 @@ namespace Plainion.RI.Controls
         {
             if( request.DropTarget == myRoot )
             {
-                AddChildTo( request.DroppedNode, myRoot );
+                ChangeParent( ( Node )request.DroppedNode, n => ( ( Node )myRoot ).Children.Add( n ), myRoot );
+            }
+            else if( request.Location == DropLocation.Before || request.Location == DropLocation.After )
+            {
+                MoveNode( ( Node )request.DroppedNode, ( Node )request.DropTarget, request.Location );
             }
             else
             {
-                if( request.Location == DropLocation.Before || request.Location == DropLocation.After )
-                {
-                    MoveNode( request.DroppedNode, request.DropTarget,  request.Location );
-                }
-                else
-                {
-                    AddChildTo( request.DroppedNode, request.DropTarget );
-                }
+                ChangeParent( ( Node )request.DroppedNode, n => ( ( Node )request.DropTarget ).Children.Add( n ), request.DropTarget );
             }
-        }
-
-        private void MoveNode( INode nodeToMove, INode targetNode, DropLocation location )
-        {
-            MoveNode( ( Node )nodeToMove, ( Node )targetNode, location );
-
-            //   IsDirty = true;
         }
 
         private void MoveNode( Node nodeToMove, Node targetNode, DropLocation operation )
@@ -66,38 +57,24 @@ namespace Plainion.RI.Controls
             {
                 if( dropPos < siblings.Count )
                 {
-                    var oldParent=(Node)nodeToMove.Parent;
-
-                    oldParent.Children.Remove( nodeToMove );
-                    siblings.Insert( dropPos, nodeToMove );
-
-                    nodeToMove.Parent = targetNode.Parent;
+                    ChangeParent( nodeToMove, n => siblings.Insert( dropPos, n ), targetNode.Parent );
                 }
                 else
                 {
-                    var oldParent = ( Node )nodeToMove.Parent;
-
-                    oldParent.Children.Remove( nodeToMove );
-                    siblings.Add( nodeToMove );
-
-                    nodeToMove.Parent = targetNode.Parent;
+                    ChangeParent( nodeToMove, n => siblings.Add( n ), targetNode.Parent );
                 }
             }
         }
 
-        private void AddChildTo( INode child, INode newParent )
+        private void ChangeParent( Node nodeToMove, Action<Node> insertionOperation, INode newParent )
         {
-            AddChildTo( ( Node )child, ( Node )newParent );
-        }
+            var oldParent = ( Node )nodeToMove.Parent;
 
-        private void AddChildTo( Node child, Node newParent )
-        {
-            var oldParent = (Node)child.Parent;
+            oldParent.Children.Remove( nodeToMove );
 
-            oldParent.Children.Remove( child );
-            newParent.Children.Add( child );
+            insertionOperation( nodeToMove );
 
-            child.Parent = newParent;
+            nodeToMove.Parent = newParent.Parent;
         }
     }
 }
