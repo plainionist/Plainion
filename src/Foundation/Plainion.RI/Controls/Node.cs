@@ -68,7 +68,8 @@ namespace Plainion.RI.Controls
                     myParent.Children.Remove( this );
                 }
 
-                SetProperty( ref myParent, (Node)value );
+                // Notifications about parent changes currently not required
+                myParent = ( Node )value;
             }
         }
 
