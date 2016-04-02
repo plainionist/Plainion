@@ -14,7 +14,8 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <GroupBox Header="TreeEditor" BorderBrush="Black">
-        <pn:TreeEditor Root="{Binding Root}" FilterLabel="Filter on node text">
+        <pn:TreeEditor Root="{Binding Root}" FilterLabel="Filter on node text"
+                       DropCommand="{Binding DropCommand}">
             <pn:TreeEditor.NodeStyle>
                 <Style TargetType="{x:Type pn:NodeItem}" BasedOn="{StaticResource DefaultNodeStyle}">
                     <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>

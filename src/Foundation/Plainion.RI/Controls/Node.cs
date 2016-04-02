@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Plainion.Windows.Controls.Tree;
 using Prism.Mvvm;
@@ -10,11 +11,16 @@ namespace Plainion.RI.Controls
     {
         private string myId;
         private string myName;
-        private IList<Node> myChildren;
+        private ObservableCollection<Node> myChildren;
         private bool myIsSelected;
         private bool myIsExpanded;
         private bool myIsChecked;
         private bool myIsInEditMode;
+
+        public Node()
+        {
+            myChildren = new ObservableCollection<Node>();
+        }
 
         public string Id
         {
@@ -45,7 +51,7 @@ namespace Plainion.RI.Controls
             get { return myChildren; }
         }
 
-        public IList<Node> Children
+        public ObservableCollection<Node> Children
         {
             get { return myChildren; }
             set { SetProperty( ref myChildren, value ); }

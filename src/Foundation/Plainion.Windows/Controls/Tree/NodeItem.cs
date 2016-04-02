@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 using Plainion.Windows.Interactivity.DragDrop;
 
 namespace Plainion.Windows.Controls.Tree
@@ -16,7 +17,6 @@ namespace Plainion.Windows.Controls.Tree
         //private bool myShowChildrenCount;
         //private bool myIsChecked;
         private bool myIsInEditMode;
-        private NodeState myState;
 
         internal NodeItem( StateContainer stateContainer )
         {
@@ -30,8 +30,8 @@ namespace Plainion.Windows.Controls.Tree
 
         private void OnDataContextChanged( object sender, DependencyPropertyChangedEventArgs e )
         {
-            myState = myStateContainer.GetOrCreate( DataContext );
-            myState.Attach( this );
+            State = myStateContainer.GetOrCreate( DataContext );
+            State.Attach( this );
         }
 
         private void OnLoaded( object sender, RoutedEventArgs e )
@@ -54,6 +54,8 @@ namespace Plainion.Windows.Controls.Tree
         {
             return item is NodeItem;
         }
+
+        internal NodeState State { get; private set; }
 
         public static DependencyProperty TextProperty = DependencyProperty.Register( "Text", typeof( string ), typeof( TreeViewItem ),
             new FrameworkPropertyMetadata( null ) );
@@ -111,7 +113,7 @@ namespace Plainion.Windows.Controls.Tree
         public bool IsFilteredOut
         {
             get { return ( bool )GetValue( IsFilteredOutProperty ); }
-            set { SetValue( IsFilteredOutProperty, value ); myState.IsFilteredOut = value; }
+            set { SetValue( IsFilteredOutProperty, value ); State.IsFilteredOut = value; }
         }
 
         private void OnPropertyChanged( [CallerMemberName]string p = null )
@@ -214,20 +216,23 @@ namespace Plainion.Windows.Controls.Tree
 
             var arg = new NodeDropRequest
             {
-                DroppedNode = droppedElement.DataContext,
-                DropTarget = DataContext,
-                Operation = location
+                DroppedNode = droppedElement.State.DataContext,
+                DropTarget = State.DataContext,
+                Location = location
             };
 
-            var editor = ( TreeEditor )LogicalTreeHelper.GetParent( this );
+            var editor = this.FindParentOfType<TreeEditor>();
             if( editor.DropCommand != null && editor.DropCommand.CanExecute( arg ) )
             {
                 editor.DropCommand.Execute( arg );
             }
 
-            IsExpanded = true;
+            if( location == DropLocation.InPlace )
+            {
+                IsExpanded = true;
+            }
         }
-
+        
         Type IDragable.DataType
         {
             get { return typeof( NodeItem ); }

@@ -1,8 +1,7 @@
 ﻿
+- d&d
 
 - in place edit
-
-- d&d
 
 - CRUD
 

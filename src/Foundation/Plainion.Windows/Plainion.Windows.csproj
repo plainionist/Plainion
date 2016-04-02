@@ -109,6 +109,7 @@
     <Compile Include="BindableProperty.cs" />
     <Compile Include="TaskExtensions.cs" />
     <Compile Include="UnhandledExceptionHook.cs" />
+    <Compile Include="VisualTreeUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\CircularProgressIndicator.xaml">

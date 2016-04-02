@@ -4,10 +4,10 @@ namespace Plainion.Windows.Controls.Tree
 {
     public class NodeDropRequest
     {
-        public object DroppedNode { get; internal set; }
+        public INode DroppedNode { get; internal set; }
 
-        public object DropTarget { get; internal set; }
+        public INode DropTarget { get; internal set; }
 
-        public DropLocation Operation { get; internal set; }
+        public DropLocation Location { get; internal set; }
     }
 }

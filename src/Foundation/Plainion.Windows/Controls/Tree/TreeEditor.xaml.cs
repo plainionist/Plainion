@@ -87,9 +87,9 @@ namespace Plainion.Windows.Controls.Tree
 
             var arg = new NodeDropRequest
             {
-                DroppedNode = droppedElement.DataContext,
+                DroppedNode = droppedElement.State.DataContext,
                 DropTarget = Root,
-                Operation = location
+                Location = location
             };
 
             if (DropCommand != null && DropCommand.CanExecute(arg))

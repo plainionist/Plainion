@@ -39,7 +39,7 @@ namespace Plainion.Windows.Controls.Tree
         {
             ItemForContextMenu = null;
 
-            var nodeItem = FindContainer( e.OriginalSource as DependencyObject );
+            var nodeItem = ( ( DependencyObject )e.OriginalSource ).FindParentOfType<NodeItem>();
 
             if( nodeItem != null )
             {
@@ -48,15 +48,6 @@ namespace Plainion.Windows.Controls.Tree
                 nodeItem.Focus();
                 e.Handled = true;
             }
-        }
-
-        private NodeItem FindContainer( DependencyObject source )
-        {
-            while( source != null && !( source is NodeItem ) )
-            {
-                source = VisualTreeHelper.GetParent( source );
-            }
-            return source as NodeItem;
         }
     }
 }
