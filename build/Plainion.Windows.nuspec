@@ -3,14 +3,17 @@
   <metadata>
     <id>Plainion.Windows</id>
     <title>Plainion.Windows</title>
-    <version>1.12.0.0</version>
+    <version>1.13.0.0</version>
     <authors>ronin4net</authors>
     <owners>ronin4net</owners>
     <licenseUrl>http://opensource.org/licenses/BSD-3-Clause</licenseUrl>
     <projectUrl>https://github.com/ronin4net/Plainion/wiki/Plainion.Windows</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Provides extensions to WPF to simplify development of software engineering tools</description>
-    <releaseNotes>SelectFolderDialog added</releaseNotes>
+    <releaseNotes>
+- EditableTextBlock improved to support dynmaic FormattedText
+- Pre-release of TreeEditor
+    </releaseNotes>
     <copyright>Copyright 2016</copyright>
     <dependencies>
       <dependency id="Plainion.Core" version="2.3.0.0" />
