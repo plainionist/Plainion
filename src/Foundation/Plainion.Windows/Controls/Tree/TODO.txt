@@ -1,11 +1,8 @@
 ﻿
-- d&d
-
 - in place edit
 
 - CRUD
 
 - check box
-
 
 - shortcut keys
