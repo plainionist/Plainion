@@ -20,6 +20,8 @@
                 <Style TargetType="{x:Type pn:NodeItem}" BasedOn="{StaticResource DefaultNodeStyle}">
                     <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
                     <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+                    <Setter Property="DragAllowed" Value="{Binding DragAllowed}"/>
+                    <Setter Property="DropAllowed" Value="{Binding DropAllowed}"/>
                     <Setter Property="Text" Value="{Binding Name}"/>
                     <Setter Property="FormattedText">
                         <Setter.Value>

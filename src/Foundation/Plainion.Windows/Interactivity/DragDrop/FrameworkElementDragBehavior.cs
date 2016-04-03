@@ -25,7 +25,7 @@ namespace Plainion.Windows.Interactivity.DragDrop
 
             base.OnDetaching();
         }
-        
+
         private void OnMouseLeftButtonDown( object sender, MouseButtonEventArgs e )
         {
             myIsMouseClicked = true;
@@ -38,15 +38,15 @@ namespace Plainion.Windows.Interactivity.DragDrop
 
         private void OnMouseLeave( object sender, MouseEventArgs e )
         {
-            if ( myIsMouseClicked )
+            if( myIsMouseClicked )
             {
                 var dragObject = AssociatedObject.DataContext as IDragable;
-                if ( dragObject != null )
+                if( dragObject != null && dragObject.DataType != null )
                 {
                     var data = new DataObject();
                     data.SetData( dragObject.DataType, AssociatedObject.DataContext );
 
-                    System.Windows.DragDrop.DoDragDrop( AssociatedObject, data, DragDropEffects.Move);
+                    System.Windows.DragDrop.DoDragDrop( AssociatedObject, data, DragDropEffects.Move );
                 }
             }
 

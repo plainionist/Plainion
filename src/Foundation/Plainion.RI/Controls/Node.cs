@@ -19,7 +19,14 @@ namespace Plainion.RI.Controls
         public Node()
         {
             Children = new ObservableCollection<Node>();
+
+            DragAllowed = true;
+            DropAllowed = true;
         }
+
+        public bool DragAllowed { get; set; }
+
+        public bool DropAllowed { get; set; }
 
         public string Id
         {

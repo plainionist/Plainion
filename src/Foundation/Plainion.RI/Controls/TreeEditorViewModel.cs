@@ -17,15 +17,29 @@ namespace Plainion.RI.Controls
         public TreeEditorViewModel()
         {
             Root = new Node();
+            Root.DragAllowed = false;
+            Root.DropAllowed = false;
 
             foreach( var process in Process.GetProcesses() )
             {
-                var processNode = new Node() { Parent = Root, Id = process.Id.ToString(), Name = process.ProcessName };
+                var processNode = new Node
+                {
+                    Parent = Root,
+                    Id = process.Id.ToString(),
+                    Name = process.ProcessName,
+                    DragAllowed = false
+                };
                 Root.Children.Add( processNode );
 
                 processNode.Children.AddRange( process.Threads
                     .OfType<ProcessThread>()
-                    .Select( t => new Node { Parent = processNode, Id = t.Id.ToString(), Name = "unknown" } ) );
+                    .Select( t => new Node
+                    {
+                        Parent = processNode,
+                        Id = t.Id.ToString(),
+                        Name = "unknown",
+                        DropAllowed = false
+                    } ) );
             }
 
             myDragDropBehavior = new DragDropBehavior( Root );

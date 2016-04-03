@@ -27,16 +27,16 @@ namespace Plainion.Windows.Interactivity.DragDrop
             AssociatedObject.DragOver -= OnDragOver;
             AssociatedObject.DragLeave -= OnDragLeave;
             AssociatedObject.Drop -= OnDrop;
-        
+
             base.OnDetaching();
         }
 
         private void OnDrop( object sender, DragEventArgs e )
         {
-            if ( myDataFormat != null && e.Data.GetDataPresent( myDataFormat ) )
+            if( myDataFormat != null && e.Data.GetDataPresent( myDataFormat ) )
             {
-                var target = AssociatedObject.DataContext as IDropable;
-                target.Drop( e.Data.GetData( myDataFormat ), (DropLocation)e.Data.GetData( typeof( DropLocation ) ) );
+                var target = AssociatedObject as IDropable ?? AssociatedObject.DataContext as IDropable;
+                target.Drop( e.Data.GetData( myDataFormat ), ( DropLocation )e.Data.GetData( typeof( DropLocation ) ) );
             }
 
             myAdorner.Remove();
@@ -55,14 +55,14 @@ namespace Plainion.Windows.Interactivity.DragDrop
         {
             e.Effects = DragDropEffects.None;
 
-            if ( myDataFormat != null )
+            if( myDataFormat != null && e.Data.GetDataPresent( myDataFormat ) )
             {
-                if ( e.Data.GetDataPresent( myDataFormat ) )
+                var location = GetDropLocation( e );
+
+                var target = AssociatedObject as IDropable ?? AssociatedObject.DataContext as IDropable;
+                if( target.IsDropAllowed( e.Data.GetData( myDataFormat ), DropLocation.InPlace ) )
                 {
                     e.Effects = DragDropEffects.Move;
-
-                    var location = GetDropLocation( e );
-
                     e.Data.SetData( typeof( DropLocation ), location );
 
                     myAdorner.Update( location );
@@ -76,11 +76,11 @@ namespace Plainion.Windows.Interactivity.DragDrop
         {
             var pos = e.GetPosition( AssociatedObject );
 
-            if ( pos.Y < AssociatedObject.ActualHeight * 0.2 )
+            if( pos.Y < AssociatedObject.ActualHeight * 0.2 )
             {
                 return DropLocation.Before;
             }
-            else if ( pos.Y > AssociatedObject.ActualHeight * 0.8 )
+            else if( pos.Y > AssociatedObject.ActualHeight * 0.8 )
             {
                 return DropLocation.After;
             }
@@ -93,10 +93,10 @@ namespace Plainion.Windows.Interactivity.DragDrop
         private void OnDragEnter( object sender, DragEventArgs e )
         {
             //if the DataContext implements IDropable, record the data type that can be dropped
-            if ( myDataFormat == null )
+            if( myDataFormat == null )
             {
                 var dropObject = AssociatedObject.DataContext as IDropable;
-                if ( dropObject != null )
+                if( dropObject != null )
                 {
                     myDataFormat = dropObject.DataFormat;
                 }
