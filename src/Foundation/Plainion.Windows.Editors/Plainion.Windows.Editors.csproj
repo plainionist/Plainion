@@ -42,8 +42,9 @@
     </Compile>
     <AppDesigner Include="Properties\" />
     <Compile Include="Xml\AbstractCompletionData.cs" />
-    <Compile Include="Xml\KeywordCompletionData.cs" />
-    <Compile Include="Xml\PropertyCompletionData.cs" />
+    <Compile Include="Xml\PropertyElementCompletionData.cs" />
+    <Compile Include="Xml\ElementCompletionData.cs" />
+    <Compile Include="Xml\AttributeCompletionData.cs" />
     <Compile Include="Xml\XmlEditor.xaml.cs">
       <DependentUpon>XmlEditor.xaml</DependentUpon>
     </Compile>

@@ -35,11 +35,11 @@ namespace Plainion.Windows.Editors.Xml
             set { SetValue( DocumentProperty, value ); }
         }
 
-        public static readonly DependencyProperty CompletionDataProperty = DependencyProperty.Register( "CompletionData", typeof( IEnumerable<KeywordCompletionData> ), typeof( XmlEditor ) );
+        public static readonly DependencyProperty CompletionDataProperty = DependencyProperty.Register( "CompletionData", typeof( IEnumerable<ElementCompletionData> ), typeof( XmlEditor ) );
 
-        public IEnumerable<KeywordCompletionData> CompletionData
+        public IEnumerable<ElementCompletionData> CompletionData
         {
-            get { return ( IEnumerable<KeywordCompletionData> )GetValue( CompletionDataProperty ); }
+            get { return ( IEnumerable<ElementCompletionData> )GetValue( CompletionDataProperty ); }
             set { SetValue( CompletionDataProperty, value ); }
         }
 
@@ -89,7 +89,7 @@ namespace Plainion.Windows.Editors.Xml
         {
             if( e.Text == "<" )
             {
-                HandleKeywordCompletion();
+                HandleTagCompletion();
             }
             else if( e.Text == ">" )
             {
@@ -97,11 +97,15 @@ namespace Plainion.Windows.Editors.Xml
             }
             else if( e.Text == " " )
             {
-                HandlePropertyCompletion();
+                HandleAttributeCompletion();
+            }
+            else if( e.Text == "." )
+            {
+                HandlePropertyElementCompletion();
             }
         }
 
-        private void HandleKeywordCompletion()
+        private void HandleTagCompletion()
         {
             ShowCompletionWindow( CompletionData );
         }
@@ -144,7 +148,7 @@ namespace Plainion.Windows.Editors.Xml
             myTextEditor.CaretOffset = oldCaretOffset;
         }
 
-        private void HandlePropertyCompletion()
+        private void HandleAttributeCompletion()
         {
             var lastClosedTagPos = myTextEditor.Document.LastIndexOf( '>', 0, myTextEditor.CaretOffset );
             if( lastClosedTagPos < 0 )
@@ -172,7 +176,40 @@ namespace Plainion.Windows.Editors.Xml
             }
 
             var completionItems = completionData.Type.GetProperties()
-                .Select( p => new PropertyCompletionData( p ) );
+                .Select( p => new AttributeCompletionData( p ) );
+            ShowCompletionWindow( completionItems );
+        }
+
+        private void HandlePropertyElementCompletion()
+        {
+            var lastClosedTagPos = myTextEditor.Document.LastIndexOf( '>', 0, myTextEditor.CaretOffset );
+            if( lastClosedTagPos < 0 )
+            {
+                lastClosedTagPos = 0;
+            }
+
+            var lastOpenedTagPos = myTextEditor.Document.LastIndexOf( '<', lastClosedTagPos, myTextEditor.CaretOffset - lastClosedTagPos );
+            if( lastOpenedTagPos < 0 )
+            {
+                return;
+            }
+
+            var spaceAfterOpenedTagPos = myTextEditor.Document.IndexOf( ' ', lastOpenedTagPos, myTextEditor.CaretOffset - lastOpenedTagPos );
+            if( spaceAfterOpenedTagPos !=-1 )
+            {
+                // no xml property completion if attributes already started
+                return;
+            }
+
+            var xmlTag = myTextEditor.Document.Text.Substring( lastOpenedTagPos + 1, myTextEditor.CaretOffset - lastOpenedTagPos - 2 );
+            var completionData = CompletionData.SingleOrDefault( d => d.Type.Name == xmlTag );
+            if( completionData == null )
+            {
+                return;
+            }
+
+            var completionItems = completionData.Type.GetProperties()
+                .Select( p => new PropertyElementCompletionData( p ) );
             ShowCompletionWindow( completionItems );
         }
     }

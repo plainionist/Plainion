@@ -13,7 +13,7 @@ namespace Plainion.RI.Editors
     class XmlEditorViewModel : BindableBase
     {
         private TextDocument myDocument;
-        private IEnumerable<KeywordCompletionData> myCompletionData;
+        private IEnumerable<ElementCompletionData> myCompletionData;
 
         public XmlEditorViewModel()
         {
@@ -23,7 +23,7 @@ namespace Plainion.RI.Editors
                 .Where( t => t.Namespace == typeof( SystemPackaging ).Namespace )
                 .Where( t => !t.IsAbstract )
                 .Where( t => t.GetCustomAttributes( typeof( CompilerGeneratedAttribute ), true ).Length == 0 )
-                .Select( t => new KeywordCompletionData( t ) )
+                .Select( t => new ElementCompletionData( t ) )
                 .ToList();
         }
 
@@ -33,7 +33,7 @@ namespace Plainion.RI.Editors
             set { SetProperty( ref myDocument, value ); }
         }
 
-        public IEnumerable<KeywordCompletionData> CompletionData
+        public IEnumerable<ElementCompletionData> CompletionData
         {
             get { return myCompletionData; }
             set { SetProperty( ref myCompletionData, value ); }

@@ -2,9 +2,9 @@
 
 namespace Plainion.Windows.Editors.Xml
 {
-    public class KeywordCompletionData : AbstractCompletionData
+    public class ElementCompletionData : AbstractCompletionData
     {
-        public KeywordCompletionData(Type type)
+        public ElementCompletionData(Type type)
             : base(type.Name, type.Name)
         {
             Type = type;

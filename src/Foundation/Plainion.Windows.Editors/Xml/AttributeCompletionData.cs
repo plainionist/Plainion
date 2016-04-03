@@ -5,9 +5,9 @@ using ICSharpCode.AvalonEdit.Editing;
 
 namespace Plainion.Windows.Editors.Xml
 {
-    class PropertyCompletionData : AbstractCompletionData
+    class AttributeCompletionData : AbstractCompletionData
     {
-        public PropertyCompletionData(PropertyInfo property)
+        public AttributeCompletionData(PropertyInfo property)
             : base(property.Name, property.PropertyType.Name)
         {
         }
