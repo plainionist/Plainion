@@ -1,4 +1,7 @@
 ﻿
+- more d&d control
+  - check drop allowance to control which operations in the tree are allowed
+
 - in place edit
 
 - CRUD
