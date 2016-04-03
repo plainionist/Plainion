@@ -134,7 +134,7 @@ namespace Plainion.Windows.Editors.Xml
             var currentLine = myTextEditor.Document.GetLineByOffset( myTextEditor.CaretOffset );
             var lastOpenedTagPos = myTextEditor.Document.LastIndexOf( '<', currentLine.Offset, myTextEditor.CaretOffset - currentLine.Offset );
             var spaceAfterOpenedTagPos = myTextEditor.Document.IndexOf( ' ', lastOpenedTagPos, myTextEditor.CaretOffset - lastOpenedTagPos );
-            var xmlTagEndPos = Math.Max( spaceAfterOpenedTagPos, myTextEditor.CaretOffset - 1 );
+            var xmlTagEndPos = spaceAfterOpenedTagPos == -1 ? myTextEditor.CaretOffset - 1 : spaceAfterOpenedTagPos;
             var xmlTag = myTextEditor.Document.Text.Substring( lastOpenedTagPos + 1, xmlTagEndPos - lastOpenedTagPos - 1 );
 
             var oldCaretOffset = myTextEditor.CaretOffset;
