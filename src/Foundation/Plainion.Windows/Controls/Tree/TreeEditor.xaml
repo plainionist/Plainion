@@ -40,7 +40,7 @@
         </Grid>
 
         <tree:ExtendedTreeView x:Name="myTree" Margin="0,3,0,0" ItemsSource="{Binding Root.Children}" 
-                               BorderThickness="0" Focusable="True"
+                               Focusable="True"
                                ItemContainerStyle="{Binding NodeStyle}">
             <tree:ExtendedTreeView.Resources>
                 <windows:BindingProxy x:Key="TreeProxy" Data="{Binding ElementName=myTree}"/>
