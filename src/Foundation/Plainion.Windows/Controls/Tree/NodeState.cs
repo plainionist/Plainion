@@ -12,7 +12,7 @@ namespace Plainion.Windows.Controls.Tree
         private bool myIsFilteredOut;
         private bool myIsExpanded;
 
-        public NodeState(INode dataContext, StateContainer container)
+        public NodeState( INode dataContext, StateContainer container )
         {
             DataContext = dataContext;
             myContainer = container;
@@ -23,61 +23,70 @@ namespace Plainion.Windows.Controls.Tree
         public bool IsFilteredOut
         {
             get { return myIsFilteredOut; }
-            set { SetProperty(ref myIsFilteredOut, value); }
+            set { SetProperty( ref myIsFilteredOut, value ); }
         }
 
         public bool IsExpanded
         {
             get { return myIsExpanded; }
-            set { SetProperty(ref myIsExpanded, value); }
+            set { SetProperty( ref myIsExpanded, value ); }
         }
 
-        private bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        private bool SetProperty<T>( ref T storage, T value, [CallerMemberName] string propertyName = null )
         {
-            if (object.Equals(storage, value))
+            if( object.Equals( storage, value ) )
             {
                 return false;
             }
 
             storage = value;
 
-            if (myAttachedView != null)
+            if( myAttachedView != null )
             {
-                myAttachedView.GetType().GetProperty(propertyName).SetValue(myAttachedView, storage);
+                myAttachedView.GetType().GetProperty( propertyName ).SetValue( myAttachedView, storage );
             }
 
             return true;
         }
 
-        public void Attach(NodeItem nodeItem)
+        public void Attach( NodeItem nodeItem )
         {
             myAttachedView = nodeItem;
 
             myAttachedView.IsFilteredOut = IsFilteredOut;
         }
 
-        public void ApplyFilter(string filter)
+        public void ApplyFilter( string filter )
         {
-            var tokens = filter.Split('/');
+            string[] tokens = null;
 
-            if (GetParent(this) != null)
+            if( filter == null )
             {
-                var levelFilter = tokens.Length == 1 ? filter : tokens[GetDepth()];
-                if (string.IsNullOrWhiteSpace(levelFilter))
+                IsFilteredOut = false;
+            }
+            else
+            {
+                // if this has no parent it is Root - no need to filter root
+                if( GetParent( this ) != null )
                 {
-                    IsFilteredOut = false;
-                }
-                else
-                {
-                    IsFilteredOut = !DataContext.Matches(levelFilter);
+                    tokens = filter.Split( '/' );
+                    var levelFilter = tokens.Length == 1 ? filter : tokens[ GetDepth() ];
+                    if( string.IsNullOrWhiteSpace( levelFilter ) )
+                    {
+                        IsFilteredOut = false;
+                    }
+                    else
+                    {
+                        IsFilteredOut = !DataContext.Matches( levelFilter );
+                    }
                 }
             }
 
-            foreach (var child in GetChildren())
+            foreach( var child in GetChildren() )
             {
-                child.ApplyFilter(filter);
+                child.ApplyFilter( filter );
 
-                if (!child.IsFilteredOut && tokens.Length == 1)
+                if( !child.IsFilteredOut && tokens != null && tokens.Length == 1 )
                 {
                     IsFilteredOut = false;
                 }
@@ -88,10 +97,10 @@ namespace Plainion.Windows.Controls.Tree
         {
             int depth = 0;
 
-            var parent = GetParent(this);
-            while (parent != null)
+            var parent = GetParent( this );
+            while( parent != null )
             {
-                parent = GetParent(parent);
+                parent = GetParent( parent );
                 depth++;
             }
 
@@ -99,27 +108,27 @@ namespace Plainion.Windows.Controls.Tree
             return depth - 1;
         }
 
-        private NodeState GetParent(NodeState state)
+        private NodeState GetParent( NodeState state )
         {
-            return state.DataContext.Parent == null ? null : myContainer.GetOrCreate(state.DataContext.Parent);
+            return state.DataContext.Parent == null ? null : myContainer.GetOrCreate( state.DataContext.Parent );
         }
 
         private IEnumerable<NodeState> GetChildren()
         {
-            if (DataContext.Children == null)
+            if( DataContext.Children == null )
             {
                 return Enumerable.Empty<NodeState>();
             }
 
             return DataContext.Children
-                .Select(myContainer.GetOrCreate);
+                .Select( myContainer.GetOrCreate );
         }
 
         public void ExpandAll()
         {
             IsExpanded = true;
 
-            foreach (var child in GetChildren())
+            foreach( var child in GetChildren() )
             {
                 child.ExpandAll();
             }
@@ -129,7 +138,7 @@ namespace Plainion.Windows.Controls.Tree
         {
             IsExpanded = false;
 
-            foreach (var child in GetChildren())
+            foreach( var child in GetChildren() )
             {
                 child.CollapseAll();
             }

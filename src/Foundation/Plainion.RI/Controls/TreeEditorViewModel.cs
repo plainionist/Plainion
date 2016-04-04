@@ -20,6 +20,24 @@ namespace Plainion.RI.Controls
             Root.DragAllowed = false;
             Root.DropAllowed = false;
 
+            BuildTree();
+
+            myDragDropBehavior = new DragDropBehavior( Root );
+            DropCommand = new DelegateCommand<NodeDropRequest>( myDragDropBehavior.ApplyDrop );
+
+            RefreshCommand = new DelegateCommand( BuildTree );
+        }
+
+        public Node Root { get; private set; }
+
+        public ICommand DropCommand { get; private set; }
+
+        public ICommand RefreshCommand { get; private set; }
+
+        private void BuildTree()
+        {
+            Root.Children.Clear();
+
             foreach( var process in Process.GetProcesses() )
             {
                 var processNode = new Node
@@ -41,13 +59,6 @@ namespace Plainion.RI.Controls
                         DropAllowed = false
                     } ) );
             }
-
-            myDragDropBehavior = new DragDropBehavior( Root );
-            DropCommand = new DelegateCommand<NodeDropRequest>( myDragDropBehavior.ApplyDrop );
         }
-
-        public Node Root { get; private set; }
-
-        public ICommand DropCommand { get; private set; }
     }
 }

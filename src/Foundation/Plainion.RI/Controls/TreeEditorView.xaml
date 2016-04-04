@@ -14,25 +14,31 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <GroupBox Header="TreeEditor" BorderBrush="Black">
-        <pn:TreeEditor Root="{Binding Root}" FilterLabel="Filter on node text"
+        <DockPanel LastChildFill="True">
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,5">
+                <Button Content="Refresh" Command="{Binding RefreshCommand}"/>
+            </StackPanel>
+            
+            <pn:TreeEditor Root="{Binding Root}" FilterLabel="Filter on node text"
                        DropCommand="{Binding DropCommand}">
-            <pn:TreeEditor.NodeStyle>
-                <Style TargetType="{x:Type pn:NodeItem}" BasedOn="{StaticResource DefaultNodeStyle}">
-                    <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
-                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
-                    <Setter Property="DragAllowed" Value="{Binding DragAllowed}"/>
-                    <Setter Property="DropAllowed" Value="{Binding DropAllowed}"/>
-                    <Setter Property="Text" Value="{Binding Name}"/>
-                    <Setter Property="FormattedText">
-                        <Setter.Value>
-                            <MultiBinding StringFormat="{}{0} (Id = {1})">
-                                <Binding Path="Name"/>
-                                <Binding Path="Id"/>
-                            </MultiBinding>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </pn:TreeEditor.NodeStyle>
-        </pn:TreeEditor>
+                <pn:TreeEditor.NodeStyle>
+                    <Style TargetType="{x:Type pn:NodeItem}" BasedOn="{StaticResource DefaultNodeStyle}">
+                        <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
+                        <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+                        <Setter Property="DragAllowed" Value="{Binding DragAllowed}"/>
+                        <Setter Property="DropAllowed" Value="{Binding DropAllowed}"/>
+                        <Setter Property="Text" Value="{Binding Name}"/>
+                        <Setter Property="FormattedText">
+                            <Setter.Value>
+                                <MultiBinding StringFormat="{}{0} (Id = {1})">
+                                    <Binding Path="Name"/>
+                                    <Binding Path="Id"/>
+                                </MultiBinding>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </pn:TreeEditor.NodeStyle>
+            </pn:TreeEditor>
+        </DockPanel>
     </GroupBox>
 </UserControl>

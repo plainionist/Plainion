@@ -1,7 +1,4 @@
 ﻿
-- if children of root change - reapply filter!
-  
-
 - more d&d control
   - check drop allowance to control which operations in the tree are allowed
   - maybe we should better go for INodeDragDrop
