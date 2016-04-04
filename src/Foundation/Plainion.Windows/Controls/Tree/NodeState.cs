@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
+using Plainion.Windows.Interactivity.DragDrop;
 
 namespace Plainion.Windows.Controls.Tree
 {
@@ -142,6 +143,28 @@ namespace Plainion.Windows.Controls.Tree
             {
                 child.CollapseAll();
             }
+        }
+
+        internal bool IsDropAllowed( DropLocation location )
+        {
+            if( location == DropLocation.InPlace )
+            {
+                var dragDropSupport = DataContext as IDragDropSupport;
+                if( dragDropSupport != null )
+                {
+                    return dragDropSupport.IsDropAllowed;
+                }
+            }
+            else
+            {
+                var dragDropSupport = DataContext.Parent as IDragDropSupport;
+                if( dragDropSupport != null )
+                {
+                    return dragDropSupport.IsDropAllowed;
+                }
+            }
+
+            return true;
         }
     }
 }

@@ -55,6 +55,7 @@
     <Compile Include="BoolToVisibilityConverter.cs" />
     <Compile Include="Controls\Tree\DragDropBehavior.cs" />
     <Compile Include="Controls\Tree\ExtendedTreeView.cs" />
+    <Compile Include="Controls\Tree\IDragDropSupport.cs" />
     <Compile Include="Controls\Tree\INode.cs" />
     <Compile Include="Controls\Tree\NodeDropRequest.cs" />
     <Compile Include="Controls\Tree\NodeState.cs" />

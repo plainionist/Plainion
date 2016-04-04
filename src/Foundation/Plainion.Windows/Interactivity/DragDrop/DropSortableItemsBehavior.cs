@@ -60,7 +60,7 @@ namespace Plainion.Windows.Interactivity.DragDrop
                 var location = GetDropLocation( e );
 
                 var target = AssociatedObject as IDropable ?? AssociatedObject.DataContext as IDropable;
-                if( target.IsDropAllowed( e.Data.GetData( myDataFormat ), DropLocation.InPlace ) )
+                if( target.IsDropAllowed( e.Data.GetData( myDataFormat ), location ) )
                 {
                     e.Effects = DragDropEffects.Move;
                     e.Data.SetData( typeof( DropLocation ), location );

@@ -17,8 +17,8 @@ namespace Plainion.RI.Controls
         public TreeEditorViewModel()
         {
             Root = new Node();
-            Root.DragAllowed = false;
-            Root.DropAllowed = false;
+            Root.IsDragAllowed = false;
+            Root.IsDropAllowed = false;
 
             BuildTree();
 
@@ -45,7 +45,7 @@ namespace Plainion.RI.Controls
                     Parent = Root,
                     Id = process.Id.ToString(),
                     Name = process.ProcessName,
-                    DragAllowed = false
+                    IsDragAllowed = false
                 };
                 Root.Children.Add( processNode );
 
@@ -56,7 +56,7 @@ namespace Plainion.RI.Controls
                         Parent = processNode,
                         Id = t.Id.ToString(),
                         Name = "unknown",
-                        DropAllowed = false
+                        IsDropAllowed = false
                     } ) );
             }
         }

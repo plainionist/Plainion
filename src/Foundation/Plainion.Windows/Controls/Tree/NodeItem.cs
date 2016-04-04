@@ -66,24 +66,6 @@ namespace Plainion.Windows.Controls.Tree
             set { SetValue( TextProperty, value ); }
         }
 
-        public static DependencyProperty DragAllowedProperty = DependencyProperty.Register( "DragAllowed", typeof( bool ), typeof( NodeItem ),
-            new FrameworkPropertyMetadata( true ) );
-
-        public bool DragAllowed
-        {
-            get { return ( bool )GetValue( DragAllowedProperty ); }
-            set { SetValue( DragAllowedProperty, value ); }
-        }
-
-        public static DependencyProperty DropAllowedProperty = DependencyProperty.Register( "DropAllowed", typeof( bool ), typeof( NodeItem ),
-            new FrameworkPropertyMetadata( true ) );
-
-        public bool DropAllowed
-        {
-            get { return ( bool )GetValue( DropAllowedProperty ); }
-            set { SetValue( DropAllowedProperty, value ); }
-        }
-
         public static DependencyProperty FormattedTextProperty = DependencyProperty.Register( "FormattedText", typeof( string ), typeof( NodeItem ),
             new FrameworkPropertyMetadata( null ) );
 
@@ -219,13 +201,7 @@ namespace Plainion.Windows.Controls.Tree
                 return false;
             }
 
-            if( location == DropLocation.InPlace )
-            {
-                return DropAllowed;
-            }
-
-            // TODO: ask parent
-            return true;
+            return State.IsDropAllowed( location );
         }
 
         void IDropable.Drop( object data, DropLocation location )
@@ -264,7 +240,16 @@ namespace Plainion.Windows.Controls.Tree
 
         Type IDragable.DataType
         {
-            get { return DragAllowed ? typeof( NodeItem ) : null; }
+            get
+            {
+                var dragDropSupport = State.DataContext as IDragDropSupport;
+                if( dragDropSupport != null && !dragDropSupport.IsDragAllowed )
+                {
+                    return null;
+                }
+
+                return typeof( NodeItem );
+            }
         }
     }
 }

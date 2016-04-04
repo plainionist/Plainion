@@ -47,9 +47,9 @@ namespace Plainion.Windows.Controls.Tree
         {
             myTree.StateContainer.DataContext = Root;
 
-            if( Root != null)
+            if( Root != null )
             {
-                CollectionChangedEventManager.AddHandler( (INotifyCollectionChanged)Root.Children, OnRootChildrenChanged );
+                CollectionChangedEventManager.AddHandler( ( INotifyCollectionChanged )Root.Children, OnRootChildrenChanged );
             }
         }
 
@@ -94,10 +94,24 @@ namespace Plainion.Windows.Controls.Tree
             set { SetValue( FilterProperty, value ); }
         }
 
+        string IDropable.DataFormat
+        {
+            get { return typeof( NodeItem ).FullName; }
+        }
+
+        bool IDropable.IsDropAllowed( object data, DropLocation location )
+        {
+            if( Root == null )
+            {
+                return false;
+            }
+
+            return myTree.StateContainer.GetOrCreate( Root ).IsDropAllowed( location );
+        }
+
         void IDropable.Drop( object data, DropLocation location )
         {
             var droppedElement = data as NodeItem;
-
             if( droppedElement == null )
             {
                 return;
@@ -114,16 +128,6 @@ namespace Plainion.Windows.Controls.Tree
             {
                 DropCommand.Execute( arg );
             }
-        }
-
-        string IDropable.DataFormat
-        {
-            get { return typeof( NodeItem ).FullName; }
-        }
-
-        bool IDropable.IsDropAllowed( object data, DropLocation location )
-        {
-            return true;
         }
 
         public static DependencyProperty ExpandAllCommandProperty = DependencyProperty.Register( "ExpandAllCommand", typeof( ICommand ), typeof( TreeEditor ),

@@ -7,7 +7,7 @@ using Prism.Mvvm;
 
 namespace Plainion.RI.Controls
 {
-    class Node : BindableBase, INode
+    class Node : BindableBase, INode, IDragDropSupport
     {
         private string myId;
         private string myName;
@@ -20,13 +20,13 @@ namespace Plainion.RI.Controls
         {
             Children = new ObservableCollection<Node>();
 
-            DragAllowed = true;
-            DropAllowed = true;
+            IsDragAllowed = true;
+            IsDropAllowed = true;
         }
 
-        public bool DragAllowed { get; set; }
+        public bool IsDragAllowed { get; set; }
 
-        public bool DropAllowed { get; set; }
+        public bool IsDropAllowed { get; set; }
 
         public string Id
         {
