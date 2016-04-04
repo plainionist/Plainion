@@ -1,9 +1,4 @@
 ﻿
-- more d&d control
-  - check drop allowance to control which operations in the tree are allowed
-  - maybe we should better go for INodeDragDrop
-
-
 - in place edit
 
 - CRUD
