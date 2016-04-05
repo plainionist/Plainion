@@ -3,7 +3,7 @@
   <metadata>
     <id>Plainion.Windows</id>
     <title>Plainion.Windows</title>
-    <version>1.14.0.0</version>
+    <version>1.15.0.0</version>
     <authors>ronin4net</authors>
     <owners>ronin4net</owners>
     <licenseUrl>http://opensource.org/licenses/BSD-3-Clause</licenseUrl>
@@ -11,8 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Provides extensions to WPF to simplify development of software engineering tools</description>
     <releaseNotes>
-- TreeEditor: level-wise search fixed
-- TreeEditor: IDragDropSupport added 
+- TreeEditor: Expand/Collapse ContextMenu improved 
     </releaseNotes>
     <copyright>Copyright 2016</copyright>
     <dependencies>
