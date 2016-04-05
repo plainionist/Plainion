@@ -14,7 +14,6 @@ namespace Plainion.RI.Controls
         private bool myIsSelected;
         private bool myIsExpanded;
         private bool myIsChecked;
-        private bool myIsInEditMode;
 
         public Node()
         {
@@ -38,18 +37,6 @@ namespace Plainion.RI.Controls
         {
             get { return myName; }
             set { SetProperty( ref myName, value ); }
-        }
-
-        public bool IsInEditMode
-        {
-            get { return myIsInEditMode; }
-            set
-            {
-                if( SetProperty( ref myIsInEditMode, value ) )
-                {
-                    // OnPropertyChanged(() => FormattedText);
-                }
-            }
         }
 
         IEnumerable<INode> INode.Children

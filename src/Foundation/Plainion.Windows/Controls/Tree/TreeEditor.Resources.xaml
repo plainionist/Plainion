@@ -86,15 +86,11 @@
                                     <!--
                                     <StackPanel.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="New" InputGestureText="Ctrl+N"
-                                Command="{Binding Data.AddChildCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
-                                            <MenuItem Header="Delete"
-                                Command="{Binding Data.DeleteCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
+                                            <MenuItem Header="New" InputGestureText="Ctrl+N" Command="{Binding Data.AddChildCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
+                                            <MenuItem Header="Delete" Command="{Binding Data.DeleteCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
                                             <Separator/>
-                                            <MenuItem Header="Expand all" InputGestureText="Ctrl++" 
-                                Command="{Binding Data.ExpandAllCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
-                                            <MenuItem Header="Collapse all" InputGestureText="Ctrl+-"
-                                Command="{Binding Data.CollapseAllCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
+                                            <MenuItem Header="Expand all" InputGestureText="Ctrl++" Command="{Binding Data.ExpandAllCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
+                                            <MenuItem Header="Collapse all" InputGestureText="Ctrl+-" Command="{Binding Data.CollapseAllCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
                                         </ContextMenu>
                                     </StackPanel.ContextMenu>
                                     -->
@@ -102,25 +98,19 @@
                                     <i:Interaction.Behaviors>
                                         <dragDrop:FrameworkElementDragBehavior/>
                                         <dragDrop:DropSortableItemsBehavior/>
-                                        <!--
-                                        <interactivity:RaiseCommandOnMouseGestureBehavior ClickCount="2" MouseButton="Left" Command="{Binding Data.EditCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
-                                        -->
+                                        <interactivity:RaiseCommandOnMouseGestureBehavior ClickCount="2" MouseButton="Left" Command="{Binding EditCommand}"/>
                                     </i:Interaction.Behaviors>
-                                    
+
                                     <!--
                                     <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}" IsThreeState="True" Focusable="False" VerticalAlignment="Center" Margin="0,0,3,0"/>
                                     -->
-                                    
-                                    <Grid>
-                                        <controls:EditableTextBlock VerticalAlignment="Center" HorizontalAlignment="Stretch"
-                                                                    Text="{Binding Text, Mode=TwoWay}" 
-                                                                    FormattedText="{Binding FormattedText, Mode=OneWay}" 
-                                                                    IsInEditMode="{Binding IsInEditMode, Mode=TwoWay}">
-                                        </controls:EditableTextBlock>
-                                    </Grid>
+
+                                    <controls:EditableTextBlock VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                                                                Text="{Binding Text, Mode=TwoWay}" 
+                                                                FormattedText="{Binding FormattedText, Mode=OneWay}" 
+                                                                IsInEditMode="{Binding IsInEditMode, Mode=TwoWay}"/>
                                     <!--
-                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding ChildrenCount}"
-                           Margin="5,0,0,0" Foreground="Green"/>
+                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding ChildrenCount}" Margin="5,0,0,0" Foreground="Green"/>
                                     -->
                                 </StackPanel>
                             </Border>

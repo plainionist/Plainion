@@ -53,6 +53,7 @@
     <Compile Include="Controls\TextBoxBinding.cs" />
     <Compile Include="BindingProxy.cs" />
     <Compile Include="BoolToVisibilityConverter.cs" />
+    <Compile Include="Controls\Tree\DelegateCommand.cs" />
     <Compile Include="Controls\Tree\DragDropBehavior.cs" />
     <Compile Include="Controls\Tree\ExtendedTreeView.cs" />
     <Compile Include="Controls\Tree\IDragDropSupport.cs" />
