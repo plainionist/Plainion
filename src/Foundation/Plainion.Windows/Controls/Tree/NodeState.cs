@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Controls;
 using Plainion.Windows.Interactivity.DragDrop;
 
@@ -59,19 +61,21 @@ namespace Plainion.Windows.Controls.Tree
                 return;
             }
 
-            if (myAttachedView != null)
+            var dependencyPropertyField = myAttachedView.GetType()
+                .GetField(propertyName + "Property", BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy);
+            if (dependencyPropertyField != null)
             {
-                var expr = myAttachedView.GetBindingExpression(TreeViewItem.IsExpandedProperty);
+                var expr = myAttachedView.GetBindingExpression((DependencyProperty)dependencyPropertyField.GetValue(myAttachedView));
                 if (expr != null)
                 {
                     expr.ResolvedSource.GetType().GetProperty(expr.ResolvedSourcePropertyName).SetValue(expr.ResolvedSource, myIsExpanded);
                     expr.UpdateTarget();
-                }
-                else
-                {
-                    myAttachedView.GetType().GetProperty(propertyName).SetValue(myAttachedView, value);
+
+                    return;
                 }
             }
+
+            myAttachedView.GetType().GetProperty(propertyName).SetValue(myAttachedView, value);
         }
 
         public void Attach(NodeItem nodeItem)
