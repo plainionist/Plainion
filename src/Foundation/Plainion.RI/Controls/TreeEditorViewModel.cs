@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Linq;
@@ -22,13 +23,33 @@ namespace Plainion.RI.Controls
 
             BuildTree();
 
-            myDragDropBehavior = new DragDropBehavior( Root );
-            DropCommand = new DelegateCommand<NodeDropRequest>( myDragDropBehavior.ApplyDrop );
+            CreateChildCommand = new DelegateCommand<Node>(OnCreateChild, p => p.Parent == Root);
+            DeleteCommand = new DelegateCommand<Node>(n => ((Node)n.Parent).Children.Remove(n));
 
-            RefreshCommand = new DelegateCommand( BuildTree );
+            myDragDropBehavior = new DragDropBehavior(Root);
+            DropCommand = new DelegateCommand<NodeDropRequest>(myDragDropBehavior.ApplyDrop);
+
+            RefreshCommand = new DelegateCommand(BuildTree);
+        }
+
+        private void OnCreateChild(Node parent)
+        {
+            parent.Children.Add(new Node
+            {
+                Parent = parent,
+                Id = Guid.NewGuid().ToString(),
+                Name = "<new>",
+                IsDragAllowed = parent != Root,
+                IsDropAllowed = parent == Root
+            });
+            parent.IsExpanded = true;
         }
 
         public Node Root { get; private set; }
+
+        public ICommand CreateChildCommand { get; private set; }
+
+        public ICommand DeleteCommand { get; private set; }
 
         public ICommand DropCommand { get; private set; }
 
@@ -38,7 +59,7 @@ namespace Plainion.RI.Controls
         {
             Root.Children.Clear();
 
-            foreach( var process in Process.GetProcesses() )
+            foreach (var process in Process.GetProcesses())
             {
                 var processNode = new Node
                 {
@@ -47,17 +68,17 @@ namespace Plainion.RI.Controls
                     Name = process.ProcessName,
                     IsDragAllowed = false
                 };
-                Root.Children.Add( processNode );
+                Root.Children.Add(processNode);
 
-                processNode.Children.AddRange( process.Threads
+                processNode.Children.AddRange(process.Threads
                     .OfType<ProcessThread>()
-                    .Select( t => new Node
+                    .Select(t => new Node
                     {
                         Parent = processNode,
                         Id = t.Id.ToString(),
                         Name = "unknown",
                         IsDropAllowed = false
-                    } ) );
+                    }));
             }
         }
     }

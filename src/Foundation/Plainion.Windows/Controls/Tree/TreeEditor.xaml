@@ -18,7 +18,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    
+
     <DockPanel LastChildFill="True" DataContext="{Binding ElementName=_this}">
         <DockPanel.Resources>
             <!-- Binds to TreeEditor itself which only works because DockPanel DataContext is set to TreeEditor itself-->
@@ -45,7 +45,7 @@
             <tree:ExtendedTreeView.Resources>
                 <windows:BindingProxy x:Key="TreeProxy" Data="{Binding ElementName=myTree}"/>
             </tree:ExtendedTreeView.Resources>
-            
+
             <i:Interaction.Behaviors>
                 <interactivity:FocusOnClickBehavior/>
                 <dragDrop:FrameworkElementDropBehavior/>
@@ -53,6 +53,9 @@
 
             <tree:ExtendedTreeView.ContextMenu>
                 <ContextMenu>
+                    <MenuItem Header="New" Command="{Binding CreateChildCommand}" CommandParameter="{Binding Data.ItemForContextMenu.DataContext, Source={StaticResource TreeProxy}}"/>
+                    <MenuItem Header="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding Data.ItemForContextMenu.DataContext, Source={StaticResource TreeProxy}}"/>
+                    <Separator/>
                     <MenuItem Header="Expand">
                         <MenuItem Header="This" Command="{Binding ExpandAllCommand}" CommandParameter="{Binding Data.ItemForContextMenu.DataContext, Source={StaticResource TreeProxy}}"/>
                         <MenuItem Header="All" Command="{Binding ExpandAllCommand}"/>

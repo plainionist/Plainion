@@ -18,8 +18,10 @@
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,5">
                 <Button Content="Refresh" Command="{Binding RefreshCommand}"/>
             </StackPanel>
-            
+
             <pn:TreeEditor Root="{Binding Root}" FilterLabel="Filter on node text"
+                       CreateChildCommand="{Binding CreateChildCommand}"
+                       DeleteCommand="{Binding DeleteCommand}"
                        DropCommand="{Binding DropCommand}">
                 <pn:TreeEditor.NodeStyle>
                     <Style TargetType="{x:Type pn:NodeItem}" BasedOn="{StaticResource DefaultNodeStyle}">
