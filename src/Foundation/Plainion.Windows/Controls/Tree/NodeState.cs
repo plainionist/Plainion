@@ -30,8 +30,12 @@ namespace Plainion.Windows.Controls.Tree
         public bool IsExpanded
         {
             get { return myIsExpanded; }
-            // our local value may not be uptodate
-            set { ForceSetProperty(ref myIsExpanded, value); }
+            set
+            {
+                // always update - we may not have latest state
+                myIsExpanded = value;
+                SetViewProperty(myIsExpanded);
+            }
         }
 
         private bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
@@ -41,19 +45,33 @@ namespace Plainion.Windows.Controls.Tree
                 return false;
             }
 
-            return ForceSetProperty(ref storage, value, propertyName);
+            storage = value;
+
+            SetViewProperty(storage, propertyName);
+
+            return true;
         }
 
-        private bool ForceSetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        private void SetViewProperty<T>(T value, [CallerMemberName] string propertyName = null)
         {
-            storage = value;
+            if (myAttachedView == null)
+            {
+                return;
+            }
 
             if (myAttachedView != null)
             {
-                myAttachedView.GetType().GetProperty(propertyName).SetValue(myAttachedView, storage);
+                var expr = myAttachedView.GetBindingExpression(TreeViewItem.IsExpandedProperty);
+                if (expr != null)
+                {
+                    expr.ResolvedSource.GetType().GetProperty(expr.ResolvedSourcePropertyName).SetValue(expr.ResolvedSource, myIsExpanded);
+                    expr.UpdateTarget();
+                }
+                else
+                {
+                    myAttachedView.GetType().GetProperty(propertyName).SetValue(myAttachedView, value);
+                }
             }
-
-            return true;
         }
 
         public void Attach(NodeItem nodeItem)

@@ -21,14 +21,7 @@ namespace Plainion.Windows.Controls.Tree
             //ShowChildrenCount = false;
             EditCommand = new DelegateCommand(() => IsInEditMode = true);
 
-            DataContextChanged += OnDataContextChanged;
             Loaded += OnLoaded;
-        }
-
-        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            State = myStateContainer.GetOrCreate(DataContext);
-            State.Attach(this);
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
@@ -40,6 +33,15 @@ namespace Plainion.Windows.Controls.Tree
             {
                 SetBinding(FormattedTextProperty, new Binding { Path = new PropertyPath("Text"), Source = this });
             }
+        
+            DataContextChanged += OnDataContextChanged;
+            OnDataContextChanged(null, new DependencyPropertyChangedEventArgs());
+        }
+
+        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            State = myStateContainer.GetOrCreate(DataContext);
+            State.Attach(this);
         }
 
         protected override DependencyObject GetContainerForItemOverride()
