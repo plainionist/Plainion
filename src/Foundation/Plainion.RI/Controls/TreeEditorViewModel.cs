@@ -23,7 +23,7 @@ namespace Plainion.RI.Controls
 
             BuildTree();
 
-            CreateChildCommand = new DelegateCommand<Node>(OnCreateChild, p => p.Parent == Root);
+            CreateChildCommand = new DelegateCommand<Node>(OnCreateChild, p => p.Parent == Root || p == Root);
             DeleteCommand = new DelegateCommand<Node>(n => ((Node)n.Parent).Children.Remove(n));
 
             myDragDropBehavior = new DragDropBehavior(Root);
@@ -34,14 +34,17 @@ namespace Plainion.RI.Controls
 
         private void OnCreateChild(Node parent)
         {
-            parent.Children.Add(new Node
+            var node = new Node
             {
                 Parent = parent,
                 Id = Guid.NewGuid().ToString(),
                 Name = "<new>",
                 IsDragAllowed = parent != Root,
                 IsDropAllowed = parent == Root
-            });
+            };
+            parent.Children.Add(node);
+
+            node.IsSelected = true;
             parent.IsExpanded = true;
         }
 

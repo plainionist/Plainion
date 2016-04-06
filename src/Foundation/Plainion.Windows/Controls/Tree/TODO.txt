@@ -1,6 +1,8 @@
 ﻿
 - CRUD
   - menu item dimming does not work
+  - context menu on tree itself should pass Root as node around
+
 
 - check box
 

@@ -53,15 +53,15 @@
 
             <tree:ExtendedTreeView.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="New" Command="{Binding CreateChildCommand}" CommandParameter="{Binding Data.ItemForContextMenu.DataContext, Source={StaticResource TreeProxy}}"/>
-                    <MenuItem Header="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding Data.ItemForContextMenu.DataContext, Source={StaticResource TreeProxy}}"/>
+                    <MenuItem Header="New" Command="{Binding CreateChildCommand}" CommandParameter="{Binding Data.NodeForContextMenu, Source={StaticResource TreeProxy}}"/>
+                    <MenuItem Header="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding Data.NodeForContextMenu, Source={StaticResource TreeProxy}}"/>
                     <Separator/>
                     <MenuItem Header="Expand">
-                        <MenuItem Header="This" Command="{Binding ExpandAllCommand}" CommandParameter="{Binding Data.ItemForContextMenu.DataContext, Source={StaticResource TreeProxy}}"/>
+                        <MenuItem Header="This" Command="{Binding ExpandAllCommand}" CommandParameter="{Binding Data.NodeForContextMenu, Source={StaticResource TreeProxy}}"/>
                         <MenuItem Header="All" Command="{Binding ExpandAllCommand}"/>
                     </MenuItem>
                     <MenuItem Header="Collapse">
-                        <MenuItem Header="This" Command="{Binding CollapseAllCommand}" CommandParameter="{Binding Data.ItemForContextMenu.DataContext, Source={StaticResource TreeProxy}}"/>
+                        <MenuItem Header="This" Command="{Binding CollapseAllCommand}" CommandParameter="{Binding Data.NodeForContextMenu, Source={StaticResource TreeProxy}}"/>
                         <MenuItem Header="All" Command="{Binding CollapseAllCommand}"/>
                     </MenuItem>
                 </ContextMenu>
