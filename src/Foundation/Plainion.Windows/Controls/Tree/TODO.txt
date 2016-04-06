@@ -1,7 +1,6 @@
 ﻿
-- in place edit
-
 - CRUD
+  - menu item dimming does not work
 
 - check box
 
