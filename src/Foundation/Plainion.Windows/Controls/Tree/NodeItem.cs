@@ -245,5 +245,18 @@ namespace Plainion.Windows.Controls.Tree
         }
 
         public ICommand EditCommand { get; private set; }
+
+        protected override void OnPreviewKeyDown(KeyEventArgs e)
+        {
+            if (e.Key == Key.F2)
+            {
+                IsInEditMode = true;
+                e.Handled = true;
+            }
+            else
+            {
+                base.OnPreviewKeyDown(e);
+            }
+        }
     }
 }
