@@ -57,7 +57,6 @@ namespace Plainion.Windows.Editors.Xml
             myTextEditor.TextArea.TextEntered += OnTextEntered;
 
             SearchPanel.Install(myTextEditor);
-            //myTextEditor.TextArea.DefaultInputHandler.NestedInputHandlers.Add(new SearchInputHandler(myTextEditor.TextArea));
         }
 
         private void OnTextChanged( object sender, EventArgs e )
