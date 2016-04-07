@@ -8,6 +8,8 @@ using System.Windows.Input;
 using ICSharpCode.AvalonEdit.CodeCompletion;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Folding;
+using ICSharpCode.AvalonEdit.Search;
+
 
 namespace Plainion.Windows.Editors.Xml
 {
@@ -53,6 +55,9 @@ namespace Plainion.Windows.Editors.Xml
 
             myTextEditor.TextArea.TextEntering += OnTextEntering;
             myTextEditor.TextArea.TextEntered += OnTextEntered;
+
+            SearchPanel.Install(myTextEditor);
+            //myTextEditor.TextArea.DefaultInputHandler.NestedInputHandlers.Add(new SearchInputHandler(myTextEditor.TextArea));
         }
 
         private void OnTextChanged( object sender, EventArgs e )
