@@ -8,6 +8,10 @@ using Plainion.Windows.Interactivity.DragDrop;
 
 namespace Plainion.Windows.Controls.Tree
 {
+    /// <summary>
+    /// The "state" master is always the actual DataContext (the implementation of INode). Only for state which 
+    /// is not represented by DataContext this class here is the master
+    /// </summary>
     class NodeState
     {
         private NodeItem myAttachedView;

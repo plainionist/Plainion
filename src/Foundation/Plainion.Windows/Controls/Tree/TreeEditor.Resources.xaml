@@ -83,18 +83,6 @@
                                             Grid.Column="1">
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Stretch" Background="Transparent" 
                                             DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}">
-                                    <!--
-                                    <StackPanel.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="New" InputGestureText="Ctrl+N" Command="{Binding Data.AddChildCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
-                                            <MenuItem Header="Delete" Command="{Binding Data.DeleteCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
-                                            <Separator/>
-                                            <MenuItem Header="Expand all" InputGestureText="Ctrl++" Command="{Binding Data.ExpandAllCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
-                                            <MenuItem Header="Collapse all" InputGestureText="Ctrl+-" Command="{Binding Data.CollapseAllCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
-                                        </ContextMenu>
-                                    </StackPanel.ContextMenu>
-                                    -->
-
                                     <i:Interaction.Behaviors>
                                         <dragDrop:FrameworkElementDragBehavior/>
                                         <dragDrop:DropSortableItemsBehavior/>
@@ -110,9 +98,6 @@
                                                                 FormattedText="{Binding FormattedText, Mode=OneWay}" 
                                                                 IsInEditMode="{Binding IsInEditMode, Mode=TwoWay}" Focusable="True">
                                     </controls:EditableTextBlock>
-                                    <!--
-                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding ChildrenCount}" Margin="5,0,0,0" Foreground="Green"/>
-                                    -->
                                 </StackPanel>
                             </Border>
                             <ItemsPresenter x:Name="ItemsHost" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch"/>
