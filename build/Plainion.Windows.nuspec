@@ -3,7 +3,7 @@
   <metadata>
     <id>Plainion.Windows</id>
     <title>Plainion.Windows</title>
-    <version>1.19.0.0</version>
+    <version>1.20.0.0</version>
     <authors>ronin4net</authors>
     <owners>ronin4net</owners>
     <licenseUrl>http://opensource.org/licenses/BSD-3-Clause</licenseUrl>
@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Provides extensions to WPF to simplify development of software engineering tools</description>
     <releaseNotes>
-- TreeEditor: Filtering fixed
+- TreeEditor: ContextMenu item state updates fixed
     </releaseNotes>
     <copyright>Copyright 2016</copyright>
     <dependencies>

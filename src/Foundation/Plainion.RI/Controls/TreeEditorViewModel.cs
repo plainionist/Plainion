@@ -23,6 +23,7 @@ namespace Plainion.RI.Controls
 
             BuildTree();
 
+            // as an example we do not want to allow to create children below threads
             CreateChildCommand = new DelegateCommand<Node>(OnCreateChild, p => p.Parent == Root || p == Root);
             DeleteCommand = new DelegateCommand<Node>(n => ((Node)n.Parent).Children.Remove(n));
 
