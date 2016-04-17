@@ -9,15 +9,22 @@ namespace Plainion.Windows.Controls.Tree
     class DelegateCommand : ICommand
     {
         private Action myDelegate;
+        private Func<bool> myCanExecuteDelegate;
 
-        public DelegateCommand(Action action)
+        public DelegateCommand( Action execute)
+            :this(execute, ()=>true)
         {
-            myDelegate = action;
         }
 
-        public bool CanExecute(object parameter)
+        public DelegateCommand( Action execute, Func<bool> canExecute )
         {
-            return true;
+            myDelegate = execute;
+            myCanExecuteDelegate = canExecute;
+        }
+
+        public bool CanExecute( object parameter )
+        {
+            return myCanExecuteDelegate();
         }
 
         public event EventHandler CanExecuteChanged;

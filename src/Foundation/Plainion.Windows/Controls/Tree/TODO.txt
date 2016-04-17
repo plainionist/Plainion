@@ -1,4 +1,7 @@
 ﻿
+- in place edit only possible if bould twoway
+
+- Created/delete commands only visible if bound
 
 - check box
 

@@ -13,104 +13,86 @@ namespace Plainion.Windows.Controls.Tree
         //private bool myShowChildrenCount;
         //private bool myIsChecked;
 
-        internal NodeItem(StateContainer stateContainer)
+        internal NodeItem( StateContainer stateContainer )
         {
             myStateContainer = stateContainer;
 
             //ShowChildrenCount = false;
-            EditCommand = new DelegateCommand(() => IsInEditMode = true);
+            EditCommand = new DelegateCommand( () => IsInEditMode = true, () =>
+            {
+                var expr = GetBindingExpression( TextProperty );
+                return expr != null && expr.ParentBinding.Mode == BindingMode.TwoWay;
+            } );
 
             Loaded += OnLoaded;
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e)
+        private void OnLoaded( object sender, RoutedEventArgs e )
         {
             Loaded -= OnLoaded;
 
-            if (BindingOperations.GetBindingExpression(this, FormattedTextProperty) == null
-                && BindingOperations.GetMultiBindingExpression(this, FormattedTextProperty) == null)
+            if( BindingOperations.GetBindingExpression( this, FormattedTextProperty ) == null
+                && BindingOperations.GetMultiBindingExpression( this, FormattedTextProperty ) == null )
             {
-                SetBinding(FormattedTextProperty, new Binding { Path = new PropertyPath("Text"), Source = this });
+                SetBinding( FormattedTextProperty, new Binding { Path = new PropertyPath( "Text" ), Source = this } );
             }
-        
-            DataContextChanged += OnDataContextChanged;
-            OnDataContextChanged(null, new DependencyPropertyChangedEventArgs());
-        }
 
-        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            State = myStateContainer.GetOrCreate(DataContext);
-            State.Attach(this);
+            State = myStateContainer.GetOrCreate( DataContext );
+            State.Attach( this );
         }
 
         protected override DependencyObject GetContainerForItemOverride()
         {
-            return new NodeItem(myStateContainer);
+            return new NodeItem( myStateContainer );
         }
 
-        protected override bool IsItemItsOwnContainerOverride(object item)
+        protected override bool IsItemItsOwnContainerOverride( object item )
         {
             return item is NodeItem;
         }
 
         internal NodeState State { get; private set; }
 
-        public static DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(NodeItem),
-            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        public static DependencyProperty TextProperty = DependencyProperty.Register( "Text", typeof( string ), typeof( NodeItem ),
+            new FrameworkPropertyMetadata( null ) );
 
         public string Text
         {
-            get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
+            get { return ( string )GetValue( TextProperty ); }
+            set { SetValue( TextProperty, value ); }
         }
 
-        public static DependencyProperty FormattedTextProperty = DependencyProperty.Register("FormattedText", typeof(string), typeof(NodeItem),
-            new FrameworkPropertyMetadata(null));
+        public static DependencyProperty FormattedTextProperty = DependencyProperty.Register( "FormattedText", typeof( string ), typeof( NodeItem ),
+            new FrameworkPropertyMetadata( null ) );
 
         public string FormattedText
         {
-            get { return (string)GetValue(FormattedTextProperty); }
-            set { SetValue(FormattedTextProperty, value); }
+            get { return ( string )GetValue( FormattedTextProperty ); }
+            set { SetValue( FormattedTextProperty, value ); }
         }
 
-        public static DependencyProperty IsInEditModeProperty = DependencyProperty.Register("IsInEditMode", typeof(bool), typeof(NodeItem),
-            new FrameworkPropertyMetadata(false, OnIsInEditModeChanged));
-
-        private static void OnIsInEditModeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var self = (NodeItem)d;
-
-            if (self.Text == null && (bool)e.NewValue == true)
-            {
-                // we first need to set some dummy text so that the EditableTextBlock control becomes visible again
-                self.Text = "<empty>";
-            }
-
-            if (!self.IsInEditMode && self.Text == "<empty>")
-            {
-                self.Text = null;
-            }
-        }
+        public static DependencyProperty IsInEditModeProperty = DependencyProperty.Register( "IsInEditMode", typeof( bool ), typeof( NodeItem ),
+            new FrameworkPropertyMetadata( false ) );
 
         public bool IsInEditMode
         {
-            get { return (bool)GetValue(IsInEditModeProperty); }
-            set { SetValue(IsInEditModeProperty, value); }
+            get { return ( bool )GetValue( IsInEditModeProperty ); }
+            set { SetValue( IsInEditModeProperty, value ); }
         }
 
-        public static DependencyProperty IsFilteredOutProperty = DependencyProperty.Register("IsFilteredOut", typeof(bool), typeof(TreeViewItem),
-            new FrameworkPropertyMetadata(false, OnIsFilteredOutChanged));
+        public static DependencyProperty IsFilteredOutProperty = DependencyProperty.Register( "IsFilteredOut", typeof( bool ), typeof( TreeViewItem ),
+            new FrameworkPropertyMetadata( false, OnIsFilteredOutChanged ) );
 
-        private static void OnIsFilteredOutChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnIsFilteredOutChanged( DependencyObject d, DependencyPropertyChangedEventArgs e )
         {
-            var self = (NodeItem)d;
+            var self = ( NodeItem )d;
             self.Visibility = self.IsFilteredOut ? Visibility.Collapsed : Visibility.Visible;
         }
 
         public bool IsFilteredOut
         {
-            get { return (bool)GetValue(IsFilteredOutProperty); }
-            set { SetValue(IsFilteredOutProperty, value); State.IsFilteredOut = value; }
+            get { return ( bool )GetValue( IsFilteredOutProperty ); }
+            set { SetValue( IsFilteredOutProperty, value ); State.IsFilteredOut = value; }
         }
 
         //public bool? IsChecked
@@ -184,29 +166,29 @@ namespace Plainion.Windows.Controls.Tree
 
         string IDropable.DataFormat
         {
-            get { return typeof(NodeItem).FullName; }
+            get { return typeof( NodeItem ).FullName; }
         }
 
-        bool IDropable.IsDropAllowed(object data, DropLocation location)
+        bool IDropable.IsDropAllowed( object data, DropLocation location )
         {
-            if (!(data is NodeItem))
+            if( !( data is NodeItem ) )
             {
                 return false;
             }
 
-            return State.IsDropAllowed(location);
+            return State.IsDropAllowed( location );
         }
 
-        void IDropable.Drop(object data, DropLocation location)
+        void IDropable.Drop( object data, DropLocation location )
         {
             var droppedElement = data as NodeItem;
 
-            if (droppedElement == null)
+            if( droppedElement == null )
             {
                 return;
             }
 
-            if (object.ReferenceEquals(droppedElement, this))
+            if( object.ReferenceEquals( droppedElement, this ) )
             {
                 //if dragged and dropped yourself, don't need to do anything
                 return;
@@ -220,12 +202,12 @@ namespace Plainion.Windows.Controls.Tree
             };
 
             var editor = this.FindParentOfType<TreeEditor>();
-            if (editor.DropCommand != null && editor.DropCommand.CanExecute(arg))
+            if( editor.DropCommand != null && editor.DropCommand.CanExecute( arg ) )
             {
-                editor.DropCommand.Execute(arg);
+                editor.DropCommand.Execute( arg );
             }
 
-            if (location == DropLocation.InPlace)
+            if( location == DropLocation.InPlace )
             {
                 IsExpanded = true;
             }
@@ -236,27 +218,31 @@ namespace Plainion.Windows.Controls.Tree
             get
             {
                 var dragDropSupport = State.DataContext as IDragDropSupport;
-                if (dragDropSupport != null && !dragDropSupport.IsDragAllowed)
+                if( dragDropSupport != null && !dragDropSupport.IsDragAllowed )
                 {
                     return null;
                 }
 
-                return typeof(NodeItem);
+                return typeof( NodeItem );
             }
         }
 
         public ICommand EditCommand { get; private set; }
 
-        protected override void OnPreviewKeyDown(KeyEventArgs e)
+        protected override void OnPreviewKeyDown( KeyEventArgs e )
         {
-            if (e.Key == Key.F2)
+            if( e.Key == Key.F2 )
             {
-                IsInEditMode = true;
+                if( EditCommand.CanExecute( null ) )
+                {
+                    EditCommand.Execute( null );
+                }
+
                 e.Handled = true;
             }
             else
             {
-                base.OnPreviewKeyDown(e);
+                base.OnPreviewKeyDown( e );
             }
         }
     }
