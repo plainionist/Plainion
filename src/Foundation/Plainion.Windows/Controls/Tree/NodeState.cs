@@ -18,6 +18,7 @@ namespace Plainion.Windows.Controls.Tree
         private readonly StateContainer myContainer;
         private bool myIsFilteredOut;
         private bool myIsExpanded;
+        private bool? myIsChecked;
 
         public NodeState( INode dataContext, StateContainer container )
         {
@@ -58,11 +59,11 @@ namespace Plainion.Windows.Controls.Tree
             return true;
         }
 
-        private void SetViewProperty<T>( T value, [CallerMemberName] string propertyName = null )
+        private bool SetViewProperty<T>( T value, [CallerMemberName] string propertyName = null )
         {
             if( myAttachedView == null )
             {
-                return;
+                return false;
             }
 
             var dependencyPropertyField = myAttachedView.GetType()
@@ -75,14 +76,28 @@ namespace Plainion.Windows.Controls.Tree
                     // If this is a DependencyProperty with binding we have to update the source instead of setting the
                     // DependencyProperty because setting the DependencyProperty directly will kill the binding
 
-                    expr.ResolvedSource.GetType().GetProperty( expr.ResolvedSourcePropertyName ).SetValue( expr.ResolvedSource, myIsExpanded );
-                    expr.UpdateTarget();
+                    var prop = expr.ResolvedSource.GetType().GetProperty( expr.ResolvedSourcePropertyName );
+                    if( !object.Equals( prop.GetValue( expr.ResolvedSource ), value ) )
+                    {
+                        prop.SetValue( expr.ResolvedSource, myIsExpanded );
+                        expr.UpdateTarget();
 
-                    return;
+                        return true;
+                    }
+
+                    return false;
                 }
             }
 
-            myAttachedView.GetType().GetProperty( propertyName ).SetValue( myAttachedView, value );
+            {
+                var prop = myAttachedView.GetType().GetProperty( propertyName );
+                if( !object.Equals( prop.GetValue( myAttachedView ), value ) )
+                {
+                    prop.SetValue( myAttachedView, value );
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void Attach( NodeItem nodeItem )
@@ -101,6 +116,17 @@ namespace Plainion.Windows.Controls.Tree
             {
                 // no binding --> we are the master
                 myAttachedView.IsExpanded = IsExpanded;
+            }
+
+            expr = myAttachedView.GetBindingExpression( NodeItem.IsCheckedProperty );
+            if( expr != null )
+            {
+                // property bound to INode impl --> this is the master
+                IsChecked = myAttachedView.IsChecked;
+            }
+            else
+            {
+                // no binding --> ignore
             }
         }
 
@@ -212,6 +238,48 @@ namespace Plainion.Windows.Controls.Tree
             }
 
             return true;
+        }
+
+        public bool? IsChecked
+        {
+            get { return myIsChecked; }
+            set
+            {
+                // always update - we may not have latest state
+                myIsChecked = value;
+
+                // the view and the datacontext may already be updated for the node the user clicked the checkbox on
+                // -> still update children and parent
+                SetViewProperty( myIsChecked );
+
+                // update children but only propagate TRUE or FALSE as NULL can only be derived from children for its parent
+                if( value == true || value == false )
+                {
+                    foreach( var child in GetChildren() )
+                    {
+                        child.IsChecked = value;
+                    }
+                }
+
+                // update parent
+                var parent = GetParent( this );
+                if( parent != null )
+                {
+                    var siblings = parent.GetChildren();
+
+                    if( siblings.All( t => t.IsChecked == true ) )
+                    {
+                        parent.IsChecked = true;
+                    }
+
+                    if( siblings.All( t => !t.IsChecked == true ) )
+                    {
+                        parent.IsChecked = false;
+                    }
+
+                    parent.IsChecked = null;
+                }
+            }
         }
     }
 }

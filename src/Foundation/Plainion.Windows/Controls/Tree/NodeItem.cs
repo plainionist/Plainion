@@ -18,6 +18,7 @@ namespace Plainion.Windows.Controls.Tree
             myStateContainer = stateContainer;
 
             //ShowChildrenCount = false;
+
             EditCommand = new DelegateCommand( () => IsInEditMode = true, () =>
             {
                 var expr = GetBindingExpression( TextProperty );
@@ -37,6 +38,12 @@ namespace Plainion.Windows.Controls.Tree
                 SetBinding( FormattedTextProperty, new Binding { Path = new PropertyPath( "Text" ), Source = this } );
             }
 
+            DataContextChanged += OnDataContextChanged;
+            OnDataContextChanged( null, new DependencyPropertyChangedEventArgs() );
+        }
+
+        private void OnDataContextChanged( object sender, DependencyPropertyChangedEventArgs e )
+        {
             State = myStateContainer.GetOrCreate( DataContext );
             State.Attach( this );
         }
@@ -95,45 +102,28 @@ namespace Plainion.Windows.Controls.Tree
             set { SetValue( IsFilteredOutProperty, value ); State.IsFilteredOut = value; }
         }
 
-        //public bool? IsChecked
-        //{
-        //    get
-        //    {
-        //        if( myChildren == null )
-        //        {
-        //            return myIsChecked;
-        //        }
+        public static DependencyProperty IsCheckedProperty = DependencyProperty.Register( "IsChecked", typeof( bool? ), typeof( TreeViewItem ),
+            new FrameworkPropertyMetadata( null, OnIsCheckedChanged ) );
 
-        //        if( Children.All( t => t.IsChecked == true ) )
-        //        {
-        //            return true;
-        //        }
+        private static void OnIsCheckedChanged( DependencyObject d, DependencyPropertyChangedEventArgs e )
+        {
+            //var self = ( NodeItem )d;
+            //if( self.State != null )
+            //{
+            //    self.State.IsChecked = self.IsChecked;
+            //}
+        }
 
-        //        if( Children.All( t => !t.IsChecked == true ) )
-        //        {
-        //            return false;
-        //        }
+        public bool? IsChecked
+        {
+            get { return ( bool? )GetValue( IsCheckedProperty ); }
+            set { SetValue( IsCheckedProperty, value ); }
+        }
 
-        //        return null;
-        //    }
-        //    set
-        //    {
-        //        if( myChildren == null )
-        //        {
-        //            myIsChecked = value != null && value.Value;
-        //        }
-        //        else
-        //        {
-        //            foreach( var t in Children )
-        //            {
-        //                t.IsChecked = value.HasValue && value.Value;
-        //            }
-        //        }
-
-        //        OnPropertyChanged();
-        //    }
-        //}
-
+        public bool ShowCheckBox
+        {
+            get { return GetBindingExpression( IsCheckedProperty ) != null; }
+        }
 
         //public bool ShowChildrenCount
         //{

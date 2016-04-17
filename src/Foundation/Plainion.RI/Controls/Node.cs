@@ -13,7 +13,7 @@ namespace Plainion.RI.Controls
         private string myName;
         private bool myIsSelected;
         private bool myIsExpanded;
-        private bool myIsChecked;
+        private bool? myIsChecked;
 
         public Node()
         {
@@ -21,6 +21,7 @@ namespace Plainion.RI.Controls
 
             IsDragAllowed = true;
             IsDropAllowed = true;
+            IsChecked = false;
         }
 
         public bool IsDragAllowed { get; set; }
@@ -50,41 +51,8 @@ namespace Plainion.RI.Controls
 
         public bool? IsChecked
         {
-            get
-            {
-                if( !Children.Any() )
-                {
-                    return myIsChecked;
-                }
-
-                if( Children.All( t => t.IsChecked == true ) )
-                {
-                    return true;
-                }
-
-                if( Children.All( t => !t.IsChecked == true ) )
-                {
-                    return false;
-                }
-
-                return null;
-            }
-            set
-            {
-                if( !Children.Any() )
-                {
-                    myIsChecked = value != null && value.Value;
-                }
-                else
-                {
-                    foreach( var t in Children )
-                    {
-                        t.IsChecked = value.HasValue && value.Value;
-                    }
-                }
-
-                OnPropertyChanged( () => IsChecked );
-            }
+            get { return myIsChecked; }
+            set { SetProperty( ref myIsChecked, value ); }
         }
 
         public bool IsSelected

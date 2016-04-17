@@ -27,6 +27,7 @@
                     <Style TargetType="{x:Type pn:NodeItem}" BasedOn="{StaticResource DefaultNodeStyle}">
                         <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
                         <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+                        <Setter Property="IsChecked" Value="{Binding IsChecked, Mode=TwoWay}"/>
                         <Setter Property="Text" Value="{Binding Name, Mode=TwoWay}"/>
                         <Setter Property="FormattedText">
                             <Setter.Value>
