@@ -3,9 +3,11 @@ using System.Collections.Generic;
 
 namespace Plainion.Windows.Controls.Tree
 {
-    // used to store additional state to the actual INode model.
-    // we cannot store state in NodeItem directly as those instances lifecylced ItemContainerGenerator.
-    // esp. with virtualization enabled those items might be created on demand and destroyed frequently.
+    /// <summary>
+    /// used to store additional state to the actual INode model.
+    /// we cannot store state in NodeItem directly as those instances lifecylced ItemContainerGenerator.
+    /// esp. with virtualization enabled those items might be created on demand and destroyed frequently.
+    /// </summary>
     class StateContainer
     {
         private readonly Dictionary<object, NodeState> myStates;
@@ -34,7 +36,7 @@ namespace Plainion.Windows.Controls.Tree
             return GetOrCreate(DataContext);
         }
 
-        internal NodeState GetOrCreate(object dataContext)
+        public NodeState GetOrCreate( object dataContext )
         {
             NodeState state;
             if (!myStates.TryGetValue(dataContext, out state))

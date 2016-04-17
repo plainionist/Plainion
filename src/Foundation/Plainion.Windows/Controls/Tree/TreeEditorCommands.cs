@@ -2,6 +2,9 @@
 
 namespace Plainion.Windows.Controls.Tree
 {
+    /// <summary>
+    /// Defaults for the <see cref="TreeEditor"/> commands.
+    /// </summary>
     public class TreeEditorCommands
     {
         public static readonly RoutedCommand ExpandAll = new RoutedCommand();

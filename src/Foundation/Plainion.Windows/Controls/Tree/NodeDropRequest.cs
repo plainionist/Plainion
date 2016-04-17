@@ -2,6 +2,9 @@
 
 namespace Plainion.Windows.Controls.Tree
 {
+    /// <summary>
+    /// Send as parameter with the <see cref="TreeEditor.DropCommand"/> to specify the requested DragDrop action.
+    /// </summary>
     public class NodeDropRequest
     {
         public INode DroppedNode { get; internal set; }

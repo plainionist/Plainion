@@ -5,6 +5,9 @@ using System.Windows.Input;
 
 namespace Plainion.Windows.Controls.Tree
 {
+    /// <summary>
+    /// Used by the <see cref="TreeEditor"/> to handle certain aspects which are difficult to handle in the Xaml.
+    /// </summary>
     class ExtendedTreeView : TreeView
     {
         public ExtendedTreeView()
