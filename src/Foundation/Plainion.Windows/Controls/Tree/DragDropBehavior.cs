@@ -1,16 +1,21 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Plainion.Windows.Interactivity.DragDrop;
 using System.Linq;
 using Plainion.Collections;
-using System.Collections;
+using Plainion.Windows.Interactivity.DragDrop;
 
 namespace Plainion.Windows.Controls.Tree
 {
     /// <summary>
-    /// Parent must be writable.
-    /// Children must be of type ObservableCollection{T}
+    /// Implements DragDrop in the tree. Can be used by users of the TreeEditor to handle 
+    /// Drag and Drop commands.
+    /// <para>
+    /// Pre-conditions:
+    /// - INode.Parent must be writable
+    /// - INode.Children must be of type ObservableCollection{T}
+    /// </para>
     /// </summary>
     public class DragDropBehavior
     {

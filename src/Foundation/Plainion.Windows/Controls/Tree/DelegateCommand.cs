@@ -3,18 +3,28 @@ using System.Windows.Input;
 
 namespace Plainion.Windows.Controls.Tree
 {
+    /// <summary>
+    /// Simple implementation of a DelegateCommand which allows easy callbacks to used DataContext
+    /// </summary>
     class DelegateCommand : ICommand
     {
         private Action myDelegate;
+        private Func<bool> myCanExecuteDelegate;
 
-        public DelegateCommand(Action @delegate)
+        public DelegateCommand( Action execute)
+            :this(execute, ()=>true)
         {
-            myDelegate = @delegate;
         }
 
-        public bool CanExecute(object parameter)
+        public DelegateCommand( Action execute, Func<bool> canExecute )
         {
-            return true;
+            myDelegate = execute;
+            myCanExecuteDelegate = canExecute;
+        }
+
+        public bool CanExecute( object parameter )
+        {
+            return myCanExecuteDelegate();
         }
 
         public event EventHandler CanExecuteChanged;

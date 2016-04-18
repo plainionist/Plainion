@@ -18,8 +18,9 @@ namespace Plainion.Windows.Controls.Tree
         private readonly StateContainer myContainer;
         private bool myIsFilteredOut;
         private bool myIsExpanded;
+        private bool? myIsChecked;
 
-        public NodeState(INode dataContext, StateContainer container)
+        public NodeState( INode dataContext, StateContainer container )
         {
             DataContext = dataContext;
             myContainer = container;
@@ -30,7 +31,7 @@ namespace Plainion.Windows.Controls.Tree
         public bool IsFilteredOut
         {
             get { return myIsFilteredOut; }
-            set { SetProperty(ref myIsFilteredOut, value); }
+            set { SetProperty( ref myIsFilteredOut, value ); }
         }
 
         public bool IsExpanded
@@ -40,56 +41,73 @@ namespace Plainion.Windows.Controls.Tree
             {
                 // always update - we may not have latest state
                 myIsExpanded = value;
-                SetViewProperty(myIsExpanded);
+                SetViewProperty( myIsExpanded );
             }
         }
 
-        private bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        private bool SetProperty<T>( ref T storage, T value, [CallerMemberName] string propertyName = null )
         {
-            if (object.Equals(storage, value))
+            if( object.Equals( storage, value ) )
             {
                 return false;
             }
 
             storage = value;
 
-            SetViewProperty(storage, propertyName);
+            SetViewProperty( storage, propertyName );
 
             return true;
         }
 
-        private void SetViewProperty<T>(T value, [CallerMemberName] string propertyName = null)
+        private bool SetViewProperty<T>( T value, [CallerMemberName] string propertyName = null )
         {
-            if (myAttachedView == null)
+            if( myAttachedView == null )
             {
-                return;
+                return false;
             }
 
             var dependencyPropertyField = myAttachedView.GetType()
-                .GetField(propertyName + "Property", BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy);
-            if (dependencyPropertyField != null)
+                .GetField( propertyName + "Property", BindingFlags.Static | BindingFlags.Public | BindingFlags.FlattenHierarchy );
+            if( dependencyPropertyField != null )
             {
-                var expr = myAttachedView.GetBindingExpression((DependencyProperty)dependencyPropertyField.GetValue(myAttachedView));
-                if (expr != null)
+                var expr = myAttachedView.GetBindingExpression( ( DependencyProperty )dependencyPropertyField.GetValue( myAttachedView ) );
+                if( expr != null )
                 {
-                    expr.ResolvedSource.GetType().GetProperty(expr.ResolvedSourcePropertyName).SetValue(expr.ResolvedSource, myIsExpanded);
-                    expr.UpdateTarget();
+                    // If this is a DependencyProperty with binding we have to update the source instead of setting the
+                    // DependencyProperty because setting the DependencyProperty directly will kill the binding
 
-                    return;
+                    var prop = expr.ResolvedSource.GetType().GetProperty( expr.ResolvedSourcePropertyName );
+                    if( !object.Equals( prop.GetValue( expr.ResolvedSource ), value ) )
+                    {
+                        prop.SetValue( expr.ResolvedSource, myIsExpanded );
+                        expr.UpdateTarget();
+
+                        return true;
+                    }
+
+                    return false;
                 }
             }
 
-            myAttachedView.GetType().GetProperty(propertyName).SetValue(myAttachedView, value);
+            {
+                var prop = myAttachedView.GetType().GetProperty( propertyName );
+                if( !object.Equals( prop.GetValue( myAttachedView ), value ) )
+                {
+                    prop.SetValue( myAttachedView, value );
+                    return true;
+                }
+            }
+            return false;
         }
 
-        public void Attach(NodeItem nodeItem)
+        public void Attach( NodeItem nodeItem )
         {
             myAttachedView = nodeItem;
 
             myAttachedView.IsFilteredOut = IsFilteredOut;
 
-            var expr = myAttachedView.GetBindingExpression(TreeViewItem.IsExpandedProperty);
-            if (expr != null)
+            var expr = myAttachedView.GetBindingExpression( TreeViewItem.IsExpandedProperty );
+            if( expr != null )
             {
                 // property bound to INode impl --> this is the master
                 IsExpanded = myAttachedView.IsExpanded;
@@ -99,39 +117,50 @@ namespace Plainion.Windows.Controls.Tree
                 // no binding --> we are the master
                 myAttachedView.IsExpanded = IsExpanded;
             }
+
+            expr = myAttachedView.GetBindingExpression( NodeItem.IsCheckedProperty );
+            if( expr != null )
+            {
+                // property bound to INode impl --> this is the master
+                IsChecked = myAttachedView.IsChecked;
+            }
+            else
+            {
+                // no binding --> ignore
+            }
         }
 
-        public void ApplyFilter(string filter)
+        public void ApplyFilter( string filter )
         {
             string[] tokens = null;
 
-            if (filter == null)
+            if( filter == null )
             {
                 IsFilteredOut = false;
             }
             else
             {
                 // if this has no parent it is Root - no need to filter root
-                if (GetParent(this) != null)
+                if( GetParent( this ) != null )
                 {
-                    tokens = filter.Split('/');
-                    var levelFilter = tokens.Length == 1 ? filter : tokens[GetDepth()];
-                    if (string.IsNullOrWhiteSpace(levelFilter))
+                    tokens = filter.Split( '/' );
+                    var levelFilter = tokens.Length == 1 ? filter : tokens[ GetDepth() ];
+                    if( string.IsNullOrWhiteSpace( levelFilter ) )
                     {
                         IsFilteredOut = false;
                     }
                     else
                     {
-                        IsFilteredOut = !DataContext.Matches(levelFilter);
+                        IsFilteredOut = !DataContext.Matches( levelFilter );
                     }
                 }
             }
 
-            foreach (var child in GetChildren())
+            foreach( var child in GetChildren() )
             {
-                child.ApplyFilter(filter);
+                child.ApplyFilter( filter );
 
-                if (!child.IsFilteredOut && tokens != null && tokens.Length == 1)
+                if( !child.IsFilteredOut && tokens != null && tokens.Length == 1 )
                 {
                     IsFilteredOut = false;
                 }
@@ -142,10 +171,10 @@ namespace Plainion.Windows.Controls.Tree
         {
             int depth = 0;
 
-            var parent = GetParent(this);
-            while (parent != null)
+            var parent = GetParent( this );
+            while( parent != null )
             {
-                parent = GetParent(parent);
+                parent = GetParent( parent );
                 depth++;
             }
 
@@ -153,27 +182,27 @@ namespace Plainion.Windows.Controls.Tree
             return depth - 1;
         }
 
-        private NodeState GetParent(NodeState state)
+        private NodeState GetParent( NodeState state )
         {
-            return state.DataContext.Parent == null ? null : myContainer.GetOrCreate(state.DataContext.Parent);
+            return state.DataContext.Parent == null ? null : myContainer.GetOrCreate( state.DataContext.Parent );
         }
 
         private IEnumerable<NodeState> GetChildren()
         {
-            if (DataContext.Children == null)
+            if( DataContext.Children == null )
             {
                 return Enumerable.Empty<NodeState>();
             }
 
             return DataContext.Children
-                .Select(myContainer.GetOrCreate);
+                .Select( myContainer.GetOrCreate );
         }
 
         public void ExpandAll()
         {
             IsExpanded = true;
 
-            foreach (var child in GetChildren())
+            foreach( var child in GetChildren() )
             {
                 child.ExpandAll();
             }
@@ -183,18 +212,18 @@ namespace Plainion.Windows.Controls.Tree
         {
             IsExpanded = false;
 
-            foreach (var child in GetChildren())
+            foreach( var child in GetChildren() )
             {
                 child.CollapseAll();
             }
         }
 
-        internal bool IsDropAllowed(DropLocation location)
+        internal bool IsDropAllowed( DropLocation location )
         {
-            if (location == DropLocation.InPlace)
+            if( location == DropLocation.InPlace )
             {
                 var dragDropSupport = DataContext as IDragDropSupport;
-                if (dragDropSupport != null)
+                if( dragDropSupport != null )
                 {
                     return dragDropSupport.IsDropAllowed;
                 }
@@ -202,13 +231,55 @@ namespace Plainion.Windows.Controls.Tree
             else
             {
                 var dragDropSupport = DataContext.Parent as IDragDropSupport;
-                if (dragDropSupport != null)
+                if( dragDropSupport != null )
                 {
                     return dragDropSupport.IsDropAllowed;
                 }
             }
 
             return true;
+        }
+
+        public bool? IsChecked
+        {
+            get { return myIsChecked; }
+            set
+            {
+                // always update - we may not have latest state
+                myIsChecked = value;
+
+                // the view and the datacontext may already be updated for the node the user clicked the checkbox on
+                // -> still update children and parent
+                SetViewProperty( myIsChecked );
+
+                // update children but only propagate TRUE or FALSE as NULL can only be derived from children for its parent
+                if( value == true || value == false )
+                {
+                    foreach( var child in GetChildren() )
+                    {
+                        child.IsChecked = value;
+                    }
+                }
+
+                // update parent
+                var parent = GetParent( this );
+                if( parent != null )
+                {
+                    var siblings = parent.GetChildren();
+
+                    if( siblings.All( t => t.IsChecked == true ) )
+                    {
+                        parent.IsChecked = true;
+                    }
+
+                    if( siblings.All( t => !t.IsChecked == true ) )
+                    {
+                        parent.IsChecked = false;
+                    }
+
+                    parent.IsChecked = null;
+                }
+            }
         }
     }
 }
