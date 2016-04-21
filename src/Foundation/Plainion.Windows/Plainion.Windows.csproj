@@ -165,6 +165,7 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Controls\ReadMe.md" />
     <None Include="Controls\Tree\ReadMe.md" />
     <None Include="packages.config" />
   </ItemGroup>
