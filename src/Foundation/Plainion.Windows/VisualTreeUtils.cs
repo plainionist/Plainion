@@ -7,7 +7,6 @@ namespace Plainion.Windows
     {
         public static T FindParentOfType<T>( this DependencyObject self ) where T : DependencyObject
         {
-            var current = self;
             while( self != null && !( self is T ) )
             {
                 self = VisualTreeHelper.GetParent( self );
