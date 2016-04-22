@@ -36,7 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\AdornedControl.cs" />
-    <Compile Include="AdornerPlacement.cs" />
+    <Compile Include="Controls\AdornerPlacement.cs" />
     <Compile Include="Controls\DocumentFacade.cs" />
     <Compile Include="Controls\DocumentNavigationPane.xaml.cs">
       <DependentUpon>DocumentNavigationPane.xaml</DependentUpon>
@@ -80,7 +80,7 @@
     <Compile Include="Interactivity\DragDrop\DropLocation.cs" />
     <Compile Include="Controls\EditableTextBlock.cs" />
     <Compile Include="Interactivity\DragDrop\FrameworkElementDropBehavior.cs" />
-    <Compile Include="FrameworkElementAdorner.cs" />
+    <Compile Include="Controls\FrameworkElementAdorner.cs" />
     <Compile Include="Interactivity\PanOnLMBBehavior.cs" />
     <Compile Include="Interactivity\PropagateInputBindingsToWindowBehavior.cs" />
     <Compile Include="Interactivity\RaiseCommandOnMouseGestureBehavior.cs" />
@@ -168,6 +168,7 @@
     <None Include="Controls\ReadMe.md" />
     <None Include="Controls\Tree\ReadMe.md" />
     <None Include="packages.config" />
+    <None Include="ReadMe.md" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Bold.png" />

@@ -1,5 +1,5 @@
 ﻿
-namespace Plainion.Windows
+namespace Plainion.Windows.Controls
 {
     /// <summary>
     /// Specifies the placement of the adorner in related to the adorned control.

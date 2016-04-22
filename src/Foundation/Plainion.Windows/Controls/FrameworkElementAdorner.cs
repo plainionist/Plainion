@@ -4,7 +4,8 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
 
-namespace Plainion.Windows
+
+namespace Plainion.Windows.Controls
 {
     /// <summary>
     /// This class is an adorner that allows a FrameworkElement derived class to adorn another FrameworkElement.
