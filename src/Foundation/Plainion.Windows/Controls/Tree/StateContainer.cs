@@ -49,7 +49,7 @@ namespace Plainion.Windows.Controls.Tree
         }
 
         // used to avoid updates from NodeItem to NodeState while recursively updating NodeStates
-        public bool UpdatingIsCheckedRunning { get; set; }
+        public bool IsCheckedPropagationRunning { get; set; }
 
         public DataContextProperty<bool?> IsCheckedProperty { get; set; }
     }

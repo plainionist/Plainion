@@ -228,15 +228,14 @@ namespace Plainion.Windows.Controls.Tree
             return true;
         }
 
-        // Only call this if "IsChecked" is set from outside (user)
         public void PropagateIsChecked( bool value )
         {
-            if( myContainer.UpdatingIsCheckedRunning )
+            if( myContainer.IsCheckedPropagationRunning )
             {
                 return;
             }
 
-            myContainer.UpdatingIsCheckedRunning = true;
+            myContainer.IsCheckedPropagationRunning = true;
 
             {
                 SetIsCheckedLocally( value );
@@ -249,7 +248,7 @@ namespace Plainion.Windows.Controls.Tree
                 UpdateParentsIsChecked();
             }
 
-            myContainer.UpdatingIsCheckedRunning = false;
+            myContainer.IsCheckedPropagationRunning = false;
         }
 
         // only considers this node - neither parent nor children updated
@@ -264,7 +263,7 @@ namespace Plainion.Windows.Controls.Tree
             {
                 child.SetIsCheckedLocally( value );
 
-                child.UpdateParentsIsChecked();
+                child.UpdateChildrenIsChecked( value );
             }
         }
 
