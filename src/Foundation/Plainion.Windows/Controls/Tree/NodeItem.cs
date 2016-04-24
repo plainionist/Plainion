@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -12,7 +11,6 @@ namespace Plainion.Windows.Controls.Tree
     {
         private readonly StateContainer myStateContainer;
         //private bool myShowChildrenCount;
-        //private bool myIsChecked;
 
         internal NodeItem( StateContainer stateContainer )
         {

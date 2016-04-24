@@ -96,6 +96,7 @@ namespace Plainion.Windows.Controls.Tree
                     return true;
                 }
             }
+
             return false;
         }
 
