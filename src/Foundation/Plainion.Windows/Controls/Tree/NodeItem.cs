@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -10,13 +11,10 @@ namespace Plainion.Windows.Controls.Tree
     public class NodeItem : TreeViewItem, IDropable, IDragable
     {
         private readonly StateContainer myStateContainer;
-        //private bool myShowChildrenCount;
 
         internal NodeItem( StateContainer stateContainer )
         {
             myStateContainer = stateContainer;
-
-            //ShowChildrenCount = false;
 
             EditCommand = new DelegateCommand( () => IsInEditMode = true, () =>
             {
@@ -135,35 +133,6 @@ namespace Plainion.Windows.Controls.Tree
         {
             get { return GetBindingExpression( IsCheckedProperty ) != null; }
         }
-
-        //public bool ShowChildrenCount
-        //{
-        //    get { return myShowChildrenCount; }
-        //    set
-        //    {
-        //        if (myShowChildrenCount == value)
-        //        {
-        //            return;
-        //        }
-
-        //        myShowChildrenCount = value;
-
-        //        foreach (var child in Children)
-        //        {
-        //            child.ShowChildrenCount = myShowChildrenCount;
-        //        }
-        //    }
-        //}
-
-        //public string ChildrenCount
-        //{
-        //    get
-        //    {
-        //        return ShowChildrenCount && Children.Count > 0
-        //            ? string.Format( "[{0}]", Children.Count )
-        //            : string.Empty;
-        //    }
-        //}
 
         string IDropable.DataFormat
         {

@@ -20,9 +20,10 @@
             </StackPanel>
 
             <pn:TreeEditor Root="{Binding Root}" FilterLabel="Filter on node text"
-                       CreateChildCommand="{Binding CreateChildCommand}"
-                       DeleteCommand="{Binding DeleteCommand}"
-                       DropCommand="{Binding DropCommand}">
+                           CreateChildCommand="{Binding CreateChildCommand}"
+                           DeleteCommand="{Binding DeleteCommand}"
+                           DropCommand="{Binding DropCommand}"
+                           ShowChildrenCount="True">
                 <pn:TreeEditor.NodeStyle>
                     <Style TargetType="{x:Type pn:NodeItem}" BasedOn="{StaticResource DefaultNodeStyle}">
                         <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>

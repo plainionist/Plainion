@@ -18,6 +18,7 @@ namespace Plainion.Windows.Controls.Tree
         private readonly StateContainer myContainer;
         private bool myIsFilteredOut;
         private bool myIsExpanded;
+        private bool myShowChildrenCount;
 
         public NodeState( INode dataContext, StateContainer container )
         {
@@ -171,12 +172,12 @@ namespace Plainion.Windows.Controls.Tree
             return depth - 1;
         }
 
-        private NodeState GetParent( NodeState state )
+        public NodeState GetParent( NodeState state )
         {
             return state.DataContext.Parent == null ? null : myContainer.GetOrCreate( state.DataContext.Parent );
         }
 
-        private IEnumerable<NodeState> GetChildren()
+        public IEnumerable<NodeState> GetChildren()
         {
             if( DataContext.Children == null )
             {
@@ -292,6 +293,25 @@ namespace Plainion.Windows.Controls.Tree
             }
 
             parent.UpdateParentsIsChecked();
+        }
+
+        public bool ShowChildrenCount
+        {
+            get { return myShowChildrenCount; }
+            set
+            {
+                if( myShowChildrenCount == value )
+                {
+                    return;
+                }
+
+                myShowChildrenCount = value;
+
+                foreach( var child in GetChildren() )
+                {
+                    child.ShowChildrenCount = myShowChildrenCount;
+                }
+            }
         }
     }
 }

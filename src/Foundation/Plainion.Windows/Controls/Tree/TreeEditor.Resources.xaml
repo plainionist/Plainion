@@ -17,6 +17,9 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type tree:NodeItem}">
                     <StackPanel>
+                        <StackPanel.Resources>
+                            <windows:BindingProxy x:Key="RealDataContext" Data="{Binding}"/>
+                        </StackPanel.Resources>
                         <Grid Margin="0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" MinWidth="19" />
@@ -85,6 +88,8 @@
                                             DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}">
                                     <StackPanel.Resources>
                                         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+                                        
+                                        <tree:ShowChildrenCountConverter x:Key="ShowChildrenCountConverter"/>
                                     </StackPanel.Resources>
                                     
                                     <i:Interaction.Behaviors>
@@ -101,6 +106,15 @@
                                                                 FormattedText="{Binding FormattedText, Mode=OneWay}" 
                                                                 IsInEditMode="{Binding IsInEditMode, Mode=TwoWay}" Focusable="True">
                                     </controls:EditableTextBlock>
+
+                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" Foreground="Green">
+                                        <TextBlock.Text>
+                                            <MultiBinding Converter="{StaticResource ShowChildrenCountConverter}">
+                                                <Binding Path="."/>
+                                                <Binding Path="Data.Children" Source="{StaticResource RealDataContext}"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
                                 </StackPanel>
                             </Border>
                             <ItemsPresenter x:Name="ItemsHost" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch"/>
