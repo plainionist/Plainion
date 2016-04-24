@@ -18,7 +18,6 @@ namespace Plainion.Windows.Controls.Tree
         private readonly StateContainer myContainer;
         private bool myIsFilteredOut;
         private bool myIsExpanded;
-        private bool? myIsChecked;
 
         public NodeState( INode dataContext, StateContainer container )
         {
@@ -79,7 +78,7 @@ namespace Plainion.Windows.Controls.Tree
                     var prop = expr.ResolvedSource.GetType().GetProperty( expr.ResolvedSourcePropertyName );
                     if( !object.Equals( prop.GetValue( expr.ResolvedSource ), value ) )
                     {
-                        prop.SetValue( expr.ResolvedSource, myIsExpanded );
+                        prop.SetValue( expr.ResolvedSource, value );
                         expr.UpdateTarget();
 
                         return true;
@@ -116,17 +115,6 @@ namespace Plainion.Windows.Controls.Tree
             {
                 // no binding --> we are the master
                 myAttachedView.IsExpanded = IsExpanded;
-            }
-
-            expr = myAttachedView.GetBindingExpression( NodeItem.IsCheckedProperty );
-            if( expr != null )
-            {
-                // property bound to INode impl --> this is the master
-                IsChecked = myAttachedView.IsChecked;
-            }
-            else
-            {
-                // no binding --> ignore
             }
         }
 
@@ -240,46 +228,70 @@ namespace Plainion.Windows.Controls.Tree
             return true;
         }
 
-        public bool? IsChecked
+        // Only call this if "IsChecked" is set from outside (user)
+        public void PropagateIsChecked( bool value )
         {
-            get { return myIsChecked; }
-            set
+            if( myContainer.UpdatingIsCheckedRunning )
             {
-                // always update - we may not have latest state
-                myIsChecked = value;
+                return;
+            }
+
+            myContainer.UpdatingIsCheckedRunning = true;
+
+            {
+                SetIsCheckedLocally( value );
 
                 // the view and the datacontext may already be updated for the node the user clicked the checkbox on
                 // -> still update children and parent
-                SetViewProperty( myIsChecked );
 
-                // update children but only propagate TRUE or FALSE as NULL can only be derived from children for its parent
-                if( value == true || value == false )
-                {
-                    foreach( var child in GetChildren() )
-                    {
-                        child.IsChecked = value;
-                    }
-                }
+                UpdateChildrenIsChecked( value );
 
-                // update parent
-                var parent = GetParent( this );
-                if( parent != null )
-                {
-                    var siblings = parent.GetChildren();
-
-                    if( siblings.All( t => t.IsChecked == true ) )
-                    {
-                        parent.IsChecked = true;
-                    }
-
-                    if( siblings.All( t => !t.IsChecked == true ) )
-                    {
-                        parent.IsChecked = false;
-                    }
-
-                    parent.IsChecked = null;
-                }
+                UpdateParentsIsChecked();
             }
+
+            myContainer.UpdatingIsCheckedRunning = false;
+        }
+
+        // only considers this node - neither parent nor children updated
+        private void SetIsCheckedLocally( bool? value )
+        {
+            SetViewProperty( value, "IsChecked" );
+        }
+
+        private void UpdateChildrenIsChecked( bool value )
+        {
+            foreach( var child in GetChildren() )
+            {
+                child.SetIsCheckedLocally( value );
+
+                child.UpdateParentsIsChecked();
+            }
+        }
+
+        private void UpdateParentsIsChecked()
+        {
+            var parent = GetParent( this );
+            if( parent == null )
+            {
+                return;
+            }
+
+            var siblings = parent.GetChildren();
+
+            if( siblings.All( t => myContainer.IsCheckedProperty.Get( t.DataContext ) == true ) )
+            {
+                parent.SetIsCheckedLocally( true );
+            }
+            else if( siblings.All( t => myContainer.IsCheckedProperty.Get( t.DataContext ) == false ) )
+            {
+                parent.SetIsCheckedLocally( false );
+            }
+            else
+            {
+                parent.SetIsCheckedLocally( null );
+            }
+
+            parent.UpdateParentsIsChecked();
         }
     }
 }

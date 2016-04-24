@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 
 namespace Plainion.Windows.Controls.Tree
@@ -46,5 +47,10 @@ namespace Plainion.Windows.Controls.Tree
             }
             return state;
         }
+
+        // used to avoid updates from NodeItem to NodeState while recursively updating NodeStates
+        public bool UpdatingIsCheckedRunning { get; set; }
+
+        public DataContextProperty<bool?> IsCheckedProperty { get; set; }
     }
 }

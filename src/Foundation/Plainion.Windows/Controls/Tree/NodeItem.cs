@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -107,11 +108,23 @@ namespace Plainion.Windows.Controls.Tree
 
         private static void OnIsCheckedChanged( DependencyObject d, DependencyPropertyChangedEventArgs e )
         {
-            //var self = ( NodeItem )d;
-            //if( self.State != null )
-            //{
-            //    self.State.IsChecked = self.IsChecked;
-            //}
+            var self = ( NodeItem )d;
+
+            // at first posibility get the property name of the IsChecked binding and remember it
+            if( self.myStateContainer.IsCheckedProperty == null )
+            {
+                var expr = self.GetBindingExpression( IsCheckedProperty );
+
+                string propertyName = expr.ResolvedSourcePropertyName;
+
+                self.myStateContainer.IsCheckedProperty = new DataContextProperty<bool?>( propertyName );
+            }
+
+            if( self.State != null )
+            {
+                // third state cannot be set - just calculated
+                self.State.PropagateIsChecked( self.IsChecked == true );
+            }
         }
 
         public bool? IsChecked

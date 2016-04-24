@@ -17,4 +17,8 @@ This namespace provides a simple TreeEditor control and related classes.
 # Usage
 
 - just implement INode and bind the root of your tree to the Root property of the TreeEditor
-- for a fully working example see Plainion.RI/Controls/TreeEditorView
+
+
+# Example
+
+- see: Plainion.RI/Controls/TreeEditorView
