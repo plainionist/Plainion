@@ -1,4 +1,4 @@
 ﻿
-- check box
+- udpate of children count does not work :(
 
 - shortcut keys

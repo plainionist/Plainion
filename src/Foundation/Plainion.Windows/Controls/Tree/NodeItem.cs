@@ -43,6 +43,10 @@ namespace Plainion.Windows.Controls.Tree
         {
             State = myStateContainer.GetOrCreate( DataContext );
             State.Attach( this );
+
+            var childrenCount = ( TextBlock )GetTemplateChild( "myChildrenCount" );
+            var expr = BindingOperations.GetMultiBindingExpression( childrenCount, TextBlock.TextProperty );
+            expr.UpdateTarget();
         }
 
         protected override DependencyObject GetContainerForItemOverride()

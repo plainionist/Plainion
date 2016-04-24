@@ -107,7 +107,7 @@
                                                                 IsInEditMode="{Binding IsInEditMode, Mode=TwoWay}" Focusable="True">
                                     </controls:EditableTextBlock>
 
-                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" Foreground="Green">
+                                    <TextBlock x:Name="myChildrenCount" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" Foreground="Green">
                                         <TextBlock.Text>
                                             <MultiBinding Converter="{StaticResource ShowChildrenCountConverter}">
                                                 <Binding Path="."/>

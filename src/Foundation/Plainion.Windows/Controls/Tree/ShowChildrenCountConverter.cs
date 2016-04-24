@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Windows;
 using System.Windows.Data;
 
 namespace Plainion.Windows.Controls.Tree
