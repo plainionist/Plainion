@@ -9,6 +9,7 @@
     <AssemblyName>Plainion.AppFw.Wpf</AssemblyName>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
+    <NuGetPackageImportStamp>0c4a6ff2</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <UseVSHostingProcess>false</UseVSHostingProcess>
@@ -88,4 +89,11 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\..\..\packages\Plainion.IronDoc.1.0.0.0\build\Plainion.IronDoc.targets" Condition="Exists('..\..\..\packages\Plainion.IronDoc.1.0.0.0\build\Plainion.IronDoc.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\packages\Plainion.IronDoc.1.0.0.0\build\Plainion.IronDoc.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Plainion.IronDoc.1.0.0.0\build\Plainion.IronDoc.targets'))" />
+  </Target>
 </Project>

@@ -9,11 +9,14 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Plainion.RI</RootNamespace>
     <AssemblyName>Plainion.RI</AssemblyName>
+    <NuGetPackageImportStamp>ceeb1f84</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DocumentationFile>$(OutputPath)\Plainion.RI.xml</DocumentationFile>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DocumentationFile>$(OutputPath)\Plainion.RI.xml</DocumentationFile>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
@@ -246,4 +249,11 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\..\..\packages\Plainion.IronDoc.1.0.0.0\build\Plainion.IronDoc.targets" Condition="Exists('..\..\..\packages\Plainion.IronDoc.1.0.0.0\build\Plainion.IronDoc.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\packages\Plainion.IronDoc.1.0.0.0\build\Plainion.IronDoc.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Plainion.IronDoc.1.0.0.0\build\Plainion.IronDoc.targets'))" />
+  </Target>
 </Project>
