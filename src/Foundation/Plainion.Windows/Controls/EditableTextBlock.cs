@@ -20,7 +20,8 @@ namespace Plainion.Windows.Controls
 
         public EditableTextBlock()
         {
-            Focusable = true;
+            // dont set it - it will break keyboard navigation of ListView and TreeView
+            //Focusable = true;
             FocusVisualStyle = null;
 
             Loaded += OnLoaded;

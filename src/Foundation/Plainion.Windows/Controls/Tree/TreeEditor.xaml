@@ -10,7 +10,7 @@
              xmlns:windows="clr-namespace:Plainion.Windows"
              xmlns:tree="clr-namespace:Plainion.Windows.Controls.Tree"
              x:Name="_this"
-             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300" Focusable="True">
+             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -27,11 +27,6 @@
             <DataTemplate x:Key="NodeTemplate">
                 <!-- keep empty by intention -->
             </DataTemplate>
-
-            <!-- x:Shared="False" forces the new creation of that object whenever referenced -->
-            <InputBindingCollection x:Shared="False" x:Key="InputBindings">
-                <KeyBinding Key="F2" Command="{Binding Data.EditCommand, Source={StaticResource ThisProxy}}" CommandParameter="{Binding}"/>
-            </InputBindingCollection>
         </DockPanel.Resources>
 
         <Grid DockPanel.Dock="Top"  HorizontalAlignment="Stretch">
@@ -40,7 +35,6 @@
         </Grid>
 
         <tree:ExtendedTreeView x:Name="myTree" Margin="0,3,0,0" ItemsSource="{Binding Root.Children}" 
-                               Focusable="True"
                                ItemContainerStyle="{Binding NodeStyle}">
             <tree:ExtendedTreeView.Resources>
                 <windows:BindingProxy x:Key="TreeProxy" Data="{Binding ElementName=myTree}"/>

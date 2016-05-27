@@ -181,9 +181,6 @@
     <Resource Include="Resources\Numbering.png" />
     <Resource Include="Resources\Underline.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Controls\Tree\TODO.txt" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\..\packages\Plainion.IronDoc.1.0.0.0\build\Plainion.IronDoc.targets" Condition="Exists('..\..\..\packages\Plainion.IronDoc.1.0.0.0\build\Plainion.IronDoc.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
