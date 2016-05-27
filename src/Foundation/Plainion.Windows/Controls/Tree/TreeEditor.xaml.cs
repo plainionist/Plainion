@@ -204,7 +204,6 @@ namespace Plainion.Windows.Controls.Tree
             {
                 self.myTree.StateContainer.GetRoot().ShowChildrenCount = self.ShowChildrenCount;
             }
-
         }
 
         public bool ShowChildrenCount

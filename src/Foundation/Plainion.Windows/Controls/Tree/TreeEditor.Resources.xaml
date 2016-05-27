@@ -112,6 +112,8 @@
                                             <MultiBinding Converter="{StaticResource ShowChildrenCountConverter}">
                                                 <Binding Path="."/>
                                                 <Binding Path="Data.Children" Source="{StaticResource RealDataContext}"/>
+                                                <!-- http://stackoverflow.com/questions/5583830/multibinding-with-multivalueconverter-does-not-update -->
+                                                <Binding Path="Data.Children.Count" Source="{StaticResource RealDataContext}"/>
                                             </MultiBinding>
                                         </TextBlock.Text>
                                     </TextBlock>
