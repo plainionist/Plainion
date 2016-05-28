@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 
-namespace Plainion.Windows.Tests.Controls
+namespace Plainion.Windows.Tests.Controls.Text
 {
     public class FakePresentationSource : PresentationSource
     {

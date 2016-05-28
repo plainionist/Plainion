@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 
-namespace Plainion.Windows.Controls
+namespace Plainion.Windows.Controls.Text
 {
     public partial class NotePad : UserControl
     {

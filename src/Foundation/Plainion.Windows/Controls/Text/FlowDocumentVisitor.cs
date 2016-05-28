@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Documents;
 
-namespace Plainion.Windows.Controls
+namespace Plainion.Windows.Controls.Text
 {
     class FlowDocumentVisitor
     {

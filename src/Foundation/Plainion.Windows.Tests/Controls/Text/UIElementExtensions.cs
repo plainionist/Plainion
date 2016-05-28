@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
-namespace Plainion.Windows.Tests.Controls
+namespace Plainion.Windows.Tests.Controls.Text
 {
     static class UIElementExtensions
     {

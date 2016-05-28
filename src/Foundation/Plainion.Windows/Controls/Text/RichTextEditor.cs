@@ -3,10 +3,12 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 
-namespace Plainion.Windows.Controls
+namespace Plainion.Windows.Controls.Text
 {
     /// <summary>
-    /// Simple RichText editor.
+    /// Extends RichtTextBox by auto-completion.
+    /// Current implementation supports: 
+    /// - autodetection of hyperlinks
     /// </summary>
     /// <remarks>
     /// Initial verison inspired by:

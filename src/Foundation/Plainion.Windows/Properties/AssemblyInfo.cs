@@ -12,6 +12,7 @@ using System.Windows.Markup;
 [assembly: XmlnsDefinition( "http://github.com/ronin4net/plainion", "Plainion.Windows" )]
 [assembly: XmlnsDefinition( "http://github.com/ronin4net/plainion", "Plainion.Windows.Controls" )]
 [assembly: XmlnsDefinition( "http://github.com/ronin4net/plainion", "Plainion.Windows.Controls.Tree" )]
+[assembly: XmlnsDefinition( "http://github.com/ronin4net/plainion", "Plainion.Windows.Controls.Text" )]
 [assembly: XmlnsDefinition( "http://github.com/ronin4net/plainion", "Plainion.Windows.Interactivity" )]
 [assembly: XmlnsDefinition( "http://github.com/ronin4net/plainion", "Plainion.Windows.Interactivity.DragDrop" )]
 

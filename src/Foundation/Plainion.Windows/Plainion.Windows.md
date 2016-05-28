@@ -13,7 +13,7 @@ Specifies the placement of the adorner in related to the adorned control.
 
 > Initial version taken from: - http://www.codeproject.com/Articles/57984/WPF-Loading-Wait-Adorner - http://www.codeproject.com/Articles/54472/Defining-WPF-Adorners-in-XAML
 
-## Windows.Controls.DocumentNavigationPane
+## Windows.Controls.Text.DocumentNavigationPane
 DocumentNavigationPane
 
 ### Methods
@@ -21,7 +21,7 @@ DocumentNavigationPane
 #### InitializeComponent
 InitializeComponent
 
-## Windows.Controls.NoteBook
+## Windows.Controls.Text.NoteBook
 NoteBook
 
 ### Methods
@@ -29,7 +29,7 @@ NoteBook
 #### InitializeComponent
 InitializeComponent
 
-## Windows.Controls.NotePad
+## Windows.Controls.Text.NotePad
 NotePad
 
 ### Methods
@@ -37,8 +37,8 @@ NotePad
 #### InitializeComponent
 InitializeComponent
 
-## Windows.Controls.RichTextEditor
-Simple RichText editor.
+## Windows.Controls.Text.RichTextEditor
+Extends RichtTextBox by auto-completion. Current implementation supports: - autodetection of hyperlinks
 
 > ### Remarks
 

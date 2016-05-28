@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Navigation;
 
-namespace Plainion.Windows.Controls
+namespace Plainion.Windows.Controls.Text
 {
     static class DocumentFacade
     {

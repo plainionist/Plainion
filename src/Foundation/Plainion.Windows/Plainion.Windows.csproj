@@ -38,18 +38,18 @@
   <ItemGroup>
     <Compile Include="Controls\AdornedControl.cs" />
     <Compile Include="Controls\AdornerPlacement.cs" />
-    <Compile Include="Controls\DocumentFacade.cs" />
-    <Compile Include="Controls\DocumentNavigationPane.xaml.cs">
+    <Compile Include="Controls\Text\DocumentFacade.cs" />
+    <Compile Include="Controls\Text\DocumentNavigationPane.xaml.cs">
       <DependentUpon>DocumentNavigationPane.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FlowDocumentVisitor.cs" />
-    <Compile Include="Controls\NoteBook.xaml.cs">
+    <Compile Include="Controls\Text\FlowDocumentVisitor.cs" />
+    <Compile Include="Controls\Text\NoteBook.xaml.cs">
       <DependentUpon>NoteBook.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\NotePad.xaml.cs">
+    <Compile Include="Controls\Text\NotePad.xaml.cs">
       <DependentUpon>NotePad.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\RichTextEditor.cs" />
+    <Compile Include="Controls\Text\RichTextEditor.cs" />
     <Compile Include="Controls\SelectFolderDialog.cs" />
     <Compile Include="Controls\TextBoxBinding.cs" />
     <Compile Include="BindingProxy.cs" />
@@ -123,15 +123,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\DocumentNavigationPane.xaml">
+    <Page Include="Controls\Text\DocumentNavigationPane.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\NoteBook.xaml">
+    <Page Include="Controls\Text\NoteBook.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\NotePad.xaml">
+    <Page Include="Controls\Text\NotePad.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
