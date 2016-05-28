@@ -5,9 +5,15 @@ using System.Windows.Input;
 
 namespace Plainion.Windows.Controls
 {
-    // http://blogs.msdn.com/b/prajakta/archive/2006/10/17/autp-detecting-hyperlinks-in-richtextbox-part-i.aspx
-    // http://blogs.msdn.com/b/prajakta/archive/2006/11/28/auto-detecting-hyperlinks-in-richtextbox-part-ii.aspx
-    class RichTextEditor : RichTextBox
+    /// <summary>
+    /// Simple RichText editor.
+    /// </summary>
+    /// <remarks>
+    /// Initial verison inspired by:
+    /// http://blogs.msdn.com/b/prajakta/archive/2006/10/17/autp-detecting-hyperlinks-in-richtextbox-part-i.aspx
+    /// http://blogs.msdn.com/b/prajakta/archive/2006/11/28/auto-detecting-hyperlinks-in-richtextbox-part-ii.aspx
+    /// </remarks>
+    public class RichTextEditor : RichTextBox
     {
         // True when word(s) are added to this RichTextBox.
         private bool myWordsAdded;

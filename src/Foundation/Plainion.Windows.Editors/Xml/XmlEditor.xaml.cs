@@ -10,7 +10,6 @@ using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Folding;
 using ICSharpCode.AvalonEdit.Search;
 
-
 namespace Plainion.Windows.Editors.Xml
 {
     public partial class XmlEditor : UserControl

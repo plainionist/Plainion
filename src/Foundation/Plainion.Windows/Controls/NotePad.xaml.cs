@@ -5,7 +5,7 @@ using System.Windows.Media;
 
 namespace Plainion.Windows.Controls
 {
-    partial class NotePad : UserControl
+    public partial class NotePad : UserControl
     {
         public NotePad()
         {

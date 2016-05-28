@@ -37,6 +37,13 @@ NotePad
 #### InitializeComponent
 InitializeComponent
 
+## Windows.Controls.RichTextEditor
+Simple RichText editor.
+
+> ### Remarks
+
+> Initial verison inspired by: http://blogs.msdn.com/b/prajakta/archive/2006/10/17/autp-detecting-hyperlinks-in-richtextbox-part-i.aspx http://blogs.msdn.com/b/prajakta/archive/2006/11/28/auto-detecting-hyperlinks-in-richtextbox-part-ii.aspx
+
 ## Windows.Controls.SelectFolderDialog
 Provides WPF wrapper for System.Windows.Forms.FolderBrowserDialog. It derives from in order to support same handling as and .
 

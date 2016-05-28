@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,7 +24,10 @@ namespace Plainion.Windows.Controls.Tree
                 return expr != null && expr.ParentBinding.Mode == BindingMode.TwoWay;
             });
 
-            Loaded += OnLoaded;
+            if( !DesignerProperties.GetIsInDesignMode( this ) )
+            {
+                Loaded += OnLoaded;
+            }
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
