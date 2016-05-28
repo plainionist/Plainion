@@ -14,160 +14,160 @@ namespace Plainion.Windows.Controls.Tree
     {
         private readonly StateContainer myStateContainer;
 
-        internal NodeItem(StateContainer stateContainer)
+        internal NodeItem( StateContainer stateContainer )
         {
-            myStateContainer = stateContainer;
-
-            EditCommand = new DelegateCommand(() => IsInEditMode = true, () =>
-            {
-                var expr = GetBindingExpression(TextProperty);
-                return expr != null && expr.ParentBinding.Mode == BindingMode.TwoWay;
-            });
-
             if( !DesignerProperties.GetIsInDesignMode( this ) )
             {
+                myStateContainer = stateContainer;
+
+                EditCommand = new DelegateCommand( () => IsInEditMode = true, () =>
+                {
+                    var expr = GetBindingExpression( TextProperty );
+                    return expr != null && expr.ParentBinding.Mode == BindingMode.TwoWay;
+                } );
+
                 Loaded += OnLoaded;
             }
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e)
+        private void OnLoaded( object sender, RoutedEventArgs e )
         {
             Loaded -= OnLoaded;
 
-            if (BindingOperations.GetBindingExpression(this, FormattedTextProperty) == null
-                && BindingOperations.GetMultiBindingExpression(this, FormattedTextProperty) == null)
+            if( BindingOperations.GetBindingExpression( this, FormattedTextProperty ) == null
+                && BindingOperations.GetMultiBindingExpression( this, FormattedTextProperty ) == null )
             {
-                SetBinding(FormattedTextProperty, new Binding { Path = new PropertyPath("Text"), Source = this });
+                SetBinding( FormattedTextProperty, new Binding { Path = new PropertyPath( "Text" ), Source = this } );
             }
 
             DataContextChanged += OnDataContextChanged;
-            OnDataContextChanged(null, new DependencyPropertyChangedEventArgs());
+            OnDataContextChanged( null, new DependencyPropertyChangedEventArgs() );
         }
 
-        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void OnDataContextChanged( object sender, DependencyPropertyChangedEventArgs e )
         {
-            State = myStateContainer.GetOrCreate(DataContext);
-            State.Attach(this);
+            State = myStateContainer.GetOrCreate( DataContext );
+            State.Attach( this );
 
-            var childrenCount = (TextBlock)GetTemplateChild("PART_ChildrenCount");
-            var expr = BindingOperations.GetMultiBindingExpression(childrenCount, TextBlock.TextProperty);
+            var childrenCount = ( TextBlock )GetTemplateChild( "PART_ChildrenCount" );
+            var expr = BindingOperations.GetMultiBindingExpression( childrenCount, TextBlock.TextProperty );
             expr.UpdateTarget();
         }
 
         protected override DependencyObject GetContainerForItemOverride()
         {
-            return new NodeItem(myStateContainer);
+            return new NodeItem( myStateContainer );
         }
 
-        protected override bool IsItemItsOwnContainerOverride(object item)
+        protected override bool IsItemItsOwnContainerOverride( object item )
         {
             return item is NodeItem;
         }
 
         internal NodeState State { get; private set; }
 
-        public static DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(NodeItem),
-            new FrameworkPropertyMetadata(null));
+        public static DependencyProperty TextProperty = DependencyProperty.Register( "Text", typeof( string ), typeof( NodeItem ),
+            new FrameworkPropertyMetadata( null ) );
 
         public string Text
         {
-            get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
+            get { return ( string )GetValue( TextProperty ); }
+            set { SetValue( TextProperty, value ); }
         }
 
-        public static DependencyProperty FormattedTextProperty = DependencyProperty.Register("FormattedText", typeof(string), typeof(NodeItem),
-            new FrameworkPropertyMetadata(null));
+        public static DependencyProperty FormattedTextProperty = DependencyProperty.Register( "FormattedText", typeof( string ), typeof( NodeItem ),
+            new FrameworkPropertyMetadata( null ) );
 
         public string FormattedText
         {
-            get { return (string)GetValue(FormattedTextProperty); }
-            set { SetValue(FormattedTextProperty, value); }
+            get { return ( string )GetValue( FormattedTextProperty ); }
+            set { SetValue( FormattedTextProperty, value ); }
         }
 
-        public static DependencyProperty IsInEditModeProperty = DependencyProperty.Register("IsInEditMode", typeof(bool), typeof(NodeItem),
-            new FrameworkPropertyMetadata(false));
+        public static DependencyProperty IsInEditModeProperty = DependencyProperty.Register( "IsInEditMode", typeof( bool ), typeof( NodeItem ),
+            new FrameworkPropertyMetadata( false ) );
 
         public bool IsInEditMode
         {
-            get { return (bool)GetValue(IsInEditModeProperty); }
-            set { SetValue(IsInEditModeProperty, value); }
+            get { return ( bool )GetValue( IsInEditModeProperty ); }
+            set { SetValue( IsInEditModeProperty, value ); }
         }
 
-        public static DependencyProperty IsFilteredOutProperty = DependencyProperty.Register("IsFilteredOut", typeof(bool), typeof(TreeViewItem),
-            new FrameworkPropertyMetadata(false, OnIsFilteredOutChanged));
+        public static DependencyProperty IsFilteredOutProperty = DependencyProperty.Register( "IsFilteredOut", typeof( bool ), typeof( TreeViewItem ),
+            new FrameworkPropertyMetadata( false, OnIsFilteredOutChanged ) );
 
-        private static void OnIsFilteredOutChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnIsFilteredOutChanged( DependencyObject d, DependencyPropertyChangedEventArgs e )
         {
-            var self = (NodeItem)d;
+            var self = ( NodeItem )d;
             self.Visibility = self.IsFilteredOut ? Visibility.Collapsed : Visibility.Visible;
         }
 
         public bool IsFilteredOut
         {
-            get { return (bool)GetValue(IsFilteredOutProperty); }
-            set { SetValue(IsFilteredOutProperty, value); State.IsFilteredOut = value; }
+            get { return ( bool )GetValue( IsFilteredOutProperty ); }
+            set { SetValue( IsFilteredOutProperty, value ); State.IsFilteredOut = value; }
         }
 
-        public static DependencyProperty IsCheckedProperty = DependencyProperty.Register("IsChecked", typeof(bool?), typeof(TreeViewItem),
-            new FrameworkPropertyMetadata(null, OnIsCheckedChanged));
+        public static DependencyProperty IsCheckedProperty = DependencyProperty.Register( "IsChecked", typeof( bool? ), typeof( TreeViewItem ),
+            new FrameworkPropertyMetadata( null, OnIsCheckedChanged ) );
 
-        private static void OnIsCheckedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnIsCheckedChanged( DependencyObject d, DependencyPropertyChangedEventArgs e )
         {
-            var self = (NodeItem)d;
+            var self = ( NodeItem )d;
 
             // at first posibility get the property name of the IsChecked binding and remember it
-            if (self.myStateContainer.IsCheckedProperty == null)
+            if( self.myStateContainer.IsCheckedProperty == null )
             {
-                var expr = self.GetBindingExpression(IsCheckedProperty);
+                var expr = self.GetBindingExpression( IsCheckedProperty );
 
                 string propertyName = expr.ResolvedSourcePropertyName;
 
-                self.myStateContainer.IsCheckedProperty = new DataContextProperty<bool?>(propertyName);
+                self.myStateContainer.IsCheckedProperty = new DataContextProperty<bool?>( propertyName );
             }
 
-            if (self.State != null)
+            if( self.State != null )
             {
                 // third state cannot be set - just calculated
-                self.State.PropagateIsChecked(self.IsChecked == true);
+                self.State.PropagateIsChecked( self.IsChecked == true );
             }
         }
 
         public bool? IsChecked
         {
-            get { return (bool?)GetValue(IsCheckedProperty); }
-            set { SetValue(IsCheckedProperty, value); }
+            get { return ( bool? )GetValue( IsCheckedProperty ); }
+            set { SetValue( IsCheckedProperty, value ); }
         }
 
         public bool ShowCheckBox
         {
-            get { return GetBindingExpression(IsCheckedProperty) != null; }
+            get { return GetBindingExpression( IsCheckedProperty ) != null; }
         }
 
         string IDropable.DataFormat
         {
-            get { return typeof(NodeItem).FullName; }
+            get { return typeof( NodeItem ).FullName; }
         }
 
-        bool IDropable.IsDropAllowed(object data, DropLocation location)
+        bool IDropable.IsDropAllowed( object data, DropLocation location )
         {
-            if (!(data is NodeItem))
+            if( !( data is NodeItem ) )
             {
                 return false;
             }
 
-            return State.IsDropAllowed(location);
+            return State.IsDropAllowed( location );
         }
 
-        void IDropable.Drop(object data, DropLocation location)
+        void IDropable.Drop( object data, DropLocation location )
         {
             var droppedElement = data as NodeItem;
 
-            if (droppedElement == null)
+            if( droppedElement == null )
             {
                 return;
             }
 
-            if (object.ReferenceEquals(droppedElement, this))
+            if( object.ReferenceEquals( droppedElement, this ) )
             {
                 //if dragged and dropped yourself, don't need to do anything
                 return;
@@ -181,12 +181,12 @@ namespace Plainion.Windows.Controls.Tree
             };
 
             var editor = this.FindParentOfType<TreeEditor>();
-            if (editor.DropCommand != null && editor.DropCommand.CanExecute(arg))
+            if( editor.DropCommand != null && editor.DropCommand.CanExecute( arg ) )
             {
-                editor.DropCommand.Execute(arg);
+                editor.DropCommand.Execute( arg );
             }
 
-            if (location == DropLocation.InPlace)
+            if( location == DropLocation.InPlace )
             {
                 IsExpanded = true;
             }
@@ -197,34 +197,34 @@ namespace Plainion.Windows.Controls.Tree
             get
             {
                 var dragDropSupport = State.DataContext as IDragDropSupport;
-                if (dragDropSupport != null && !dragDropSupport.IsDragAllowed)
+                if( dragDropSupport != null && !dragDropSupport.IsDragAllowed )
                 {
                     return null;
                 }
 
-                return typeof(NodeItem);
+                return typeof( NodeItem );
             }
         }
 
         public ICommand EditCommand { get; private set; }
-    
-        protected override void OnPreviewKeyDown(KeyEventArgs e)
+
+        protected override void OnPreviewKeyDown( KeyEventArgs e )
         {
             // we didnt managed to handle InputBindings in xaml for these shortcuts without breaking the 
             // keyboard navigation within the TreeView
 
-            if (e.Key == Key.F2 && IsSelected)
+            if( e.Key == Key.F2 && IsSelected )
             {
-                if (EditCommand.CanExecute(null))
+                if( EditCommand.CanExecute( null ) )
                 {
-                    EditCommand.Execute(null);
+                    EditCommand.Execute( null );
                 }
 
                 e.Handled = true;
             }
             else
             {
-                base.OnPreviewKeyDown(e);
+                base.OnPreviewKeyDown( e );
             }
         }
     }
