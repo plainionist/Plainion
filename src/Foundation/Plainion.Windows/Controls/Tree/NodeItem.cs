@@ -1,11 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Threading;
 using Plainion.Windows.Interactivity.DragDrop;
 
 namespace Plainion.Windows.Controls.Tree
@@ -93,7 +91,7 @@ namespace Plainion.Windows.Controls.Tree
             set { SetValue( IsInEditModeProperty, value ); }
         }
 
-        public static DependencyProperty IsFilteredOutProperty = DependencyProperty.Register( "IsFilteredOut", typeof( bool ), typeof( TreeViewItem ),
+        public static DependencyProperty IsFilteredOutProperty = DependencyProperty.Register( "IsFilteredOut", typeof( bool ), typeof( NodeItem ),
             new FrameworkPropertyMetadata( false, OnIsFilteredOutChanged ) );
 
         private static void OnIsFilteredOutChanged( DependencyObject d, DependencyPropertyChangedEventArgs e )
@@ -108,7 +106,7 @@ namespace Plainion.Windows.Controls.Tree
             set { SetValue( IsFilteredOutProperty, value ); State.IsFilteredOut = value; }
         }
 
-        public static DependencyProperty IsCheckedProperty = DependencyProperty.Register( "IsChecked", typeof( bool? ), typeof( TreeViewItem ),
+        public static DependencyProperty IsCheckedProperty = DependencyProperty.Register( "IsChecked", typeof( bool? ), typeof( NodeItem ),
             new FrameworkPropertyMetadata( null, OnIsCheckedChanged ) );
 
         private static void OnIsCheckedChanged( DependencyObject d, DependencyPropertyChangedEventArgs e )
