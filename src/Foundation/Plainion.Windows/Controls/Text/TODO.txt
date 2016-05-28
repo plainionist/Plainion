@@ -1,0 +1,22 @@
+﻿
+- add interface for "INodesStorage"
+
+- make DocumentNavigationPane use it
+
+- add buttons to DocumentNavigationPane for
+  - add section to selected
+  - remove selected section
+
+- search in document
+
+- search in all documents
+
+
+
+- for default impl have a look at
+  - http://www.litedb.org/
+  - probably this has to be put into separate dll because of dependency?
+  - do we want to have a simple impl without further deps?
+    - we could use zip archive from .net 4.5
+
+

@@ -14,7 +14,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <tree:TreeEditor Root="{Binding Root}" FilterLabel="Search"
+        <tree:TreeEditor Root="{Binding Root}" FilterLabel="Filter sections"
                        CreateChildCommand="{Binding CreateChildCommand}"
                        DeleteCommand="{Binding DeleteCommand}"
                        DropCommand="{Binding DropCommand}">
