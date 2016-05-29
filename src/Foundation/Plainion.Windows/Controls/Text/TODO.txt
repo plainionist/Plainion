@@ -1,5 +1,5 @@
 ﻿
-- add interface for "INodesStorage"
+- add interface for "IPageStorage"
 
 - make DocumentNavigationPane use it
 
@@ -18,5 +18,6 @@
   - probably this has to be put into separate dll because of dependency?
   - do we want to have a simple impl without further deps?
     - we could use zip archive from .net 4.5
+	- or we just dont put it into a single file but into a folder (index file + one file per page)
 
 

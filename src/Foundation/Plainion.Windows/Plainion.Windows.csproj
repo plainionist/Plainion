@@ -43,6 +43,7 @@
       <DependentUpon>DocumentNavigationPane.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Text\FlowDocumentVisitor.cs" />
+    <Compile Include="Controls\Text\IPageStorage.cs" />
     <Compile Include="Controls\Text\NoteBook.xaml.cs">
       <DependentUpon>NoteBook.xaml</DependentUpon>
     </Compile>
