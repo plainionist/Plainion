@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Node Id="aa59921b-67eb-4a18-8c7d-5457ab8d255c" Created="636058082388758932" LastModified="636058082689438932">
+  <Caption><![CDATA[Fix TreeView]]></Caption>
+  <Content><![CDATA["new" and "delete" does not work in graphviz when node was selected]]></Content>
+</Node>

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Node Id="3e0b15cb-5333-4f1e-b8aa-32a4a60c16f0" Created="636058082839548932" LastModified="636058083340898932">
+  <Caption><![CDATA[review check list]]></Caption>
+  <Content><![CDATA[- create a list of all files and components and make a checklist for
+  - documentation of class
+  - documentation of component
+  - UT
+
+]]></Content>
+</Node>
