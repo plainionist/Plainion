@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -19,31 +21,31 @@ namespace Plainion.Windows.Controls.Tree
 
         protected override DependencyObject GetContainerForItemOverride()
         {
-            return new NodeItem( StateContainer );
+            return new NodeItem(StateContainer);
         }
 
-        protected override bool IsItemItsOwnContainerOverride( object item )
+        protected override bool IsItemItsOwnContainerOverride(object item)
         {
             return item is NodeItem;
         }
 
-        public static DependencyProperty NodeForContextMenuProperty = DependencyProperty.Register( "NodeForContextMenu", typeof( INode ), typeof( ExtendedTreeView ),
-            new FrameworkPropertyMetadata( null ) );
+        public static DependencyProperty NodeForContextMenuProperty = DependencyProperty.Register("NodeForContextMenu", typeof(INode), typeof(ExtendedTreeView),
+            new FrameworkPropertyMetadata(null));
 
         public INode NodeForContextMenu
         {
-            get { return ( INode )GetValue( NodeForContextMenuProperty ); }
-            set { SetValue( NodeForContextMenuProperty, value ); }
+            get { return (INode)GetValue(NodeForContextMenuProperty); }
+            set { SetValue(NodeForContextMenuProperty, value); }
         }
 
         // TODO: into behavior?
-        protected override void OnPreviewMouseRightButtonDown( MouseButtonEventArgs e )
+        protected override void OnPreviewMouseRightButtonDown(MouseButtonEventArgs e)
         {
             NodeForContextMenu = null;
 
             NodeItem nodeItem = null;
 
-            if( Keyboard.Modifiers == ModifierKeys.Control )
+            if (Keyboard.Modifiers == ModifierKeys.Control)
             {
                 // in case the full treeview is filled with nodes there is no option to 
                 // open context menu without selecting any node (because nodes stretch horizontally)
@@ -52,12 +54,12 @@ namespace Plainion.Windows.Controls.Tree
             }
             else
             {
-                nodeItem = ( ( DependencyObject )e.OriginalSource ).FindParentOfType<NodeItem>();
+                nodeItem = ((DependencyObject)e.OriginalSource).FindParentOfType<NodeItem>();
             }
 
-            if( nodeItem != null )
+            if (nodeItem != null)
             {
-                NodeForContextMenu = ( INode )nodeItem.DataContext;
+                NodeForContextMenu = (INode)nodeItem.DataContext;
 
                 nodeItem.Focus();
             }
@@ -74,12 +76,20 @@ namespace Plainion.Windows.Controls.Tree
 
         private void RefreshContextMenuCommandsCanExecute()
         {
-            foreach( var item in ContextMenu.Items.OfType<MenuItem>() )
+            foreach (var item in ContextMenu.Items.OfType<MenuItem>())
             {
                 var command = item.Command;
-                if( command != null )
+                if (command != null)
                 {
-                    item.IsEnabled = command.CanExecute( item.CommandParameter );
+                    var raiseMethod = command.GetType().GetMethod("RaiseCanExecuteChanged");
+                    if (raiseMethod != null)
+                    {
+                        raiseMethod.Invoke(command, null);
+                    }
+                    else
+                    {
+                        item.IsEnabled = command.CanExecute(item.CommandParameter);
+                    }
                 }
             }
         }

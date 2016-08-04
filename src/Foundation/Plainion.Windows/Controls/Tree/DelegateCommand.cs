@@ -8,8 +8,8 @@ namespace Plainion.Windows.Controls.Tree
     /// </summary>
     class DelegateCommand : ICommand
     {
-        private Action myDelegate;
-        private Func<bool> myCanExecuteDelegate;
+        private readonly Action myDelegate;
+        private readonly Func<bool> myCanExecuteDelegate;
 
         public DelegateCommand( Action execute)
             :this(execute, ()=>true)

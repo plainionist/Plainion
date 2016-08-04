@@ -13,8 +13,6 @@ namespace Plainion.RI.Controls
     [Export]
     class TreeEditorViewModel : BindableBase
     {
-        private DragDropBehavior myDragDropBehavior;
-
         public TreeEditorViewModel()
         {
             Root = new Node();
@@ -23,12 +21,12 @@ namespace Plainion.RI.Controls
 
             BuildTree();
 
-            // as an example we do not want to allow to create children below threads
-            CreateChildCommand = new DelegateCommand<Node>(OnCreateChild, p => p.Parent == Root || p == Root);
-            DeleteCommand = new DelegateCommand<Node>(n => ((Node)n.Parent).Children.Remove(n));
+            // as an example we only want to allow to add or delete processes
+            CreateChildCommand = new DelegateCommand<Node>(OnCreateChild, n => n == Root);
+            DeleteCommand = new DelegateCommand<Node>(n => ((Node)n.Parent).Children.Remove(n), n => n.Parent == Root);
 
-            myDragDropBehavior = new DragDropBehavior(Root);
-            DropCommand = new DelegateCommand<NodeDropRequest>(myDragDropBehavior.ApplyDrop);
+            var dragDropBehavior = new DragDropBehavior(Root);
+            DropCommand = new DelegateCommand<NodeDropRequest>(dragDropBehavior.ApplyDrop);
 
             RefreshCommand = new DelegateCommand(BuildTree);
         }
