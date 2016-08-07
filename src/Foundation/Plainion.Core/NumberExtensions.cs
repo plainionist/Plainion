@@ -18,6 +18,8 @@ namespace Plainion
         /// </summary>
         public static void Times( this int count, Action<int> action )
         {
+            Contract.Requires( count >= 0, "Negative numbers are invalid" );
+
             for ( int i = 0; i < count; ++i )
             {
                 action( i );

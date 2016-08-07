@@ -42,6 +42,7 @@
     <Compile Include="IO\MemoryFS\DirectoryImplTest.cs" />
     <Compile Include="IO\MemoryFS\FileImplTest.cs" />
     <Compile Include="IO\MemoryFS\FileSystemImplTest.cs" />
+    <Compile Include="NumberExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\SerializableBindableBaseTests.cs" />
     <Compile Include="Validation\Model.cs" />
