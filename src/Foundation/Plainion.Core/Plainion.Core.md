@@ -25,6 +25,17 @@ Decorates ICollection interface with IReadOnlyCollection. Useful if you want to 
 ## Collections.IEnumerableTExtensions
 Additional extensions to generic IEnumerable interface.
 
+### Methods
+
+#### ToQueue``1(System.Collections.Generic.IEnumerable{``0})
+Returns a copy of the given collection as queue.
+
+#### IndexOf``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})
+Returns the first position of the element specified with the given predicate. Returns -1 if no such element could be found.
+
+#### IndexOf``1(System.Collections.Generic.IEnumerable{``0},``0)
+Returns the first position of the specified element. Returns -1 if no such element could be found.
+
 ## Collections.IListTExtensions
 Extensions to the generic IList interface.
 

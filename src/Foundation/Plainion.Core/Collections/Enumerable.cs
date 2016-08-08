@@ -9,6 +9,9 @@ namespace Plainion.Collections
     /// </summary>
     public static class IEnumerableTExtensions
     {
+        /// <summary>
+        /// Returns a copy of the given collection as queue.
+        /// </summary>
         public static Queue<T> ToQueue<T>( this IEnumerable<T> list )
         {
             Contract.RequiresNotNull( list, "list" );
@@ -16,12 +19,16 @@ namespace Plainion.Collections
             return new Queue<T>( list );
         }
 
-        public static int IndexOf<T>( this IEnumerable<T> list, Func<T, bool> pred )
+        /// <summary>
+        /// Returns the first position of the element specified with the given predicate.
+        /// Returns -1 if no such element could be found.
+        /// </summary>
+        public static int IndexOf<T>( this IEnumerable<T> list, Func<T, bool> predicate )
         {
             int i = 0;
             foreach ( var item in list )
             {
-                if ( pred( item ) )
+                if ( predicate( item ) )
                 {
                     return i;
                 }
@@ -31,6 +38,10 @@ namespace Plainion.Collections
             return -1;
         }
 
+        /// <summary>
+        /// Returns the first position of the specified element.
+        /// Returns -1 if no such element could be found.
+        /// </summary>
         public static int IndexOf<T>( this IEnumerable<T> list, T element )
         {
             int i = 0;
