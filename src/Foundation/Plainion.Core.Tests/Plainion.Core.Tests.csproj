@@ -42,6 +42,7 @@
     <Compile Include="IO\MemoryFS\DirectoryImplTest.cs" />
     <Compile Include="IO\MemoryFS\FileImplTest.cs" />
     <Compile Include="IO\MemoryFS\FileSystemImplTest.cs" />
+    <Compile Include="TypeConverterTests.cs" />
     <Compile Include="StringExtensionsTests.cs" />
     <Compile Include="ObjectsTests.cs" />
     <Compile Include="NumberExtensionsTests.cs" />
