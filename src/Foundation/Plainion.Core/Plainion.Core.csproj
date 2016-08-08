@@ -91,6 +91,7 @@
     <Compile Include="Validation\ValidateObjectAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Collections\ReadMe.md" />
     <None Include="ReadMe.md" />
     <None Include="Composition\ReadMe.md" />
     <None Include="packages.config" />
