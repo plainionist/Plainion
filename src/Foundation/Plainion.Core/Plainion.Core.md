@@ -47,6 +47,20 @@ Adds the given range to the list.
 ## Collections.Index`2
 Key/Value data structure which realizes an "update on read" which means that when a requested value for a given key does not exist it is created using the provided value creator.
 
+### Properties
+
+#### Item(`0)
+
+Creates requested value on demand if not exists
+
+### Methods
+
+#### TryGetValue(`0,`1@)
+Performs lookup for existing values. No value will be created on demand.
+
+#### Add(`0)
+Adds the given key and creates a value using the value creator IF the key does not exist yet.
+
 ## Composition.Composer
 Simplify usage of MEF or plain vanilla usages of it.
 

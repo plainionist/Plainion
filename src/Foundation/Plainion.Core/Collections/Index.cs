@@ -14,11 +14,16 @@ namespace Plainion.Collections
 
         public Index( Func<TKey, TValue> valueCreator )
         {
+            Contract.RequiresNotNull( valueCreator, "valueCreator" );
+
             myValueCreator = valueCreator;
 
             myIndex = new Dictionary<TKey, TValue>();
         }
 
+        /// <summary>
+        /// Creates requested value on demand if not exists
+        /// </summary>
         public TValue this[ TKey key ]
         {
             get
@@ -59,6 +64,10 @@ namespace Plainion.Collections
             return myIndex.ContainsKey( key );
         }
 
+        /// <summary>
+        /// Performs lookup for existing values. 
+        /// No value will be created on demand.
+        /// </summary>
         public bool TryGetValue( TKey key, out TValue value )
         {
             return myIndex.TryGetValue( key, out value );
@@ -69,6 +78,9 @@ namespace Plainion.Collections
             get { return myIndex.Count; }
         }
 
+        /// <summary>
+        /// Adds the given key and creates a value using the value creator IF the key does not exist yet.
+        /// </summary>
         public void Add( TKey key )
         {
             TValue value;

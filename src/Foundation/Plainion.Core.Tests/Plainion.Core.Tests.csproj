@@ -38,6 +38,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\IndexTests.cs" />
     <Compile Include="Collections\EnumerableTests.cs" />
     <Compile Include="Composition\DecoratorChainCatalogTests.cs" />
     <Compile Include="IO\MemoryFS\DirectoryImplTest.cs" />
