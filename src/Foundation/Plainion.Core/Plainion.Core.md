@@ -80,6 +80,15 @@ Provides MEF support for the decorator pattern. This catalog builds a chain of d
 
 > Internally this catalog rewrites the contracts of the parts in the chain to avoid conflicts. Recomposition is currently not supported.
 
+> ### Example
+
+>
+
+```
+
+var decoration = new DecoratorChainCatalog( typeof( IContract ) ); decoration.Add( typeof( Impl ) ); decoration.Add( typeof( Decorator1 ) ); decoration.Add( typeof( Decorator2 ) ); // - pass this catalog to MEF CompositionContainer // - everyone importing IContract will get the Decorator2 which decorates Decorator1 which decorates the actual implementation "Impl".
+```
+
 ### Methods
 
 #### Constructor
@@ -136,6 +145,12 @@ Requires that the given condition related to inner state of the class is true.
 > ##### Exceptions
 
 > **System.InvalidOperationException:**  if condition is not met
+
+## Diagnostics.ProcessThreadIndex`1
+Provides an for process-thread trees
+
+## Diagnostics.ProcessThreadSet
+Provides an for process to thread collections
 
 ## ExceptionExtensions
 Provides extension methods to objects.

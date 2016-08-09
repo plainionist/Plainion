@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
 using NUnit.Framework;
 using Plainion.Validation;
-using System.ComponentModel.DataAnnotations;
 
-namespace Plainion.UnitTests.Validation
+namespace Plainion.Tests.Validation
 {
     [TestFixture]
     public class ValidateObjectAttributeTests

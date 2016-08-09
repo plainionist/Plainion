@@ -2,7 +2,7 @@
 using System.Globalization;
 using NUnit.Framework;
 
-namespace Plainion.Core.Tests
+namespace Plainion.Tests
 {
     [TestFixture]
     class TypeConverterTests

@@ -5,7 +5,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using NUnit.Framework;
 using Plainion.Serialization;
 
-namespace Plainion.Core.Tests.Serialization
+namespace Plainion.Tests.Serialization
 {
     [TestFixture]
     public class SerializableBindableBaseTests

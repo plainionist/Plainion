@@ -16,7 +16,7 @@ namespace Plainion.Diagnostics
                 return string.Empty;
             }
 
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
 
             sb.Append( "[" );
             sb.Append( string.Join( "|", list.Cast<object>().Select( a => a.ToString() ).ToArray() ) );

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Plainion.Validation;
 
-namespace Plainion.UnitTests.Validation
+namespace Plainion.Tests.Validation
 {
     class Model
     {

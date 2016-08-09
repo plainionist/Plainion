@@ -6,7 +6,7 @@ using System.IO;
 using Plainion.IO.MemoryFS;
 using Plainion.IO;
 
-namespace Plainion.UnitTests.IO.MemoryFS
+namespace Plainion.Tests.IO.MemoryFS
 {
     [TestFixture]
     public class DirectoryImplTest

@@ -3,7 +3,7 @@ using System.Linq;
 using NUnit.Framework;
 using Plainion.Collections;
 
-namespace Plainion.Core.Tests.Collections
+namespace Plainion.Tests.Collections
 {
     [TestFixture]
     class EnumerableTests

@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 
-namespace Plainion.Core.Tests
+namespace Plainion.Tests
 {
     [TestFixture]
     class NumberExtensionsTests

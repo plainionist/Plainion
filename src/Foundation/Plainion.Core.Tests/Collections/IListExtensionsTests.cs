@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using Plainion.Collections;
 
-namespace Plainion.Core.Tests.Collections
+namespace Plainion.Tests.Collections
 {
     [TestFixture]
     class IListExtensionsTests

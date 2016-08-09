@@ -92,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Collections\ReadMe.md" />
+    <None Include="Diagnostics\ReadMe.md" />
     <None Include="ReadMe.md" />
     <None Include="Composition\ReadMe.md" />
     <None Include="packages.config" />

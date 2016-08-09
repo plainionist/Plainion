@@ -5,7 +5,7 @@ using System.Threading;
 using System.IO;
 using Plainion.IO.MemoryFS;
 
-namespace Plainion.UnitTests.IO.MemoryFS
+namespace Plainion.Tests.IO.MemoryFS
 {
     [TestFixture]
     public class FileSystemImplTest

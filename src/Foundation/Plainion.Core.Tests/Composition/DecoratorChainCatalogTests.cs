@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using Plainion.Composition;
 
-namespace Plainion.Core.Tests.Composition
+namespace Plainion.Tests.Composition
 {
     [TestFixture]
     public class DecoratorChainCatalogTests

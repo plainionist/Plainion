@@ -5,6 +5,9 @@ using Plainion.Collections;
 
 namespace Plainion.Diagnostics
 {
+    /// <summary>
+    /// Provides an <see cref="Index{K,V}"/> for process-thread trees
+    /// </summary>
     public class ProcessThreadIndex<TValue> : Index<int, Index<int, TValue>>
     {
         public ProcessThreadIndex( Func<int, int, TValue> valueCreator )
