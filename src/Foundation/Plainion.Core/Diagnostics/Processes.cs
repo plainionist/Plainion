@@ -1,8 +1,11 @@
 ﻿using System.Diagnostics;
 using System.IO;
 
-namespace Plainion.IO
+namespace Plainion.Diagnostics
 {
+    /// <summary>
+    /// Provides convenience APIs to launch external programs.
+    /// </summary>
     public class Processes
     {
         /// <summary>
