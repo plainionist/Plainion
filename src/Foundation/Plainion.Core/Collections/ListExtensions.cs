@@ -10,11 +10,14 @@ namespace Plainion.Collections
         /// <summary>
         /// Adds the given range to the list.
         /// </summary>
-        public static void AddRange<T>( this IList<T> list, IEnumerable<T> range )
+        public static void AddRange<T>( this IList<T> self, IEnumerable<T> range )
         {
-            foreach ( var item in range )
+            Contract.RequiresNotNull( self, "self" );
+            Contract.RequiresNotNull( range, "range" );
+
+            foreach( var item in range )
             {
-                list.Add( item );
+                self.Add( item );
             }
         }
     }

@@ -61,6 +61,12 @@ Performs lookup for existing values. No value will be created on demand.
 #### Add(`0)
 Adds the given key and creates a value using the value creator IF the key does not exist yet.
 
+## Collections.IObservableEnumerable`1
+Combines and to form a contract that expects both.
+
+## Collections.IObservableReadOnlyCollection`1
+Combines and to form a contract that expects both.
+
 ## Composition.Composer
 Simplify usage of MEF or plain vanilla usages of it.
 
