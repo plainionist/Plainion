@@ -16,7 +16,7 @@ namespace Plainion.IO
             Contract.RequiresNotNullNotEmpty( path, "path" );
 
             FileSystem = fileSystem;
-            Path = FileSystem.UnifyPath( path );
+            Path = IO.FileSystem.UnifyPath( path );
         }
 
         [DataMember]

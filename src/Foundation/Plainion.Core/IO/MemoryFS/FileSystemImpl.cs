@@ -49,7 +49,7 @@ namespace Plainion.IO.MemoryFS
 
         internal IDirectory GetOrCreateDirectory( string path )
         {
-            var absolutePath = this.UnifyPath( path );
+            var absolutePath = FileSystem.UnifyPath( path );
 
             if( !myItems.ContainsKey( absolutePath ) )
             {
@@ -61,7 +61,7 @@ namespace Plainion.IO.MemoryFS
 
         internal IFile GetOrCreateFile( string path )
         {
-            var absolutePath = this.UnifyPath( path );
+            var absolutePath = FileSystem.UnifyPath( path );
 
             if( !myItems.ContainsKey( absolutePath ) )
             {

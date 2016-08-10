@@ -186,8 +186,8 @@ Provides filesystem IO related convenience APIs.
 #### CopyTo(System.String,System.String)
 Copies the given file to the given directory.
 
-#### UnifyPath(Plainion.IO.IFileSystem,System.String)
-Unifies the given path in the way that simple string compare succeeds. Removes tailing (back)slashes and converts into full qualified path.
+#### UnifyPath(System.String)
+Unifies the given path in the way that simple string compare succeeds. Removes trailing (back)slashes and converts into full qualified path.
 
 ## IO.IDirectory
 Abstraction interface for a directory
