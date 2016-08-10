@@ -43,9 +43,9 @@
     <Compile Include="Collections\EnumerableTests.cs" />
     <Compile Include="Composition\DecoratorChainCatalogTests.cs" />
     <Compile Include="Diagnostics\EnumerableTests.cs" />
-    <Compile Include="IO\MemoryFS\DirectoryImplTest.cs" />
-    <Compile Include="IO\MemoryFS\FileImplTest.cs" />
-    <Compile Include="IO\MemoryFS\FileSystemImplTest.cs" />
+    <Compile Include="IO\MemoryFS\DirectoryImplTests.cs" />
+    <Compile Include="IO\MemoryFS\FileImplTests.cs" />
+    <Compile Include="IO\MemoryFS\FileSystemImplTests.cs" />
     <Compile Include="TypeConverterTests.cs" />
     <Compile Include="StringExtensionsTests.cs" />
     <Compile Include="ObjectsTests.cs" />

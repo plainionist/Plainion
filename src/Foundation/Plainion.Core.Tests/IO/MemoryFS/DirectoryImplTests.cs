@@ -1,15 +1,12 @@
-﻿using System;
+﻿using System.IO;
 using NUnit.Framework;
-using System.Collections.Generic;
-using System.Threading;
-using System.IO;
-using Plainion.IO.MemoryFS;
 using Plainion.IO;
+using Plainion.IO.MemoryFS;
 
 namespace Plainion.Tests.IO.MemoryFS
 {
     [TestFixture]
-    public class DirectoryImplTest
+    public class DirectoryImplTests
     {
         private FileSystemImpl myFileSystem;
 
