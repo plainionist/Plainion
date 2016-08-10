@@ -172,8 +172,22 @@ Preserves the full stack trace before rethrowing an exception. According to this
 #### AddContext(System.Exception,System.String,System.Object)
 Adds a key/value pair to Exception.Data
 
+## IO.AbstractFileSystemEntry`1
+Base class for filesystem implementations.
+
 ## IO.IFileSystemEntry
 Abstraction interface for common functionallity of a file and a directory.
+
+## IO.FileSystem
+Provides filesystem IO related convenience APIs.
+
+### Methods
+
+#### CopyTo(System.String,System.String)
+Copies the given file to the given directory.
+
+#### UnifyPath(Plainion.IO.IFileSystem,System.String)
+Unifies the given path in the way that simple string compare succeeds. Removes tailing (back)slashes and converts into full qualified path.
 
 ## IO.IDirectory
 Abstraction interface for a directory
@@ -186,6 +200,17 @@ Abstraction interface to file system IO.
 
 ## IO.MemoryFS.FileSystemImpl
 Wrapper around real file system IO.
+
+## Diagnostics.Processes
+Provides convenience APIs to launch external programs.
+
+### Methods
+
+#### Execute(System.Diagnostics.ProcessStartInfo)
+Executes a process and waits for its exit.
+
+#### Execute(System.Diagnostics.ProcessStartInfo,System.IO.TextWriter,System.IO.TextWriter)
+Executes a process and waits for its exit.
 
 ## IO.RealFS.FileSystemImpl
 Wrapper around real file system IO.

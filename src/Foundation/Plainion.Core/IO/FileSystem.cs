@@ -2,6 +2,9 @@
 
 namespace Plainion.IO
 {
+    /// <summary>
+    /// Provides filesystem IO related convenience APIs.
+    /// </summary>
     public static class FileSystem
     {
         /// <summary>
@@ -17,6 +20,10 @@ namespace Plainion.IO
             File.Copy( file, dirOrFile, true );
         }
 
+        /// <summary>
+        /// Unifies the given path in the way that simple string compare succeeds.
+        /// Removes tailing (back)slashes and converts into full qualified path.
+        /// </summary>
         public static string UnifyPath( this IFileSystem self, string path )
         {
             var unifiedPath = path;

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.IO;
-using Plainion.IO;
+using Plainion.Diagnostics;
 
 namespace Plainion.AppFw.Shell
 {
