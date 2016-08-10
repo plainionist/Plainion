@@ -8,19 +8,6 @@ namespace Plainion.IO
     public static class FileSystem
     {
         /// <summary>
-        /// Copies the given file to the given directory.
-        /// </summary>
-        public static void CopyTo( string file, string dirOrFile )
-        {
-            if( Directory.Exists( dirOrFile ) )
-            {
-                dirOrFile = Path.Combine( dirOrFile, Path.GetFileName( file ) );
-            }
-
-            File.Copy( file, dirOrFile, true );
-        }
-
-        /// <summary>
         /// Unifies the given path in the way that simple string compare succeeds.
         /// Removes trailing (back)slashes and converts into full qualified path.
         /// </summary>

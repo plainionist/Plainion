@@ -182,6 +182,7 @@ namespace Plainion.IO.MemoryFS
                 line = reader.ReadLine();
             }
         }
+
         public IFile MoveTo( IDirectory directory )
         {
             if( !directory.Exists )
@@ -193,6 +194,25 @@ namespace Plainion.IO.MemoryFS
             targetFile.WriteAll( ReadAllLines() );
 
             Delete();
+
+            return targetFile;
+        }
+
+        public IFile CopyTo( IFileSystemEntry dirOrFile, bool overwrite )
+        {
+            var directory = dirOrFile as IDirectory;
+            if( directory == null )
+            {
+                directory = ( ( IFile )dirOrFile ).Parent;
+            }
+
+            if( !directory.Exists )
+            {
+                directory.Create();
+            }
+
+            var targetFile = directory.File( Name );
+            targetFile.WriteAll( ReadAllLines() );
 
             return targetFile;
         }

@@ -18,6 +18,16 @@ namespace Plainion.IO
 
         string[] ReadAllLines();
 
+        /// <summary>
+        /// Moves this file to the given target directory.
+        /// Returns an instance pointing to the new target file.
+        /// </summary>
         IFile MoveTo( IDirectory directory );
+
+        /// <summary>
+        /// Copies the given file to the given directory or target file.
+        /// Returns an instance pointing to the new target file.
+        /// </summary>
+        IFile CopyTo( IFileSystemEntry dirOrFile, bool overwrite );
     }
 }

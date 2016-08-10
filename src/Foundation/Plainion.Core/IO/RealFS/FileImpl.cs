@@ -67,7 +67,7 @@ namespace Plainion.IO.RealFS
 
         public IFile MoveTo( IDirectory directory )
         {
-            if ( !directory.Exists )
+            if( !directory.Exists )
             {
                 directory.Create();
             }
@@ -76,6 +76,20 @@ namespace Plainion.IO.RealFS
             File.Move( Path, targetFile.Path );
 
             return targetFile;
+        }
+
+        public IFile CopyTo( IFileSystemEntry dirOrFile, bool overwrite )
+        {
+            var target = dirOrFile.Path;
+
+            if( dirOrFile is IDirectory )
+            {
+                target = System.IO.Path.Combine( dirOrFile.Path, Name );
+            }
+
+            File.Copy( Path, target, overwrite );
+
+            return FileSystem.File( target );
         }
     }
 }
