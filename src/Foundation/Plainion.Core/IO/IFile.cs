@@ -18,6 +18,6 @@ namespace Plainion.IO
 
         string[] ReadAllLines();
 
-        IFile Move( IDirectory directory );
+        IFile MoveTo( IDirectory directory );
     }
 }

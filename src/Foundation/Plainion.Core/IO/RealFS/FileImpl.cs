@@ -65,7 +65,7 @@ namespace Plainion.IO.RealFS
             return File.ReadAllLines( Path );
         }
 
-        public IFile Move( IDirectory directory )
+        public IFile MoveTo( IDirectory directory )
         {
             if ( !directory.Exists )
             {

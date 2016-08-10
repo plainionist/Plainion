@@ -182,7 +182,7 @@ namespace Plainion.IO.MemoryFS
                 line = reader.ReadLine();
             }
         }
-        public IFile Move( IDirectory directory )
+        public IFile MoveTo( IDirectory directory )
         {
             if( !directory.Exists )
             {
