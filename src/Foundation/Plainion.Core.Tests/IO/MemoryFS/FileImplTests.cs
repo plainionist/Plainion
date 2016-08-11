@@ -42,11 +42,13 @@ namespace Plainion.Tests.IO.MemoryFS
         }
 
         [Test]
-        public void Create_ParentDirectoryDoesNotExist_Throws()
+        public void Create_ParentDirectoryDoesNotExist_ParentGetsCreated()
         {
             var file = myFileSystem.File( @"c:\dir\f1.txt" );
 
-            Assert.Throws<FileNotFoundException>( () => file.Create() );
+            file.Create();
+
+            Assert.That( file.Parent.Exists, Is.True );
         }
 
         [Test]
@@ -75,7 +77,7 @@ namespace Plainion.Tests.IO.MemoryFS
         {
             var file = CreateSampleFile();
 
-            using ( var writer = file.CreateWriter() )
+            using( var writer = file.CreateWriter() )
             {
                 writer.WriteLine( "a" );
             }
@@ -93,9 +95,9 @@ namespace Plainion.Tests.IO.MemoryFS
             file.WriteAll( expectedContent );
 
             var content = new List<string>();
-            using ( var reader = file.CreateReader() )
+            using( var reader = file.CreateReader() )
             {
-                while ( reader.Peek() != -1 )
+                while( reader.Peek() != -1 )
                 {
                     content.Add( reader.ReadLine() );
                 }
@@ -142,19 +144,19 @@ namespace Plainion.Tests.IO.MemoryFS
 
         private Action<IFile> GetAction( string actionName )
         {
-            if ( actionName == "CreateReader" )
+            if( actionName == "CreateReader" )
             {
-                return file => { using ( var reader = file.CreateReader() ) { } };
+                return file => { using( var reader = file.CreateReader() ) { } };
             }
-            else if ( actionName == "ReadAllLines" )
+            else if( actionName == "ReadAllLines" )
             {
                 return file => file.ReadAllLines();
             }
-            else if ( actionName == "CreateWriter" )
+            else if( actionName == "CreateWriter" )
             {
-                return file => { using ( var writer = file.CreateWriter() ) { } };
+                return file => { using( var writer = file.CreateWriter() ) { } };
             }
-            else if ( actionName == "WriteAll" )
+            else if( actionName == "WriteAll" )
             {
                 return file => file.WriteAll();
             }

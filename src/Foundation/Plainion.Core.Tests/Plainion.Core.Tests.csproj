@@ -43,6 +43,8 @@
     <Compile Include="Collections\EnumerableTests.cs" />
     <Compile Include="Composition\DecoratorChainCatalogTests.cs" />
     <Compile Include="Diagnostics\EnumerableTests.cs" />
+    <Compile Include="IO\FileSystemOperationsTests.cs" />
+    <Compile Include="IO\AbstractFileSystemEntryTests.cs" />
     <Compile Include="IO\FileSystemTests.cs" />
     <Compile Include="IO\MemoryFS\DirectoryImplTests.cs" />
     <Compile Include="IO\MemoryFS\FileImplTests.cs" />

@@ -71,7 +71,7 @@ namespace Plainion.IO.MemoryFS
 
             if( !Parent.Exists )
             {
-                throw new FileNotFoundException( Parent.Path );
+                Parent.Create();
             }
 
             myExists = true;

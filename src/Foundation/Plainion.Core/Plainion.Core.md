@@ -188,7 +188,7 @@ Base class for filesystem entries.
 
 > ### Remarks
 
-> Comparision is based on Path.
+> Comparision is based on "Path" respecting case!
 
 ## IO.IFileSystemEntry
 Abstraction interface for common functionallity of a file and a directory.
