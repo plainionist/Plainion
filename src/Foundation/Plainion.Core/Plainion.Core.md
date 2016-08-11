@@ -173,7 +173,11 @@ Preserves the full stack trace before rethrowing an exception. According to this
 Adds a key/value pair to Exception.Data
 
 ## IO.AbstractFileSystemEntry`1
-Base class for filesystem implementations.
+Base class for filesystem entries.
+
+> ### Remarks
+
+> Comparision is based on Path.
 
 ## IO.IFileSystemEntry
 Abstraction interface for common functionallity of a file and a directory.
@@ -191,6 +195,17 @@ Unifies the given path in the way that simple string compare succeeds. Removes t
 
 ## IO.IDirectory
 Abstraction interface for a directory
+
+### Methods
+
+#### EnumerateFiles
+Returns an iterator to all files in that directory.
+
+#### EnumerateFiles(System.String)
+Returns an iterator to all files in that directory matching the given wildcard pattern.
+
+#### EnumerateFiles(System.String,System.IO.SearchOption)
+Returns an iterator to all files in that directory matching the given wildcard pattern and optionally searches recursively.
 
 ## IO.IFile
 Abstraction interface for a file

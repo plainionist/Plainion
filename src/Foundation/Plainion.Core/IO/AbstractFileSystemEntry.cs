@@ -5,8 +5,11 @@ using NPath = System.IO.Path;
 namespace Plainion.IO
 {
     /// <summary>
-    /// Base class for filesystem implementations.
+    /// Base class for filesystem entries.
     /// </summary>
+    /// <remarks>
+    /// Comparision is based on Path.
+    /// </remarks>
     [DataContract( Namespace = DCNames.NS_AbstractFS )]
     internal abstract class AbstractFileSystemEntry<TFileSystem> : IFileSystemEntry where TFileSystem : IFileSystem
     {

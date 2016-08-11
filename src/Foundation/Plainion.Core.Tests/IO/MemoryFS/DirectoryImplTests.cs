@@ -63,7 +63,7 @@ namespace Plainion.Tests.IO.MemoryFS
             var dir = myFileSystem.Directory( SimplestDirectoryPossible );
             dir.Create();
 
-            var files = dir.GetFiles();
+            var files = dir.EnumerateFiles();
 
             Assert.That( files, Is.Empty );
         }
@@ -83,7 +83,7 @@ namespace Plainion.Tests.IO.MemoryFS
             f2.Create();
             // for f3 only the wrapper created has been created but not the file
 
-            var files = dir.GetFiles();
+            var files = dir.EnumerateFiles();
 
             Assert.That( files, Is.EquivalentTo( new IFile[] { f1, f2 } ) );
         }
@@ -102,7 +102,7 @@ namespace Plainion.Tests.IO.MemoryFS
             f2.Create();
             f3.Create();
 
-            var files = dir.GetFiles( "*.txt" );
+            var files = dir.EnumerateFiles( "*.txt" );
 
             Assert.That( files, Is.EquivalentTo( new IFile[] { f1, f2 } ) );
         }
@@ -119,7 +119,7 @@ namespace Plainion.Tests.IO.MemoryFS
             f2.Parent.Create();
             f2.Create();
 
-            var files = dir.GetFiles( null, SearchOption.AllDirectories );
+            var files = dir.EnumerateFiles( null, SearchOption.AllDirectories );
 
             Assert.That( files, Is.EquivalentTo( new IFile[] { f1, f2 } ) );
         }

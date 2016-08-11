@@ -41,17 +41,17 @@ namespace Plainion.IO.MemoryFS
             myExists = true;
         }
 
-        public IEnumerable<IFile> GetFiles()
+        public IEnumerable<IFile> EnumerateFiles()
         {
-            return GetFiles( null );
+            return EnumerateFiles( null );
         }
 
-        public IEnumerable<IFile> GetFiles( string pattern )
+        public IEnumerable<IFile> EnumerateFiles( string pattern )
         {
-            return GetFiles( pattern, SearchOption.TopDirectoryOnly );
+            return EnumerateFiles( pattern, SearchOption.TopDirectoryOnly );
         }
 
-        public IEnumerable<IFile> GetFiles( string pattern, SearchOption option )
+        public IEnumerable<IFile> EnumerateFiles( string pattern, SearchOption option )
         {
             if ( !Exists )
             {
@@ -67,7 +67,7 @@ namespace Plainion.IO.MemoryFS
                 filesToReturn = filesToReturn.Where( file => Wildcard.IsMatch( file.Name, pattern ) );
             }
 
-            return filesToReturn.ToList();
+            return filesToReturn;
         }
 
         private IEnumerable<IFileSystemEntry> GetAllExistingChildren( bool recursive )
