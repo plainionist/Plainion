@@ -17,5 +17,17 @@ namespace Plainion.Core.Tests.IO
         {
             Assert.That( FileSystem.UnifyPath( @"c:\test" + sep ), Is.EqualTo( @"c:\test" ) );
         }
+
+        [Test]
+        public void UnifyPath_DriveLetterOnly_SameStringReturned()
+        {
+            Assert.That( FileSystem.UnifyPath( "c:" ), Is.EqualTo( "c:" ) );
+        }
+
+        [Test]
+        public void UnifyPath_DriveLetterWithBackslash_BackslashRemoved()
+        {
+            Assert.That( FileSystem.UnifyPath( @"c:\" ), Is.EqualTo( "c:" ) );
+        }
     }
 }
