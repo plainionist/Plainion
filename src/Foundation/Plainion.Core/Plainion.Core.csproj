@@ -93,7 +93,9 @@
   <ItemGroup>
     <None Include="Collections\ReadMe.md" />
     <None Include="Diagnostics\ReadMe.md" />
+    <None Include="IO\MemoryFS\ReadMe.md" />
     <None Include="IO\ReadMe.md" />
+    <None Include="IO\RealFS\ReadMe.md" />
     <None Include="ReadMe.md" />
     <None Include="Composition\ReadMe.md" />
     <None Include="packages.config" />

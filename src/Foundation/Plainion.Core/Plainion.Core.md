@@ -178,6 +178,9 @@ Base class for filesystem implementations.
 ## IO.IFileSystemEntry
 Abstraction interface for common functionallity of a file and a directory.
 
+## IO.DCNames
+Internally used to serialize the MemoryFS
+
 ## IO.FileSystem
 Provides filesystem IO related convenience APIs.
 
@@ -201,7 +204,7 @@ Moves this file to the given target directory. Returns an instance pointing to t
 Copies the given file to the given directory or target file. Returns an instance pointing to the new target file.
 
 ## IO.IFileSystem
-Abstraction interface to file system IO.
+Abstraction interface to filesystem IO.
 
 ## IO.MemoryFS.FileSystemImpl
 Wrapper around real file system IO.

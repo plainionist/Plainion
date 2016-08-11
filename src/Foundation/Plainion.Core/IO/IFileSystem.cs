@@ -3,7 +3,7 @@
 namespace Plainion.IO
 {
     /// <summary>
-    /// Abstraction interface to file system IO.
+    /// Abstraction interface to filesystem IO.
     /// </summary>
     public interface IFileSystem
     {
