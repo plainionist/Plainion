@@ -237,9 +237,6 @@ Executes a process and waits for its exit.
 #### Execute(System.Diagnostics.ProcessStartInfo,System.IO.TextWriter,System.IO.TextWriter)
 Executes a process and waits for its exit.
 
-## IO.RealFS.FileSystemImpl
-Wrapper around real file system IO.
-
 ## Logging.ConsoleLogger
 Simple logger which logs different message types to the console. Logs the different message types in different colors. Esp. Errors = Red and Warnings = Yellow.
 

@@ -2,9 +2,6 @@
 
 namespace Plainion.IO.RealFS
 {
-    /// <summary>
-    /// Wrapper around real file system IO.
-    /// </summary>
     public class FileSystemImpl : IFileSystem
     {
         public IDirectory Directory( string path )
