@@ -34,18 +34,6 @@ namespace Plainion.IO.RealFS
             NDirectory.Delete( Path );
         }
 
-        public IEnumerable<IFile> EnumerateFiles()
-        {
-            return NDirectory.EnumerateFiles( Path )
-                .Select( path => FileSystem.File( path ) );
-        }
-
-        public IEnumerable<IFile> EnumerateFiles( string pattern )
-        {
-            return NDirectory.EnumerateFiles( Path, pattern )
-                .Select( path => FileSystem.File( path ) );
-        }
-
         public IEnumerable<IFile> EnumerateFiles( string pattern, SearchOption option )
         {
             return NDirectory.EnumerateFiles( Path, pattern, option )

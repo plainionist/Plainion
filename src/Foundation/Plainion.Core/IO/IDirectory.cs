@@ -12,16 +12,6 @@ namespace Plainion.IO
         IDirectory Directory( string directory );
 
         /// <summary>
-        /// Returns an iterator to all files in that directory.
-        /// </summary>
-        IEnumerable<IFile> EnumerateFiles();
-
-        /// <summary>
-        /// Returns an iterator to all files in that directory matching the given wildcard pattern.
-        /// </summary>
-        IEnumerable<IFile> EnumerateFiles( string pattern );
-
-        /// <summary>
         /// Returns an iterator to all files in that directory matching the given wildcard pattern and optionally searches recursively.
         /// </summary>
         IEnumerable<IFile> EnumerateFiles( string pattern, SearchOption option );

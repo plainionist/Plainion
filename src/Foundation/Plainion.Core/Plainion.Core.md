@@ -3,6 +3,14 @@
 ## IO.FileSystemOperations
 Provides extensions to , and which implement operations which can be applied to all impelemenations of IFileSystem.
 
+### Methods
+
+#### EnumerateFiles(Plainion.IO.IDirectory)
+Returns an iterator to all files in this directory.
+
+#### EnumerateFiles(Plainion.IO.IDirectory,System.String)
+Returns an iterator to all files in this directory matching the given wildcard pattern.
+
 ## Progress.NullProgress`1
 Null-object pattern for IProgress{T}
 
@@ -200,12 +208,6 @@ Unifies the given path in the way that simple string compare succeeds. Removes t
 Abstraction interface for a directory
 
 ### Methods
-
-#### EnumerateFiles
-Returns an iterator to all files in that directory.
-
-#### EnumerateFiles(System.String)
-Returns an iterator to all files in that directory matching the given wildcard pattern.
 
 #### EnumerateFiles(System.String,System.IO.SearchOption)
 Returns an iterator to all files in that directory matching the given wildcard pattern and optionally searches recursively.

@@ -8,7 +8,7 @@ using NPath = System.IO.Path;
 
 namespace Plainion.IO.MemoryFS
 {
-    [DataContract( Namespace = DCNames.NS_MemoryFS)]
+    [DataContract( Namespace = DCNames.NS_MemoryFS )]
     internal class DirectoryImpl : AbstractFileSystemEntry<FileSystemImpl>, IDirectory
     {
         [DataMember]
@@ -28,12 +28,12 @@ namespace Plainion.IO.MemoryFS
 
         public override void Create()
         {
-            if ( Exists )
+            if( Exists )
             {
                 return;
             }
 
-            if ( Parent != null )
+            if( Parent != null )
             {
                 Parent.Create();
             }
@@ -41,19 +41,11 @@ namespace Plainion.IO.MemoryFS
             myExists = true;
         }
 
-        public IEnumerable<IFile> EnumerateFiles()
-        {
-            return EnumerateFiles( null );
-        }
-
-        public IEnumerable<IFile> EnumerateFiles( string pattern )
-        {
-            return EnumerateFiles( pattern, SearchOption.TopDirectoryOnly );
-        }
-
         public IEnumerable<IFile> EnumerateFiles( string pattern, SearchOption option )
         {
-            if ( !Exists )
+            Contract.RequiresNotNull( pattern, "pattern" );
+
+            if( !Exists )
             {
                 return new IFile[] { };
             }
@@ -62,7 +54,7 @@ namespace Plainion.IO.MemoryFS
 
             var filesToReturn = allChildren.OfType<IFile>();
 
-            if ( !string.IsNullOrEmpty( pattern ) )
+            if( pattern != "*" )
             {
                 filesToReturn = filesToReturn.Where( file => Wildcard.IsMatch( file.Name, pattern ) );
             }
@@ -76,7 +68,7 @@ namespace Plainion.IO.MemoryFS
                 .Where( file => file.Exists )
                 .ToList(); // "Directory" property below will create new items
 
-            if ( recursive )
+            if( recursive )
             {
                 return allFiles.Where( item => ItemIsChild( item ) );
             }
@@ -89,15 +81,15 @@ namespace Plainion.IO.MemoryFS
         // checks if item belongs to this directory recursively
         private bool ItemIsChild( IFileSystemEntry item )
         {
-            if ( !item.Path.StartsWith( Path, StringComparison.OrdinalIgnoreCase ) )
+            if( !item.Path.StartsWith( Path, StringComparison.OrdinalIgnoreCase ) )
             {
                 return false;
             }
 
             var itemParent = item.Parent;
-            while ( itemParent != null )
+            while( itemParent != null )
             {
-                if ( Equals( itemParent ) )
+                if( Equals( itemParent ) )
                 {
                     return true;
                 }
@@ -110,7 +102,7 @@ namespace Plainion.IO.MemoryFS
 
         public override void Delete()
         {
-            if ( GetAllExistingChildren( false ).Any() )
+            if( GetAllExistingChildren( false ).Any() )
             {
                 throw new IOException( "Directory is not empty" );
             }
@@ -120,17 +112,17 @@ namespace Plainion.IO.MemoryFS
 
         public void Delete( bool recursive )
         {
-            if ( !recursive )
+            if( !recursive )
             {
                 Delete();
                 return;
             }
 
             var allChildren = GetAllExistingChildren( recursive ).ToList();
-            foreach ( var item in allChildren )
+            foreach( var item in allChildren )
             {
                 var dir = item as IDirectory;
-                if ( dir != null )
+                if( dir != null )
                 {
                     dir.Delete( true );
                 }

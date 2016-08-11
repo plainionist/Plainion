@@ -41,5 +41,25 @@ namespace Plainion.IO
 
             return lines;
         }
+
+        /// <summary>
+        /// Returns an iterator to all files in this directory.
+        /// </summary>
+        public static IEnumerable<IFile> EnumerateFiles( this IDirectory self )
+        {
+            Contract.RequiresNotNull( self, "self" );
+
+            return self.EnumerateFiles( "*", System.IO.SearchOption.TopDirectoryOnly );
+        }
+
+        /// <summary>
+        /// Returns an iterator to all files in this directory matching the given wildcard pattern.
+        /// </summary>
+        public static IEnumerable<IFile> EnumerateFiles( this IDirectory self, string pattern )
+        {
+            Contract.RequiresNotNull( self, "self" );
+
+            return self.EnumerateFiles( pattern, System.IO.SearchOption.TopDirectoryOnly );
+        }
     }
 }

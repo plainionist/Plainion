@@ -119,7 +119,7 @@ namespace Plainion.Tests.IO.MemoryFS
             f2.Parent.Create();
             f2.Create();
 
-            var files = dir.EnumerateFiles( null, SearchOption.AllDirectories );
+            var files = dir.EnumerateFiles( "*", SearchOption.AllDirectories );
 
             Assert.That( files, Is.EquivalentTo( new IFile[] { f1, f2 } ) );
         }
