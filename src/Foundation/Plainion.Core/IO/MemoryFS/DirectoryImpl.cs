@@ -26,6 +26,9 @@ namespace Plainion.IO.MemoryFS
             get { return myExists; }
         }
 
+        /// <summary>
+        /// Non-existent parents will be created on demand.
+        /// </summary>
         public override void Create()
         {
             if( Exists )

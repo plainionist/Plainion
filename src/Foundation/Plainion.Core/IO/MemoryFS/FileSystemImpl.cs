@@ -5,9 +5,6 @@ using System.Runtime.Serialization;
 
 namespace Plainion.IO.MemoryFS
 {
-    /// <summary>
-    /// Wrapper around real file system IO.
-    /// </summary>
     [DataContract( Namespace = DCNames.NS_MemoryFS )]
     [KnownType( typeof( DirectoryImpl ) )]
     [KnownType( typeof( FileImpl ) )]
@@ -23,12 +20,26 @@ namespace Plainion.IO.MemoryFS
 
         public IDirectory Directory( string path )
         {
-            return GetOrCreateDirectory( path );
+            var absolutePath = FileSystem.UnifyPath( path );
+
+            if( !myItems.ContainsKey( absolutePath ) )
+            {
+                AddItem( new DirectoryImpl( this, absolutePath ) );
+            }
+
+            return ( IDirectory )myItems[ absolutePath ];
         }
 
         public IFile File( string path )
         {
-            return GetOrCreateFile( path );
+            var absolutePath = FileSystem.UnifyPath( path );
+
+            if( !myItems.ContainsKey( absolutePath ) )
+            {
+                AddItem( new FileImpl( this, absolutePath ) );
+            }
+
+            return ( IFile )myItems[ absolutePath ];
         }
 
         public IFile GetTempFile()
@@ -45,30 +56,6 @@ namespace Plainion.IO.MemoryFS
             dir.Create();
 
             return dir;
-        }
-
-        internal IDirectory GetOrCreateDirectory( string path )
-        {
-            var absolutePath = FileSystem.UnifyPath( path );
-
-            if( !myItems.ContainsKey( absolutePath ) )
-            {
-                AddItem( new DirectoryImpl( this, absolutePath ) );
-            }
-
-            return ( IDirectory )myItems[ absolutePath ];
-        }
-
-        internal IFile GetOrCreateFile( string path )
-        {
-            var absolutePath = FileSystem.UnifyPath( path );
-
-            if( !myItems.ContainsKey( absolutePath ) )
-            {
-                AddItem( new FileImpl( this, absolutePath ) );
-            }
-
-            return ( IFile )myItems[ absolutePath ];
         }
 
         internal IEnumerable<IFileSystemEntry> Items

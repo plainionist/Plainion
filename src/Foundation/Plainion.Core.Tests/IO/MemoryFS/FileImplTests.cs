@@ -107,7 +107,7 @@ namespace Plainion.Tests.IO.MemoryFS
         }
 
         [Test]
-        public void AllReadActions_WhenCalled_TimestampsShouldBeUpdatedProperly( [Values( "CreateReader", "ReadAllLines" )] string readActionName )
+        public void CreateReader_WhenCalled_TimestampsShouldBeUpdatedProperly()
         {
             var file = CreateSampleFile();
 
@@ -117,15 +117,16 @@ namespace Plainion.Tests.IO.MemoryFS
             // as DateTime is not that precise we have to wait a bit here
             Thread.Sleep( 5 );
 
-            var readAction = GetAction( readActionName );
-            readAction( file );
+            using( var reader = file.CreateReader() )
+            {
+            }
 
             Assert.That( beforeLastAccessTime < file.LastAccessTime );
             Assert.That( beforeLastWriteTime == file.LastWriteTime );
         }
 
         [Test]
-        public void AllWriteActions_WhenCalled_TimestampsShouldBeUpdatedProperly( [Values( "CreateWriter", "WriteAll" )] string writeActionName )
+        public void CreateWriter_WhenCalled_TimestampsShouldBeUpdatedProperly()
         {
             var file = CreateSampleFile();
 
@@ -135,33 +136,40 @@ namespace Plainion.Tests.IO.MemoryFS
             // as DateTime is not that precise we have to wait a bit here
             Thread.Sleep( 5 );
 
-            var writeAction = GetAction( writeActionName );
-            writeAction( file );
+            using( var writer = file.CreateWriter() )
+            {
+            }
 
             Assert.That( beforeLastAccessTime == file.LastAccessTime );
             Assert.That( beforeLastWriteTime < file.LastWriteTime );
         }
 
-        private Action<IFile> GetAction( string actionName )
+        [Test]
+        public void MoveTo_WhenCalled_FileGetsMoved()
         {
-            if( actionName == "CreateReader" )
-            {
-                return file => { using( var reader = file.CreateReader() ) { } };
-            }
-            else if( actionName == "ReadAllLines" )
-            {
-                return file => file.ReadAllLines();
-            }
-            else if( actionName == "CreateWriter" )
-            {
-                return file => { using( var writer = file.CreateWriter() ) { } };
-            }
-            else if( actionName == "WriteAll" )
-            {
-                return file => file.WriteAll();
-            }
+            var file = myFileSystem.File( @"c:\a\b.txt" );
+            file.Create();
+            file.WriteAll( "hi" );
 
-            throw new NotSupportedException( actionName );
+            var targetFile = file.MoveTo( myFileSystem.Directory( @"c:\d" ) );
+
+            Assert.That( file.Exists, Is.False );
+            Assert.That( targetFile.Exists, Is.True );
+            Assert.That( targetFile.ReadAllLines(), Is.EquivalentTo( new[] { "hi" } ) );
+        }
+
+        [Test]
+        public void CopyTo_WhenCalled_FileGetsCopied()
+        {
+            var file = myFileSystem.File( @"c:\a\b.txt" );
+            file.Create();
+            file.WriteAll( "hi" );
+
+            var targetFile = file.CopyTo( myFileSystem.Directory( @"c:\d" ), true );
+
+            Assert.That( file.Exists, Is.True );
+            Assert.That( targetFile.Exists, Is.True );
+            Assert.That( targetFile.ReadAllLines(), Is.EquivalentTo( new[] { "hi" } ) );
         }
 
         private IFile CreateSampleFile()

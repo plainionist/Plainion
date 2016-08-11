@@ -226,9 +226,6 @@ Copies the given file to the given directory or target file. Returns an instance
 ## IO.IFileSystem
 Abstraction interface to filesystem IO.
 
-## IO.MemoryFS.FileSystemImpl
-Wrapper around real file system IO.
-
 ## Diagnostics.Processes
 Provides convenience APIs to launch external programs.
 
