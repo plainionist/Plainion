@@ -55,16 +55,6 @@ namespace Plainion.IO.RealFS
             get { return File.GetLastAccessTime( Path ); }
         }
 
-        public void WriteAll( params string[] text )
-        {
-            File.WriteAllLines( Path, text );
-        }
-
-        public string[] ReadAllLines()
-        {
-            return File.ReadAllLines( Path );
-        }
-
         public IFile MoveTo( IDirectory directory )
         {
             if( !directory.Exists )

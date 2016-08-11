@@ -14,10 +14,6 @@ namespace Plainion.IO
         TextReader CreateReader();
         TextReader CreateReader( Encoding encoding );
 
-        void WriteAll( params string[] text );
-
-        string[] ReadAllLines();
-
         /// <summary>
         /// Moves this file to the given target directory.
         /// Returns an instance pointing to the new target file.

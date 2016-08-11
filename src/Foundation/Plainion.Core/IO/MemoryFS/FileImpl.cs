@@ -149,28 +149,6 @@ namespace Plainion.IO.MemoryFS
             }
         }
 
-        public void WriteAll( params string[] text )
-        {
-            CreateOnDemand();
-
-            myLastWriteTime = DateTime.Now;
-
-            myContent.Clear();
-            foreach( var line in text )
-            {
-                myContent.AppendLine( line );
-            }
-        }
-
-        public string[] ReadAllLines()
-        {
-            CheckExists();
-
-            myLastAccessTime = DateTime.Now;
-
-            return GetLines( myContent.ToString() ).ToArray();
-        }
-
         private static IEnumerable<string> GetLines( string str )
         {
             var reader = new StringReader( str );
@@ -190,8 +168,8 @@ namespace Plainion.IO.MemoryFS
                 directory.Create();
             }
 
-            var targetFile = directory.File( Name );
-            targetFile.WriteAll( ReadAllLines() );
+            var targetFile = ( FileImpl )directory.File( Name );
+            targetFile.WriteAll( this.ReadAllLines().ToArray() );
 
             Delete();
 
@@ -212,7 +190,7 @@ namespace Plainion.IO.MemoryFS
             }
 
             var targetFile = directory.File( Name );
-            targetFile.WriteAll( ReadAllLines() );
+            targetFile.WriteAll( this.ReadAllLines().ToArray() );
 
             return targetFile;
         }

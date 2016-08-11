@@ -31,6 +31,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IO\FileSystemOperations.cs" />
     <Compile Include="Progress\NullProgress.cs" />
     <Compile Include="Serialization\SerializableBindableBase.cs" />
     <Compile Include="Xaml\IncludeExtension.cs" />

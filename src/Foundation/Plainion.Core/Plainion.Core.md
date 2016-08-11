@@ -1,5 +1,8 @@
 # Plainion.Core
 
+## IO.FileSystemOperations
+Provides extensions to , and which implement operations which can be applied to all impelemenations of IFileSystem.
+
 ## Progress.NullProgress`1
 Null-object pattern for IProgress{T}
 
