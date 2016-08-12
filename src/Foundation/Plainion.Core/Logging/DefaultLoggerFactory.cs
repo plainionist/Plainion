@@ -15,13 +15,6 @@ namespace Plainion.Logging
             LogLevel = LogLevel.Warning;
         }
 
-        /// <summary>
-        /// Not implemented
-        /// </summary>
-        public void LoadConfiguration( Uri uri )
-        {
-        }
-
         public void AddSink( ILoggingSink sink )
         {
             myRootSink.Add( sink );

@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.Composition.Hosting;
 using System.Windows;
 using System.Windows.Controls;
+using Plainion.Logging;
 using Plainion.Prism.Interactivity;
 using Plainion.Prism.Regions;
+using Plainion.RI.Logging;
 using Prism.Interactivity;
 using Prism.Mef;
 using Prism.Regions;
@@ -53,8 +55,12 @@ namespace Plainion.RI
         public override void Run( bool runWithDefaultConfiguration )
         {
             base.Run( runWithDefaultConfiguration );
-            
+
             Application.Current.Exit += OnShutdown;
+
+            LoggerFactory.Implementation = Container.GetExportedValue<CustomLoggerFactory>();
+            LoggerFactory.LogLevel = LogLevel.Notice;
+            LoggerFactory.GetLogger( GetType() ).Notice( "Application ready" );
         }
 
         protected virtual void OnShutdown( object sender, ExitEventArgs e )

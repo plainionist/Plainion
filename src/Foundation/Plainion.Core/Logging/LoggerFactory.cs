@@ -14,11 +14,6 @@ namespace Plainion.Logging
 
         public static ILoggerFactory Implementation { get; set; }
 
-        public static void LoadConfiguration( Uri uri )
-        {
-            Implementation.LoadConfiguration( uri );
-        }
-
         public static void AddSink( ILoggingSink sink )
         {
             Implementation.AddSink( sink );

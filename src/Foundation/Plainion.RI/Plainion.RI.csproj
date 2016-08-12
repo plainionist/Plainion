@@ -138,6 +138,13 @@
     <Compile Include="Controls\NotePadView.xaml.cs">
       <DependentUpon>NotePadView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Logging\CustomLogEntry.cs" />
+    <Compile Include="Logging\CustomLogger.cs" />
+    <Compile Include="Logging\CustomLoggerFactory.cs" />
+    <Compile Include="Logging\StatusBarLogView.xaml.cs">
+      <DependentUpon>StatusBarLogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Logging\StatusBarLogViewModel.cs" />
     <Compile Include="RegionNames.cs" />
     <Compile Include="ShellViewModel.cs" />
     <Page Include="Controls\EditableTextBlockView.xaml">
@@ -201,6 +208,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\NotePadView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Logging\StatusBarLogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

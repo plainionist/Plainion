@@ -4,6 +4,7 @@ using Plainion.RI.Dialogs;
 using Plainion.RI.Editors;
 using Plainion.RI.InteractionRequests;
 using Plainion.RI.InteractionRequests.Dialogs;
+using Plainion.RI.Logging;
 using Prism.Mef.Modularity;
 using Prism.Modularity;
 using Prism.Regions;
@@ -41,6 +42,8 @@ namespace Plainion.RI
             RegionManager.RegisterViewWithRegion( RegionNames.Controls, typeof( NoteBookView ) );
 
             RegionManager.RegisterViewWithRegion( RegionNames.Editors, typeof( XmlEditorView ) );
+
+            RegionManager.RegisterViewWithRegion( RegionNames.StatusBar, typeof( StatusBarLogView ) );
         }
     }
 }

@@ -41,5 +41,9 @@ More advanced extensions of the logging framework require a custom implementatio
 implementing a custom ILogger. If only the former option is wanted the DefaultLogger can be reused.
 
 When implementing a custom ILogger even a custom ILoggingEntry can be used which may carry additional application specific context information which could then be used by a 
-custom ILoggingSink, e.g.: the source of the message (the class which created the logger).
+custom ILoggingSink, e.g.: the source of the message (the class which created the logger). The LoggerBase supports implementing a custom logger.
+
+## Example
+
+see Plainion.RI for a sample statusbar based logging
 

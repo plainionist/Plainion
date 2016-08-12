@@ -11,6 +11,26 @@ Returns an iterator to all files in this directory.
 #### EnumerateFiles(Plainion.IO.IDirectory,System.String)
 Returns an iterator to all files in this directory matching the given wildcard pattern.
 
+## Logging.LoggerBase
+Base class for implementations.
+
+### Properties
+
+#### ConfiguredLogLevel
+
+Derived classes must implement this SPI to provide
+
+### Methods
+
+#### Write(Plainion.Logging.LogLevel,System.String,System.Object[])
+UT only
+
+#### WriteCore(Plainion.Logging.LogLevel,System.String)
+Called from all log APIs if the configured log level allows it. Derived classes must implement this SPI to perform the actual logging.
+
+## Logging.ILogger
+Defines the APIs provided by the logging framework to its clients which wants to log messages.
+
 ## Logging.FileLoggingSink
 Implementation of which logs to a file. It requires calling Open() before the first entry can be written and Close() when the logging session ends.
 
@@ -256,9 +276,6 @@ Implements composite pattern for
 ## Logging.ILogEntry
 Defines the minimum contract of a log entry which can be handled by
 
-## Logging.ILogger
-Defines the APIs provided by the logging framework to its clients which wants to log messages.
-
 ## Logging.ILoggerFactory
 Main interface of the logging framework. Provides APIs for configuration as well as creation of instances.
 
@@ -268,18 +285,8 @@ Facade for the actual logger factory implementation. Provides simple access to t
 ## Logging.DefaultLogger
 Default implementation of .
 
-### Methods
-
-#### Write(Plainion.Logging.LogLevel,System.String,System.Object[])
-Logs the given message if the given logging fits the current logging level.
-
 ## Logging.DefaultLoggerFactory
 Default implementation of which allows adding different kinds of s.
-
-### Methods
-
-#### LoadConfiguration(System.Uri)
-Not implemented
 
 ## NumberExtensions
 Extensions for numeric values to increase usability.

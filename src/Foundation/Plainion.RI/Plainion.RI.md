@@ -131,6 +131,14 @@ NotePadView
 #### InitializeComponent
 InitializeComponent
 
+## RI.Logging.StatusBarLogView
+StatusBarLogView
+
+### Methods
+
+#### InitializeComponent
+InitializeComponent
+
 ## RI.App
 App
 

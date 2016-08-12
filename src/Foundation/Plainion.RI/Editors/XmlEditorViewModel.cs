@@ -3,9 +3,9 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using ICSharpCode.AvalonEdit.Document;
-using Prism.Mvvm;
 using Plainion.RI.Editors.Spec;
 using Plainion.Windows.Editors.Xml;
+using Prism.Mvvm;
 
 namespace Plainion.RI.Editors
 {

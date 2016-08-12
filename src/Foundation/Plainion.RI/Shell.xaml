@@ -4,26 +4,34 @@
         xmlns:prism="http://www.codeplex.com/prism"
         xmlns:l="clr-namespace:Plainion.RI"
         Title="Plainion - Reference Implementation" Height="800" Width="1000">
-    <TabControl TabStripPlacement="Left" Margin="3">
-        <TabItem Header="Dialogs">
-            <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                <StackPanel Orientation="Vertical" prism:RegionManager.RegionName="{x:Static l:RegionNames.Dialogs}"/>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="InteractionRequests">
-            <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                <StackPanel Orientation="Vertical" prism:RegionManager.RegionName="{x:Static l:RegionNames.InteractionRequests}"/>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="Controls">
-            <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                <StackPanel Orientation="Vertical" prism:RegionManager.RegionName="{x:Static l:RegionNames.Controls}"/>
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="Editors">
-            <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                <StackPanel Orientation="Vertical" prism:RegionManager.RegionName="{x:Static l:RegionNames.Editors}"/>
-            </ScrollViewer>
-        </TabItem>
-    </TabControl>
+    <DockPanel LastChildFill="True">
+        <StatusBar DockPanel.Dock="Bottom" HorizontalAlignment="Stretch">
+            <StatusBarItem>
+                <ContentControl prism:RegionManager.RegionName="{x:Static l:RegionNames.StatusBar}"/>
+            </StatusBarItem>
+        </StatusBar>
+
+        <TabControl TabStripPlacement="Left" Margin="3" SelectedIndex="{Binding SelectedIndex}">
+            <TabItem Header="Dialogs">
+                <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical" prism:RegionManager.RegionName="{x:Static l:RegionNames.Dialogs}"/>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="InteractionRequests">
+                <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical" prism:RegionManager.RegionName="{x:Static l:RegionNames.InteractionRequests}"/>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Controls">
+                <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical" prism:RegionManager.RegionName="{x:Static l:RegionNames.Controls}"/>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Editors">
+                <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical" prism:RegionManager.RegionName="{x:Static l:RegionNames.Editors}"/>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
 </Window>

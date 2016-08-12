@@ -32,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IO\FileSystemOperations.cs" />
+    <Compile Include="Logging\LoggerBase.cs" />
     <Compile Include="Logging\FileLoggingSink.cs" />
     <Compile Include="Logging\ConsoleLoggingSink.cs" />
     <Compile Include="Progress\NullProgress.cs" />

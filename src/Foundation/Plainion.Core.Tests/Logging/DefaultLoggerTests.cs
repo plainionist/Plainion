@@ -64,7 +64,7 @@ namespace Plainion.Core.Tests.Logging
             var logger = new DefaultLogger( sink );
 
             DefaultLogger.LogLevel = LogLevel.Warning;
-            logger.Info( "some message" );
+            logger.Write( LogLevel.Info, "some message" );
 
             Assert.That( sink.LastEntry, Is.Null );
         }
@@ -76,7 +76,7 @@ namespace Plainion.Core.Tests.Logging
             var logger = new DefaultLogger( sink );
 
             DefaultLogger.LogLevel = LogLevel.Warning;
-            logger.Warning( "some message" );
+            logger.Write( LogLevel.Warning, "some message" );
 
             Assert.That( sink.LastEntry.Message, Is.EqualTo( "some message" ) );
         }
@@ -88,7 +88,7 @@ namespace Plainion.Core.Tests.Logging
             var logger = new DefaultLogger( sink );
 
             DefaultLogger.LogLevel = LogLevel.Info;
-            logger.Warning( "some message" );
+            logger.Write( LogLevel.Warning, "some message" );
 
             Assert.That( sink.LastEntry.Message, Is.EqualTo( "some message" ) );
         }

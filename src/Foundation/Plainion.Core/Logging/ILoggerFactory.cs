@@ -7,8 +7,6 @@ namespace Plainion.Logging
     /// </summary>
     public interface ILoggerFactory
     {
-        void LoadConfiguration( Uri uri );
-
         void AddSink( ILoggingSink sink );
 
         ILogger GetLogger( Type loggingType );
