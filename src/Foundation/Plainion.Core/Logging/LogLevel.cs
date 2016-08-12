@@ -3,7 +3,6 @@ namespace Plainion.Logging
 {
     public enum LogLevel
     {
-        None,
         Debug,
         Info,
         Notice,

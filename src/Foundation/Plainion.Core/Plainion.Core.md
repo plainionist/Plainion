@@ -279,7 +279,7 @@ Default implementation of which allows adding different kinds of s.
 ### Methods
 
 #### LoadConfiguration(System.Uri)
-Does NOT load any configuration from the given uri. Just sets the default LogLevel to LogLevel.Warning
+Not implemented
 
 ## NumberExtensions
 Extensions for numeric values to increase usability.

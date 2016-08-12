@@ -30,6 +30,7 @@ The framework provides the following implementations of ILoggingSink
 - ConsoleLoggingSink : logs all messages to the System.Console
 - FileLoggingSink: logs all messages to the given file
 
+Usually the default LogLevel should be adjusted according to the needs of the application (default is LogLevel.Warning).
 
 # Extending the framework
 

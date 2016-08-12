@@ -12,15 +12,14 @@ namespace Plainion.Logging
         public DefaultLoggerFactory()
         {
             myRootSink = new CompositeLoggingSink();
+            LogLevel = LogLevel.Warning;
         }
 
         /// <summary>
-        /// Does NOT load any configuration from the given uri.
-        /// Just sets the default LogLevel to LogLevel.Warning
+        /// Not implemented
         /// </summary>
         public void LoadConfiguration( Uri uri )
         {
-            LogLevel = LogLevel.Warning;
         }
 
         public void AddSink( ILoggingSink sink )
