@@ -2,6 +2,12 @@
 
 namespace Plainion.Logging
 {
+    /// <summary>
+    /// Factory for the actual logger implementation
+    /// </summary>
+    /// <remarks>
+    /// Current impelementation follows singleton pattern.
+    /// </remarks>
     public class LoggerFactory
     {
         static LoggerFactory()
@@ -9,11 +15,7 @@ namespace Plainion.Logging
             Implementation = new ConsoleLoggerFactoringImpl();
         }
 
-        public static ILoggerFactoringImpl Implementation
-        {
-            get;
-            set;
-        }
+        public static ILoggerFactoringImpl Implementation { get; set; }
 
         public static void LoadConfiguration( Uri uri )
         {
