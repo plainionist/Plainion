@@ -8,7 +8,13 @@ namespace Plainion.RI.Logging
     [Export( typeof( ILoggingSink ) )]
     class StatusBarLogViewModel : BindableBase, ILoggingSink
     {
-        public CustomLogEntry LastLog { get; private set; }
+        private CustomLogEntry myLastLog;
+
+        public CustomLogEntry LastLog
+        {
+            get { return myLastLog; }
+            private set { SetProperty( ref myLastLog, value ); }
+        }
 
         public void Write( ILogEntry entry )
         {

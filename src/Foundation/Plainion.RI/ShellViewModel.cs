@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.Composition;
+using System.Windows.Controls;
 using Plainion.Logging;
 using Prism.Mvvm;
 
@@ -9,16 +10,16 @@ namespace Plainion.RI
     {
         private static readonly ILogger myLogger = LoggerFactory.GetLogger( typeof( ShellViewModel ) );
 
-        private int mySelectedIndex;
+        private object mySelectedItem;
 
-        public int SelectedIndex
+        public object SelectedItem
         {
-            get { return mySelectedIndex; }
+            get { return mySelectedItem; }
             set
             {
-                if( SetProperty( ref mySelectedIndex, value ) )
+                if( SetProperty( ref mySelectedItem, value ) )
                 {
-                    myLogger.Notice( "You selected tab number '{0}'", value + 1 );
+                    myLogger.Notice( "You selected tab '{0}'", ((TabItem)value).Header );
                 }
             }
         }

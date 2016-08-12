@@ -11,7 +11,7 @@
             </StatusBarItem>
         </StatusBar>
 
-        <TabControl TabStripPlacement="Left" Margin="3" SelectedIndex="{Binding SelectedIndex}">
+        <TabControl TabStripPlacement="Left" Margin="3" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
             <TabItem Header="Dialogs">
                 <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <StackPanel Orientation="Vertical" prism:RegionManager.RegionName="{x:Static l:RegionNames.Dialogs}"/>

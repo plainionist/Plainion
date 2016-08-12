@@ -3,7 +3,7 @@ using Plainion.Logging;
 
 namespace Plainion.RI.Logging
 {
-    class CustomLogger : ILogger
+    class CustomLogger : LoggerBase
     {
         private CustomLoggerFactory myFactory;
         private Type myOwnerType;
@@ -14,49 +14,14 @@ namespace Plainion.RI.Logging
             myOwnerType = owner;
         }
 
-        public void Debug( string format, params object[] args )
+        protected override LogLevel ConfiguredLogLevel
         {
-            Write( LogLevel.Debug, format, args );
+            get { return myFactory.LogLevel; }
         }
 
-        private void Write( LogLevel level, string format, object[] args )
+        protected override void WriteCore( LogLevel level, string msg )
         {
-            if( myFactory.LogLevel <= level )
-            {
-                myFactory.Sink.Write( new CustomLogEntry( myOwnerType.Namespace, string.Format( format, args ), level ) );
-            }
-        }
-
-        public void Info( string format, params object[] args )
-        {
-            Write( LogLevel.Info, format, args );
-        }
-
-        public void Notice( string format, params object[] args )
-        {
-            Write( LogLevel.Notice, format, args );
-        }
-
-        public void Warning( string format, params object[] args )
-        {
-            Write( LogLevel.Warning, format, args );
-        }
-
-        public void Warning( Exception exception, string format, params object[] args )
-        {
-            var msg = string.Format( format, args );
-            Warning( "{0}{1}{2}", msg, Environment.NewLine, exception.Dump() );
-        }
-
-        public void Error( string format, params object[] args )
-        {
-            Write( LogLevel.Error, format, args );
-        }
-
-        public void Error( Exception exception, string format, params object[] args )
-        {
-            var msg = string.Format( format, args );
-            Error( "{0}{1}{2}", msg, Environment.NewLine, exception.Dump() );
+            myFactory.Sink.Write( new CustomLogEntry( myOwnerType.FullName, msg, level ) );
         }
     }
 }

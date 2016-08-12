@@ -54,12 +54,17 @@ namespace Plainion.RI
 
         public override void Run( bool runWithDefaultConfiguration )
         {
+            LoggerFactory.Implementation = new CustomLoggerFactory();
+            LoggerFactory.LogLevel = LogLevel.Notice;
+
             base.Run( runWithDefaultConfiguration );
 
             Application.Current.Exit += OnShutdown;
 
-            LoggerFactory.Implementation = Container.GetExportedValue<CustomLoggerFactory>();
-            LoggerFactory.LogLevel = LogLevel.Notice;
+            foreach( var sink in Container.GetExportedValues<ILoggingSink>() )
+            {
+                LoggerFactory.AddSink( sink );
+            }
             LoggerFactory.GetLogger( GetType() ).Notice( "Application ready" );
         }
 
