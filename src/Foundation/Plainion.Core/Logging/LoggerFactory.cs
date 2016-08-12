@@ -3,28 +3,25 @@
 namespace Plainion.Logging
 {
     /// <summary>
-    /// Factory for the actual logger implementation
+    /// Facade for the actual logger factory implementation. Provides simple access to the logging framework as kind of singleton.
     /// </summary>
-    /// <remarks>
-    /// Current impelementation follows singleton pattern.
-    /// </remarks>
     public class LoggerFactory
     {
         static LoggerFactory()
         {
-            Implementation = new ConsoleLoggerFactoringImpl();
+            Implementation = new DefaultLoggerFactory();
         }
 
-        public static ILoggerFactoringImpl Implementation { get; set; }
+        public static ILoggerFactory Implementation { get; set; }
 
         public static void LoadConfiguration( Uri uri )
         {
             Implementation.LoadConfiguration( uri );
         }
 
-        public static void AddGuiAppender( ILoggingSink sink )
+        public static void AddSink( ILoggingSink sink )
         {
-            Implementation.AddGuiAppender( sink );
+            Implementation.AddSink( sink );
         }
 
         public static ILogger GetLogger( Type loggingType )

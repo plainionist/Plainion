@@ -32,6 +32,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IO\FileSystemOperations.cs" />
+    <Compile Include="Logging\FileLoggingSink.cs" />
+    <Compile Include="Logging\ConsoleLoggingSink.cs" />
     <Compile Include="Progress\NullProgress.cs" />
     <Compile Include="Serialization\SerializableBindableBase.cs" />
     <Compile Include="Xaml\IncludeExtension.cs" />
@@ -66,16 +68,14 @@
     <Compile Include="IO\RealFS\FileImpl.cs" />
     <Compile Include="IO\RealFS\FileSystemImpl.cs" />
     <Compile Include="Logging\CompositeLoggingSink.cs" />
-    <Compile Include="Logging\ConsoleLogger.cs" />
-    <Compile Include="Logging\ConsoleLoggerFactoringImpl.cs" />
     <Compile Include="Logging\ILogEntry.cs" />
     <Compile Include="Logging\ILogger.cs" />
-    <Compile Include="Logging\ILoggerFactoringImpl.cs" />
+    <Compile Include="Logging\ILoggerFactory.cs" />
     <Compile Include="Logging\ILoggingSink.cs" />
     <Compile Include="Logging\LogEntry.cs" />
     <Compile Include="Logging\LoggerFactory.cs" />
-    <Compile Include="Logging\LoggingSinkLogger.cs" />
-    <Compile Include="Logging\LoggingSinkLoggerFactory.cs" />
+    <Compile Include="Logging\DefaultLogger.cs" />
+    <Compile Include="Logging\DefaultLoggerFactory.cs" />
     <Compile Include="Logging\LogLevel.cs" />
     <Compile Include="NumberExtensions.cs" />
     <Compile Include="Progress\CountingProgress.cs" />
@@ -97,6 +97,7 @@
     <None Include="IO\MemoryFS\ReadMe.md" />
     <None Include="IO\ReadMe.md" />
     <None Include="IO\RealFS\ReadMe.md" />
+    <None Include="Logging\ReadMe.md" />
     <None Include="ReadMe.md" />
     <None Include="Composition\ReadMe.md" />
     <None Include="packages.config" />

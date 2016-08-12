@@ -105,6 +105,7 @@ namespace Plainion.AppFw.Shell.Hosting
 
             myScriptsToExecute.Clear();
 
+            LoggerFactory.AddSink( new ConsoleLoggingSink() );
             LoggerFactory.LogLevel = LogLevel.Notice;
 
             for( int i = 0; i < args.Length; ++i )

@@ -3,6 +3,9 @@ using Plainion;
 
 namespace Plainion.Logging
 {
+    /// <summary>
+    /// Implements composite pattern for <see cref="ILoggingSink"/>
+    /// </summary>
     public class CompositeLoggingSink : ILoggingSink
     {
         private IList<ILoggingSink> mySinks;

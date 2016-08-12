@@ -2,6 +2,9 @@
 
 namespace Plainion.Logging
 {
+    /// <summary>
+    /// Defines the APIs provided by the logging framework to its clients which wants to log messages.
+    /// </summary>
     public interface ILogger
     {
         void Debug( string format, params object[] args );

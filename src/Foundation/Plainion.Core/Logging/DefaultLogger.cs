@@ -1,14 +1,15 @@
 using System;
-using Plainion.Logging;
-using Plainion;
 
 namespace Plainion.Logging
 {
-    class LoggingSinkLogger : ILogger
+    /// <summary>
+    /// Default implementation of <see cref="ILogger"/>.
+    /// </summary>
+    public class DefaultLogger : ILogger
     {
         private ILoggingSink mySink;
 
-        public LoggingSinkLogger( ILoggingSink sink )
+        public DefaultLogger( ILoggingSink sink )
         {
             Contract.RequiresNotNull( sink, "sink" );
 
@@ -37,7 +38,7 @@ namespace Plainion.Logging
 
         public void Warning( Exception exception, string format, params object[] args )
         {
-            var msg = string.Format( format, args );
+            var msg = FormatMessage( format, args );
             Warning( "{0}{1}{2}", msg, Environment.NewLine, exception.Dump() );
         }
 
@@ -48,7 +49,7 @@ namespace Plainion.Logging
 
         public void Error( Exception exception, string format, params object[] args )
         {
-            var msg = string.Format( format, args );
+            var msg = FormatMessage( format, args );
             Error( "{0}{1}{2}", msg, Environment.NewLine, exception.Dump() );
         }
 
@@ -64,7 +65,22 @@ namespace Plainion.Logging
                 return;
             }
 
-            mySink.Write( new LogEntry( level, string.Format( msg, args ) ) );
+            mySink.Write( new LogEntry( level, FormatMessage( msg, args ) ) );
+        }
+
+        private string FormatMessage( string msg, params object[] args )
+        {
+            if( args.Length == 0 )
+            {
+                // sometimes we find "{" in exceptions (e.g. deserialization issues from Xaml). In this case usually the ILogger
+                // API without "arguments" is used.
+                // So dont pass the args to string.Format() to avoid format exceptions
+                return msg;
+            }
+            else
+            {
+                return string.Format( msg, args );
+            }
         }
     }
 }

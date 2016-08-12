@@ -19,25 +19,26 @@ myLogger.Debug( "Processing starter script: {0}", file );
 
 ## Configure the framework
 
-Choose an appropriate implementation of ILoggerFactoringImpl and set it to the LoggerFactory together with a LogLevel
+The minimum configuration of the framework requires adding an ILoggingSink
 
 ```C#
-LoggerFactory.Implementation = new ConsoleLoggerFactoringImpl();
-LoggerFactory.LogLevel = LogLevel.Info;
+LoggerFactory.AddSink( new ConsoleLoggingSink() );
 ```
 
-The framework provides the following implementations of ILoggerFactoringImpl
+The framework provides the following implementations of ILoggingSink
 
-- ConsoleLoggerFactoringImpl : logs all messages to the System.Console
-- LoggingSinkLoggerFactory: logs all messages to the ILoggingSink instances added via AddGuiAppender
+- ConsoleLoggingSink : logs all messages to the System.Console
+- FileLoggingSink: logs all messages to the given file
 
 
 # Extending the framework
 
-The framework can be extended by implementing ILoggerFactoringImpl which returns custom implementation of ILogger.
+The simplest extension of the logging framework is a custom logging sink. Therefore only ILoggingSink needs to be implemented and an instance passed to LoggingFactory.AddSink().
+This approach is most appropriate e.g. when writing logging messages into a statusbar or status window of an application.
 
-Alternatively LoggingSinkLoggerFactory can be used together with a custom implementation of ILoggingSink.
+More advanced extensions of the logging framework require a custom implementation of ILoggingFactory. This approach allows loading logging configuration from some URI and 
+implementing a custom ILogger. If only the former option is wanted the DefaultLogger can be reused.
 
-
-TBD
+When implementing a custom ILogger even a custom ILoggingEntry can be used which may carry additional application specific context information which could then be used by a 
+custom ILoggingSink, e.g.: the source of the message (the class which created the logger).
 

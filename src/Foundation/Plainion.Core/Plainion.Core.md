@@ -11,6 +11,19 @@ Returns an iterator to all files in this directory.
 #### EnumerateFiles(Plainion.IO.IDirectory,System.String)
 Returns an iterator to all files in this directory matching the given wildcard pattern.
 
+## Logging.FileLoggingSink
+Implementation of which logs to a file. It requires calling Open() before the first entry can be written and Close() when the logging session ends.
+
+## Logging.ILoggingSink
+Defines a sink which actually writes the message e.g. to the console, a file or into a window.
+
+> ### Remarks
+
+> Implementations may need to get informed about the start and end of the logging session. Such triggers need to be provided by the application directly to the implementation.
+
+## Logging.ConsoleLoggingSink
+Implementation of which logs to System.Console in different colors.
+
 ## Progress.NullProgress`1
 Null-object pattern for IProgress{T}
 
@@ -237,13 +250,36 @@ Executes a process and waits for its exit.
 #### Execute(System.Diagnostics.ProcessStartInfo,System.IO.TextWriter,System.IO.TextWriter)
 Executes a process and waits for its exit.
 
-## Logging.ConsoleLogger
-Simple logger which logs different message types to the console. Logs the different message types in different colors. Esp. Errors = Red and Warnings = Yellow.
+## Logging.CompositeLoggingSink
+Implements composite pattern for
+
+## Logging.ILogEntry
+Defines the minimum contract of a log entry which can be handled by
+
+## Logging.ILogger
+Defines the APIs provided by the logging framework to its clients which wants to log messages.
+
+## Logging.ILoggerFactory
+Main interface of the logging framework. Provides APIs for configuration as well as creation of instances.
+
+## Logging.LoggerFactory
+Facade for the actual logger factory implementation. Provides simple access to the logging framework as kind of singleton.
+
+## Logging.DefaultLogger
+Default implementation of .
 
 ### Methods
 
-#### WriteLine(Plainion.Logging.LogLevel,System.String,System.Object[])
+#### Write(Plainion.Logging.LogLevel,System.String,System.Object[])
 Logs the given message if the given logging fits the current logging level.
+
+## Logging.DefaultLoggerFactory
+Default implementation of which allows adding different kinds of s.
+
+### Methods
+
+#### LoadConfiguration(System.Uri)
+Does NOT load any configuration from the given uri. Just sets the default LogLevel to LogLevel.Warning
 
 ## NumberExtensions
 Extensions for numeric values to increase usability.
