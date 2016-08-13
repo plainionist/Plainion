@@ -13,7 +13,7 @@
     <releaseNotes>Upgraded to Plainion.Core 3.0</releaseNotes>
     <copyright>Copyright 2016</copyright>
     <dependencies>
-      <dependency id="Plainion.Core" version="2.1.0.0" />
+      <dependency id="Plainion.Core" version="3.0.0.0" />
     </dependencies>
   </metadata>
 </package>
