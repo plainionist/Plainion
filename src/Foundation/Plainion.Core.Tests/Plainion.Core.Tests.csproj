@@ -52,6 +52,7 @@
     <Compile Include="Logging\DefaultLoggerTests.cs" />
     <Compile Include="Logging\FakeLoggingSink.cs" />
     <Compile Include="Logging\FileLoggingSinkTests.cs" />
+    <Compile Include="Text\WildcardTests.cs" />
     <Compile Include="TypeConverterTests.cs" />
     <Compile Include="StringExtensionsTests.cs" />
     <Compile Include="ObjectsTests.cs" />
