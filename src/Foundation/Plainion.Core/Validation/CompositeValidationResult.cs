@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Plainion.Validation
 {
+    /// <summary>
+    /// Composite pattern for System.ComponentModel.DataAnnotation.ValidationResult
+    /// </summary>
     public class CompositeValidationResult : ValidationResult
     {
         private readonly List<ValidationResult> myResults = new List<ValidationResult>();

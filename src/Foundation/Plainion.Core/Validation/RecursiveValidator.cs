@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace Plainion.Validation
 {
+    /// <summary>
+    /// Applies System.ComponentModel.DataAnnotation.Validator recursively to the given object graph using the <see cref="ValidateObjectAttribute"/>.
+    /// </summary>
     public static class RecursiveValidator
     {
         public static void Validate( object root )

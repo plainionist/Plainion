@@ -6,9 +6,14 @@ using System.Linq;
 namespace Plainion.Validation
 {
     /// <summary>
+    /// Defines a ValidationAttribute which "looks into" the property type this attribute is applied to.
+    /// It supports collects as well as custom types.
+    /// It is used together with <see cref="RecursiveValidator"/>
+    /// </summary>
+    /// <remarks>
     /// http://technofattie.blogspot.de/2011/10/recursive-validation-using.html
     /// http://stackoverflow.com/questions/2690291/how-to-inherit-from-dataannotations-validationattribute-it-appears-securecritic
-    /// </summary>
+    /// </remarks>
     public class ValidateObjectAttribute : ValidationAttribute
     {
         protected override ValidationResult IsValid( object value, ValidationContext validationContext )

@@ -106,6 +106,7 @@
     <None Include="Serialization\ReadMe.md" />
     <None Include="Tasks\ReadMe.md" />
     <None Include="Text\ReadMe.md" />
+    <None Include="Validation\ReadMe.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\..\packages\Plainion.IronDoc.1.0.0.0\build\Plainion.IronDoc.targets" Condition="Exists('..\..\..\packages\Plainion.IronDoc.1.0.0.0\build\Plainion.IronDoc.targets')" />

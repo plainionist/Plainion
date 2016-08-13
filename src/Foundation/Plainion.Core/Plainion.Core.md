@@ -359,5 +359,15 @@ Represents a wildcard running on the engine. Supported wildcard characters are "
 #### Constructor
 Initializes a wildcard with the given search pattern and options.
 
+## Validation.CompositeValidationResult
+Composite pattern for System.ComponentModel.DataAnnotation.ValidationResult
+
+## Validation.RecursiveValidator
+Applies System.ComponentModel.DataAnnotation.Validator recursively to the given object graph using the .
+
 ## Validation.ValidateObjectAttribute
-http://technofattie.blogspot.de/2011/10/recursive-validation-using.html http://stackoverflow.com/questions/2690291/how-to-inherit-from-dataannotations-validationattribute-it-appears-securecritic
+Defines a ValidationAttribute which "looks into" the property type this attribute is applied to. It supports collects as well as custom types. It is used together with
+
+> ### Remarks
+
+> http://technofattie.blogspot.de/2011/10/recursive-validation-using.html http://stackoverflow.com/questions/2690291/how-to-inherit-from-dataannotations-validationattribute-it-appears-securecritic
