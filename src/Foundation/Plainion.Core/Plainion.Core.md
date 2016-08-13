@@ -51,7 +51,7 @@ Null-object pattern for IProgress{T}
 Null-object pattern for IProgress{IProgressInfo}
 
 ## Serialization.SerializableBindableBase
-Supports INotifyPropertyChanged for model entities.
+Serializable base class with INotifyPropertyChanged support.
 
 > ### Remarks
 
@@ -352,7 +352,7 @@ Starts a STA thread wrapped by a Task.
 Starts a STA thread wrapped by a Task.
 
 ## Text.Wildcard
-Represents a wildcard running on the engine.
+Represents a wildcard running on the engine. Supported wildcard characters are "*" (any sequence of any character) and "?" (any but single character). The pattern must match the whole input.
 
 ### Methods
 

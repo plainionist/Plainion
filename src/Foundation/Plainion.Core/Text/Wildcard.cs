@@ -3,8 +3,9 @@
 namespace Plainion.Text
 {
     /// <summary>
-    /// Represents a wildcard running on the
-    /// <see cref="System.Text.RegularExpressions"/> engine.
+    /// Represents a wildcard running on the <see cref="System.Text.RegularExpressions"/> engine.
+    /// Supported wildcard characters are "*" (any sequence of any character) and "?" (any but single character).
+    /// The pattern must match the whole input.
     /// </summary>
     public class Wildcard : Regex
     {
