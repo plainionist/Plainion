@@ -3,7 +3,7 @@ using NUnit.Framework;
 using Plainion.IO;
 using FS = Plainion.IO.MemoryFS.FileSystemImpl;
 
-namespace Plainion.Core.Tests.IO
+namespace Plainion.Tests.IO
 {
     [TestFixture]
     class FileSystemOperationsTests

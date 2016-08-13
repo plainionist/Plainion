@@ -1,7 +1,7 @@
 ﻿using Plainion.IO;
 using NUnit.Framework;
 
-namespace Plainion.Core.Tests.IO
+namespace Plainion.Tests.IO
 {
     [TestFixture]
     class FileSystemTests

@@ -5,7 +5,7 @@
     <ProjectGuid>{58BB77AF-6384-4E77-8DE1-0915C3D4B03E}</ProjectGuid>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <RootNamespace>Plainion.Core.Tests</RootNamespace>
+    <RootNamespace>Plainion.Tests</RootNamespace>
     <AssemblyName>Plainion.Core.Tests</AssemblyName>
     <OutputType>Library</OutputType>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
@@ -26,11 +26,13 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,6 +63,8 @@
     <Compile Include="Serialization\SerializableBindableBaseTests.cs" />
     <Compile Include="Validation\Model.cs" />
     <Compile Include="Validation\ValidateObjectAttributeTests.cs" />
+    <Compile Include="Xaml\IncludeTests.cs" />
+    <Compile Include="Xaml\Model.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Plainion.Core\Plainion.Core.csproj">
@@ -73,6 +77,18 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestData\Xaml\Shared.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestData\Xaml\Master.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

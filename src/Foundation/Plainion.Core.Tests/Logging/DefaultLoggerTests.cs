@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using Plainion.Logging;
 
-namespace Plainion.Core.Tests.Logging
+namespace Plainion.Tests.Logging
 {
     [TestFixture]
     class DefaultLoggerTests

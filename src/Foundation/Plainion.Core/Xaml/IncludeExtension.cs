@@ -7,13 +7,9 @@ namespace Plainion.Xaml
     /// Xaml markup comparable to XInclude. Allows simple include of Xaml files into other Xaml files.
     /// </summary>
     [MarkupExtensionReturnType( typeof( object ) )]
-    public class IncludeExtension : MarkupExtension 
+    public class IncludeExtension : MarkupExtension
     {
-        public string Path
-        {
-            get;
-            set;
-        }
+        public string Path { get; set; }
 
         public override object ProvideValue( IServiceProvider serviceProvider )
         {

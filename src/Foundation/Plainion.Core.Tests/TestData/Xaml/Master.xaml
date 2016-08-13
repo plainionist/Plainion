@@ -1,0 +1,6 @@
+﻿<l:Model xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:i="clr-namespace:Plainion.Xaml;assembly=Plainion.Core"
+       xmlns:l="clr-namespace:Plainion.Tests.Xaml;assembly=Plainion.Core.Tests">
+    <i:Include Path="TestData/Xaml/Shared.xaml"/>
+</l:Model>

@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Plainion.Text;
 
-namespace Plainion.Core.Tests.Text
+namespace Plainion.Tests.Text
 {
     [TestFixture]
     class WildcardTests
