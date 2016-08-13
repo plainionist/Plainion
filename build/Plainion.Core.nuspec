@@ -3,14 +3,30 @@
   <metadata>
     <id>Plainion.Core</id>
     <title>Plainion.Core</title>
-    <version>2.8.0.0</version>
+    <version>3.0.0.0</version>
     <authors>ronin4net</authors>
     <owners>ronin4net</owners>
     <licenseUrl>http://opensource.org/licenses/BSD-3-Clause</licenseUrl>
     <projectUrl>https://github.com/ronin4net/Plainion/wiki/Plainion.Core</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Provides .Net libraries to simplify development of software engineering tools</description>
-    <releaseNotes>SerializableBindableBase fixed for BinaryFormatter</releaseNotes>
+    <releaseNotes>
+- Major improvement of documentation
+- UnitTests added
+- IO Filesystem abstraction reworked
+  - FileSystem.UnifyPath: filesystem parameter removed
+  - IFile.Move renamed to IFile.MoveTo
+  - FileSystem.CopyTo moved to IFile.CopyTo
+  - IDirectory.GetFiles() APIs renamed to EnumerateFiles and return an iterator now. 
+    Convenience methods provided as extension methods so that implementations can be shared across filesystem implementations.
+  - IFile.ReadAllLines and WriteAll converted into extension methods so that implementations can be shared across filesystem implementations.
+- Logging framework reworked to make it easier to extend
+  - BREAKING change: the application now always has to provide a logging sink
+  - LoggerFactory.LoadConfiguration removed
+  - ILoggerFactoringImpl renamed to ILoggerFactory
+  - Most extensible classes renamed and simplified
+- Processes utility moved from "IO" namespace to "Diagnostics" namespace
+    </releaseNotes>
     <copyright>Copyright 2016</copyright>
   </metadata>
 </package>

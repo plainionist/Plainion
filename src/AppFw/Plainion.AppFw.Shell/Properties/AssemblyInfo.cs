@@ -6,7 +6,7 @@ using System.Windows.Markup;
 
 [assembly: AssemblyTitle( "Plainion.AppFw.Shell" )]
 [assembly: CLSCompliant( true )]
-[assembly: AssemblyVersion( "1.0.0.0" )]
+[assembly: AssemblyVersion( "1.3.0.0" )]
 
 // required since .NET 4.0 to allow calls to other assemblies
 [assembly: AllowPartiallyTrustedCallersAttribute()]
