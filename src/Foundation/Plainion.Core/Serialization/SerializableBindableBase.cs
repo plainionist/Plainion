@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 namespace Plainion.Serialization
 {
     /// <summary>
-    /// Supports INotifyPropertyChanged for model entities.
+    /// Serializable base class with INotifyPropertyChanged support.
     /// </summary>
     /// <remarks>
     /// BindableBase from Prism cannot be used with DataContractSerializer because it does not

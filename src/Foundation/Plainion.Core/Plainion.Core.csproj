@@ -99,6 +99,7 @@
     <None Include="IO\ReadMe.md" />
     <None Include="IO\RealFS\ReadMe.md" />
     <None Include="Logging\ReadMe.md" />
+    <None Include="Progress\ReadMe.md" />
     <None Include="ReadMe.md" />
     <None Include="Composition\ReadMe.md" />
     <None Include="packages.config" />
