@@ -12,6 +12,7 @@ namespace Plainion.Tests.Logging
         {
             var sink = new FakeLoggingSink();
 
+            DefaultLogger.LogLevel = LogLevel.Debug;
             new DefaultLogger( sink ).Debug( "some message" );
 
             Assert.That( sink.LastEntry.Level, Is.EqualTo( LogLevel.Debug ) );
@@ -22,6 +23,7 @@ namespace Plainion.Tests.Logging
         {
             var sink = new FakeLoggingSink();
 
+            DefaultLogger.LogLevel = LogLevel.Debug;
             new DefaultLogger( sink ).Info( "some message" );
 
             Assert.That( sink.LastEntry.Level, Is.EqualTo( LogLevel.Info ) );
@@ -32,6 +34,7 @@ namespace Plainion.Tests.Logging
         {
             var sink = new FakeLoggingSink();
 
+            DefaultLogger.LogLevel = LogLevel.Debug;
             new DefaultLogger( sink ).Notice( "some message" );
 
             Assert.That( sink.LastEntry.Level, Is.EqualTo( LogLevel.Notice ) );
@@ -42,6 +45,7 @@ namespace Plainion.Tests.Logging
         {
             var sink = new FakeLoggingSink();
 
+            DefaultLogger.LogLevel = LogLevel.Debug;
             new DefaultLogger( sink ).Warning( "some message" );
 
             Assert.That( sink.LastEntry.Level, Is.EqualTo( LogLevel.Warning ) );
@@ -52,6 +56,7 @@ namespace Plainion.Tests.Logging
         {
             var sink = new FakeLoggingSink();
 
+            DefaultLogger.LogLevel = LogLevel.Debug;
             new DefaultLogger( sink ).Error( "some message" );
 
             Assert.That( sink.LastEntry.Level, Is.EqualTo( LogLevel.Error ) );
