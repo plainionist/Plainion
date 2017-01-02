@@ -211,7 +211,11 @@ Dumps the given exception content to the given TextWriter.
 Dumps the given exception content to the given TextWriter. Content will be: exception type, message, exception.Data, StackTrace. InnerException is handled recursively. ReflectionTypeLoadException is expanded and LoaderExceptions are dummed.
 
 #### PreserveStackTrace(System.Exception)
-Preserves the full stack trace before rethrowing an exception. According to this post see http://weblogs.asp.net/fmarguerie/archive/2008/01/02/rethrowing-exceptions-and-preserving-the-full-call-stack-trace.aspx it is required to get the full stack trace in any case.
+Preserves the full stack trace before rethrowing an exception.
+
+> ##### Remarks
+
+> According to this post see http://weblogs.asp.net/fmarguerie/archive/2008/01/02/rethrowing-exceptions-and-preserving-the-full-call-stack-trace.aspx it is required to get the full stack trace in any case.
 
 #### AddContext(System.Exception,System.String,System.Object)
 Adds a key/value pair to Exception.Data

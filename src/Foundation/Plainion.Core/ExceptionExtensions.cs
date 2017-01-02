@@ -70,11 +70,11 @@ namespace Plainion
 
         /// <summary>
         /// Preserves the full stack trace before rethrowing an exception.
+        /// </summary>
         /// <remarks>
         /// According to this post see http://weblogs.asp.net/fmarguerie/archive/2008/01/02/rethrowing-exceptions-and-preserving-the-full-call-stack-trace.aspx
         /// it is required to get the full stack trace in any case.
         /// </remarks>
-        /// </summary>
         public static void PreserveStackTrace( this Exception exception )
         {
             Contract.RequiresNotNull( exception, "exception" );
