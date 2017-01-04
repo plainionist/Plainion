@@ -84,17 +84,6 @@
     </Compile>
     <Compile Include="Dialogs\SelectFolderInteractionRequestViewModel.cs" />
     <Compile Include="Dialogs\SelectFolderDialogViewModel.cs" />
-    <Compile Include="Editors\Spec\Cluster.cs" />
-    <Compile Include="Editors\Spec\Exclude.cs" />
-    <Compile Include="Editors\Spec\Include.cs" />
-    <Compile Include="Editors\Spec\Package.cs" />
-    <Compile Include="Editors\Spec\PackageBase.cs" />
-    <Compile Include="Editors\Spec\SystemPackaging.cs" />
-    <Compile Include="Editors\Spec\Wildcard.cs" />
-    <Compile Include="Editors\XmlEditorView.xaml.cs">
-      <DependentUpon>XmlEditorView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Editors\XmlEditorViewModel.cs" />
     <Compile Include="InteractionRequests\DefaultWindowWithViewModelAsContentView.xaml.cs">
       <DependentUpon>DefaultWindowWithViewModelAsContentView.xaml</DependentUpon>
     </Compile>
@@ -160,10 +149,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Dialogs\SelectFolderDialogView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Editors\XmlEditorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -248,10 +233,6 @@
     <ProjectReference Include="..\Plainion.Prism\Plainion.Prism.csproj">
       <Project>{838852b7-5a0c-4acb-8436-db2d581708cb}</Project>
       <Name>Plainion.Prism</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Plainion.Windows.Editors\Plainion.Windows.Editors.csproj">
-      <Project>{e230a130-4058-4ec5-89e7-523db5f59be2}</Project>
-      <Name>Plainion.Windows.Editors</Name>
     </ProjectReference>
     <ProjectReference Include="..\Plainion.Windows\Plainion.Windows.csproj">
       <Project>{b76263b3-b4c6-4111-865d-1ce6b578d34a}</Project>

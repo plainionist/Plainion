@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using Plainion.RI.Controls;
 using Plainion.RI.Dialogs;
-using Plainion.RI.Editors;
 using Plainion.RI.InteractionRequests;
 using Plainion.RI.InteractionRequests.Dialogs;
 using Plainion.RI.Logging;
@@ -40,8 +39,6 @@ namespace Plainion.RI
             RegionManager.RegisterViewWithRegion( RegionNames.Controls, typeof( TreeEditorView ) );
             RegionManager.RegisterViewWithRegion( RegionNames.Controls, typeof( NotePadView ) );
             RegionManager.RegisterViewWithRegion( RegionNames.Controls, typeof( NoteBookView ) );
-
-            RegionManager.RegisterViewWithRegion( RegionNames.Editors, typeof( XmlEditorView ) );
 
             RegionManager.RegisterViewWithRegion( RegionNames.StatusBar, typeof( StatusBarLogView ) );
         }

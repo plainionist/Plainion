@@ -45,8 +45,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Prism.Tests", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.RI", "src\Foundation\Plainion.RI\Plainion.RI.csproj", "{318B1687-68A2-4FE1-BDAD-52222617EA8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Windows.Editors", "src\Foundation\Plainion.Windows.Editors\Plainion.Windows.Editors.csproj", "{E230A130-4058-4EC5-89E7-523DB5F59BE2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,10 +103,6 @@ Global
 		{318B1687-68A2-4FE1-BDAD-52222617EA8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{318B1687-68A2-4FE1-BDAD-52222617EA8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{318B1687-68A2-4FE1-BDAD-52222617EA8A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E230A130-4058-4EC5-89E7-523DB5F59BE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E230A130-4058-4EC5-89E7-523DB5F59BE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E230A130-4058-4EC5-89E7-523DB5F59BE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E230A130-4058-4EC5-89E7-523DB5F59BE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -127,6 +121,5 @@ Global
 		{7506BCCD-69D4-4E84-98D2-A4E51FA67B9A} = {BCAB08B5-5E40-437B-BE7F-10FCEC2518E0}
 		{5BBD573F-3689-4A0E-BBB8-C6C7BA836509} = {1FD0B599-85B4-410B-99DC-2306646BC5F5}
 		{318B1687-68A2-4FE1-BDAD-52222617EA8A} = {1FD0B599-85B4-410B-99DC-2306646BC5F5}
-		{E230A130-4058-4EC5-89E7-523DB5F59BE2} = {1FD0B599-85B4-410B-99DC-2306646BC5F5}
 	EndGlobalSection
 EndGlobal

@@ -27,11 +27,6 @@
                     <StackPanel Orientation="Vertical" prism:RegionManager.RegionName="{x:Static l:RegionNames.Controls}"/>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="Editors">
-                <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                    <StackPanel Orientation="Vertical" prism:RegionManager.RegionName="{x:Static l:RegionNames.Editors}"/>
-                </ScrollViewer>
-            </TabItem>
         </TabControl>
     </DockPanel>
 </Window>

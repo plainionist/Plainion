@@ -32,14 +32,6 @@ SelectFolderDialogView
 #### InitializeComponent
 InitializeComponent
 
-## RI.Editors.XmlEditorView
-XmlEditorView
-
-### Methods
-
-#### InitializeComponent
-InitializeComponent
-
 ## RI.InteractionRequests.DefaultWindowWithViewModelAsContentView
 DefaultWindowWithViewModelAsContentView
 

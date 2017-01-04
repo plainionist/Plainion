@@ -24,12 +24,6 @@
     <File Include="$(BuildOutputPath)\Plainion.Windows.xml"/>
   </ItemGroup>
 
-  <ItemGroup  Condition=" '$(Package)' == 'Windows.Editors' ">
-    <File Include="$(BuildOutputPath)\Plainion.Windows.Editors.dll"/>
-    <File Include="$(BuildOutputPath)\Plainion.Windows.Editors.pdb"/>
-    <File Include="$(BuildOutputPath)\Plainion.Windows.Editors.xml"/>
-  </ItemGroup>
-
   <ItemGroup  Condition=" '$(Package)' == 'Prism' ">
     <File Include="$(BuildOutputPath)\Plainion.Prism.dll"/>
     <File Include="$(BuildOutputPath)\Plainion.Prism.pdb"/>
@@ -88,7 +82,6 @@
 
     <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="Package=Core" Targets="_CreatePackage" />
     <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="Package=Windows" Targets="_CreatePackage" />
-    <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="Package=Windows.Editors" Targets="_CreatePackage" />
     <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="Package=Prism" Targets="_CreatePackage" />
     <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="Package=AppFw.Wpf" Targets="_CreatePackage" />
     <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="Package=AppFw.Shell" Targets="_CreatePackage" />
