@@ -30,15 +30,6 @@
     <File Include="$(BuildOutputPath)\Plainion.Prism.xml"/>
   </ItemGroup>
 
-  <ItemGroup  Condition=" '$(Package)' == 'AppFw.Wpf' ">
-    <File Include="$(BuildOutputPath)\Plainion.AppFw.Wpf.dll"/>
-    <File Include="$(BuildOutputPath)\Plainion.AppFw.Wpf.pdb"/>
-    <File Include="$(BuildOutputPath)\Plainion.AppFw.Wpf.xml"/>
-    <File Include="$(BuildOutputPath)\Plainion.AppFw.Wpf.Infrastructure.dll"/>
-    <File Include="$(BuildOutputPath)\Plainion.AppFw.Wpf.Infrastructure.pdb"/>
-    <File Include="$(BuildOutputPath)\Plainion.AppFw.Wpf.Infrastructure.xml"/>
-  </ItemGroup>
-
   <ItemGroup  Condition=" '$(Package)' == 'AppFw.Shell' ">
     <File Include="$(BuildOutputPath)\Plainion.AppFw.Shell.dll"/>
     <File Include="$(BuildOutputPath)\Plainion.AppFw.Shell.pdb"/>
@@ -83,7 +74,6 @@
     <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="Package=Core" Targets="_CreatePackage" />
     <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="Package=Windows" Targets="_CreatePackage" />
     <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="Package=Prism" Targets="_CreatePackage" />
-    <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="Package=AppFw.Wpf" Targets="_CreatePackage" />
     <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="Package=AppFw.Shell" Targets="_CreatePackage" />
 
     <CallTarget Targets="CreateStarterRelease"/>
