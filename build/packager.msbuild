@@ -30,15 +30,6 @@
     <File Include="$(BuildOutputPath)\Plainion.Prism.xml"/>
   </ItemGroup>
 
-  <ItemGroup  Condition=" '$(Package)' == 'AppFw.Shell' ">
-    <File Include="$(BuildOutputPath)\Plainion.AppFw.Shell.dll"/>
-    <File Include="$(BuildOutputPath)\Plainion.AppFw.Shell.pdb"/>
-    <File Include="$(BuildOutputPath)\Plainion.AppFw.Shell.xml"/>
-    <File Include="$(BuildOutputPath)\Plainion.AppFw.Shell.Hosting.dll"/>
-    <File Include="$(BuildOutputPath)\Plainion.AppFw.Shell.Hosting.pdb"/>
-    <File Include="$(BuildOutputPath)\Plainion.AppFw.Shell.Hosting.xml"/>
-  </ItemGroup>
-
   <Target Name="UpdatePackages">
     <Exec Command="$(NuGet) restore $(Solution)" WorkingDirectory="$(PackageRoot)"/>
   </Target>
@@ -75,8 +66,6 @@
     <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="Package=Windows" Targets="_CreatePackage" />
     <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="Package=Prism" Targets="_CreatePackage" />
     <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="Package=AppFw.Shell" Targets="_CreatePackage" />
-
-    <CallTarget Targets="CreateStarterRelease"/>
   </Target>
 
   <Target Name="_CreatePackage">
@@ -87,19 +76,5 @@
     <Copy SourceFiles="@(File)" DestinationFolder="$(PackageRoot)\$(Package)\lib\NET45"/>
 
     <Exec Command="$(NuGet) pack $(PackageRoot)\$(Package)\Plainion.$(Package).nuspec -OutputDirectory $(PackageRoot)\$(Package)"/>
-  </Target>
-
-  <Target Name="CreateStarterRelease">
-    <MakeDir Directories="$(PackageRoot)\Plainion.Starter"/>
-
-    <ItemGroup>
-      <StarterFile Include="$(BuildOutputPath)\Plainion.Starter.exe"/>
-      <StarterFile Include="$(BuildOutputPath)\Plainion.Starter.exe.config"/>
-      <StarterFile Include="$(BuildOutputPath)\Plainion.Core.dll"/>
-      <StarterFile Include="$(BuildOutputPath)\Plainion.AppFw.Shell.dll"/>
-      <StarterFile Include="$(BuildOutputPath)\Plainion.AppFw.Shell.Hosting.dll"/>
-    </ItemGroup>
-
-    <Copy SourceFiles="@(StarterFile)" DestinationFolder="$(PackageRoot)\Plainion.Starter"/>
   </Target>
 </Project>
