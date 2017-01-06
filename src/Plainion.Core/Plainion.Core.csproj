@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\..\build\Plainion.Globals.msbuild" />
+  <Import Project="..\..\build\Plainion.Globals.msbuild" />
   <PropertyGroup>
     <ProjectGuid>{3CBD40B6-84FC-4898-8C64-CD602DA8EF79}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -110,11 +110,4 @@
     <None Include="Xaml\ReadMe.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\..\..\packages\Plainion.IronDoc.1.0.0.0\build\Plainion.IronDoc.targets" Condition="Exists('..\..\..\packages\Plainion.IronDoc.1.0.0.0\build\Plainion.IronDoc.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\..\packages\Plainion.IronDoc.1.0.0.0\build\Plainion.IronDoc.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Plainion.IronDoc.1.0.0.0\build\Plainion.IronDoc.targets'))" />
-  </Target>
 </Project>

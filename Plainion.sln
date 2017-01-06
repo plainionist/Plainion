@@ -14,19 +14,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "@Solution Items", "@Solutio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Foundation", "Foundation", "{1FD0B599-85B4-410B-99DC-2306646BC5F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Core", "src\Foundation\Plainion.Core\Plainion.Core.csproj", "{3CBD40B6-84FC-4898-8C64-CD602DA8EF79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Core", "src\Plainion.Core\Plainion.Core.csproj", "{3CBD40B6-84FC-4898-8C64-CD602DA8EF79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Core.Tests", "src\Foundation\Plainion.Core.Tests\Plainion.Core.Tests.csproj", "{58BB77AF-6384-4E77-8DE1-0915C3D4B03E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Core.Tests", "src\Plainion.Core.Tests\Plainion.Core.Tests.csproj", "{58BB77AF-6384-4E77-8DE1-0915C3D4B03E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Prism", "src\Foundation\Plainion.Prism\Plainion.Prism.csproj", "{838852B7-5A0C-4ACB-8436-DB2D581708CB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Prism", "src\Plainion.Prism\Plainion.Prism.csproj", "{838852B7-5A0C-4ACB-8436-DB2D581708CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Windows", "src\Foundation\Plainion.Windows\Plainion.Windows.csproj", "{B76263B3-B4C6-4111-865D-1CE6B578D34A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Windows", "src\Plainion.Windows\Plainion.Windows.csproj", "{B76263B3-B4C6-4111-865D-1CE6B578D34A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Windows.Tests", "src\Foundation\Plainion.Windows.Tests\Plainion.Windows.Tests.csproj", "{57156D7A-BD77-45E3-82F6-01FA4A07E200}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Windows.Tests", "src\Plainion.Windows.Tests\Plainion.Windows.Tests.csproj", "{57156D7A-BD77-45E3-82F6-01FA4A07E200}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Prism.Tests", "src\Foundation\Plainion.Prism.Tests\Plainion.Prism.Tests.csproj", "{5BBD573F-3689-4A0E-BBB8-C6C7BA836509}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Prism.Tests", "src\Plainion.Prism.Tests\Plainion.Prism.Tests.csproj", "{5BBD573F-3689-4A0E-BBB8-C6C7BA836509}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.RI", "src\Foundation\Plainion.RI\Plainion.RI.csproj", "{318B1687-68A2-4FE1-BDAD-52222617EA8A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.RI", "src\Plainion.RI\Plainion.RI.csproj", "{318B1687-68A2-4FE1-BDAD-52222617EA8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
