@@ -45,5 +45,5 @@ custom ILoggingSink, e.g.: the source of the message (the class which created th
 
 ## Example
 
-see Plainion.RI for a sample statusbar based logging
+see Plainion.Prism repository included "Plainion.RI" projct for a sample statusbar based logging
 

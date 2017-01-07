@@ -24,12 +24,6 @@
     <File Include="$(BuildOutputPath)\Plainion.Windows.xml"/>
   </ItemGroup>
 
-  <ItemGroup  Condition=" '$(Package)' == 'Prism' ">
-    <File Include="$(BuildOutputPath)\Plainion.Prism.dll"/>
-    <File Include="$(BuildOutputPath)\Plainion.Prism.pdb"/>
-    <File Include="$(BuildOutputPath)\Plainion.Prism.xml"/>
-  </ItemGroup>
-
   <Target Name="UpdatePackages">
     <Exec Command="$(NuGet) restore $(Solution)" WorkingDirectory="$(PackageRoot)"/>
   </Target>

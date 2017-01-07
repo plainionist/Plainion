@@ -1,10 +1,9 @@
-﻿using System.ComponentModel.Composition.Hosting;
+﻿using System.Collections.Specialized;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
 using System.Windows;
 using System.Windows.Controls;
 using Plainion.Logging;
-using Plainion.Prism.Interactivity;
-using Plainion.Prism.Regions;
-using Plainion.RI.Logging;
 using Prism.Interactivity;
 using Prism.Mef;
 using Prism.Regions;
@@ -31,10 +30,6 @@ namespace Plainion.RI
             base.ConfigureAggregateCatalog();
 
             AggregateCatalog.Catalogs.Add( new AssemblyCatalog( GetType().Assembly ) );
-            AggregateCatalog.Catalogs.Add( new TypeCatalog( typeof( StackPanelRegionAdapter ) ) );
-
-            AggregateCatalog.Catalogs.Add( new TypeCatalog( typeof( PopupWindowActionRegionAdapter ) ) );
-            AggregateCatalog.Catalogs.Add( new TypeCatalog( typeof( KeepAliveDelayedRegionCreationBehavior ) ) );
         }
 
         protected override CompositionContainer CreateContainer()
@@ -47,25 +42,15 @@ namespace Plainion.RI
             var mappings = base.ConfigureRegionAdapterMappings();
 
             mappings.RegisterMapping( typeof( StackPanel ), Container.GetExportedValue<StackPanelRegionAdapter>() );
-            mappings.RegisterMapping( typeof( PopupWindowAction ), Container.GetExportedValue<PopupWindowActionRegionAdapter>() );
 
             return mappings;
         }
 
         public override void Run( bool runWithDefaultConfiguration )
         {
-            LoggerFactory.Implementation = new CustomLoggerFactory();
-            LoggerFactory.LogLevel = LogLevel.Notice;
-
             base.Run( runWithDefaultConfiguration );
 
             Application.Current.Exit += OnShutdown;
-
-            foreach( var sink in Container.GetExportedValues<ILoggingSink>() )
-            {
-                LoggerFactory.AddSink( sink );
-            }
-            LoggerFactory.GetLogger( GetType() ).Notice( "Application ready" );
         }
 
         protected virtual void OnShutdown( object sender, ExitEventArgs e )
@@ -73,4 +58,34 @@ namespace Plainion.RI
             Container.Dispose();
         }
     }
+
+    [Export( typeof( StackPanelRegionAdapter ) )]
+    public class StackPanelRegionAdapter : RegionAdapterBase<StackPanel>, IRegionAdapter
+    {
+        [ImportingConstructor]
+        public StackPanelRegionAdapter( IRegionBehaviorFactory factory )
+            : base( factory )
+        {
+        }
+
+        protected override void Adapt( IRegion region, StackPanel regionTarget )
+        {
+            region.Views.CollectionChanged += ( s, e ) =>
+            {
+                if( e.Action == NotifyCollectionChangedAction.Add )
+                {
+                    foreach( FrameworkElement element in e.NewItems )
+                    {
+                        regionTarget.Children.Add( element );
+                    }
+                }
+            };
+        }
+
+        protected override IRegion CreateRegion()
+        {
+            return new AllActiveRegion();
+        }
+    }
+
 }
