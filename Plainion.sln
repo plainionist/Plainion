@@ -7,20 +7,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "@Solution Items", "@Solutio
 	ProjectSection(SolutionItems) = preProject
 		build\packager.msbuild = build\packager.msbuild
 		build\Plainion.Core.nuspec = build\Plainion.Core.nuspec
-		build\Plainion.Prism.nuspec = build\Plainion.Prism.nuspec
-		build\Plainion.Windows.nuspec = build\Plainion.Windows.nuspec
 		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Core", "src\Plainion.Core\Plainion.Core.csproj", "{3CBD40B6-84FC-4898-8C64-CD602DA8EF79}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Core.Tests", "src\Plainion.Core.Tests\Plainion.Core.Tests.csproj", "{58BB77AF-6384-4E77-8DE1-0915C3D4B03E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Windows", "src\Plainion.Windows\Plainion.Windows.csproj", "{B76263B3-B4C6-4111-865D-1CE6B578D34A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.Windows.Tests", "src\Plainion.Windows.Tests\Plainion.Windows.Tests.csproj", "{57156D7A-BD77-45E3-82F6-01FA4A07E200}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plainion.RI", "src\Plainion.RI\Plainion.RI.csproj", "{318B1687-68A2-4FE1-BDAD-52222617EA8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,18 +28,6 @@ Global
 		{58BB77AF-6384-4E77-8DE1-0915C3D4B03E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58BB77AF-6384-4E77-8DE1-0915C3D4B03E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58BB77AF-6384-4E77-8DE1-0915C3D4B03E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B76263B3-B4C6-4111-865D-1CE6B578D34A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B76263B3-B4C6-4111-865D-1CE6B578D34A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B76263B3-B4C6-4111-865D-1CE6B578D34A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B76263B3-B4C6-4111-865D-1CE6B578D34A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{57156D7A-BD77-45E3-82F6-01FA4A07E200}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{57156D7A-BD77-45E3-82F6-01FA4A07E200}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{57156D7A-BD77-45E3-82F6-01FA4A07E200}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{57156D7A-BD77-45E3-82F6-01FA4A07E200}.Release|Any CPU.Build.0 = Release|Any CPU
-		{318B1687-68A2-4FE1-BDAD-52222617EA8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{318B1687-68A2-4FE1-BDAD-52222617EA8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{318B1687-68A2-4FE1-BDAD-52222617EA8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{318B1687-68A2-4FE1-BDAD-52222617EA8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
