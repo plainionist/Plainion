@@ -2,38 +2,41 @@
 
 Provides .Net libraries to simplify development of software engineering tools 
 
-## Plainion.Core
+![NuGet Version](https://img.shields.io/nuget/v/Plainion.Core.svg?style=flat-square)
 
-General extensions to .NET framwork
+## Plainion
 
-- [Docs](https://github.com/ronin4net/Plainion/wiki/Plainion.Core)  
-- ![NuGet Version](https://img.shields.io/nuget/v/Plainion.Core.svg?style=flat-square)
+- Contract: simple but expressive design by contract methods
+- StringExtensions: useful extensions to System.String
 
-## Plainion.Windows
+## Plainion.Composition
 
-Various extensions to WPF
+Extensions to dependency injection and component composition.
 
-- [Docs](https://github.com/ronin4net/Plainion/wiki/Plainion.Windows)
-- ![NuGet Version](https://img.shields.io/nuget/v/Plainion.Windows.svg?style=flat-square)
+- IComposer/Composer: slim wrapper around MEF CompositionContainer, Catalogs and CompositionBatch
+- DecoratorChainCatalog: decorator pattern support to MEF
 
-## Plainon.Prism
+## Plainion.Progress
 
-Extensions to Prism library
+simple progress descriptions (undefined, integer, percentage) to be used with System.Progress
 
-- [Docs](https://github.com/ronin4net/Plainion/wiki/Plainion.Prism)
-- ![NuGet Version](https://img.shields.io/nuget/v/Plainion.Prism.svg?style=flat-square)
+## Plainion.Tasks
 
-## Plainion.AppFw.Wpf
+extensions to the TPL
 
-WPF/Prism based application framework
+- Tasks.StartSTATask: starts an STA thread with the given main loop body and returns it as TPL task
 
-- [Docs](https://github.com/ronin4net/Plainion/wiki/Plainion.AppFw.Wpf)
-- ![NuGet Version](https://img.shields.io/nuget/v/Plainion.AppFw.Wpf.svg?style=flat-square)
 
-## Plainion.AppFw.Shell
+## Other
 
-XAML/C# based shell scripting application framework
-
-- [Docs](https://github.com/ronin4net/Plainion/wiki/Plainion.AppFw.Shell)
-- ![NuGet Version](https://img.shields.io/nuget/v/Plainion.AppFw.Shell.svg?style=flat-square)
-
+- RecursiveValidator (DataAnnotations)
+- Wildcard
+- simple Logging framework
+- FileSystem access with interfaces and InMemory realization
+- ValidatingXamlReader
+- Enumerable and List extensions
+- Collection interfaces
+- Number extensions
+- Objects.Clone
+- StringExtensions
+- TypeConverter 
