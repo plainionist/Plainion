@@ -36,6 +36,7 @@
     <Compile Include="Logging\FileLoggingSink.cs" />
     <Compile Include="Logging\ConsoleLoggingSink.cs" />
     <Compile Include="Progress\NullProgress.cs" />
+    <Compile Include="Properties\AssemblyDefs.cs" />
     <Compile Include="Serialization\SerializableBindableBase.cs" />
     <Compile Include="Xaml\IncludeExtension.cs" />
     <Compile Include="Xaml\ValidatingXamlReader.cs" />
