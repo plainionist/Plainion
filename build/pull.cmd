@@ -1,8 +1,6 @@
 @echo off
 setlocal
 
-set git="C:\Program Files\Git\bin\git.exe"
-
 git clone https://github.com/ronin4net/Plainion.git
 git clone https://github.com/ronin4net/Plainion.Windows.git
 git clone https://github.com/ronin4net/Plainion.Windows.Editors.git
@@ -22,7 +20,7 @@ git clone https://github.com/ronin4net/Plainion.Bees.git
 for /f "delims=" %%i in ('dir /ad /b') do (
   echo --- %%i ---
   cd %%i
-  %git% pull
+  git pull
   cd ..
 )
 
