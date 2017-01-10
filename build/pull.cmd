@@ -17,6 +17,8 @@ git clone https://github.com/plainionist/Plainion.Whiteboard.git
 git clone https://github.com/plainionist/Plainion.Notes.git
 git clone https://github.com/plainionist/Plainion.Bees.git
 
+git clone https://github.com/plainionist/plainionist.github.io 
+
 for /f "delims=" %%i in ('dir /ad /b') do (
   echo --- %%i ---
   cd %%i
