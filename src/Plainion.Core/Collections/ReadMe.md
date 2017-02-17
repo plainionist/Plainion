@@ -1,2 +1,2 @@
 
-This namespace contains extensions to and closes caps with the .NET framework collections.
+This namespace contains various extensions to the .NET framework collections.
