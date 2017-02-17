@@ -29,7 +29,6 @@ Provides simple logging framework abstraction to keep most of an application cod
 
 See [ReadMe](src/Plainion.Core/Logging/ReadMe.md)
 
-
 ## Misc
 
 Many more tiny little helpers
