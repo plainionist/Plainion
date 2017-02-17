@@ -9,7 +9,7 @@
     <licenseUrl>http://opensource.org/licenses/BSD-3-Clause</licenseUrl>
     <projectUrl>https://github.com/ronin4net/Plainion/wiki/Plainion.Core</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Provides .Net libraries to simplify development of software engineering tools</description>
+    <description>Extending the .NET framework for simplicity</description>
     <releaseNotes>
 - Major improvement of documentation
 - UnitTests added
