@@ -16,7 +16,7 @@ Target "CreatePackage" (fun _ ->
     [
         ( projectName + ".*", Some "lib/NET45", None)
     ]
-    |> PNuGet.Pack (projectRoot </> "build" </> projectName + ".nuspec") (projectRoot </> "pkg")
+    |> PNuGet.Pack (projectRoot </> "build" </> projectName + ".Core.nuspec") (projectRoot </> "pkg")
 )
 
 Target "Deploy" (fun _ ->
