@@ -24,7 +24,7 @@ Target "Deploy" (fun _ ->
 )
 
 Target "Publish" (fun _ ->
-    PNuGet.PublishPackage projectName (projectRoot </> "pkg")
+    PNuGet.PublishPackage (projectName + ".Core") (projectRoot </> "pkg")
 )
 
 RunTarget()
