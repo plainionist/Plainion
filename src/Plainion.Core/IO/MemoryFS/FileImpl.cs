@@ -6,48 +6,34 @@ using System.Text;
 
 namespace Plainion.IO.MemoryFS
 {
-    [DataContract( Namespace = DCNames.NS_MemoryFS )]
+    [DataContract(Namespace = DCNames.NS_MemoryFS)]
     internal class FileImpl : AbstractFileSystemEntry<FileSystemImpl>, IFile
     {
-        private StringBuilder myContent;
+        [DataMember(Name = "ContentV2")]
+        private byte[] myContent;
 
-        [DataMember( Name = "Exists" )]
+        [DataMember(Name = "Exists")]
         private bool myExists;
-        [DataMember( Name = "LastWriteTime" )]
+        [DataMember(Name = "LastWriteTime")]
         private DateTime myLastWriteTime;
-        [DataMember( Name = "LastAccessTime" )]
+        [DataMember(Name = "LastAccessTime")]
         private DateTime myLastAccessTime;
 
-        [DataMember( Name = "Content" )]
-        private string mySerializingContent;
-
-        [OnSerializing]
-        private void OnSerializing( StreamingContext context )
-        {
-            if( myExists && myContent != null )
-            {
-                mySerializingContent = myContent.ToString();
-            }
-        }
-
-        [OnSerialized]
-        private void OnSerialized( StreamingContext context )
-        {
-            mySerializingContent = null;
-        }
+        [DataMember(Name = "Content")]
+        private string mySerializedContentV1;
 
         [OnDeserialized]
-        private void OnDeserialized( StreamingContext context )
+        private void OnDeserialized(StreamingContext context)
         {
-            if( mySerializingContent != null )
+            if(mySerializedContentV1 != null)
             {
-                myContent = new StringBuilder( mySerializingContent );
-                mySerializingContent = null;
+                myContent = Encoding.Default.GetBytes(mySerializedContentV1);
+                mySerializedContentV1 = null;
             }
         }
 
-        public FileImpl( FileSystemImpl fileSystem, string path )
-            : base( fileSystem, path )
+        public FileImpl(FileSystemImpl fileSystem, string path)
+            : base(fileSystem, path)
         {
             myExists = false;
             myContent = null;
@@ -62,18 +48,18 @@ namespace Plainion.IO.MemoryFS
 
         public override void Create()
         {
-            if( Exists )
+            if(Exists)
             {
                 return;
             }
 
-            if( !Parent.Exists )
+            if(!Parent.Exists)
             {
                 Parent.Create();
             }
 
             myExists = true;
-            myContent = new StringBuilder();
+            myContent = new byte[0];
         }
 
         public override void Delete()
@@ -84,47 +70,113 @@ namespace Plainion.IO.MemoryFS
 
         public TextWriter CreateWriter()
         {
+            return CreateWriter(Encoding.Default);
+        }
+
+        public TextWriter CreateWriter(Encoding encoding)
+        {
             CreateOnDemand();
 
             myLastWriteTime = DateTime.Now;
 
-            myContent.Clear();
-            return new StringWriter( myContent );
+            return new Writer(this, encoding);
         }
 
         private void CreateOnDemand()
         {
-            if( !Exists )
+            if(!Exists)
             {
                 Create();
             }
         }
 
-        public TextWriter CreateWriter( Encoding encoding )
+        private class Writer : StreamWriter
         {
-            return CreateWriter();
+            private FileImpl myFile;
+
+            public Writer(FileImpl file, Encoding encoding)
+                : base(new MemoryStream(), encoding)
+            {
+                myFile = file;
+            }
+
+            protected override void Dispose(bool disposing)
+            {
+                if(disposing)
+                {
+                    Flush();
+                    myFile.myContent = ((MemoryStream)this.BaseStream).ToArray();
+                }
+
+                base.Dispose(disposing);
+            }
         }
 
         public TextReader CreateReader()
+        {
+            return CreateReader(Encoding.Default);
+
+        }
+
+        public TextReader CreateReader(Encoding encoding)
         {
             CheckExists();
 
             myLastAccessTime = DateTime.Now;
 
-            return new StringReader( myContent.ToString() );
+            return new StreamReader(new MemoryStream(myContent), encoding);
         }
 
         private void CheckExists()
         {
-            if( !Exists )
+            if(!Exists)
             {
-                throw new FileNotFoundException( Path );
+                throw new FileNotFoundException(Path);
             }
         }
 
-        public TextReader CreateReader( Encoding encoding )
+        public Stream Stream(FileAccess access)
         {
-            return CreateReader();
+            if(access == FileAccess.Read)
+            {
+                CheckExists();
+                return new MemoryStream(myContent);
+            }
+            else if(access == FileAccess.Read || access == FileAccess.ReadWrite)
+            {
+                CheckExists();
+                return new WriterStream(this, myContent);
+            }
+            else
+            {
+                return new WriterStream(this);
+            }
+        }
+
+        private class WriterStream : MemoryStream
+        {
+            private FileImpl myFile;
+
+            public WriterStream(FileImpl file)
+            {
+                myFile = file;
+            }
+
+            public WriterStream(FileImpl file, byte[] content)
+                : base(content)
+            {
+                myFile = file;
+            }
+
+            protected override void Dispose(bool disposing)
+            {
+                if(disposing)
+                {
+                    myFile.myContent = this.ToArray();
+                }
+
+                base.Dispose(disposing);
+            }
         }
 
         public override DateTime LastWriteTime
@@ -147,36 +199,40 @@ namespace Plainion.IO.MemoryFS
             }
         }
 
-        public IFile MoveTo( IDirectory directory )
+        public IFile MoveTo(IDirectory directory)
         {
-            if( !directory.Exists )
+            if(!directory.Exists)
             {
                 directory.Create();
             }
 
-            var targetFile = ( FileImpl )directory.File( Name );
-            targetFile.WriteAll( this.ReadAllLines().ToArray() );
+            var targetFile = (FileImpl)directory.File(Name);
+            targetFile.CreateOnDemand();
+            targetFile.myContent = new byte[myContent.Length];
+            Array.Copy(myContent, targetFile.myContent, myContent.Length);
 
             Delete();
 
             return targetFile;
         }
 
-        public IFile CopyTo( IFileSystemEntry dirOrFile, bool overwrite )
+        public IFile CopyTo(IFileSystemEntry dirOrFile, bool overwrite)
         {
             var directory = dirOrFile as IDirectory;
-            if( directory == null )
+            if(directory == null)
             {
-                directory = ( ( IFile )dirOrFile ).Parent;
+                directory = ((IFile)dirOrFile).Parent;
             }
 
-            if( !directory.Exists )
+            if(!directory.Exists)
             {
                 directory.Create();
             }
 
-            var targetFile = directory.File( Name );
-            targetFile.WriteAll( this.ReadAllLines().ToArray() );
+            var targetFile = (FileImpl)directory.File(Name);
+            targetFile.CreateOnDemand();
+            targetFile.myContent = new byte[myContent.Length];
+            Array.Copy(myContent, targetFile.myContent, myContent.Length);
 
             return targetFile;
         }

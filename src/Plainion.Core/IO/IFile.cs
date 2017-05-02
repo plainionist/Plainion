@@ -14,6 +14,8 @@ namespace Plainion.IO
         TextReader CreateReader();
         TextReader CreateReader( Encoding encoding );
 
+        Stream Stream(FileAccess access);
+
         /// <summary>
         /// Moves this file to the given target directory.
         /// Returns an instance pointing to the new target file.

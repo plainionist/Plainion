@@ -6,80 +6,86 @@ namespace Plainion.IO.RealFS
 {
     internal class FileImpl : AbstractFileSystemEntry<FileSystemImpl>, IFile
     {
-        public FileImpl( FileSystemImpl fileSystem, string path )
-            : base( fileSystem, path )
+        public FileImpl(FileSystemImpl fileSystem, string path)
+            : base(fileSystem, path)
         {
         }
 
         public override bool Exists
         {
-            get { return File.Exists( Path ); }
+            get { return File.Exists(Path); }
         }
 
         public override void Create()
         {
-            File.Create( Path );
+            File.Create(Path);
         }
 
         public override void Delete()
         {
-            File.Delete( Path );
+            File.Delete(Path);
         }
 
         public TextWriter CreateWriter()
         {
-            return new StreamWriter( Path );
+            return new StreamWriter(Path);
         }
 
-        public TextWriter CreateWriter( Encoding encoding )
+        public TextWriter CreateWriter(Encoding encoding)
         {
-            return new StreamWriter( Path, false, encoding );
+            return new StreamWriter(Path, false, encoding);
         }
 
         public TextReader CreateReader()
         {
-            return new StreamReader( Path );
+            return new StreamReader(Path);
         }
-        public TextReader CreateReader( Encoding encoding )
+
+        public TextReader CreateReader(Encoding encoding)
         {
-            return new StreamReader( Path, encoding );
+            return new StreamReader(Path, encoding);
+        }
+
+        public Stream Stream(FileAccess access)
+        {
+            return new FileStream(Path, FileMode.Open, access);
         }
 
         public override DateTime LastWriteTime
         {
-            get { return File.GetLastWriteTime( Path ); }
+            get { return File.GetLastWriteTime(Path); }
         }
 
         public override DateTime LastAccessTime
         {
-            get { return File.GetLastAccessTime( Path ); }
+            get { return File.GetLastAccessTime(Path); }
         }
 
-        public IFile MoveTo( IDirectory directory )
+        public IFile MoveTo(IDirectory directory)
         {
-            if( !directory.Exists )
+            if(!directory.Exists)
             {
                 directory.Create();
             }
 
-            var targetFile = directory.File( Name );
-            File.Move( Path, targetFile.Path );
+            var targetFile = directory.File(Name);
+            File.Move(Path, targetFile.Path);
 
             return targetFile;
         }
 
-        public IFile CopyTo( IFileSystemEntry dirOrFile, bool overwrite )
+        public IFile CopyTo(IFileSystemEntry dirOrFile, bool overwrite)
         {
             var target = dirOrFile.Path;
 
-            if( dirOrFile is IDirectory )
+            if(dirOrFile is IDirectory)
             {
-                target = System.IO.Path.Combine( dirOrFile.Path, Name );
+                target = System.IO.Path.Combine(dirOrFile.Path, Name);
             }
 
-            File.Copy( Path, target, overwrite );
+            File.Copy(Path, target, overwrite);
 
-            return FileSystem.File( target );
+            return FileSystem.File(target);
         }
     }
 }

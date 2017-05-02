@@ -172,6 +172,41 @@ namespace Plainion.Tests.IO.MemoryFS
             Assert.That( targetFile.ReadAllLines(), Is.EquivalentTo( new[] { "hi" } ) );
         }
 
+
+        [Test]
+        public void Stream_WhenWritten_ContentIsFilled()
+        {
+            var file = CreateSampleFile();
+
+            using(var writer = new StreamWriter(file.Stream(FileAccess.Write)))
+            {
+                writer.WriteLine("a");
+            }
+
+            var content = file.ReadAllLines();
+            Assert.That(content, Is.EquivalentTo(new string[] { "a" }));
+        }
+
+        [Test]
+        public void Stream_WhenRead_ContentWillBeReturned()
+        {
+            var file = CreateSampleFile();
+
+            var expectedContent = new string[] { "line1", "line2" };
+            file.WriteAll(expectedContent);
+
+            var content = new List<string>();
+            using(var reader = new StreamReader(file.Stream(FileAccess.Read)))
+            {
+                while(reader.Peek() != -1)
+                {
+                    content.Add(reader.ReadLine());
+                }
+            }
+
+            Assert.That(content, Is.EquivalentTo(expectedContent));
+        }
+
         private IFile CreateSampleFile()
         {
             var file = myFileSystem.File( SimplestFilenamePossible );

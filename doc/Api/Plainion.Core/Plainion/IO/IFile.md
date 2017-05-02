@@ -18,6 +18,8 @@ Abstraction interface for a file
 
 ### System.IO.TextReader CreateReader(System.Text.Encoding encoding)
 
+### System.IO.Stream Stream(System.IO.FileAccess access)
+
 ### Plainion.IO.IFile MoveTo(Plainion.IO.IDirectory directory)
 
 Moves this file to the given target directory. Returns an instance pointing to the new target file.

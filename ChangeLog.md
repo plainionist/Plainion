@@ -1,3 +1,7 @@
+## 3.1.0 - 2017-05-02
+
+- IFile.Stream API added
+
 ## 3.0.0 - 2016-08-13
 
 - Major improvement of documentation
