@@ -14,7 +14,7 @@ Abstraction interface for a directory
 
 ### Plainion.IO.IDirectory Directory(System.String directory)
 
-### System.Collections.Generic.IEnumerable`1[[Plainion.IO.IFile, Plainion.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=11fdbc7b87b9a0de]] EnumerateFiles(System.String pattern,System.IO.SearchOption option)
+### System.Collections.Generic.IEnumerable`1[[Plainion.IO.IFile, Plainion.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=11fdbc7b87b9a0de]] EnumerateFiles(System.String pattern,System.IO.SearchOption option)
 
 Returns an iterator to all files in that directory matching the given wildcard pattern and optionally searches recursively.
 

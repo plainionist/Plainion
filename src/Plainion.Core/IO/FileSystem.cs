@@ -13,21 +13,24 @@ namespace Plainion.IO
         /// </summary>
         public static string UnifyPath( string path )
         {
-            var unifiedPath = path;
-
-            while( unifiedPath.EndsWith( "/" ) || unifiedPath.EndsWith( "\\" ) )
+            if( path.Length == 2 && char.IsLetter( path[ 0 ] ) && path[ 1 ] == ':' )
             {
-                unifiedPath = unifiedPath.Substring( 0, unifiedPath.Length - 1 );
+                // if we call Path.GetFullPath() with drive letter only ("d:") then it returns 
+                // current working directory instead 
+                // -> just return what we got
+                return path;
             }
-
-            if( unifiedPath.Length > 2 )
+            else
             {
-                // dont call this with drive letter only because it will
-                // turn it into uppercase letter and then it will be treated as different path
-                unifiedPath = Path.GetFullPath( unifiedPath );
-            }
+                var unifiedPath = Path.GetFullPath( path );
 
-            return unifiedPath;
+                while( unifiedPath.EndsWith( "/" ) || unifiedPath.EndsWith( "\\" ) )
+                {
+                    unifiedPath = unifiedPath.Substring( 0, unifiedPath.Length - 1 );
+                }
+
+                return unifiedPath;
+            }
         }
     }
 }

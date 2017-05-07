@@ -163,5 +163,16 @@ namespace Plainion.Tests.IO.MemoryFS
             Assert.That( f1.Exists, Is.False );
             Assert.That( f2.Exists, Is.False );
         }
+
+        [Test]
+        public void Parent_OfRoot_IsNull()
+        {
+            var fs = new FileSystemImpl();
+            fs.File( "/x/a/1" ).Create();
+
+            var root = fs.Directory( "/" );
+
+            Assert.That( root.Parent, Is.Null);
+        }
     }
 }

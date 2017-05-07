@@ -5,6 +5,8 @@
 
 **Assembly:** Plainion.Core
 
+Ignores case for paths.
+
 
 ## Constructors
 

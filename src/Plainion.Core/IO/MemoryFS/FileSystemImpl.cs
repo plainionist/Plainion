@@ -5,6 +5,9 @@ using System.Runtime.Serialization;
 
 namespace Plainion.IO.MemoryFS
 {
+    /// <summary>
+    /// Ignores case for paths.
+    /// </summary>
     [DataContract( Namespace = DCNames.NS_MemoryFS )]
     [KnownType( typeof( DirectoryImpl ) )]
     [KnownType( typeof( FileImpl ) )]

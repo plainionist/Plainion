@@ -1,3 +1,7 @@
+## 3.2.0 - 2017-05-07
+
+- FileSystem.UnifyPath fixed (handling unix root)
+
 ## 3.1.0 - 2017-05-02
 
 - IFile.Stream API added
