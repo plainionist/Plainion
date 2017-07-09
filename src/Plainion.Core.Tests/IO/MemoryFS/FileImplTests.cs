@@ -172,7 +172,6 @@ namespace Plainion.Tests.IO.MemoryFS
             Assert.That( targetFile.ReadAllLines(), Is.EquivalentTo( new[] { "hi" } ) );
         }
 
-
         [Test]
         public void Stream_WhenWritten_ContentIsFilled()
         {
@@ -205,6 +204,26 @@ namespace Plainion.Tests.IO.MemoryFS
             }
 
             Assert.That(content, Is.EquivalentTo(expectedContent));
+        }
+
+        [Test]
+        public void Stream_NotExistingFileOpenedForWrite_FileIsCreatedOnDemand()
+        {
+            var file = myFileSystem.File(SimplestFilenamePossible);
+
+            using(var stream = file.Stream(FileAccess.Write))
+            {
+            }
+
+            Assert.That(file.Exists, Is.True);
+        }
+
+        [Test]
+        public void Stream_NotExistingFileOpenedForRead_Throws()
+        {
+            var file = myFileSystem.File(SimplestFilenamePossible);
+
+            Assert.Throws<FileNotFoundException>(() => file.Stream(FileAccess.Read));
         }
 
         private IFile CreateSampleFile()

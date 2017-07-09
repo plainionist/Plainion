@@ -142,13 +142,14 @@ namespace Plainion.IO.MemoryFS
                 CheckExists();
                 return new MemoryStream(myContent);
             }
-            else if(access == FileAccess.Read || access == FileAccess.ReadWrite)
+            else if(access == FileAccess.ReadWrite)
             {
-                CheckExists();
+                CreateOnDemand();
                 return new WriterStream(this, myContent);
             }
             else
             {
+                CreateOnDemand();
                 return new WriterStream(this);
             }
         }

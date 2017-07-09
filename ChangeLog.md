@@ -1,3 +1,7 @@
+## 3.3.0 - 2017-07-09
+
+- InMemoryFS: File.Stream() creates not existing files on demand
+
 ## 3.2.0 - 2017-05-07
 
 - FileSystem.UnifyPath fixed (handling unix root)
