@@ -51,14 +51,14 @@ see Plainion.Prism repository included "Plainion.RI" projct for a sample statusb
 
 ## Types
 
-* [ILogger](ILogger.md)
 * [LoggerBase](LoggerBase.md)
-* [ILoggingSink](ILoggingSink.md)
 * [FileLoggingSink](FileLoggingSink.md)
 * [ConsoleLoggingSink](ConsoleLoggingSink.md)
 * [CompositeLoggingSink](CompositeLoggingSink.md)
 * [ILogEntry](ILogEntry.md)
+* [ILogger](ILogger.md)
 * [ILoggerFactory](ILoggerFactory.md)
+* [ILoggingSink](ILoggingSink.md)
 * [LogEntry](LogEntry.md)
 * [LoggerFactory](LoggerFactory.md)
 * [DefaultLogger](DefaultLogger.md)

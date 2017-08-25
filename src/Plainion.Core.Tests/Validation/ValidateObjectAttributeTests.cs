@@ -35,7 +35,7 @@ namespace Plainion.Tests.Validation
             var results = Validate( model );
 
             Assert.That( results.Count(), Is.EqualTo( 1 ) );
-            Assert.That( results.Single(), Is.StringContaining( "The Description field is required." ) );
+            Assert.That( results.Single(), Does.Contain( "The Description field is required." ) );
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace Plainion.Tests.Validation
             var results = Validate( model );
 
             Assert.That( results.Count(), Is.EqualTo( 1 ) );
-            Assert.That( results.Single(), Is.StringContaining( "The field Value must be between 1 and 10." ) );
+            Assert.That( results.Single(), Does.Contain( "The field Value must be between 1 and 10." ) );
         }
 
         [Test]
@@ -75,7 +75,7 @@ namespace Plainion.Tests.Validation
             var results = Validate( model );
 
             Assert.That( results.Count(), Is.EqualTo( 1 ) );
-            Assert.That( results.Single(), Is.StringContaining( "The field Value must be between 1 and 10." ) );
+            Assert.That( results.Single(), Does.Contain( "The field Value must be between 1 and 10." ) );
         }
 
         [Test]
@@ -87,7 +87,7 @@ namespace Plainion.Tests.Validation
             var results = Validate( dict );
 
             Assert.That( results.Count(), Is.EqualTo( 1 ) );
-            Assert.That( results.Single(), Is.StringContaining( "The Description field is required." ) );
+            Assert.That( results.Single(), Does.Contain( "The Description field is required." ) );
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace Plainion.Tests.Validation
             var results = Validate( dict );
 
             Assert.That( results.Count(), Is.EqualTo( 1 ) );
-            Assert.That( results.Single(), Is.StringContaining( "The Description field is required." ) );
+            Assert.That( results.Single(), Does.Contain( "The Description field is required." ) );
         }
 
         private static IEnumerable<string> Validate( object model )

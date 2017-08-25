@@ -7,6 +7,6 @@ It provides convenience as well as extended functionality.
 
 ## Types
 
-* [IComposer](IComposer.md)
 * [Composer](Composer.md)
 * [DecoratorChainCatalog](DecoratorChainCatalog.md)
+* [IComposer](IComposer.md)

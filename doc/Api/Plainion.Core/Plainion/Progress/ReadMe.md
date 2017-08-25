@@ -7,7 +7,7 @@ This namespace contains basic progress descriptions which can be used together w
 
 * [NullProgress](NullProgress.md)
 * [NullProgress](NullProgress.md)
-* [IProgressInfo](IProgressInfo.md)
 * [CountingProgress](CountingProgress.md)
+* [IProgressInfo](IProgressInfo.md)
 * [PercentageProgress](PercentageProgress.md)
 * [UndefinedProgress](UndefinedProgress.md)

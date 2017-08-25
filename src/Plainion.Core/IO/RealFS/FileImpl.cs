@@ -48,7 +48,7 @@ namespace Plainion.IO.RealFS
 
         public Stream Stream(FileAccess access)
         {
-            return new FileStream(Path, FileMode.Open, access);
+            return new FileStream(Path, FileMode.OpenOrCreate, access);
         }
 
         public override DateTime LastWriteTime

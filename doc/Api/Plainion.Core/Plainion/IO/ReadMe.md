@@ -34,11 +34,11 @@ In order to extend the filesystem abstraction just provide your own impelementat
 ## Types
 
 * [FileSystemOperations](FileSystemOperations.md)
-* [IFileSystemEntry](IFileSystemEntry.md)
 * [FileSystem](FileSystem.md)
 * [IDirectory](IDirectory.md)
 * [IFile](IFile.md)
 * [IFileSystem](IFileSystem.md)
+* [IFileSystemEntry](IFileSystemEntry.md)
 
 ## Namespaces
 

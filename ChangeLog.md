@@ -1,3 +1,8 @@
+## 3.4.0 - 2017-07-09
+
+- RealFS: File.Stream() changed from FileMode.Open to FileMode.OpenOrCreate to create new files on demand
+- NUnit depdency updated
+
 ## 3.3.0 - 2017-07-09
 
 - InMemoryFS: File.Stream() creates not existing files on demand

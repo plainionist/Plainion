@@ -105,7 +105,7 @@ namespace Plainion.Tests.Logging
 
             new DefaultLogger( sink ).Warning( new Exception( "{abc" ), "test" );
 
-            Assert.That( sink.LastEntry.Message, Is.StringContaining( "{abc" ) );
+            Assert.That( sink.LastEntry.Message, Does.Contain( "{abc" ) );
         }
 
         [Test]
@@ -115,7 +115,7 @@ namespace Plainion.Tests.Logging
 
             new DefaultLogger( sink ).Error( new Exception( "{abc" ), "test" );
 
-            Assert.That( sink.LastEntry.Message, Is.StringContaining( "{abc" ) );
+            Assert.That( sink.LastEntry.Message, Does.Contain( "{abc" ) );
         }
     }
 }
