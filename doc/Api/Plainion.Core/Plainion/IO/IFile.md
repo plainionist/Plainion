@@ -8,6 +8,11 @@
 Abstraction interface for a file
 
 
+## Properties
+
+### System.Int64 Size
+
+
 ## Methods
 
 ### System.IO.TextWriter CreateWriter()

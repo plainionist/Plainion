@@ -237,5 +237,10 @@ namespace Plainion.IO.MemoryFS
 
             return targetFile;
         }
+
+        public long Size
+        {
+            get { return myContent.LongLength; }
+        }
     }
 }

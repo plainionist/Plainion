@@ -48,7 +48,18 @@ namespace Plainion.IO.RealFS
 
         public Stream Stream(FileAccess access)
         {
-            return new FileStream(Path, FileMode.OpenOrCreate, access);
+            if (access == FileAccess.Read)
+            {
+                return new FileStream(Path, FileMode.Open, access);
+            }
+            else if (access == FileAccess.Write)
+            {
+                return new FileStream(Path, FileMode.Create, access);
+            }
+            else
+            {
+                return new FileStream(Path, FileMode.OpenOrCreate, access);
+            }
         }
 
         public override DateTime LastWriteTime
@@ -86,6 +97,11 @@ namespace Plainion.IO.RealFS
             File.Copy(Path, target, overwrite);
 
             return FileSystem.File(target);
+        }
+
+        public long Size
+        {
+            get { return new FileInfo(Path).Length; }
         }
     }
 }

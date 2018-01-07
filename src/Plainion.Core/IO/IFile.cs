@@ -27,5 +27,7 @@ namespace Plainion.IO
         /// Returns an instance pointing to the new target file.
         /// </summary>
         IFile CopyTo( IFileSystemEntry dirOrFile, bool overwrite );
+
+        long Size { get; }
     }
 }

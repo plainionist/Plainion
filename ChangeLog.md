@@ -1,3 +1,8 @@
+## 3.5.0 - 2018-01-07
+
+- RealFS: File.Stream() changed to always create a new file if open with "write"
+- FS: "Size" property added
+
 ## 3.4.0 - 2017-07-09
 
 - RealFS: File.Stream() changed from FileMode.Open to FileMode.OpenOrCreate to create new files on demand
