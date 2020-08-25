@@ -1,4 +1,4 @@
-## 4.0.0 - 2020-08-
+## 4.0.0 - 2020-08-25
 
 - migrated to .Net Standard
 - Plainion.Xaml namespace moved to Plainion.Windows project
