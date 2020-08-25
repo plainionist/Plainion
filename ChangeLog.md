@@ -1,3 +1,8 @@
+## 4.0.0 - 2020-08-
+
+- migrated to .Net Standard
+- Plainion.Xaml namespace moved to Plainion.Windows project
+
 ## 3.5.0 - 2018-01-07
 
 - RealFS: File.Stream() changed to always create a new file if open with "write"
