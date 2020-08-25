@@ -7,7 +7,7 @@
     <authors>ronin4net</authors>
     <owners>ronin4net</owners>
     <licenseUrl>http://opensource.org/licenses/BSD-3-Clause</licenseUrl>
-    <projectUrl>https://github.com/ronin4net/Plainion/wiki/Plainion.Core</projectUrl>
+    <projectUrl>https://github.com/plainionist/Plainion</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Extending the .NET framework for simplicity</description>
     <releaseNotes>
