@@ -1,3 +1,7 @@
+## 4.0.1 - 2020-08-25
+
+- Nuget Packaging fixed (netstandard2.0)
+
 ## 4.0.0 - 2020-08-25
 
 - migrated to .Net Standard
